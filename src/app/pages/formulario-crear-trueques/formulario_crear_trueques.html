@@ -1,0 +1,618 @@
+<div class="page-wrapper">
+  <div class="page-inner">
+    <!-- Encabezado -->
+    <header class="page-header">
+      <div class="header-icon">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M7 4 3 8l4 4" />
+          <path d="M3 8h13a5 5 0 0 1 5 5v1" />
+          <path d="M17 20l4-4-4-4" />
+          <path d="M21 16H8a5 5 0 0 1-5-5V10" />
+        </svg>
+      </div>
+      <div>
+        <h1>Publicar Trueque</h1>
+        <p class="subtitle">Completa la información de lo que ofreces</p>
+      </div>
+    </header>
+
+    <div class="layout-grid">
+      <!-- Columna izquierda: formulario -->
+      <form class="form-card" (ngSubmit)="onSubmit()" #truequeForm="ngForm">
+        <section class="form-section">
+          <div class="section-header">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m21 8-9-5-9 5 9 5 9-5Z" />
+              <path d="M3 8v8l9 5 9-5V8" />
+              <path d="M12 13v8" />
+            </svg>
+            <h2>Información del trueque</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="articulo">Artículo que ofreces <span class="required">*</span></label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m21 8-9-5-9 5 9 5 9-5Z" />
+                  <path d="M3 8v8l9 5 9-5V8" />
+                  <path d="M12 13v8" />
+                </svg>
+              </span>
+              <input
+                id="articulo"
+                name="articulo"
+                type="text"
+                placeholder="Ej: Bicicleta"
+                [(ngModel)]="modelo.articulo"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción del artículo</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                  <path d="M14 2v6h6" />
+                  <path d="M9 13h6M9 17h6" />
+                </svg>
+              </span>
+              <input
+                id="descripcion"
+                name="descripcion"
+                type="text"
+                placeholder="Marca, modelo, año, estado, detalles..."
+                [(ngModel)]="modelo.descripcion"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="estado">Estado del artículo</label>
+              <div class="field-icon">
+                <span class="icon-box">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
+                </span>
+                <select id="estado" name="estado" [(ngModel)]="modelo.estado">
+                  <option value="" disabled selected>Seleccionar estado</option>
+                  <option value="nuevo">Nuevo</option>
+                  <option value="como-nuevo">Como nuevo</option>
+                  <option value="buen-estado">Buen estado</option>
+                  <option value="usado">Usado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Categoría</label>
+              <div class="field-icon">
+                <span class="icon-box">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" />
+                  </svg>
+                </span>
+                <select id="categoria" name="categoria" [(ngModel)]="modelo.categoria">
+                  <option value="" disabled selected>Seleccionar categoría</option>
+                  <option value="electronicos">Electrónicos</option>
+                  <option value="vehiculos">Vehículos</option>
+                  <option value="videojuegos">Videojuegos</option>
+                  <option value="hogar">Hogar</option>
+                  <option value="ropa">Ropa</option>
+                  <option value="deportes">deportes</option>
+                  <option value="libros">Libros</option>
+                  <option value="muebles">Muebles</option>
+                  <option value="juguetes">Juguetes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="buscaCambio">¿Qué buscas a cambio?</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M7 4 3 8l4 4" />
+                  <path d="M3 8h13a5 5 0 0 1 5 5v1" />
+                  <path d="M17 20l4-4-4-4" />
+                  <path d="M21 16H8a5 5 0 0 1-5-5V10" />
+                </svg>
+              </span>
+              <input
+                id="buscaCambio"
+                name="buscaCambio"
+                type="text"
+                placeholder="Ej: Celular, libros, servicios, etc."
+                [(ngModel)]="modelo.buscaCambio"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="detalles">Detalles adicionales</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+              </span>
+              <input
+                id="detalles"
+                name="detalles"
+                type="text"
+                placeholder="Información adicional relevante..."
+                [(ngModel)]="modelo.detalles"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="section-header">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 22s7-7.58 7-12A7 7 0 1 0 5 10c0 4.42 7 12 7 12Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            <h2>Ubicación y disponibilidad</h2>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visibilidad">Visibilidad</label>
+              <div class="field-icon">
+                <span class="icon-box">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z" />
+                  </svg>
+                </span>
+                <select id="visibilidad" name="visibilidad" [(ngModel)]="modelo.visibilidad">
+                  <option value="publica">Pública</option>
+                  <option value="privada">Privada</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="departamento">Departamento</label>
+              <div class="field-icon">
+                <span class="icon-box">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 21h18" />
+                    <path d="M5 21V9l7-5 7 5v12" />
+                    <path d="M9 21v-6h6v6" />
+                  </svg>
+                </span>
+                <select id="departamento" name="departamento" [(ngModel)]="modelo.departamento">
+                  <option value="" disabled selected>Selecciona departamento</option>
+                  <option value="casanare">Casanare</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="municipio">Municipio</label>
+              <div class="field-icon">
+                <span class="icon-box">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="4" y="3" width="16" height="18" rx="1" />
+                    <path d="M9 21v-4h6v4M8 7h1M8 11h1M15 7h1M15 11h1" />
+                  </svg>
+                </span>
+                <select id="municipio" name="municipio" [(ngModel)]="modelo.municipio">
+                  <option value="" disabled selected>Selecciona municipio</option>
+                  <option value="Aguazul">Aguazul</option>
+                  <option value="Yopal">Yopal</option>
+                  <option value="Villanueva">Villanueva</option>
+                  <option value="Monterrey">Monterrey</option>
+                  <option value="Paz De Ariporo">Paz De Ariporo</option>
+                  <option value="Orocue">Orocue</option>
+                  <option value="Mani">Mani</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="barrio">Barrio</label>
+              <div class="field-icon">
+                <span class="icon-box">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 22s7-7.58 7-12A7 7 0 1 0 5 10c0 4.42 7 12 7 12Z" />
+                    <circle cx="12" cy="10" r="2.5" />
+                  </svg>
+                </span>
+                <input
+                  id="barrio"
+                  name="barrio"
+                  type="text"
+                  placeholder="Ej: 20 de Julio"
+                  [(ngModel)]="modelo.barrio"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="disponibleTrueque">Disponible para trueque</label>
+              <div class="field-icon">
+                <span class="icon-box">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.6 9.6 14.4 3.4a2 2 0 0 0-2.8 0L3.4 11.6a2 2 0 0 0 0 2.8l6.2 6.2a2 2 0 0 0 2.8 0l8.2-8.2a2 2 0 0 0 0-2.8Z"
+                    />
+                    <circle cx="8" cy="8" r="1.2" />
+                  </svg>
+                </span>
+                <select
+                  id="disponibleTrueque"
+                  name="disponibleTrueque"
+                  [(ngModel)]="modelo.disponibleTrueque"
+                >
+                  <option value="si">Sí</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cantidad">Cantidad disponible</label>
+              <div class="field-icon">
+                <span class="icon-box">#</span>
+                <input
+                  id="cantidad"
+                  name="cantidad"
+                  type="text"
+                  placeholder="Ej: 1 unidad"
+                  [(ngModel)]="modelo.cantidad"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group form-group-half">
+            <label for="prioridad">Prioridad</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V4s-1 1-4 1-5-2-8-2-4 1-4 1Z" />
+                  <path d="M4 22V4" />
+                </svg>
+              </span>
+              <select id="prioridad" name="prioridad" [(ngModel)]="modelo.prioridad">
+                <option value="baja">Baja</option>
+                <option value="media">Media</option>
+                <option value="alta">Alta</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="section-header">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 3.2 2 2 0 0 1 4.1 1h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L7.1 8.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6A2 2 0 0 1 22 16.9Z"
+              />
+            </svg>
+            <h2>Contacto</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="mensajeContacto">Mensaje de contacto</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"
+                  />
+                </svg>
+              </span>
+              <input
+                id="mensajeContacto"
+                name="mensajeContacto"
+                type="text"
+                placeholder="Escribe cómo quieres que te contacten..."
+                [(ngModel)]="modelo.mensajeContacto"
+              />
+            </div>
+          </div>
+        </section>
+
+        <button type="button" class="btn-map" (click)="onSeleccionarUbicacion()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m3 11 18-8-8 18-2-8-8-2Z" />
+          </svg>
+          Seleccionar ubicación en el mapa
+        </button>
+
+        <button type="submit" class="btn-primary">Publicar trueque</button>
+      </form>
+
+      <!-- Columna derecha: vista previa -->
+      <aside class="preview-column">
+        <div class="preview-card-wrapper">
+          <div class="section-header">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <div>
+              <h2>Vista previa de tu publicación</h2>
+              <p class="preview-subtitle">Así se verá tu publicación</p>
+            </div>
+          </div>
+
+          <div class="preview-card">
+            <div class="preview-banner">
+              <span class="sparkle sparkle-l"></span>
+              <span class="sparkle sparkle-r"></span>
+              <div class="preview-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m21 8-9-5-9 5 9 5 9-5Z" />
+                  <path d="M3 8v8l9 5 9-5V8" />
+                  <path d="M12 13v8" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="preview-body">
+              <h3 class="preview-tags">Bienes Físicos | Servicios | Digitales</h3>
+
+              <div class="preview-field">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m21 8-9-5-9 5 9 5 9-5Z" />
+                  <path d="M3 8v8l9 5 9-5V8" />
+                  <path d="M12 13v8" />
+                </svg>
+                <div>
+                  <span class="preview-label">Nombre</span>
+                  <p>{{ modelo.articulo || 'Ej: Servicios' }}</p>
+                </div>
+              </div>
+
+              <div class="preview-field">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                  <path d="M14 2v6h6" />
+                </svg>
+                <div>
+                  <span class="preview-label">Descripción</span>
+                  <p>{{ modelo.descripcion || 'Descripción de la categoría' }}</p>
+                </div>
+              </div>
+
+              <hr />
+
+              <div class="preview-status-row">
+                <span class="status-dot"></span>
+                <strong>Activo</strong>
+                <span class="badge">Publicado</span>
+              </div>
+
+              <div class="preview-meta-row">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                <span>Fecha de creación</span>
+                <span class="meta-value">{{ fechaCreacion }}</span>
+              </div>
+
+              <div class="preview-meta-row">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                <span>Fecha de modificación</span>
+                <span class="meta-value">{{ fechaModificacion }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 18h6M10 22h4" />
+            <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2Z" />
+          </svg>
+          <div>
+            <strong>Consejo</strong>
+            <p>
+              Añade una buena descripción y detalles claros para aumentar las posibilidades de
+              intercambio.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
