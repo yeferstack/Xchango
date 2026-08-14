@@ -1,735 +1,1800 @@
- :host {
-  --bg-app: #F4EEE1;
-  --bg-nav: #FBF8F0;
-  --bg-card: #EFE7D6;
-  --bg-option: #E9E0CC;
-  --bg-option-hover: #E1D5B8;
-  --accent: #C9AD7E;
-  --accent-dark: #B4966A;
-  --text-primary: #1E1B16;
-  --text-secondary: #847A68;
-  --border-soft: #DED1B3;
+/* =========================================================
+   FUENTES
+   ========================================================= */
 
-  display: block;
-  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
-  background: var(--bg-app);
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
-}
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   RESET GENERAL
+   ========================================================= */
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* ============== NAV ============== */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+
+  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+
+  color: #191714;
+
+  background-color: #f3ece1;
+
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(250, 247, 241, 0.82) 0%,
+      rgba(243, 235, 223, 0.72) 48%,
+      rgba(236, 223, 205, 0.78) 100%
+    ),
+    url("/Logo-xchango/fondo.jpg");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   ELEMENTOS GENERALES
+   ========================================================= */
+
+main,
+section,
+header {
+  background: transparent;
+}
+
+
+/* =========================================================
+   ELIMINAR BLOBS DEL HTML
+   ========================================================= */
+
+.hero-blob {
+  display: none !important;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
 
 .navbar {
   position: relative;
-  z-index: 2;
+  z-index: 20;
+
+  /* Hacemos que se ajuste al contenido para el efecto "píldora" */
+  width: fit-content;
+  margin: 24px auto 0;
+
+  /* Altura un poco más estilizada (opcional, puedes volver a 72px si lo prefieres) */
+  height: 64px;
+  
   display: flex;
   align-items: center;
-  gap: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 28px 40px 0;
+  justify-content: center; /* Centramos el contenido */
+  gap: 8px; /* Reducimos un poco el gap, ya que los items tendrán padding */
+
+  /* Padding simétrico para mantener la forma redonda */
+  padding: 8px 12px;
+
+  /* Efecto Glassmorphism */
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  
+  /* Borde completamente redondeado */
+  border-radius: 999px; 
+
+  /* Sombras más suaves */
+  box-shadow:
+    0 10px 30px rgba(96, 77, 51, 0.05),
+    inset 0 2px 4px rgba(255, 255, 255, 0.50);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
+
+/* Estilos para los enlaces/botones dentro del navbar */
+.navbar a {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el ícono y el texto */
+  padding: 10px 20px;
+  border-radius: 999px; /* Forma de píldora interna */
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+/* El estado activo (como el de "Inicio") */
+.navbar a.active {
+  background: #f2e9de; /* Ajusta este color al beige de tu diseño */
+}
+
+/* Efecto hover opcional */
+.navbar a:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .navbar__brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+
+  gap: 8px;
+
   flex-shrink: 0;
 }
 
 .navbar__chango {
-  height: 40px;
-  width: auto;
+  width: 42px;
+  height: 42px;
+
+  display: block;
+
   object-fit: contain;
 }
 
 .navbar__wordmark {
-  height: 20px;
-  width: auto;
+  width: 112px;
+  height: auto;
+
+  display: block;
+
   object-fit: contain;
 }
+
+
+/* =========================================================
+   MENÚ
+   ========================================================= */
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin: 0 auto;
-  background: var(--bg-nav);
-  border-radius: 999px;
-  padding: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  justify-content: center;
+
+  gap: 5px;
+
+  padding: 5px;
+
+  background: rgba(255, 255, 255, 0.54);
+
+  border: 1px solid rgba(255, 255, 255, 0.70);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 20px rgba(102, 78, 44, 0.05);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 18px;
-  border-radius: 999px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 40px;
+
+  padding: 0 15px;
+
+  border-radius: 14px;
+
   text-decoration: none;
+
+  color: #645c52;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 14px;
+  font-weight: 700;
+
   white-space: nowrap;
-  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+
+  transition:
+    background 0.20s ease,
+    color 0.20s ease,
+    transform 0.20s ease;
+}
+
+.nav-item svg {
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+
+  color: #847A68;
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.5);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.72);
+
+  color: #111111;
+
+  transform: translateY(-1px);
 }
 
 .nav-item.active {
-  background: #fff;
-  color: var(--text-primary);
-  box-shadow: 0 1px 4px rgba(30, 27, 22, 0.1);
+  background: rgba(238, 228, 214, 0.92);
+
+  color: #111111;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
-.nav-item .material-icons {
-  font-size: 18px;
-}
+
+/* =========================================================
+   ACCIONES DERECHA
+   ========================================================= */
 
 .navbar__actions {
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
+  justify-content: flex-end;
+
+  min-width: 80px;
 }
 
-.icon-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: var(--bg-nav);
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
 
-.icon-btn:hover {
-  background: var(--bg-option);
-}
-
-.user-pill {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: var(--text-secondary);
-}
-
-.user-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--accent-dark);
-  display: block;
-}
-
-/* ============== FONDO DECORATIVO ============== */
-
-.hero-blob {
-  position: absolute;
-  border-radius: 50%;
-  z-index: 0;
-  filter: blur(2px);
-  pointer-events: none;
-}
-
-.hero-blob--1 {
-  width: 620px;
-  height: 620px;
-  top: -220px;
-  left: -180px;
-  background: radial-gradient(circle at 30% 30%, var(--bg-card), transparent 70%);
-}
-
-.hero-blob--2 {
-  width: 500px;
-  height: 500px;
-  bottom: -260px;
-  right: -140px;
-  background: radial-gradient(circle at 70% 70%, var(--bg-option), transparent 70%);
-}
-
-/* ============== HERO ============== */
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero {
   position: relative;
-  z-index: 1;
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 50px 48px 35px;
+  z-index: 2;
+
+  width: calc(100% - 120px);
+  max-width: 1450px;
+
+  height: calc(100vh - 220px);
+  min-height: 0;
+
+  margin: 10px auto 0;
+
   display: grid;
-  grid-template-columns: minmax(420px, 1fr) 420px minmax(520px, 1.15fr);
-  gap: 38px;
+
+  grid-template-columns:
+    minmax(340px, 0.98fr)
+    minmax(250px, 0.74fr)
+    minmax(430px, 1.23fr);
+
   align-items: center;
-  min-height: 700px;
+
+  gap: 25px;
+
+  padding: 0;
+
+  overflow: visible;
 }
 
-/* ---------- Columna izquierda ---------- */
+
+/* =========================================================
+   HERO LEFT
+   ========================================================= */
 
 .hero-left {
-  padding-top: 40px;
+  position: relative;
+  z-index: 4;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  min-width: 0;
 }
+
+
+/* =========================================================
+   PEQUEÑO TÍTULO SUPERIOR
+   ========================================================= */
 
 .eyebrow {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--accent-dark);
+  margin-bottom: 12px;
+
+  color: #a27f59;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  letter-spacing: 0.10em;
+
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 16px;
 }
+
+
+/* =========================================================
+   TÍTULO PRINCIPAL
+   ========================================================= */
 
 .headline {
-  font-size: 2.8rem;
+  max-width: 510px;
+
+  color: #111111;
+
+  font-family: "Baloo 2", "Nunito", sans-serif;
+
+  font-size: clamp(45px, 4vw, 66px);
+
   font-weight: 800;
-  line-height: 1.15;
-  color: var(--text-primary);
-  margin-bottom: 18px;
+
+  line-height: 0.92;
+
+  letter-spacing: -0.025em;
 }
 
-.headline .accent {
-  color: var(--accent-dark);
+
+/* =========================================================
+   TÍTULO DORADO
+   ========================================================= */
+
+.accent {
+  color: #a27d57;
+
+  font-family: "Baloo 2", "Nunito", sans-serif;
+
+  font-weight: 800;
 }
+
+
+/* =========================================================
+   SUBTEXTO
+   ========================================================= */
 
 .subtext {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 28px;
+  margin-top: 22px;
+
+  color: #6e665d;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 1.45;
+
+  font-weight: 600;
 }
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
 
 .cta-row {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+
   gap: 12px;
+
+  flex-wrap: nowrap;
+
+  margin-top: 24px;
 }
 
 .btn {
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 14px 24px;
+  min-height: 49px;
+
+  padding: 0 22px;
+
+  border-radius: 16px;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
   cursor: pointer;
-  border: 1px solid transparent;
-  transition: background 0.15s ease, transform 0.15s ease, color 0.15s ease;
+
+  transition:
+    transform 0.20s ease,
+    box-shadow 0.20s ease,
+    background 0.20s ease;
 }
 
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+
 .btn-dark {
-  background: var(--text-primary);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  border: 1px solid #111111;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 10px 20px rgba(17, 17, 17, 0.15);
 }
 
 .btn-dark:hover {
-  background: #322c22;
-  transform: translateY(-2px);
+  background: #222222;
+
+  box-shadow:
+    0 14px 26px rgba(17, 17, 17, 0.18);
 }
 
-.btn-dark .arrow {
-  transition: transform 0.15s ease;
-}
-
-.btn-dark:hover .arrow {
-  transform: translateX(3px);
-}
 
 .btn-outline {
-  background: transparent;
-  color: var(--text-primary);
-  border-color: var(--border-soft);
+  border: 1px solid rgba(146, 116, 80, 0.42);
+
+  background: rgba(255, 252, 247, 0.56);
+
+  color: #4b453e;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-outline:hover {
-  background: var(--bg-option);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.78);
 }
 
-/* ---------- Columna central: teléfono ---------- */
+
+.arrow {
+  margin-left: 8px;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   CENTRO / TELÉFONO
+   ========================================================= */
 
 .hero-center {
   position: relative;
+  z-index: 4;
+
+  height: 100%;
+  min-height: 0;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
+
+
+/* =========================================================
+   PUNTOS DECORATIVOS
+   ========================================================= */
 
 .dot-grid {
   position: absolute;
-  left: -30px;
-  top: 45%;
-  width: 60px;
-  height: 60px;
-  background-image: radial-gradient(var(--border-soft) 1.5px, transparent 1.5px);
-  background-size: 12px 12px;
-  opacity: 0.8;
+
+  width: 145px;
+  height: 145px;
+
+  top: 60px;
+  right: -2px;
+
+  opacity: 0.25;
+
+  background-image:
+    radial-gradient(
+      circle,
+      #8f7c63 1.3px,
+      transparent 1.3px
+    );
+
+  background-size: 13px 13px;
+
+  pointer-events: none;
+
+  z-index: 0;
 }
+
+
+/* =========================================================
+   TELÉFONO
+   ========================================================= */
 
 .phone-wrap {
   position: relative;
-  width: 330px;
-  max-width: 100%;
+  z-index: 3;
+
+  width: min(210px, 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.phone-frame {
-  width: 100%;
-  height: auto;
-  display: block;
+.phone-img {
   position: relative;
-  z-index: 1;
+  z-index: 3;
+
+  width: 210px;
+  max-width: 100%;
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 22px 24px rgba(53, 42, 30, 0.18)
+    );
 }
+
+
+/* =========================================================
+   CONTENIDO SOBRE EL TELÉFONO
+   ========================================================= */
 
 .phone-screen {
   position: absolute;
-  top: 7%;
-  left: 8%;
-  right: 8%;
-  bottom: 7%;
-  border-radius: 30px;
+
+  z-index: 5;
+
+  top: 10.5%;
+  left: 11%;
+
+  width: 78%;
+  height: 78%;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   text-align: center;
-  padding: 30px 24px;
-  z-index: 2;
+
+  pointer-events: none;
 }
+
 
 .phone-logo {
-  width: 52px;
-  height: 52px;
+  width: 39px;
+  height: 39px;
+
   object-fit: contain;
-  margin-bottom: 14px;
+
+  margin-bottom: 9px;
 }
+
 
 .phone-welcome {
-  font-size: 1.05rem;
+  margin: 0;
+
+  color: #403a33;
+
+  font-family: "Baloo 2", "Nunito", sans-serif;
+
+  font-size: 13px;
+
+  line-height: 1.05;
+
   font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.4;
-  margin-bottom: 6px;
 }
+
 
 .phone-welcome strong {
-  color: var(--accent-dark);
+  display: block;
+
+  margin-top: 3px;
+
+  font-family: "Baloo 2", sans-serif;
+
+  font-size: 16px;
+
+  font-weight: 800;
 }
+
 
 .phone-sub {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
+  margin-top: 8px;
+
+  max-width: 130px;
+
+  color: #7b746b;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 7px;
+
+  line-height: 1.35;
 }
+
 
 .phone-btn {
-  width: 100%;
-  font-family: inherit;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #fff;
-  background: var(--accent);
+  min-width: 118px;
+  min-height: 29px;
+
+  margin-top: 13px;
+
+  padding: 0 10px;
+
   border: none;
-  border-radius: 999px;
-  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #d7bd99;
+
+  color: #ffffff;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  pointer-events: auto;
+
   cursor: pointer;
-  margin-bottom: 12px;
-  transition: background 0.15s ease;
 }
 
-.phone-btn:hover {
-  background: var(--accent-dark);
-}
 
 .phone-link {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  margin-top: 8px;
+
+  color: #967b59;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
   text-decoration: none;
+
+  pointer-events: auto;
 }
 
-.phone-link:hover {
-  color: var(--text-primary);
-}
+
+/* =========================================================
+   BASE DEL TELÉFONO
+   ========================================================= */
 
 .phone-podium {
-  width: 220px;
-  height: 20px;
-  margin-top: 12px;
-  background: radial-gradient(ellipse at center, var(--bg-option) 0%, transparent 75%);
+  position: absolute;
+
+  width: 320px;
+  height: 82px;
+
+  left: 50%;
+  bottom: 22px;
+
+  transform: translateX(-50%);
+
   border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 250, 240, 0.95) 0%,
+      rgba(224, 195, 150, 0.65) 42%,
+      rgba(200, 163, 114, 0.28) 68%,
+      transparent 76%
+    );
+
+  filter: blur(2px);
+
+  z-index: 1;
 }
 
-/* ---------- Columna derecha ---------- */
+
+/* =========================================================
+   HERO RIGHT
+   ========================================================= */
 
 .hero-right {
+  position: relative;
+  z-index: 4;
+
+  height: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding-top: 5px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(251, 248, 240, 0.85);
-  border: 1px solid rgba(222, 209, 179, 0.9);
-  border-radius: 22px;
-  padding: 10px 12px 10px 18px;
-  min-height: 62px;
-  box-shadow: 0 4px 18px rgba(30, 27, 22, 0.04);
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--bg-nav);
-  border: 1px solid var(--border-soft);
-  border-radius: 999px;
-  padding: 12px 16px;
-}
-
-.search-icon {
-  font-size: 20px;
-  color: var(--text-secondary);
-}
-
-.search-bar input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-family: inherit;
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  outline: none;
-}
-
-.search-bar input::placeholder {
-  color: var(--text-secondary);
-}
-
-.filter-btn {
-  border: none;
-  background: var(--bg-option);
-  color: var(--text-secondary);
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  transition: background 0.15s ease, transform 0.15s ease;
+
+  gap: 13px;
+
+  min-width: 0;
 }
 
-.filter-btn:hover {
-  background: var(--bg-option-hover);
-  transform: translateY(-1px);
+
+/* =========================================================
+   SEARCH BAR
+   ========================================================= */
+
+.search-bar {
+  min-height: 61px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 6px 8px 6px 17px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.57);
+
+  border: 1px solid rgba(255, 255, 255, 0.80);
+
+  box-shadow:
+    0 12px 28px rgba(89, 70, 48, 0.06);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
-.filter-icon,
+
 .search-icon {
   width: 20px;
   height: 20px;
+
   flex-shrink: 0;
+
+  color: #847A68;
 }
 
-.panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  border-radius: 22px;
-  padding: 22px;
+
+.search-bar input {
+  flex: 1;
+
+  width: 100%;
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #3a352f;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 600;
 }
+
+
+.search-bar input::placeholder {
+  color: #958c81;
+}
+
+
+.filter-btn {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(151, 123, 88, 0.16);
+
+  border-radius: 14px;
+
+  background: rgba(247, 240, 230, 0.76);
+
+  color: #847A68;
+
+  cursor: pointer;
+
+  transition:
+    background 0.20s ease,
+    transform 0.20s ease;
+}
+
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.90);
+
+  transform: translateY(-1px);
+}
+
+
+.filter-icon {
+  width: 19px;
+  height: 19px;
+}
+
+
+/* =========================================================
+   PANELES
+   ========================================================= */
+
+.panel {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border-radius: 21px;
+
+  background: rgba(255, 255, 255, 0.56);
+
+  border: 1px solid rgba(255, 255, 255, 0.80);
+
+  box-shadow:
+    0 12px 30px rgba(97, 72, 41, 0.05);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
 
 .panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+
+  gap: 12px;
+
+  margin-bottom: 11px;
 }
+
 
 .panel-header h3 {
-  font-size: 1.05rem;
+  color: #27231f;
+
+  font-family: "Baloo 2", "Nunito", sans-serif;
+
+  font-size: 17px;
+
+  line-height: 1;
+
   font-weight: 700;
-  color: var(--text-primary);
 }
 
+
 .see-all {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent-dark);
+  flex-shrink: 0;
+
+  color: #927654;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
   text-decoration: none;
 }
 
+
 .see-all:hover {
-  color: var(--text-primary);
+  text-decoration: underline;
 }
 
-/* Categorías */
+
+/* =========================================================
+   CATEGORÍAS
+   ========================================================= */
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+
+  gap: 7px;
 }
+
 
 .category {
+  min-width: 0;
+
+  min-height: 78px;
+
   display: flex;
+
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  background: var(--bg-option);
-  border-radius: 16px;
-  padding: 14px 8px;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
 
-.category:hover {
-  background: var(--bg-option-hover);
-  transform: translateY(-2px);
-}
-
-.category-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--bg-app);
-  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+
+  gap: 5px;
+
+  padding: 7px 4px;
+
+  border-radius: 14px;
+
+  background: rgba(255, 250, 244, 0.55);
+
+  border: 1px solid rgba(255, 255, 255, 0.62);
+
+  transition:
+    transform 0.20s ease,
+    background 0.20s ease;
 }
 
+
+.category:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.78);
+}
+
+
+.category-icon {
+  font-size: 25px;
+
+  line-height: 1;
+}
+
+
 .category span {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  color: #645d54;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
   text-align: center;
 }
 
-/* Destacados / carrusel */
+
+/* =========================================================
+   PRODUCTOS / CARRUSEL
+   ========================================================= */
 
 .products {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 6px;
-  margin-bottom: 14px;
-  scrollbar-width: none;
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 8px;
+
+  /* Duración sincronizada con `duracionFundido` (500ms) en login.ts */
+  transition: opacity 500ms ease;
 }
 
-.products::-webkit-scrollbar {
-  display: none;
+
+/* Estado momentáneo mientras el carrusel cambia de productos.
+   No modifica tamaños, posiciones ni el resto de la página. */
+.products.is-fading {
+  opacity: 0;
 }
+
+
+/* Si el usuario prefiere menos movimiento, se elimina el fundido. */
+@media (prefers-reduced-motion: reduce) {
+
+  .products {
+    transition: none;
+  }
+
+  .products.is-fading {
+    opacity: 1;
+  }
+}
+
 
 .product-card {
-  flex: 0 0 calc(50% - 7px);
-  scroll-snap-align: start;
-  background: var(--bg-nav);
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border-soft);
+  min-width: 0;
 }
+
 
 .product-img {
   position: relative;
+
   width: 100%;
-  aspect-ratio: 4 / 3;
+
+  aspect-ratio: 1 / 0.78;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+
+  background: #eee4d7;
 }
+
 
 .product-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+
   display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.30s ease;
 }
+
+
+.product-card:hover .product-img img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   FAVORITO
+   ========================================================= */
 
 .fav-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(251, 248, 240, 0.9);
-  color: var(--text-primary);
-  cursor: pointer;
+
+  top: 7px;
+  right: 7px;
+
+  width: 31px;
+  height: 31px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease, color 0.15s ease;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.78);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.84);
+
+  color: #847A68;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 6px 13px rgba(30, 23, 17, 0.07);
+
+  transition:
+    transform 0.20s ease,
+    background 0.20s ease;
 }
 
-.fav-btn .material-icons {
-  font-size: 16px;
-}
 
 .fav-btn:hover {
-  background: var(--accent);
-  color: #fff;
+  transform: scale(1.08);
+
+  background: #ffffff;
 }
+
+
+.fav-icon {
+  width: 17px;
+  height: 17px;
+
+  display: block;
+
+  color: #847A68;
+
+  stroke: currentColor;
+  fill: none;
+}
+
+
+/* =========================================================
+   TEXTO PRODUCTOS
+   ========================================================= */
 
 .product-card h4 {
-  font-size: 0.85rem;
+  margin-top: 6px;
+
+  color: #29251f;
+
+  font-family: "Baloo 2", "Nunito", sans-serif;
+
+  font-size: 12px;
+
+  line-height: 1.05;
+
   font-weight: 700;
-  color: var(--text-primary);
-  padding: 10px 12px 2px;
 }
 
-.product-card .location {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  padding: 0 12px 12px;
+
+.location {
+  display: flex;
+  align-items: center;
+
+  gap: 3px;
+
+  margin-top: 4px;
+
+  color: #8a8176;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 600;
 }
+
+
+.location-icon {
+  width: 14px;
+  height: 14px;
+
+  display: block;
+
+  flex-shrink: 0;
+
+  color: #847A68;
+
+  stroke: currentColor;
+  fill: none;
+}
+
+
+/* =========================================================
+   PUNTOS
+   ========================================================= */
 
 .dots {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 6px;
+
+  gap: 5px;
+
+  margin-top: 9px;
 }
+
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
+
   border-radius: 50%;
-  background: var(--border-soft);
+
+  background: rgba(132, 122, 104, 0.28);
+
+  transition:
+    width 250ms ease,
+    background-color 250ms ease;
 }
+
 
 .dot.active {
-  background: var(--accent-dark);
   width: 18px;
-  border-radius: 999px;
+
+  border-radius: 20px;
+
+  background: #847a68;
 }
 
-/* ============== FEATURES ============== */
+
+/* =========================================================
+   CARACTERÍSTICAS INFERIORES
+   ========================================================= */
 
 .features {
   position: relative;
-  z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px 60px;
+  z-index: 5;
+
+  width: calc(100% - 120px);
+  max-width: 1450px;
+
+  height: 92px;
+  min-height: 92px;
+
+  margin: 0 auto 18px;
+
   display: grid;
+
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+
+  align-items: center;
+
+  gap: 0;
+
+  padding: 12px 20px;
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.57);
+
+  border: 1px solid rgba(255, 255, 255, 0.78);
+
+  box-shadow:
+    0 12px 32px rgba(91, 69, 43, 0.06);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
+
 
 .feature {
+  min-width: 0;
+
+  position: relative;
+
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: rgba(251, 248, 240, 0.5);
-  border: 1px solid var(--border-soft);
-  border-radius: 18px;
-  padding: 20px;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 5px 20px;
 }
 
+
+.feature + .feature {
+  border-left: 1px solid rgba(139, 119, 93, 0.15);
+}
+
+
+/* =========================================================
+   ICONO CARACTERÍSTICA
+   ========================================================= */
+
 .feature-icon {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--bg-option);
-  color: var(--accent-dark);
+  width: 42px;
+  height: 42px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: rgba(250, 244, 236, 0.88);
+
+  border: 1px solid rgba(146, 121, 88, 0.14);
+
+  color: #847A68;
+
+  box-shadow:
+    0 5px 12px rgba(104, 82, 56, 0.06);
+
+  transition:
+    transform 0.20s ease,
+    background 0.20s ease;
 }
 
-.feature-icon .material-icons {
-  font-size: 22px;
+
+.feature:hover .feature-icon {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.95);
 }
+
+
+.feature-svg {
+  width: 22px;
+  height: 22px;
+
+  display: block;
+
+  color: #847A68;
+
+  stroke: currentColor;
+  fill: none;
+}
+
+
+/* =========================================================
+   TEXTO CARACTERÍSTICAS
+   ========================================================= */
 
 .feature h4 {
-  font-size: 0.95rem;
+  margin-bottom: 3px;
+
+  color: #2a261f;
+
+  font-family: "Baloo 2", "Nunito", sans-serif;
+
+  font-size: 13px;
+
+  line-height: 1;
+
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
 }
+
 
 .feature p {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
+  max-width: 180px;
+
+  color: #82786b;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 9px;
+
+  line-height: 1.35;
+
+  font-weight: 600;
 }
 
-/* ============== RESPONSIVE ============== */
 
-@media (max-width: 1100px) {
-  .navbar {
-    flex-wrap: wrap;
-    padding: 20px;
+/* =========================================================
+   TÉRMINOS Y CONDICIONES
+   ========================================================= */
+
+.terminos {
+  position: absolute;
+
+  right: 8px;
+  bottom: -16px;
+}
+
+
+.terminos a {
+  color: #8a7a67;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  opacity: 0.8;
+}
+
+
+.terminos a:hover {
+  color: #5f5040;
+
+  opacity: 1;
+
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   1440px O MENOS
+   ========================================================= */
+
+@media (max-width: 1440px) {
+
+  .navbar,
+  .hero,
+  .features {
+    width: calc(100% - 90px);
   }
 
-  .nav-links {
-    order: 3;
-    width: 100%;
-    overflow-x: auto;
-    justify-content: flex-start;
+  .headline {
+    font-size: 56px;
+  }
+
+  .phone-wrap,
+  .phone-img {
+    width: 250px;
   }
 
   .hero {
-    grid-template-columns: 1fr;
-    padding: 40px 20px;
-  }
+    grid-template-columns:
+      minmax(315px, 0.95fr)
+      minmax(245px, 0.72fr)
+      minmax(410px, 1.15fr);
 
-  .hero-left {
-    text-align: center;
-    padding-top: 0;
-  }
-
-  .cta-row {
-    justify-content: center;
-  }
-
-  .hero-center {
-    order: -1;
-  }
-
-  .dot-grid {
-    display: none;
-  }
-
-  .features {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0 20px 40px;
+    gap: 20px;
   }
 }
 
-@media (max-width: 640px) {
+
+/* =========================================================
+   1280px
+   ========================================================= */
+
+@media (max-width: 1280px) {
+
+  .navbar,
+  .hero,
+  .features {
+    width: calc(100% - 60px);
+  }
+
+  .navbar {
+    height: 66px;
+    min-height: 66px;
+  }
+
+  .navbar__chango {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navbar__wordmark {
+    width: 100px;
+  }
+
+  .nav-item {
+    min-height: 36px;
+
+    padding: 0 11px;
+
+    font-size: 12px;
+  }
+
+  .hero {
+    height: calc(100vh - 205px);
+
+    grid-template-columns:
+      minmax(295px, 0.94fr)
+      minmax(220px, 0.70fr)
+      minmax(390px, 1.10fr);
+
+    gap: 16px;
+  }
+
   .headline {
-    font-size: 2rem;
+    font-size: 49px;
   }
 
-  .phone-wrap {
-    width: 220px;
+  .subtext {
+    font-size: 14px;
   }
 
-  .product-card {
-    flex: 0 0 80%;
+  .cta-row {
+    margin-top: 19px;
+  }
+
+  .btn {
+    min-height: 45px;
+
+    padding: 0 17px;
+
+    font-size: 12px;
+  }
+
+  .phone-wrap,
+  .phone-img {
+    width: 225px;
+  }
+
+  .panel {
+    padding: 12px;
+  }
+
+  .panel-header {
+    margin-bottom: 8px;
+  }
+
+  .panel-header h3 {
+    font-size: 15px;
+  }
+
+  .category {
+    min-height: 69px;
+  }
+
+  .category-icon {
+    font-size: 22px;
+  }
+
+  .category span {
+    font-size: 8px;
+  }
+
+  .products {
+    gap: 6px;
+  }
+
+  .product-card h4 {
+    font-size: 10px;
+  }
+
+  .location {
+    font-size: 8px;
   }
 
   .features {
-    grid-template-columns: 1fr;
+    height: 82px;
+    min-height: 82px;
+
+    padding: 8px 12px;
+  }
+
+  .feature {
+    padding: 4px 13px;
+
+    gap: 8px;
+  }
+
+  .feature-icon {
+    width: 37px;
+    height: 37px;
+  }
+
+  .feature-svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .feature h4 {
+    font-size: 11px;
+  }
+
+  .feature p {
+    font-size: 8px;
+  }
+}
+
+
+/* =========================================================
+   1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .hero {
+    grid-template-columns:
+      minmax(270px, 0.9fr)
+      minmax(190px, 0.62fr)
+      minmax(350px, 1.05fr);
+  }
+
+  .headline {
+    font-size: 43px;
+  }
+
+  .phone-wrap,
+  .phone-img {
+    width: 200px;
+  }
+
+  .phone-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .phone-welcome {
+    font-size: 11px;
+  }
+
+  .phone-welcome strong {
+    font-size: 13px;
+  }
+
+  .phone-sub {
+    font-size: 6px;
+  }
+
+  .phone-btn {
+    min-width: 100px;
+    min-height: 24px;
+
+    font-size: 7px;
+  }
+
+  .phone-link {
+    font-size: 6px;
+  }
+
+  .features {
+    height: 76px;
+    min-height: 76px;
+  }
+}
+
+
+/* =========================================================
+   900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  /* En pantallas pequeñas dejamos la pantalla fija,
+     pero reducimos los elementos. */
+
+  .navbar,
+  .hero,
+  .features {
+    width: calc(100% - 30px);
+  }
+
+  .hero {
+    height: calc(100vh - 190px);
+
+    grid-template-columns:
+      minmax(230px, 0.9fr)
+      minmax(165px, 0.65fr)
+      minmax(300px, 1fr);
+
+    gap: 10px;
+  }
+
+  .headline {
+    font-size: 34px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+  }
+
+  .subtext {
+    font-size: 11px;
+  }
+
+  .btn {
+    padding: 0 12px;
+
+    font-size: 10px;
+  }
+
+  .phone-wrap,
+  .phone-img {
+    width: 170px;
+  }
+
+  .search-bar {
+    min-height: 48px;
+  }
+
+  .filter-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .categories {
+    gap: 4px;
+  }
+
+  .category {
+    min-height: 58px;
+  }
+
+  .products {
+    gap: 5px;
+  }
+
+  .features {
+    height: 70px;
+    min-height: 70px;
+  }
+
+  .feature {
+    padding: 3px 8px;
+  }
+
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .feature-svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+
+/* =========================================================
+   IMPORTANTE:
+   NO SE HABILITA SCROLL
+   ========================================================= */
+
+@media (max-height: 750px) {
+
+  .navbar {
+    margin-top: 12px;
+  }
+
+  .hero {
+    height: calc(100vh - 170px);
+
+    margin-top: 5px;
+  }
+
+  .headline {
+    font-size: 40px;
+  }
+
+  .hero-center {
+    transform: scale(0.90);
+  }
+
+  .features {
+    height: 72px;
+    min-height: 72px;
+
+    margin-bottom: 8px;
+  }
+}
+
+
+/* =========================================================
+   PANTALLAS MUY BAJAS
+   ========================================================= */
+
+@media (max-height: 650px) {
+
+  .navbar {
+    height: 58px;
+    min-height: 58px;
+
+    margin-top: 8px;
+  }
+
+  .navbar__chango {
+    width: 30px;
+    height: 30px;
+  }
+
+  .navbar__wordmark {
+    width: 85px;
+  }
+
+  .nav-item {
+    min-height: 32px;
+
+    padding: 0 8px;
+
+    font-size: 10px;
+  }
+
+  .hero {
+    height: calc(100vh - 138px);
+  }
+
+  .headline {
+    font-size: 34px;
+  }
+
+  .hero-center {
+    transform: scale(0.80);
+  }
+
+  .features {
+    height: 62px;
+    min-height: 62px;
+
+    padding: 5px 8px;
+  }
+
+  .feature-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .feature-svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .feature h4 {
+    font-size: 9px;
+  }
+
+  .feature p {
+    font-size: 7px;
   }
 }
