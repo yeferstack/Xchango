@@ -4,54 +4,86 @@
     --bg-card: #EFE7D6;
     --bg-option: #E9E0CC;
     --bg-option-hover: #E1D5B8;
+
     --accent: #C9AD7E;
     --accent-dark: #B4966A;
+
     --text-primary: #1E1B16;
     --text-secondary: #847A68;
+
     --border-soft: #DED1B3;
+
     --star-filled: #C9AD7E;
     --star-empty: #D8CDB6;
 
     display: block;
-    font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+
+    font-family:
+        'Poppins',
+        'Inter',
+        system-ui,
+        -apple-system,
+        sans-serif;
+
     background: var(--bg-app);
+
     min-height: 100vh;
 }
+
+
+/* ==============================
+   GENERAL
+============================== */
 
 * {
     box-sizing: border-box;
 }
 
-/* ============== ICONOS ============== */
+
+/* ==============================
+   ICONOS
+============================== */
 
 .icon {
     display: block;
+
     width: 24px;
     height: 24px;
 
     fill: none;
+
     stroke: currentColor;
     stroke-width: 2;
+
     stroke-linecap: round;
     stroke-linejoin: round;
 
     flex-shrink: 0;
 }
 
-/* ============== PAGINA ============== */
+
+/* ==============================
+   PAGINA
+============================== */
 
 .perfil-page {
     min-height: 100vh;
+
     background: var(--bg-app);
 
     padding: 24px 40px 60px;
 }
 
-/* ============== NAVBAR ============== */
+
+/* ==============================
+   NAVBAR
+============================== */
 
 .navbar {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     gap: 24px;
@@ -59,67 +91,32 @@
     margin-bottom: 32px;
 }
 
-/* ============== LOGO XCHANGO ============== */
 
-.navbar__brand {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    flex-shrink: 0;
-
-    min-width: 280px;
-}
-
-/* LOGO DEL CHANGO */
-
-/* =========================================
-   LOGO XCHANGO - IZQUIERDA
-========================================= */
-
-.navbar__brand {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    gap: 10px;
-
-    width: fit-content;
-    height: 52px;
-
-    margin: 0;
-    padding: 0;
-
-    text-decoration: none;
-}
-
-/* =========================================
+/* ==============================
    LOGO XCHANGO
-========================================= */
+============================== */
 
 .navbar__brand {
     display: flex;
+
     align-items: center;
-    /* Mantiene el chango y las letras alineados entre sí */
+
+    justify-content: flex-start;
 
     gap: 5px;
 
     width: fit-content;
+
     height: 52px;
 
-    /* =========================================
-     AJUSTES DE POSICIÓN 
-  ========================================= */
     margin-top: 20px;
-    /* Aumenta o disminuye este valor para subir o bajar el logo */
     margin-left: 10px;
-    /* Mantiene la separación a la izquierda que pediste */
-    margin-right: 0;
-    margin-bottom: 0;
 
     padding: 0;
+
     text-decoration: none;
+
+    flex-shrink: 0;
 }
 
 
@@ -156,10 +153,14 @@
     flex-shrink: 0;
 }
 
-/* ============== NAVBAR CENTRO ============== */
+
+/* ==============================
+   NAVBAR CENTRO
+============================== */
 
 .navbar__pill {
     display: flex;
+
     align-items: center;
 
     gap: 4px;
@@ -174,8 +175,10 @@
         0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
+
 .navbar__link {
     display: flex;
+
     align-items: center;
 
     gap: 6px;
@@ -185,6 +188,7 @@
     border-radius: 999px;
 
     font-size: 0.9rem;
+
     font-weight: 500;
 
     color: var(--text-secondary);
@@ -193,36 +197,48 @@
 
     white-space: nowrap;
 
+    text-decoration: none;
+
     transition:
         background 0.15s ease,
         color 0.15s ease;
 }
+
 
 .navbar__link .icon {
     width: 18px;
     height: 18px;
 }
 
+
 .navbar__link:hover {
     background: var(--bg-option);
+
     color: var(--text-primary);
 }
 
+
 .navbar__link:first-child {
     background: var(--text-primary);
+
     color: #fff;
 }
 
-/* ============== ACCIONES DERECHA ============== */
+
+/* ==============================
+   ACCIONES DERECHA
+============================== */
 
 .navbar__actions {
     display: flex;
+
     align-items: center;
 
     gap: 14px;
 
     flex-shrink: 0;
 }
+
 
 .navbar__icon-btn {
     background: var(--bg-nav);
@@ -235,18 +251,36 @@
     height: 40px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     cursor: pointer;
 
     color: var(--text-primary);
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
 }
+
+
+.navbar__icon-btn:hover {
+    background: var(--bg-option);
+
+    transform: scale(1.05);
+}
+
 
 .navbar__icon-btn .icon {
     width: 20px;
     height: 20px;
 }
+
+
+/* ==============================
+   AVATAR NAVBAR
+============================== */
 
 .navbar__avatar {
     width: 38px;
@@ -257,14 +291,20 @@
     overflow: hidden;
 
     border: 2px solid var(--accent);
+
+    background: var(--bg-option);
 }
+
 
 .navbar__avatar img {
     width: 100%;
     height: 100%;
 
     object-fit: cover;
+
+    display: block;
 }
+
 
 .navbar__chevron {
     width: 20px;
@@ -273,13 +313,21 @@
     color: var(--text-secondary);
 }
 
-/* ============== TARJETA PRINCIPAL ============== */
+
+/* ==============================
+   CONTENIDO PRINCIPAL
+============================== */
 
 .perfil {
     max-width: 1200px;
 
     margin: 0 auto;
 }
+
+
+/* ==============================
+   TARJETA PRINCIPAL
+============================== */
 
 .perfil__hero {
     display: grid;
@@ -297,7 +345,10 @@
     padding: 40px;
 }
 
-/* ============== IDENTIDAD ============== */
+
+/* ==============================
+   IDENTIDAD
+============================== */
 
 .perfil__identity {
     display: flex;
@@ -309,7 +360,10 @@
     text-align: center;
 }
 
-/* ============== FOTO DE PERFIL ============== */
+
+/* ==============================
+   FOTO DE PERFIL
+============================== */
 
 .perfil__avatar-wrap {
     position: relative;
@@ -320,6 +374,7 @@
     margin-bottom: 24px;
 }
 
+
 .perfil__avatar {
     width: 100%;
     height: 100%;
@@ -329,15 +384,21 @@
     border-radius: 50%;
 
     object-fit: cover;
+
     object-position: center;
 
     border: 5px solid var(--bg-app);
 
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.14);
+
+    background: var(--bg-option);
 }
 
-/* ============== BOTON CAMARA ============== */
+
+/* ==============================
+   BOTON CAMARA
+============================== */
 
 .perfil__avatar-edit {
     position: absolute;
@@ -357,6 +418,7 @@
     color: #fff;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -367,18 +429,23 @@
         transform 0.15s ease;
 }
 
+
 .perfil__avatar-edit:hover {
     background: var(--accent-dark);
 
     transform: scale(1.08);
 }
 
+
 .perfil__avatar-edit .icon {
     width: 21px;
     height: 21px;
 }
 
-/* ============== NOMBRE ============== */
+
+/* ==============================
+   NOMBRE
+============================== */
 
 .perfil__name {
     font-size: 1.5rem;
@@ -390,7 +457,10 @@
     margin: 0 0 24px;
 }
 
-/* ============== CALIFICACIONES ============== */
+
+/* ==============================
+   CALIFICACIONES
+============================== */
 
 .perfil__rating-title {
     font-size: 1.05rem;
@@ -402,6 +472,7 @@
     margin: 0 0 10px;
 }
 
+
 .perfil__stars {
     display: flex;
 
@@ -412,6 +483,7 @@
     margin-bottom: 8px;
 }
 
+
 .perfil__stars .icon {
     width: 26px;
     height: 26px;
@@ -419,11 +491,13 @@
     color: var(--star-empty);
 }
 
+
 .perfil__stars .icon.is-filled {
     color: var(--star-filled);
 
     fill: var(--star-filled);
 }
+
 
 .perfil__rating-note {
     font-size: 0.8rem;
@@ -437,7 +511,10 @@
     margin: 0 auto;
 }
 
-/* ============== GRID OPCIONES ============== */
+
+/* ==============================
+   GRID OPCIONES
+============================== */
 
 .perfil__options {
     display: grid;
@@ -449,7 +526,10 @@
     align-content: start;
 }
 
-/* ============== TARJETAS ============== */
+
+/* ==============================
+   TARJETAS DE OPCIONES
+============================== */
 
 .option-card {
     display: flex;
@@ -477,17 +557,22 @@
         transform 0.15s ease;
 }
 
+
 .option-card:hover {
     background: var(--bg-option-hover);
 
     transform: translateY(-2px);
 }
 
+
 .option-card--wide {
     grid-column: 1 / -1;
 }
 
-/* ============== ICONOS OPCIONES ============== */
+
+/* ==============================
+   ICONOS OPCIONES
+============================== */
 
 .option-card__icon {
     flex-shrink: 0;
@@ -502,16 +587,21 @@
     color: var(--accent-dark);
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 }
+
 
 .option-card__icon .icon {
     width: 22px;
     height: 22px;
 }
 
-/* ============== TEXTOS ============== */
+
+/* ==============================
+   TEXTOS
+============================== */
 
 .option-card__title {
     font-size: 1rem;
@@ -523,6 +613,7 @@
     margin: 0 0 4px;
 }
 
+
 .option-card__desc {
     font-size: 0.82rem;
 
@@ -532,6 +623,11 @@
 
     line-height: 1.35;
 }
+
+
+/* ==============================
+   FLECHAS
+============================== */
 
 .option-card__chevron {
     margin-left: auto;
@@ -544,23 +640,27 @@
     flex-shrink: 0;
 }
 
-/* ============== RESPONSIVE ============== */
+
+/* ==============================
+   RESPONSIVE
+============================== */
 
 @media (max-width: 1200px) {
-
-    .navbar__logo--chango {
-        width: 85px;
-        height: 85px;
-    }
-
-    .navbar__logo--texto {
-        width: 135px;
-    }
 
     .navbar__brand {
         min-width: 230px;
     }
+
+    .navbar__chango {
+        width: 45px;
+        height: 45px;
+    }
+
+    .navbar__letras {
+        width: 80px;
+    }
 }
+
 
 @media (max-width: 1024px) {
 
@@ -585,18 +685,8 @@
     .navbar__brand {
         min-width: 230px;
     }
-
-    .navbar__logo--chango {
-        width: 75px;
-        height: 75px;
-    }
-
-    .navbar__logo--texto {
-        width: 120px;
-    }
 }
 
-/* ============== CELULARES ============== */
 
 @media (max-width: 640px) {
 
@@ -604,38 +694,48 @@
         padding: 16px;
     }
 
+
     .navbar {
         gap: 10px;
     }
+
 
     .navbar__brand {
         gap: 5px;
 
         min-width: auto;
+
+        margin-left: 0;
     }
 
-    .navbar__logo--chango {
-        width: 55px;
-        height: 55px;
+
+    .navbar__chango {
+        width: 45px;
+        height: 45px;
     }
 
-    .navbar__logo--texto {
-        width: 90px;
+
+    .navbar__letras {
+        width: 75px;
     }
+
 
     .navbar__actions {
         gap: 6px;
     }
+
 
     .navbar__icon-btn {
         width: 36px;
         height: 36px;
     }
 
+
     .navbar__avatar {
         width: 34px;
         height: 34px;
     }
+
 
     .perfil__hero {
         padding: 24px 18px;
@@ -643,14 +743,17 @@
         border-radius: 20px;
     }
 
+
     .perfil__options {
         grid-template-columns: 1fr;
     }
+
 
     .perfil__avatar-wrap {
         width: 160px;
         height: 160px;
     }
+
 
     .perfil__avatar-edit {
         width: 42px;
@@ -659,4 +762,10 @@
         right: 4px;
         bottom: 4px;
     }
+
+
+    .option-card--wide {
+        grid-column: auto;
+    }
+
 }
