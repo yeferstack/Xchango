@@ -1,0 +1,99 @@
+<section class="panel">
+    <header class="panel__head">
+        <a class="volver" routerLink="/perfil" aria-label="Volver al perfil">
+            <span class="material-icons">arrow_back</span>
+        </a>
+        <div>
+            <h2 class="panel__titulo">Seguridad</h2>
+            <p class="panel__sub">Protege tu cuenta de XchanGo.</p>
+        </div>
+    </header>
+
+    <p class="aviso" *ngIf="mensaje">{{ mensaje }}</p>
+
+    <!-- ===== Métodos de verificación ===== -->
+    <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'verificacion'">
+        <button type="button" class="bloque__cabeza" (click)="alternarSeccion('verificacion')"
+            [attr.aria-expanded]="seccionAbierta === 'verificacion'">
+            <span class="bloque__icono material-icons">verified_user</span>
+            <span class="bloque__texto">
+                <span class="bloque__titulo">Métodos de verificación</span>
+                <span class="bloque__desc">Activa los métodos necesarios para proteger tu cuenta.</span>
+            </span>
+            <span class="bloque__flecha material-icons">expand_more</span>
+        </button>
+
+        <div class="bloque__cuerpo" *ngIf="seccionAbierta === 'verificacion'">
+            <div class="fila" *ngFor="let m of metodosVerificacion; trackBy: trackPorId">
+                <div class="fila__texto">
+                    <span class="fila__titulo">{{ m.titulo }}</span>
+                    <span class="fila__desc">{{ m.descripcion }}</span>
+                </div>
+                <button type="button" class="switch" role="switch" [class.switch--on]="m.activo"
+                    [attr.aria-checked]="m.activo" [attr.aria-label]="m.titulo" (click)="alternarOpcion(m)">
+                    <span class="switch__bolita"></span>
+                </button>
+            </div>
+        </div>
+    </article>
+
+    <!-- ===== Dispositivos vinculados ===== -->
+    <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'dispositivos'">
+        <button type="button" class="bloque__cabeza" (click)="alternarSeccion('dispositivos')"
+            [attr.aria-expanded]="seccionAbierta === 'dispositivos'">
+            <span class="bloque__icono material-icons">devices</span>
+            <span class="bloque__texto">
+                <span class="bloque__titulo">Dispositivos vinculados</span>
+                <span class="bloque__desc">Gestiona los dispositivos donde iniciaste sesión.</span>
+            </span>
+            <span class="bloque__flecha material-icons">expand_more</span>
+        </button>
+
+        <div class="bloque__cuerpo" *ngIf="seccionAbierta === 'dispositivos'">
+            <div class="fila" *ngFor="let d of dispositivos; trackBy: trackPorId">
+                <div class="fila__texto">
+                    <span class="fila__titulo">
+                        {{ d.nombre }}
+                        <em class="etiqueta" *ngIf="d.actual">Este dispositivo</em>
+                    </span>
+                    <span class="fila__desc">{{ d.sistema }} · {{ d.ubicacion }} · {{ d.ultimoAcceso }}</span>
+                </div>
+                <button type="button" class="btn-texto" *ngIf="!d.actual" (click)="cerrarSesion(d)">
+                    Cerrar sesión
+                </button>
+            </div>
+
+            <div class="fila fila--acciones" *ngIf="dispositivos.length > 1">
+                <button type="button" class="btn-secundario" (click)="cerrarTodas()">
+                    Cerrar sesión en los demás dispositivos
+                </button>
+            </div>
+        </div>
+    </article>
+
+    <!-- ===== Alertas de seguridad ===== -->
+    <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'alertas'">
+        <button type="button" class="bloque__cabeza" (click)="alternarSeccion('alertas')"
+            [attr.aria-expanded]="seccionAbierta === 'alertas'">
+            <span class="bloque__icono material-icons">notifications_active</span>
+            <span class="bloque__texto">
+                <span class="bloque__titulo">Alertas de seguridad</span>
+                <span class="bloque__desc">Revisa tus alertas y dónde las recibes.</span>
+            </span>
+            <span class="bloque__flecha material-icons">expand_more</span>
+        </button>
+
+        <div class="bloque__cuerpo" *ngIf="seccionAbierta === 'alertas'">
+            <div class="fila" *ngFor="let a of alertas; trackBy: trackPorId">
+                <div class="fila__texto">
+                    <span class="fila__titulo">{{ a.titulo }}</span>
+                    <span class="fila__desc">{{ a.descripcion }}</span>
+                </div>
+                <button type="button" class="switch" role="switch" [class.switch--on]="a.activo"
+                    [attr.aria-checked]="a.activo" [attr.aria-label]="a.titulo" (click)="alternarOpcion(a)">
+                    <span class="switch__bolita"></span>
+                </button>
+            </div>
+        </div>
+    </article>
+</section>
