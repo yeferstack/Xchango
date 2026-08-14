@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 interface RegistroUsuario {
   nombres: string;
@@ -17,34 +17,53 @@ interface RegistroUsuario {
   numeroDocumento: string;
 }
 
+interface Opcion {
+  value: string;
+  label: string;
+}
+
 @Component({
-  selector: 'app-formulario',
+  selector: "formulario_crear_usuario",
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './formulario_crear_usuario.html',
-  styleUrls: ['./formulario_crear_usuario.css'],
+  templateUrl: "./formulario_crear_usuario.html",
+  styleUrls: ["./formulario_crear_usuario.css"],
 })
 export class Formulario_crear_usuarioComponent {
   modelo: RegistroUsuario = {
-    nombres: '',
-    apellidos: '',
-    fechaNacimiento: '',
-    sexo: '',
-    direccion: '',
-    ciudad: '',
-    estado: '',
-    barrio: '',
-    email: '',
-    telefono: '+57 ',
-    tipoDocumento: '',
-    numeroDocumento: '',
+    nombres: "",
+    apellidos: "",
+    fechaNacimiento: "",
+    sexo: "",
+    direccion: "",
+    ciudad: "",
+    estado: "",
+    barrio: "",
+    email: "",
+    telefono: "+57 ",
+    tipoDocumento: "",
+    numeroDocumento: "",
   };
 
   fotoPerfilArchivo: File | null = null;
-  fotoPerfilNombre = '';
+  fotoPerfilNombre = "";
   isDragOver = false;
 
-  private readonly tiposPermitidos = ['image/png', 'image/jpeg'];
+  /** Datos de los <select>: cada uno se recorre en el HTML con *ngFor. */
+  readonly opcionesSexo: Opcion[] = [
+    { value: "femenino", label: "Femenino" },
+    { value: "masculino", label: "Masculino" },
+    { value: "otro", label: "Otro" },
+  ];
+
+  readonly tiposDocumento: Opcion[] = [
+    { value: "cc", label: "Cédula de ciudadanía" },
+    { value: "ce", label: "Cédula de extranjería" },
+    { value: "ti", label: "Tarjeta de identidad" },
+    { value: "pasaporte", label: "Pasaporte" },
+  ];
+
+  private readonly tiposPermitidos = ["image/png", "image/jpeg"];
   private readonly tamanoMaximoBytes = 5 * 1024 * 1024; // 5MB
 
   onFotoPerfilSeleccionada(event: Event): void {
@@ -77,11 +96,11 @@ export class Formulario_crear_usuarioComponent {
 
   private asignarFotoPerfil(archivo: File): void {
     if (!this.tiposPermitidos.includes(archivo.type)) {
-      console.warn('Formato no permitido. Usa JPG o PNG.');
+      console.warn("Formato no permitido. Usa JPG o PNG.");
       return;
     }
     if (archivo.size > this.tamanoMaximoBytes) {
-      console.warn('El archivo supera el máximo de 5MB.');
+      console.warn("El archivo supera el máximo de 5MB.");
       return;
     }
     this.fotoPerfilArchivo = archivo;
@@ -96,10 +115,10 @@ export class Formulario_crear_usuarioComponent {
     });
 
     if (this.fotoPerfilArchivo) {
-      formData.append('fotoPerfil', this.fotoPerfilArchivo);
+      formData.append("fotoPerfil", this.fotoPerfilArchivo);
     }
 
     // TODO: reemplazar con la llamada al servicio real
-    console.log('Formulario listo para enviar:', this.modelo, formData);
+    console.log("Formulario listo para enviar:", this.modelo, formData);
   }
 }
