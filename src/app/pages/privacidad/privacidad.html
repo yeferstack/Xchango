@@ -68,19 +68,19 @@
         <section class="tarjeta">
 
             <header class="tarjeta-encabezado">
-                <h1 class="titulo">Seguridad</h1>
-                <p class="descripcion">Protege tu cuenta de XchanGo.</p>
+                <h1 class="titulo">Privacidad</h1>
+                <p class="descripcion">Decide qué información tuya pueden ver los demás.</p>
             </header>
 
             <div class="lista-acordeones">
 
-                <!-- Métodos de verificación -->
-                <article class="acordeon" [class.abierto]="panelAbierto() === 'metodos'">
-                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('metodos')">
-                        <span class="icono-caja"><span class="material-icons">verified_user</span></span>
+                <!-- Visibilidad del perfil -->
+                <article class="acordeon" [class.abierto]="panelAbierto() === 'visibilidad'">
+                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('visibilidad')">
+                        <span class="icono-caja"><span class="material-icons">visibility</span></span>
                         <span class="acordeon-texto">
-                            <strong>Métodos de verificación</strong>
-                            <small>Activa los métodos necesarios para proteger tu cuenta.</small>
+                            <strong>Visibilidad del perfil</strong>
+                            <small>Elige quién puede encontrarte y ver tu perfil.</small>
                         </span>
                         <span class="material-icons chevron">expand_more</span>
                     </button>
@@ -88,14 +88,42 @@
                     <div class="acordeon-cuerpo">
                         <div class="acordeon-contenido">
                             <ul class="filas">
-                                <li class="fila" *ngFor="let m of metodos()">
-                                    <span class="material-icons fila-icono">{{ m.icono }}</span>
+                                <li class="fila fila-opcion" *ngFor="let op of opcionesVisibilidad"
+                                    [class.seleccionada]="visibilidad() === op.id"
+                                    (click)="seleccionarVisibilidad(op.id)">
+                                    <span class="radio" [class.on]="visibilidad() === op.id"></span>
                                     <span class="fila-texto">
-                                        <strong>{{ m.titulo }}</strong>
-                                        <small>{{ m.detalle }}</small>
+                                        <strong>{{ op.titulo }}</strong>
+                                        <small>{{ op.detalle }}</small>
                                     </span>
-                                    <button class="switch" type="button" [class.on]="m.activo"
-                                        [attr.aria-pressed]="m.activo" (click)="toggleMetodo(m.id)">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Datos de contacto -->
+                <article class="acordeon" [class.abierto]="panelAbierto() === 'contacto'">
+                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('contacto')">
+                        <span class="icono-caja"><span class="material-icons">contact_page</span></span>
+                        <span class="acordeon-texto">
+                            <strong>Datos de contacto</strong>
+                            <small>Controla qué datos personales se muestran.</small>
+                        </span>
+                        <span class="material-icons chevron">expand_more</span>
+                    </button>
+
+                    <div class="acordeon-cuerpo">
+                        <div class="acordeon-contenido">
+                            <ul class="filas">
+                                <li class="fila" *ngFor="let c of contacto()">
+                                    <span class="material-icons fila-icono">{{ c.icono }}</span>
+                                    <span class="fila-texto">
+                                        <strong>{{ c.titulo }}</strong>
+                                        <small>{{ c.detalle }}</small>
+                                    </span>
+                                    <button class="switch" type="button" [class.on]="c.activo"
+                                        [attr.aria-pressed]="c.activo" (click)="toggleContacto(c.id)">
                                         <span class="bolita"></span>
                                     </button>
                                 </li>
@@ -104,50 +132,47 @@
                     </div>
                 </article>
 
-                <!-- Dispositivos vinculados -->
-                <article class="acordeon" [class.abierto]="panelAbierto() === 'dispositivos'">
-                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('dispositivos')">
-                        <span class="icono-caja"><span class="material-icons">devices</span></span>
+                <!-- Usuarios bloqueados -->
+                <article class="acordeon" [class.abierto]="panelAbierto() === 'bloqueados'">
+                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('bloqueados')">
+                        <span class="icono-caja"><span class="material-icons">block</span></span>
                         <span class="acordeon-texto">
-                            <strong>Dispositivos vinculados</strong>
-                            <small>Gestiona los dispositivos donde iniciaste sesión.</small>
+                            <strong>Usuarios bloqueados</strong>
+                            <small>Revisa a quién bloqueaste y desbloquéalo si quieres.</small>
                         </span>
+                        <span class="contador" *ngIf="bloqueados().length > 0">{{ bloqueados().length }}</span>
                         <span class="material-icons chevron">expand_more</span>
                     </button>
 
                     <div class="acordeon-cuerpo">
                         <div class="acordeon-contenido">
                             <ul class="filas">
-                                <li class="fila" *ngFor="let d of dispositivos()">
-                                    <span class="material-icons fila-icono">{{ d.icono }}</span>
+                                <li class="fila" *ngFor="let b of bloqueados()">
+                                    <span class="avatar-mini">{{ b.nombre.charAt(0) }}</span>
                                     <span class="fila-texto">
-                                        <strong class="con-etiqueta">
-                                            {{ d.nombre }}
-                                            <em class="etiqueta" *ngIf="d.actual">Este dispositivo</em>
-                                        </strong>
-                                        <small>{{ d.lugar }} · {{ d.fecha }}</small>
+                                        <strong>{{ b.nombre }} <em class="usuario">{{ b.usuario }}</em></strong>
+                                        <small>{{ b.fecha }}</small>
                                     </span>
-                                    <button class="btn-cerrar" type="button" *ngIf="!d.actual"
-                                        (click)="cerrarSesionDispositivo(d.id)">
-                                        Cerrar sesión
+                                    <button class="btn-secundario" type="button" (click)="desbloquear(b.id)">
+                                        Desbloquear
                                     </button>
                                 </li>
                             </ul>
 
-                            <p class="vacio" *ngIf="dispositivos().length === 0">
-                                No hay otros dispositivos vinculados.
+                            <p class="vacio" *ngIf="bloqueados().length === 0">
+                                No tienes usuarios bloqueados.
                             </p>
                         </div>
                     </div>
                 </article>
 
-                <!-- Alertas de seguridad -->
-                <article class="acordeon" [class.abierto]="panelAbierto() === 'alertas'">
-                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('alertas')">
-                        <span class="icono-caja"><span class="material-icons">notifications_active</span></span>
+                <!-- Actividad y datos -->
+                <article class="acordeon" [class.abierto]="panelAbierto() === 'actividad'">
+                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('actividad')">
+                        <span class="icono-caja"><span class="material-icons">history</span></span>
                         <span class="acordeon-texto">
-                            <strong>Alertas de seguridad</strong>
-                            <small>Revisa tus alertas y dónde las recibes.</small>
+                            <strong>Actividad y datos</strong>
+                            <small>Gestiona cómo se usa tu actividad dentro de XchanGo.</small>
                         </span>
                         <span class="material-icons chevron">expand_more</span>
                     </button>
@@ -155,15 +180,23 @@
                     <div class="acordeon-cuerpo">
                         <div class="acordeon-contenido">
                             <ul class="filas">
-                                <li class="fila" *ngFor="let a of alertas()">
+                                <li class="fila" *ngFor="let a of actividad()">
                                     <span class="fila-texto">
                                         <strong>{{ a.titulo }}</strong>
                                         <small>{{ a.detalle }}</small>
                                     </span>
                                     <button class="switch" type="button" [class.on]="a.activo"
-                                        [attr.aria-pressed]="a.activo" (click)="toggleAlerta(a.id)">
+                                        [attr.aria-pressed]="a.activo" (click)="toggleActividad(a.id)">
                                         <span class="bolita"></span>
                                     </button>
+                                </li>
+
+                                <li class="fila">
+                                    <span class="fila-texto">
+                                        <strong>Descargar mis datos</strong>
+                                        <small>Recibe un archivo con tu información de la cuenta.</small>
+                                    </span>
+                                    <button class="btn-secundario" type="button">Solicitar</button>
                                 </li>
                             </ul>
                         </div>

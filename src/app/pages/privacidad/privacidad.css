@@ -555,3 +555,99 @@
         width: 100%;
     }
 }
+
+/* ===== EXTRAS DE PRIVACIDAD ===== */
+
+/* Opciones tipo radio */
+.fila-opcion {
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.fila-opcion:hover {
+    background: #FDFAF4;
+}
+
+.fila-opcion.seleccionada {
+    background: #F7F1E5;
+}
+
+.radio {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid #C9BC9F;
+    background: #FFFFFF;
+    position: relative;
+    transition: border-color 0.2s ease;
+}
+
+.radio.on {
+    border-color: var(--color-oscuro, #2E2545);
+}
+
+.radio.on::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--color-oscuro, #2E2545);
+}
+
+/* Contador en el encabezado del acordeón */
+.contador {
+    flex-shrink: 0;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 8px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--color-oscuro, #2E2545);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Avatar de usuario bloqueado */
+.avatar-mini {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-beige, #EBE2CD);
+    color: var(--color-marron, #8A6A45);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.usuario {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-texto-suave, #8A8072);
+    margin-left: 4px;
+}
+
+/* Botón secundario (desbloquear / solicitar) */
+.btn-secundario {
+    flex-shrink: 0;
+    border: 1px solid #DCD3BF;
+    background: #FFFFFF;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--color-texto, #1E1B2E);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+    background: #F5EFE3;
+    border-color: #C9BC9F;
+}
