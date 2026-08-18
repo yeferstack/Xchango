@@ -144,7 +144,11 @@
 
     <div class="cta-row">
 
-      <button class="btn btn-dark">
+      <button
+        class="btn btn-dark"
+        type="button"
+        (click)="abrirModal('registro')"
+      >
 
         Crear Cuenta
 
@@ -155,7 +159,11 @@
       </button>
 
 
-      <button class="btn btn-outline">
+      <button
+        class="btn btn-outline"
+        type="button"
+        (click)="abrirModal('login')"
+      >
 
         iniciar sesión
 
@@ -836,6 +844,20 @@
     </div>
 
   </div>
-  
+
 
 </section>
+
+
+<!-- =========================================================
+     MODAL DE AUTENTICACIÓN
+     ========================================================= -->
+
+<app-metodo-acceso
+  [abierto]="modalAbierto()"
+  [modo]="modoAuth()"
+  (cerrar)="cerrarModal()"
+  (cambiarModo)="cambiarModoAuth($event)"
+  (seleccionarMetodo)="onMetodoSeleccionado($event)"
+>
+</app-metodo-acceso>

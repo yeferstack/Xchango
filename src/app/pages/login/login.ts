@@ -7,6 +7,8 @@ import {
   signal
 } from '@angular/core';
 
+import { MetodoAcceso, ModoAuth, MetodoAuth } from './metodo-acceso/metodo-acceso';
+
 export interface Producto {
   imagen: string;
   nombre: string;
@@ -18,6 +20,7 @@ export interface Producto {
   templateUrl: './login.html',
   styleUrl: './login.css',
   standalone: true,
+  imports: [MetodoAcceso],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login implements OnInit, OnDestroy {
@@ -148,7 +151,7 @@ export class Login implements OnInit, OnDestroy {
 
 
   /* =========================================================
-     ESTADOS
+     ESTADOS CARRUSEL
      ========================================================= */
 
   readonly inicio = signal(0);
@@ -158,6 +161,15 @@ export class Login implements OnInit, OnDestroy {
   readonly cambiando = signal(false);
 
   readonly pausado = signal(false);
+
+
+  /* =========================================================
+     ESTADO MODAL DE AUTENTICACIÓN
+     ========================================================= */
+
+  readonly modalAbierto = signal(false);
+
+  readonly modoAuth = signal<ModoAuth>('login');
 
 
   /* =========================================================
@@ -252,6 +264,39 @@ export class Login implements OnInit, OnDestroy {
   reanudar(): void {
 
     this.pausado.set(false);
+
+  }
+
+
+  /* =========================================================
+     MODAL DE AUTENTICACIÓN
+     ========================================================= */
+
+  abrirModal(modo: ModoAuth): void {
+
+    this.modoAuth.set(modo);
+    this.modalAbierto.set(true);
+
+  }
+
+  cerrarModal(): void {
+
+    this.modalAbierto.set(false);
+
+  }
+
+  cambiarModoAuth(modo: ModoAuth): void {
+
+    this.modoAuth.set(modo);
+
+  }
+
+  onMetodoSeleccionado(metodo: MetodoAuth): void {
+
+    // Punto de enganche para la autenticación real (Firebase,
+    // Google OAuth, Apple OAuth, correo). Por ahora solo se deja
+    // preparado el flujo visual.
+    console.log('Método de autenticación seleccionado:', metodo, this.modoAuth());
 
   }
 

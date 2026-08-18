@@ -1,0 +1,202 @@
+@if (abierto) {
+
+  <!-- ================= OVERLAY ================= -->
+
+  <div
+    class="ma-overlay"
+    (click)="onOverlayClick($event)"
+  >
+
+    <!-- ================= MODAL ================= -->
+
+    <div
+      class="ma-modal"
+      role="dialog"
+      aria-modal="true"
+    >
+
+      <!-- ================= CERRAR ================= -->
+
+      <button
+        class="ma-close"
+        type="button"
+        aria-label="Cerrar"
+        (click)="cerrarModal()"
+      >
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18"/>
+          <path d="m6 6 12 12"/>
+        </svg>
+
+      </button>
+
+
+      <!-- ================= LOGO ================= -->
+
+      <div class="ma-logo">
+
+        <img
+          src="/Logo-xchango/chango.png"
+          alt="Logo XchanGo"
+          class="ma-logo__chango"
+        >
+
+        <img
+          src="/Logo-xchango/letras-chango.png"
+          alt="XchanGo"
+          class="ma-logo__wordmark"
+        >
+
+      </div>
+
+
+      <!-- ================= TÍTULOS ================= -->
+
+      <h2 class="ma-titulo">
+        {{ titulo }}
+      </h2>
+
+      <p class="ma-subtitulo">
+        {{ subtitulo }}
+      </p>
+
+
+      <!-- ================= MÉTODOS ================= -->
+
+      <div class="ma-metodos">
+
+        <!-- ================= GOOGLE ================= -->
+
+        <button
+          class="ma-metodo"
+          type="button"
+          (click)="elegirGoogle()"
+        >
+
+          <span class="ma-metodo__icono">
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+            >
+              <path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.47a5.53 5.53 0 0 1-2.4 3.63v3.02h3.88c2.27-2.09 3.57-5.17 3.57-8.84Z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.07 7.94-2.9l-3.88-3.02c-1.08.72-2.45 1.15-4.06 1.15-3.12 0-5.77-2.11-6.72-4.94H1.27v3.11A11.99 11.99 0 0 0 12 24Z"/>
+              <path fill="#FBBC05" d="M5.28 14.29A7.2 7.2 0 0 1 4.9 12c0-.79.14-1.56.38-2.29V6.6H1.27A11.99 11.99 0 0 0 0 12c0 1.94.46 3.77 1.27 5.4l4.01-3.11Z"/>
+              <path fill="#EA4335" d="M12 4.77c1.76 0 3.34.6 4.58 1.79l3.44-3.44C17.94 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.27 6.6l4.01 3.11C6.23 6.88 8.88 4.77 12 4.77Z"/>
+            </svg>
+
+          </span>
+
+          <span class="ma-metodo__texto">
+            Continuar con Google
+          </span>
+
+        </button>
+
+
+        <!-- ================= APPLE ================= -->
+
+        <button
+          class="ma-metodo"
+          type="button"
+          (click)="elegirApple()"
+        >
+
+          <span class="ma-metodo__icono">
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="#191714"
+            >
+              <path d="M16.365 1.43c0 1.14-.462 2.24-1.216 3.05-.83.9-2.18 1.6-3.34 1.51-.14-1.11.46-2.28 1.19-3.02.83-.86 2.26-1.5 3.37-1.54Zm3.32 16.62c-.6 1.36-.88 1.97-1.65 3.18-1.08 1.68-2.6 3.78-4.48 3.8-1.67.02-2.1-1.09-4.36-1.08-2.26.01-2.73 1.1-4.4 1.08-1.88-.02-3.32-1.9-4.4-3.58C-2.13 17.42-1.4 11.4 1.6 8.22c1.5-1.58 3.14-2.5 4.79-2.5 1.7 0 2.77 1.13 4.18 1.13 1.37 0 2.2-1.13 4.18-1.13 1.6 0 3.3.87 4.5 2.37-3.96 2.17-3.32 7.83.42 9.96Z"/>
+            </svg>
+
+          </span>
+
+          <span class="ma-metodo__texto">
+            Continuar con Apple
+          </span>
+
+        </button>
+
+
+        <!-- ================= DIVISOR ================= -->
+
+        <div class="ma-divisor">
+          <span>o</span>
+        </div>
+
+
+        <!-- ================= CORREO ================= -->
+
+        <button
+          class="ma-metodo ma-metodo--correo"
+          type="button"
+          (click)="elegirCorreo()"
+        >
+
+          <span class="ma-metodo__icono">
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#847A68"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+
+          </span>
+
+          <span class="ma-metodo__texto">
+            Continuar con correo
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- ================= CAMBIO DE MODO ================= -->
+
+      <p class="ma-cambio-modo">
+
+        {{ textoCambioModo }}
+
+        <button
+          type="button"
+          class="ma-cambio-modo__accion"
+          (click)="toggleModo()"
+        >
+          {{ accionCambioModo }}
+        </button>
+
+      </p>
+
+    </div>
+
+  </div>
+
+}
