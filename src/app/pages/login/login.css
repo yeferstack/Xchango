@@ -1,12 +1,27 @@
-/* =========================================================
-   FUENTES
-   ========================================================= */
+/* ================================
+   FUENTES XCHANGO
+   ================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap');
 
+* {
+  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+}
 
+body {
+  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+}
+
+/* Títulos principales */
+.headline,
+.accent,
+.panel-header h3,
+.product-card h4,
+.feature h4 {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+}
 /* =========================================================
-   RESET GENERAL
+   RESET / BASE
    ========================================================= */
 
 * {
@@ -19,47 +34,24 @@ html,
 body {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-
   overflow: hidden;
 }
-
-
-/* =========================================================
-   BODY
-   ========================================================= */
 
 body {
-  width: 100%;
-  height: 100vh;
   min-height: 100vh;
-
-  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
-
+  font-family: "Nunito", sans-serif;
   color: #191714;
 
-  background-color: #f3ece1;
-
-  background-image:
+  background:
     linear-gradient(
       135deg,
-      rgba(250, 247, 241, 0.82) 0%,
-      rgba(243, 235, 223, 0.72) 48%,
-      rgba(236, 223, 205, 0.78) 100%
+      rgba(250, 247, 241, .82),
+      rgba(243, 235, 223, .72) 48%,
+      rgba(236, 223, 205, .78)
     ),
-    url("/Logo-xchango/fondo.jpg");
+    url("/Logo-xchango/fondo.jpg") center / cover no-repeat;
 
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-  overflow: hidden;
 }
-
-/* =========================================================
-   ELEMENTOS GENERALES
-   ========================================================= */
 
 main,
 section,
@@ -67,205 +59,159 @@ header {
   background: transparent;
 }
 
-
-/* =========================================================
-   ELIMINAR BLOBS DEL HTML
-   ========================================================= */
-
 .hero-blob {
   display: none !important;
 }
 
 
 /* =========================================================
-   NAVBAR
-   ========================================================= */
-
-
-.navbar {
-  position: relative;
-  z-index: 20;
-
-  /* Hacemos que se ajuste al contenido para el efecto "píldora" */
-  width: fit-content;
-  margin: 24px auto 0;
-
-  /* Altura un poco más estilizada (opcional, puedes volver a 72px si lo prefieres) */
-  height: 64px;
-  
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centramos el contenido */
-  gap: 8px; /* Reducimos un poco el gap, ya que los items tendrán padding */
-
-  /* Padding simétrico para mantener la forma redonda */
-  padding: 8px 12px;
-
-  /* Efecto Glassmorphism */
-  background: rgba(255, 255, 255, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  
-  /* Borde completamente redondeado */
-  border-radius: 999px; 
-
-  /* Sombras más suaves */
-  box-shadow:
-    0 10px 30px rgba(96, 77, 51, 0.05),
-    inset 0 2px 4px rgba(255, 255, 255, 0.50);
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-/* Estilos para los enlaces/botones dentro del navbar */
-.navbar a {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* Espacio entre el ícono y el texto */
-  padding: 10px 20px;
-  border-radius: 999px; /* Forma de píldora interna */
-  color: #1a1a1a;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  transition: background 0.2s ease;
-}
-
-/* El estado activo (como el de "Inicio") */
-.navbar a.active {
-  background: #f2e9de; /* Ajusta este color al beige de tu diseño */
-}
-
-/* Efecto hover opcional */
-.navbar a:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* =========================================================
    LOGO
    ========================================================= */
 
 .navbar__brand {
+  position: fixed;
+  top: 14px;
+  left: 18px;
+  z-index: 100;
+
   display: flex;
   align-items: center;
-
   gap: 8px;
 
-  flex-shrink: 0;
+  padding: 8px 12px 8px 8px;
+  text-decoration: none;
+}
+
+/* Semicírculo decorativo */
+
+.navbar__brand::before {
+  content: "";
+
+  position: absolute;
+  width: 290px;
+  height: 285px;
+
+  left: -145px;
+  top: -145px;
+
+  border-radius: 50%;
+  background: #efe6d9;
+
+  box-shadow: 0 10px 30px rgba(96, 77, 51, .05);
+
+  z-index: -1;
+  pointer-events: none;
 }
 
 .navbar__chango {
   width: 42px;
   height: 42px;
-
   display: block;
-
   object-fit: contain;
 }
 
 .navbar__wordmark {
   width: 112px;
   height: auto;
-
   display: block;
-
   object-fit: contain;
 }
 
 
 /* =========================================================
-   MENÚ
+   NAVBAR — VIDRIO
    ========================================================= */
 
-.nav-links {
+.navbar {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+
+  width: fit-content;
+  height: 64px;
+  margin: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
+  padding: 8px 12px;
+
+  background: rgba(255, 255, 255, .48);
+  border: 1px solid rgba(255, 255, 255, .85);
+  border-radius: 999px;
+
+  box-shadow:
+    0 14px 35px rgba(96, 77, 51, .08),
+    0 0 0 8px rgba(255, 255, 255, .10),
+    inset 0 2px 5px rgba(255, 255, 255, .65);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
   gap: 5px;
 
   padding: 5px;
 
-  background: rgba(255, 255, 255, 0.54);
-
-  border: 1px solid rgba(255, 255, 255, 0.70);
-
+  background: rgba(255, 255, 255, .54);
+  border: 1px solid rgba(255, 255, 255, .70);
   border-radius: 20px;
 
-  box-shadow:
-    0 8px 20px rgba(102, 78, 44, 0.05);
+  box-shadow: 0 8px 20px rgba(102, 78, 44, .05);
 
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
 }
 
 .nav-item {
+  min-height: 40px;
+  padding: 0 15px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 7px;
 
-  min-height: 40px;
-
-  padding: 0 15px;
-
   border-radius: 14px;
-
-  text-decoration: none;
-
   color: #645c52;
-
-  font-family: "Nunito", sans-serif;
 
   font-size: 14px;
   font-weight: 700;
-
   white-space: nowrap;
 
+  text-decoration: none;
+
   transition:
-    background 0.20s ease,
-    color 0.20s ease,
-    transform 0.20s ease;
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
 }
 
 .nav-item svg {
   width: 18px;
   height: 18px;
-
+  color: #847a68;
   flex-shrink: 0;
-
-  color: #847A68;
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.72);
-
-  color: #111111;
-
+  background: rgba(255, 255, 255, .72);
+  color: #111;
   transform: translateY(-1px);
 }
 
 .nav-item.active {
-  background: rgba(238, 228, 214, 0.92);
-
-  color: #111111;
+  background: rgba(238, 228, 214, .92);
+  color: #111;
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
-}
-
-
-/* =========================================================
-   ACCIONES DERECHA
-   ========================================================= */
-
-.navbar__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  min-width: 80px;
+    inset 0 1px 0 rgba(255, 255, 255, .65);
 }
 
 
@@ -274,121 +220,79 @@ header {
    ========================================================= */
 
 .hero {
-  position: relative;
+  position: absolute;
   z-index: 2;
 
-  width: calc(100% - 120px);
-  max-width: 1450px;
-
-  height: calc(100vh - 220px);
-  min-height: 0;
-
-  margin: 10px auto 0;
+  top: 105px;
+  right: 60px;
+  bottom: 120px;
+  left: 60px;
 
   display: grid;
-
   grid-template-columns:
-    minmax(340px, 0.98fr)
-    minmax(250px, 0.74fr)
-    minmax(430px, 1.23fr);
+    minmax(340px, 1.08fr)
+    minmax(250px, .70fr)
+    minmax(430px, 1.15fr);
 
   align-items: center;
-
-  gap: 25px;
-
-  padding: 0;
+  /* Más aire entre el texto, el teléfono y el panel: antes se
+     sentían pegados y competían por atención */
+  gap: 40px;
 
   overflow: visible;
 }
 
-
-/* =========================================================
-   HERO LEFT
-   ========================================================= */
-
 .hero-left {
   position: relative;
   z-index: 4;
+  grid-column: 1;
+  grid-row: 1;
 
   display: flex;
   flex-direction: column;
-
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
 
   min-width: 0;
 }
-
-
-/* =========================================================
-   PEQUEÑO TÍTULO SUPERIOR
-   ========================================================= */
 
 .eyebrow {
   margin-bottom: 12px;
 
   color: #a27f59;
 
-  font-family: "Nunito", sans-serif;
-
   font-size: 14px;
   font-weight: 800;
-
-  letter-spacing: 0.10em;
-
+  letter-spacing: .1em;
   text-transform: uppercase;
 }
-
-
-/* =========================================================
-   TÍTULO PRINCIPAL
-   ========================================================= */
 
 .headline {
   max-width: 510px;
 
-  color: #111111;
+  color: #111;
 
-  font-family: "Baloo 2", "Nunito", sans-serif;
-
+  font-family: "Baloo 2", sans-serif;
   font-size: clamp(45px, 4vw, 66px);
-
   font-weight: 800;
-
-  line-height: 0.92;
-
-  letter-spacing: -0.025em;
+  line-height: .92;
+  letter-spacing: -.025em;
 }
-
-
-/* =========================================================
-   TÍTULO DORADO
-   ========================================================= */
 
 .accent {
   color: #a27d57;
-
-  font-family: "Baloo 2", "Nunito", sans-serif;
-
+  font-family: "Baloo 2", sans-serif;
   font-weight: 800;
 }
-
-
-/* =========================================================
-   SUBTEXTO
-   ========================================================= */
 
 .subtext {
   margin-top: 22px;
 
-  color: #6e665d;
-
-  font-family: "Nunito", sans-serif;
-
+  /* Antes #6e665d — muy claro sobre fondo blanco, bajaba la
+     legibilidad. Se oscurece sin perder la calidez beige */
+  color: #524b43;
   font-size: 16px;
-
   line-height: 1.45;
-
   font-weight: 600;
 }
 
@@ -400,65 +304,52 @@ header {
 .cta-row {
   display: flex;
   align-items: center;
-
   gap: 12px;
-
-  flex-wrap: nowrap;
 
   margin-top: 24px;
 }
 
 .btn {
   min-height: 49px;
-
   padding: 0 22px;
 
   border-radius: 16px;
 
-  font-family: "Nunito", sans-serif;
-
   font-size: 14px;
   font-weight: 800;
-
   white-space: nowrap;
 
   cursor: pointer;
 
   transition:
-    transform 0.20s ease,
-    box-shadow 0.20s ease,
-    background 0.20s ease;
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
 }
 
 .btn:hover {
   transform: translateY(-2px);
 }
 
-
 .btn-dark {
-  border: 1px solid #111111;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
 
-  background: #111111;
-
-  color: #ffffff;
-
+  /* Se añade un halo dorado sutil: antes el dorado solo
+     aparecía en "quieres." y en el link "Ver todas ›" */
   box-shadow:
-    0 10px 20px rgba(17, 17, 17, 0.15);
+    0 10px 20px rgba(17, 17, 17, .15),
+    0 0 0 1px rgba(178, 138, 87, .35);
 }
 
 .btn-dark:hover {
-  background: #222222;
-
-  box-shadow:
-    0 14px 26px rgba(17, 17, 17, 0.18);
+  background: #222;
 }
 
-
 .btn-outline {
-  border: 1px solid rgba(146, 116, 80, 0.42);
-
-  background: rgba(255, 252, 247, 0.56);
-
+  border: 1px solid rgba(146, 116, 80, .42);
+  background: rgba(255, 252, 247, .56);
   color: #4b453e;
 
   backdrop-filter: blur(10px);
@@ -466,14 +357,13 @@ header {
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, .78);
 }
-
 
 .arrow {
   margin-left: 8px;
-
   font-size: 17px;
+  color: #cba876;
 }
 
 
@@ -482,21 +372,131 @@ header {
    ========================================================= */
 
 .hero-center {
+  /* En vez de vivir en la columna del medio (que quedaba
+     descuadrada por ser asimétrica respecto a las otras dos),
+     esta capa se superpone a TODO el ancho del hero para poder
+     centrar el teléfono respecto al total, sin mover
+     hero-left ni hero-right de su columna original */
   position: relative;
   z-index: 4;
+  grid-column: 1 / -1;
+  grid-row: 1;
 
+  width: 100%;
   height: 100%;
-  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  isolation: isolate;
+
+  /* Que no bloquee clics sobre el texto/panel que quedan
+     debajo de sus bordes; el teléfono en sí sí es clickeable
+     (ver regla siguiente) */
+  pointer-events: none;
+}
+
+.hero-center > * {
+  pointer-events: auto;
+}
+
+/* Offset para correr el teléfono hacia la izquierda (o derecha)
+   respecto al centro exacto del hero. Positivo = a la derecha,
+   negativo = a la izquierda. Ajusta este único valor a gusto. */
+.hero-center {
+  --phone-offset-x: -90px;
+  transform: translateX(var(--phone-offset-x));
+}
+
+/* Halo que conecta el teléfono con el fondo */
+
+.hero-center::before {
+  content: "";
+
+  position: absolute;
+
+  /* En proporción al celular de 260px */
+  width: 350px;
+  height: 190px;
+
+  left: 50%;
+  bottom: 8px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(226, 204, 174, .42),
+      rgba(226, 204, 174, .22) 35%,
+      rgba(226, 204, 174, .08) 58%,
+      transparent 75%
+    );
+
+  filter: blur(18px);
+
+  z-index: -2;
+}
+
+/* Base de luz */
+
+.hero-center::after {
+  content: "";
+
+  position: absolute;
+
+  /* En proporción al celular de 260px */
+  width: 275px;
+  height: 44px;
+
+  left: 50%;
+  bottom: 18px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, .28);
+
+  box-shadow:
+    0 12px 35px rgba(174, 142, 102, .18),
+    inset 0 1px 8px rgba(255, 255, 255, .55);
+
+  filter: blur(2px);
+
+  z-index: -1;
+}
+
+.phone-wrap {
+  position: relative;
+  z-index: 3;
+
+  width: min(320px, 100%);
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.phone-img {
+  width: 320px;
+  max-width: 100%;
 
-/* =========================================================
-   PUNTOS DECORATIVOS
-   ========================================================= */
+  display: block;
+  object-fit: contain;
+
+  /* Ayuda al navegador a priorizar nitidez sobre velocidad al
+     escalar el PNG hacia abajo */
+  image-rendering: -webkit-optimize-contrast;
+
+  /* Promueve su propia capa de composición para que la
+     animación no fuerce un re-rasterizado borroso del resto */
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
 
 .dot-grid {
   position: absolute;
@@ -505,197 +505,40 @@ header {
   height: 145px;
 
   top: 60px;
-  right: -2px;
+  left: 50%;
 
-  opacity: 0.25;
+  /* Antes usaba "right: -2px" relativo a .hero-center, lo cual
+     funcionaba cuando esa capa tenía casi el ancho del teléfono.
+     Ahora que .hero-center abarca todo el hero (para centrar
+     bien el teléfono), se ancla desde el centro del teléfono
+     con este offset propio, así se queda pegado a él */
+  --dot-grid-offset-x: 35px;
+  transform: translateX(var(--dot-grid-offset-x));
+
+  opacity: .25;
 
   background-image:
-    radial-gradient(
-      circle,
-      #8f7c63 1.3px,
-      transparent 1.3px
-    );
+    radial-gradient(circle, #8f7c63 1.3px, transparent 1.3px);
 
   background-size: 13px 13px;
 
   pointer-events: none;
-
-  z-index: 0;
 }
 
 
 /* =========================================================
-   TELÉFONO
-   ========================================================= */
-
-.phone-wrap {
-  position: relative;
-  z-index: 3;
-
-  width: min(210px, 100%);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.phone-img {
-  position: relative;
-  z-index: 3;
-
-  width: 210px;
-  max-width: 100%;
-  height: auto;
-
-  display: block;
-
-  object-fit: contain;
-
-  filter:
-    drop-shadow(
-      0 22px 24px rgba(53, 42, 30, 0.18)
-    );
-}
-
-
-/* =========================================================
-   CONTENIDO SOBRE EL TELÉFONO
-   ========================================================= */
-
-.phone-screen {
-  position: absolute;
-
-  z-index: 5;
-
-  top: 10.5%;
-  left: 11%;
-
-  width: 78%;
-  height: 78%;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  pointer-events: none;
-}
-
-
-.phone-logo {
-  width: 39px;
-  height: 39px;
-
-  object-fit: contain;
-
-  margin-bottom: 9px;
-}
-
-
-.phone-welcome {
-  margin: 0;
-
-  color: #403a33;
-
-  font-family: "Baloo 2", "Nunito", sans-serif;
-
-  font-size: 13px;
-
-  line-height: 1.05;
-
-  font-weight: 600;
-}
-
-
-.phone-welcome strong {
-  display: block;
-
-  margin-top: 3px;
-
-  font-family: "Baloo 2", sans-serif;
-
-  font-size: 16px;
-
-  font-weight: 800;
-}
-
-
-.phone-sub {
-  margin-top: 8px;
-
-  max-width: 130px;
-
-  color: #7b746b;
-
-  font-family: "Nunito", sans-serif;
-
-  font-size: 7px;
-
-  line-height: 1.35;
-}
-
-
-.phone-btn {
-  min-width: 118px;
-  min-height: 29px;
-
-  margin-top: 13px;
-
-  padding: 0 10px;
-
-  border: none;
-
-  border-radius: 10px;
-
-  background: #d7bd99;
-
-  color: #ffffff;
-
-  font-family: "Nunito", sans-serif;
-
-  font-size: 8px;
-
-  font-weight: 800;
-
-  pointer-events: auto;
-
-  cursor: pointer;
-}
-
-
-.phone-link {
-  margin-top: 8px;
-
-  color: #967b59;
-
-  font-family: "Nunito", sans-serif;
-
-  font-size: 7px;
-
-  font-weight: 700;
-
-  text-decoration: none;
-
-  pointer-events: auto;
-}
-
-
-/* =========================================================
-   BASE DEL TELÉFONO
+   BASE ANTIGUA DEL TELÉFONO
    ========================================================= */
 
 .phone-podium {
   position: absolute;
 
-  width: 320px;
-  height: 82px;
+  /* En proporción al celular de 260px */
+  width: 260px;
+  height: 66px;
 
   left: 50%;
-  bottom: 22px;
+  bottom: 18px;
 
   transform: translateX(-50%);
 
@@ -703,102 +546,86 @@ header {
 
   background:
     radial-gradient(
-      ellipse at center,
-      rgba(255, 250, 240, 0.95) 0%,
-      rgba(224, 195, 150, 0.65) 42%,
-      rgba(200, 163, 114, 0.28) 68%,
+      ellipse,
+      rgba(255, 250, 240, .95),
+      rgba(224, 195, 150, .65) 42%,
+      rgba(200, 163, 114, .28) 68%,
       transparent 76%
     );
 
   filter: blur(2px);
-
   z-index: 1;
 }
 
 
 /* =========================================================
-   HERO RIGHT
+   PANEL DERECHO
    ========================================================= */
 
 .hero-right {
   position: relative;
   z-index: 4;
+  grid-column: 3;
+  grid-row: 1;
 
   height: 100%;
+  min-width: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  gap: 13px;
-
-  min-width: 0;
+  /* Más espacio entre buscador / categorías / destacados para
+     que se lean como bloques propios y no como un solo muro */
+  gap: 18px;
 }
-
-
-/* =========================================================
-   SEARCH BAR
-   ========================================================= */
 
 .search-bar {
   min-height: 61px;
 
   display: flex;
   align-items: center;
-
   gap: 11px;
 
   padding: 6px 8px 6px 17px;
 
+  border: 1px solid rgba(255, 255, 255, .80);
   border-radius: 20px;
 
-  background: rgba(255, 255, 255, 0.57);
-
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, .57);
 
   box-shadow:
-    0 12px 28px rgba(89, 70, 48, 0.06);
+    0 12px 28px rgba(89, 70, 48, .06),
+    0 0 0 6px rgba(255, 255, 255, .08),
+    inset 0 2px 5px rgba(255, 255, 255, .6);
 
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
 
-
 .search-icon {
   width: 20px;
   height: 20px;
-
+  color: #847a68;
   flex-shrink: 0;
-
-  color: #847A68;
 }
-
 
 .search-bar input {
   flex: 1;
-
   width: 100%;
   min-width: 0;
 
-  border: none;
-  outline: none;
-
+  border: 0;
+  outline: 0;
   background: transparent;
 
   color: #3a352f;
 
-  font-family: "Nunito", sans-serif;
-
-  font-size: 13px;
-
-  font-weight: 600;
+  font: 600 13px "Nunito", sans-serif;
 }
-
 
 .search-bar input::placeholder {
   color: #958c81;
 }
-
 
 .filter-btn {
   width: 43px;
@@ -808,34 +635,13 @@ header {
   align-items: center;
   justify-content: center;
 
-  flex-shrink: 0;
-
-  border: 1px solid rgba(151, 123, 88, 0.16);
-
+  border: 1px solid rgba(151, 123, 88, .16);
   border-radius: 14px;
 
-  background: rgba(247, 240, 230, 0.76);
-
-  color: #847A68;
+  background: rgba(247, 240, 230, .76);
+  color: #847a68;
 
   cursor: pointer;
-
-  transition:
-    background 0.20s ease,
-    transform 0.20s ease;
-}
-
-
-.filter-btn:hover {
-  background: rgba(255, 255, 255, 0.90);
-
-  transform: translateY(-1px);
-}
-
-
-.filter-icon {
-  width: 19px;
-  height: 19px;
 }
 
 
@@ -845,22 +651,21 @@ header {
 
 .panel {
   width: 100%;
-
   padding: 14px 16px;
 
+  border: 1px solid rgba(255, 255, 255, .80);
   border-radius: 21px;
 
-  background: rgba(255, 255, 255, 0.56);
-
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, .56);
 
   box-shadow:
-    0 12px 30px rgba(97, 72, 41, 0.05);
+    0 12px 30px rgba(97, 72, 41, .06),
+    0 0 0 6px rgba(255, 255, 255, .08),
+    inset 0 2px 5px rgba(255, 255, 255, .6);
 
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
-
 
 .panel-header {
   display: flex;
@@ -868,192 +673,235 @@ header {
   justify-content: space-between;
 
   gap: 12px;
-
   margin-bottom: 11px;
 }
-
 
 .panel-header h3 {
   color: #27231f;
 
-  font-family: "Baloo 2", "Nunito", sans-serif;
-
+  font-family: "Baloo 2", sans-serif;
   font-size: 17px;
-
   line-height: 1;
-
   font-weight: 700;
 }
 
-
 .see-all {
-  flex-shrink: 0;
-
   color: #927654;
 
-  font-family: "Nunito", sans-serif;
-
   font-size: 11px;
-
   font-weight: 800;
-
   text-decoration: none;
 }
 
 
-.see-all:hover {
-  text-decoration: underline;
-}
-
-
 /* =========================================================
-   CATEGORÍAS
+   CATEGORÍAS — ICONOS EN IMAGEN
    ========================================================= */
 
 .categories {
   display: grid;
-
   grid-template-columns: repeat(6, minmax(0, 1fr));
-
   gap: 7px;
 }
 
-
 .category {
   min-width: 0;
-
   min-height: 78px;
 
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
 
   gap: 5px;
-
   padding: 7px 4px;
 
+  border: 1px solid rgba(255, 255, 255, .70);
   border-radius: 14px;
 
-  background: rgba(255, 250, 244, 0.55);
+  background: rgba(255, 250, 244, .55);
 
-  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow: inset 0 1px 4px rgba(255, 255, 255, .55);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  cursor: pointer;
 
   transition:
-    transform 0.20s ease,
-    background 0.20s ease;
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
 }
 
 
-.category:hover {
-  transform: translateY(-2px);
-
-  background: rgba(255, 255, 255, 0.78);
-}
-
+/* Contenedor de la imagen */
 
 .category-icon {
-  font-size: 25px;
+  width: 42px;
+  height: 42px;
 
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
 }
 
 
-.category span {
-  color: #645d54;
+/* Imagen de cada categoría */
 
-  font-family: "Nunito", sans-serif;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  text-align: center;
-}
-
-
-/* =========================================================
-   PRODUCTOS / CARRUSEL
-   ========================================================= */
-
-.products {
-  display: grid;
-
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-
-  gap: 8px;
-
-  /* Duración sincronizada con `duracionFundido` (500ms) en login.ts */
-  transition: opacity 500ms ease;
-}
-
-
-/* Estado momentáneo mientras el carrusel cambia de productos.
-   No modifica tamaños, posiciones ni el resto de la página. */
-.products.is-fading {
-  opacity: 0;
-}
-
-
-/* Si el usuario prefiere menos movimiento, se elimina el fundido. */
-@media (prefers-reduced-motion: reduce) {
-
-  .products {
-    transition: none;
-  }
-
-  .products.is-fading {
-    opacity: 1;
-  }
-}
-
-
-.product-card {
-  min-width: 0;
-}
-
-
-.product-img {
-  position: relative;
-
-  width: 100%;
-
-  aspect-ratio: 1 / 0.78;
-
-  overflow: hidden;
-
-  border-radius: 15px;
-
-  background: #eee4d7;
-}
-
-
-.product-img img {
+.category-icon img {
   width: 100%;
   height: 100%;
 
   display: block;
 
-  object-fit: cover;
+  object-fit: contain;
 
-  transition: transform 0.30s ease;
+  transition:
+    transform .2s ease,
+    filter .2s ease;
 }
 
 
-.product-card:hover .product-img img {
-  transform: scale(1.04);
+/* Texto */
+
+.category span {
+  color: #645d54;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-align: center;
+  line-height: 1.1;
+
+  white-space: nowrap;
+}
+
+
+/* Hover */
+
+.category:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, .78);
+
+  box-shadow:
+    0 8px 18px rgba(96, 77, 51, .08),
+    inset 0 1px 4px rgba(255, 255, 255, .7);
+}
+
+.category:hover .category-icon img {
+  transform: scale(1.08);
+}
+
+.category:hover span {
+  color: #3f3932;
 }
 
 
 /* =========================================================
-   FAVORITO
+   CATEGORÍAS — PANTALLAS HASTA 1280px
    ========================================================= */
+
+@media (max-width: 1280px) {
+
+  .category {
+    min-height: 69px;
+  }
+
+  .category-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .category span {
+    font-size: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   CATEGORÍAS — PANTALLAS BAJAS
+   ========================================================= */
+
+@media (max-height: 750px) {
+
+  .category-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+}
+
+
+/* =========================================================
+   CATEGORÍAS — PANTALLAS MUY BAJAS
+   ========================================================= */
+
+@media (max-height: 650px) {
+
+  .category-icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  .category {
+    min-height: 58px;
+    gap: 3px;
+    padding: 5px 3px;
+  }
+
+  .category span {
+    font-size: 7px;
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCTOS
+   ========================================================= */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+
+  transition: opacity .5s ease;
+}
+
+.products.is-fading {
+  opacity: 0;
+}
+
+.product-card {
+  min-width: 0;
+}
+
+.product-img {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1 / .78;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+  background: #eee4d7;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
 
 .fav-btn {
   position: absolute;
-
   top: 7px;
   right: 7px;
 
@@ -1064,104 +912,54 @@ header {
   align-items: center;
   justify-content: center;
 
-  padding: 0;
-
-  border: 1px solid rgba(255, 255, 255, 0.78);
-
+  border: 1px solid rgba(255, 255, 255, .78);
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.84);
-
-  color: #847A68;
+  background: rgba(255, 255, 255, .84);
+  color: #847a68;
 
   cursor: pointer;
 
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  box-shadow:
-    0 6px 13px rgba(30, 23, 17, 0.07);
-
-  transition:
-    transform 0.20s ease,
-    background 0.20s ease;
 }
-
-
-.fav-btn:hover {
-  transform: scale(1.08);
-
-  background: #ffffff;
-}
-
 
 .fav-icon {
   width: 17px;
   height: 17px;
-
-  display: block;
-
-  color: #847A68;
-
-  stroke: currentColor;
-  fill: none;
 }
-
-
-/* =========================================================
-   TEXTO PRODUCTOS
-   ========================================================= */
 
 .product-card h4 {
   margin-top: 6px;
 
   color: #29251f;
 
-  font-family: "Baloo 2", "Nunito", sans-serif;
-
+  font-family: "Baloo 2", sans-serif;
   font-size: 12px;
-
   line-height: 1.05;
-
   font-weight: 700;
 }
-
 
 .location {
   display: flex;
   align-items: center;
-
   gap: 3px;
 
   margin-top: 4px;
 
   color: #8a8176;
-
-  font-family: "Nunito", sans-serif;
-
   font-size: 9px;
-
   font-weight: 600;
 }
-
 
 .location-icon {
   width: 14px;
   height: 14px;
-
-  display: block;
-
-  flex-shrink: 0;
-
-  color: #847A68;
-
-  stroke: currentColor;
-  fill: none;
+  color: #847a68;
 }
 
 
 /* =========================================================
-   PUNTOS
+   DOTS
    ========================================================= */
 
 .dots {
@@ -1170,96 +968,72 @@ header {
   justify-content: center;
 
   gap: 5px;
-
   margin-top: 9px;
 }
-
 
 .dot {
   width: 5px;
   height: 5px;
 
   border-radius: 50%;
-
-  background: rgba(132, 122, 104, 0.28);
-
-  transition:
-    width 250ms ease,
-    background-color 250ms ease;
+  background: rgba(132, 122, 104, .28);
 }
-
 
 .dot.active {
   width: 18px;
-
   border-radius: 20px;
-
   background: #847a68;
 }
 
 
 /* =========================================================
-   CARACTERÍSTICAS INFERIORES
+   FEATURES / FOOTER — VIDRIO
    ========================================================= */
 
 .features {
-  position: relative;
-  z-index: 5;
+  position: fixed;
+  z-index: 20;
 
-  width: calc(100% - 120px);
-  max-width: 1450px;
+  left: 60px;
+  right: 60px;
+  bottom: 18px;
 
   height: 92px;
-  min-height: 92px;
-
-  margin: 0 auto 18px;
 
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-
   align-items: center;
-
-  gap: 0;
 
   padding: 12px 20px;
 
+  border: 1px solid rgba(255, 255, 255, .82);
   border-radius: 24px;
 
-  background: rgba(255, 255, 255, 0.57);
-
-  border: 1px solid rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, .57);
 
   box-shadow:
-    0 12px 32px rgba(91, 69, 43, 0.06);
+    0 14px 35px rgba(91, 69, 43, .07),
+    0 0 0 8px rgba(255, 255, 255, .10),
+    inset 0 2px 5px rgba(255, 255, 255, .55);
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
-
 .feature {
-  min-width: 0;
-
   position: relative;
+  min-width: 0;
 
   display: flex;
   align-items: center;
-
   gap: 12px;
 
   padding: 5px 20px;
 }
 
-
 .feature + .feature {
-  border-left: 1px solid rgba(139, 119, 93, 0.15);
+  border-left: 1px solid rgba(139, 119, 93, .15);
 }
-
-
-/* =========================================================
-   ICONO CARACTERÍSTICA
-   ========================================================= */
 
 .feature-icon {
   width: 42px;
@@ -1271,160 +1045,135 @@ header {
 
   flex-shrink: 0;
 
+  border: 1px solid rgba(146, 121, 88, .14);
   border-radius: 50%;
 
-  background: rgba(250, 244, 236, 0.88);
-
-  border: 1px solid rgba(146, 121, 88, 0.14);
-
-  color: #847A68;
-
-  box-shadow:
-    0 5px 12px rgba(104, 82, 56, 0.06);
-
-  transition:
-    transform 0.20s ease,
-    background 0.20s ease;
+  background: rgba(250, 244, 236, .88);
+  color: #847a68;
 }
-
-
-.feature:hover .feature-icon {
-  transform: translateY(-2px);
-
-  background: rgba(255, 255, 255, 0.95);
-}
-
 
 .feature-svg {
   width: 22px;
   height: 22px;
-
-  display: block;
-
-  color: #847A68;
-
-  stroke: currentColor;
-  fill: none;
 }
-
-
-/* =========================================================
-   TEXTO CARACTERÍSTICAS
-   ========================================================= */
 
 .feature h4 {
   margin-bottom: 3px;
 
   color: #2a261f;
 
-  font-family: "Baloo 2", "Nunito", sans-serif;
-
+  font-family: "Baloo 2", sans-serif;
   font-size: 13px;
-
   line-height: 1;
-
-  font-weight: 700;
 }
-
 
 .feature p {
   max-width: 180px;
 
   color: #82786b;
-
-  font-family: "Nunito", sans-serif;
-
   font-size: 9px;
-
   line-height: 1.35;
-
   font-weight: 600;
 }
 
-
-/* =========================================================
-   TÉRMINOS Y CONDICIONES
-   ========================================================= */
-
 .terminos {
   position: absolute;
-
   right: 8px;
   bottom: -16px;
 }
 
-
 .terminos a {
   color: #8a7a67;
-
-  font-family: "Nunito", sans-serif;
-
   font-size: 8px;
-
   font-weight: 600;
-
   text-decoration: none;
-
-  opacity: 0.8;
-}
-
-
-.terminos a:hover {
-  color: #5f5040;
-
-  opacity: 1;
-
-  text-decoration: underline;
 }
 
 
 /* =========================================================
-   1440px O MENOS
+   PANTALLAS GRANDES
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+  .hero {
+    left: 78px;
+    right: 78px;
+    top: 105px;
+    bottom: 125px;
+
+    grid-template-columns:
+      minmax(400px, .98fr)
+      minmax(280px, .74fr)
+      minmax(500px, 1.23fr);
+
+    gap: 30px;
+  }
+
+  .features {
+    left: 78px;
+    right: 78px;
+  }
+
+  .headline {
+    font-size: 64px;
+  }
+
+  .phone-img {
+    width: 225px;
+  }
+}
+
+
+/* =========================================================
+   HASTA 1440px
    ========================================================= */
 
 @media (max-width: 1440px) {
 
-  .navbar,
-  .hero,
+  .hero {
+    left: 45px;
+    right: 45px;
+    top: 100px;
+    bottom: 115px;
+
+    grid-template-columns:
+      minmax(315px, .95fr)
+      minmax(245px, .72fr)
+      minmax(410px, 1.15fr);
+
+    gap: 20px;
+  }
+
   .features {
-    width: calc(100% - 90px);
+    left: 45px;
+    right: 45px;
   }
 
   .headline {
     font-size: 56px;
   }
 
-  .phone-wrap,
   .phone-img {
-    width: 250px;
-  }
-
-  .hero {
-    grid-template-columns:
-      minmax(315px, 0.95fr)
-      minmax(245px, 0.72fr)
-      minmax(410px, 1.15fr);
-
-    gap: 20px;
+    width: 220px;
   }
 }
 
 
 /* =========================================================
-   1280px
+   HASTA 1280px
    ========================================================= */
 
 @media (max-width: 1280px) {
 
-  .navbar,
-  .hero,
-  .features {
-    width: calc(100% - 60px);
+  .navbar {
+    top: 18px;
+    height: 60px;
   }
 
-  .navbar {
-    height: 66px;
-    min-height: 66px;
+  .navbar__brand {
+    top: 10px;
+    left: 14px;
   }
 
   .navbar__chango {
@@ -1438,18 +1187,19 @@ header {
 
   .nav-item {
     min-height: 36px;
-
     padding: 0 11px;
-
     font-size: 12px;
   }
 
   .hero {
-    height: calc(100vh - 205px);
+    top: 88px;
+    bottom: 105px;
+    left: 30px;
+    right: 30px;
 
     grid-template-columns:
-      minmax(295px, 0.94fr)
-      minmax(220px, 0.70fr)
+      minmax(295px, .94fr)
+      minmax(220px, .70fr)
       minmax(390px, 1.10fr);
 
     gap: 16px;
@@ -1469,23 +1219,16 @@ header {
 
   .btn {
     min-height: 45px;
-
     padding: 0 17px;
-
     font-size: 12px;
   }
 
-  .phone-wrap,
   .phone-img {
-    width: 225px;
+    width: 205px;
   }
 
   .panel {
     padding: 12px;
-  }
-
-  .panel-header {
-    margin-bottom: 8px;
   }
 
   .panel-header h3 {
@@ -1517,15 +1260,16 @@ header {
   }
 
   .features {
-    height: 82px;
-    min-height: 82px;
+    left: 30px;
+    right: 30px;
+    bottom: 12px;
 
+    height: 78px;
     padding: 8px 12px;
   }
 
   .feature {
     padding: 4px 13px;
-
     gap: 8px;
   }
 
@@ -1550,135 +1294,45 @@ header {
 
 
 /* =========================================================
-   1100px
+   PANTALLAS BAJAS
    ========================================================= */
 
-@media (max-width: 1100px) {
+@media (max-height: 750px) {
 
-  .hero {
-    grid-template-columns:
-      minmax(270px, 0.9fr)
-      minmax(190px, 0.62fr)
-      minmax(350px, 1.05fr);
+  .navbar {
+    top: 10px;
+    height: 56px;
   }
 
-  .headline {
-    font-size: 43px;
-  }
-
-  .phone-wrap,
-  .phone-img {
-    width: 200px;
-  }
-
-  .phone-logo {
-    width: 32px;
-    height: 32px;
-  }
-
-  .phone-welcome {
-    font-size: 11px;
-  }
-
-  .phone-welcome strong {
-    font-size: 13px;
-  }
-
-  .phone-sub {
-    font-size: 6px;
-  }
-
-  .phone-btn {
-    min-width: 100px;
-    min-height: 24px;
-
-    font-size: 7px;
-  }
-
-  .phone-link {
-    font-size: 6px;
-  }
-
-  .features {
-    height: 76px;
-    min-height: 76px;
-  }
-}
-
-
-/* =========================================================
-   900px
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-  /* En pantallas pequeñas dejamos la pantalla fija,
-     pero reducimos los elementos. */
-
-  .navbar,
-  .hero,
-  .features {
-    width: calc(100% - 30px);
+  .navbar__brand {
+    top: 8px;
   }
 
   .hero {
-    height: calc(100vh - 190px);
-
-    grid-template-columns:
-      minmax(230px, 0.9fr)
-      minmax(165px, 0.65fr)
-      minmax(300px, 1fr);
-
-    gap: 10px;
+    top: 78px;
+    bottom: 92px;
+    gap: 12px;
   }
 
   .headline {
-    font-size: 34px;
-  }
-
-  .eyebrow {
-    font-size: 10px;
+    font-size: 40px;
   }
 
   .subtext {
-    font-size: 11px;
+    margin-top: 14px;
   }
 
-  .btn {
-    padding: 0 12px;
-
-    font-size: 10px;
+  .cta-row {
+    margin-top: 15px;
   }
 
-  .phone-wrap,
   .phone-img {
-    width: 170px;
-  }
-
-  .search-bar {
-    min-height: 48px;
-  }
-
-  .filter-btn {
-    width: 34px;
-    height: 34px;
-  }
-
-  .categories {
-    gap: 4px;
-  }
-
-  .category {
-    min-height: 58px;
-  }
-
-  .products {
-    gap: 5px;
+    width: 185px;
   }
 
   .features {
+    bottom: 8px;
     height: 70px;
-    min-height: 70px;
   }
 
   .feature {
@@ -1694,39 +1348,13 @@ header {
     width: 17px;
     height: 17px;
   }
-}
 
-
-/* =========================================================
-   IMPORTANTE:
-   NO SE HABILITA SCROLL
-   ========================================================= */
-
-@media (max-height: 750px) {
-
-  .navbar {
-    margin-top: 12px;
+  .feature h4 {
+    font-size: 10px;
   }
 
-  .hero {
-    height: calc(100vh - 170px);
-
-    margin-top: 5px;
-  }
-
-  .headline {
-    font-size: 40px;
-  }
-
-  .hero-center {
-    transform: scale(0.90);
-  }
-
-  .features {
-    height: 72px;
-    min-height: 72px;
-
-    margin-bottom: 8px;
+  .feature p {
+    font-size: 7px;
   }
 }
 
@@ -1738,10 +1366,13 @@ header {
 @media (max-height: 650px) {
 
   .navbar {
-    height: 58px;
-    min-height: 58px;
+    top: 7px;
+    height: 50px;
+  }
 
-    margin-top: 8px;
+  .navbar__brand {
+    top: 6px;
+    left: 10px;
   }
 
   .navbar__chango {
@@ -1754,40 +1385,67 @@ header {
   }
 
   .nav-item {
-    min-height: 32px;
-
+    min-height: 30px;
     padding: 0 8px;
-
     font-size: 10px;
   }
 
   .hero {
-    height: calc(100vh - 138px);
+    top: 65px;
+    bottom: 78px;
+    left: 20px;
+    right: 20px;
+    gap: 8px;
   }
 
   .headline {
     font-size: 34px;
   }
 
-  .hero-center {
-    transform: scale(0.80);
+  .eyebrow {
+    font-size: 9px;
+  }
+
+  .subtext {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .cta-row {
+    margin-top: 10px;
+  }
+
+  .btn {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 9px;
+  }
+
+  .phone-img {
+    width: 155px;
   }
 
   .features {
-    height: 62px;
-    min-height: 62px;
+    left: 20px;
+    right: 20px;
+    bottom: 5px;
 
-    padding: 5px 8px;
+    height: 65px;
+    padding: 4px 7px;
+  }
+
+  .feature {
+    gap: 6px;
   }
 
   .feature-icon {
-    width: 28px;
-    height: 28px;
+    width: 27px;
+    height: 27px;
   }
 
   .feature-svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 
   .feature h4 {
@@ -1795,6 +1453,77 @@ header {
   }
 
   .feature p {
-    font-size: 7px;
+    font-size: 6px;
   }
+}
+
+
+/* =========================================================
+   TELÉFONO — VERSIÓN FINAL (reemplaza los 3 bloques repetidos
+   que había antes: sólo el último de ellos se aplicaba, así
+   que se consolidan aquí en uno solo, más ligero, para que el
+   teléfono no domine tanto frente al texto y al panel)
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .phone-wrap {
+    /* Antes 205px (quedó muy chico). Se sube a un tamaño
+       intermedio */
+    width: min(260px, 100%);
+    position: relative;
+    /* El celular dentro del PNG está corrido ~8px a la derecha
+       del centro geométrico del archivo (medido), por eso nunca
+       calzaba con la base sin importar el tamaño. Se compensa
+       con este offset */
+    left: -9px;
+    top: -4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    filter: drop-shadow(0 16px 20px rgba(53, 42, 30, .16));
+  }
+
+  .phone-img {
+    width: 260px;
+    max-width: none;
+    height: auto;
+
+    display: block;
+    object-fit: contain;
+
+    /* Sin filter acá: solo se anima transform, así el
+       navegador puede renderizar el PNG a máxima nitidez */
+    animation: phoneFloat 4s ease-in-out infinite;
+  }
+
+}
+
+@keyframes phoneFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+
+}
+
+/* En pantallas pequeñas el teléfono vuelve al centro, sin animar */
+@media (max-width: 768px) {
+
+  .phone-wrap {
+    left: 0;
+    top: 0;
+  }
+
+  .phone-img {
+    animation: none;
+  }
+
 }

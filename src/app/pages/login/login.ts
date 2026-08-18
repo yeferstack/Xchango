@@ -35,20 +35,20 @@ export class Login implements OnInit, OnDestroy {
     },
 
     {
-      imagen: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=220&fit=crop',
+      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtPnCA_0TO68aqvqwfOV-sHfTd_Ejn832DODwDfBBQ5MTNboRLkpWWl3HU&s=10',
       nombre: 'Smartwatch',
       ubicacion: 'Mani'
     },
 
     {
-      imagen: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=220&fit=crop',
+      imagen: 'https://http2.mlstatic.com/D_NQ_NP_694714-CBT109951411899_042026-O.webp',
       nombre: 'Tenis deportivos',
       ubicacion: 'Yopal'
     },
 
     {
       imagen: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=220&fit=crop',
-      nombre: 'Audífonos inalámbricos',
+      nombre: 'Audífonos inalám',
       ubicacion: 'Yopal'
     },
 
@@ -77,8 +77,8 @@ export class Login implements OnInit, OnDestroy {
     },
 
     {
-      imagen: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=300&h=220&fit=crop',
-      nombre: 'Cafetera',
+      imagen: 'https://silloneschile.cl/wp-content/uploads/2023/08/silloneschile.cl-sofa-de-cuero.webp',
+      nombre: 'Sillon Clasico',
       ubicacion: 'Monterrey'
     },
 
@@ -91,7 +91,7 @@ export class Login implements OnInit, OnDestroy {
     {
       imagen: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=220&fit=crop',
       nombre: 'Jean clásico',
-      ubicacion: 'Bogotá'
+      ubicacion: 'Villanueva'
     },
 
     {
@@ -131,7 +131,10 @@ export class Login implements OnInit, OnDestroy {
 
   private readonly intervalo = 5000;
 
-  private readonly duracionFundido = 500;
+  // Antes 500ms de fundido + 100ms extra de espera = 600ms
+  // en los que las tarjetas se veían "fantasma"/en blanco.
+  // Se acorta a 260ms para que el bache casi no se note.
+  private readonly duracionFundido = 260;
 
 
   /* =========================================================
@@ -306,6 +309,9 @@ export class Login implements OnInit, OnDestroy {
 
       /*
        * 3. Volver a aparecer.
+       *    Antes había 100ms extra de espera acá, que sumados
+       *    a los 500ms del fundido daban ~600ms de tarjetas casi
+       *    invisibles. Se reaparece en el frame siguiente.
        */
 
       this.timerReaparicion = setTimeout(() => {
@@ -314,7 +320,7 @@ export class Login implements OnInit, OnDestroy {
 
         this.cambiando.set(false);
 
-      }, 100);
+      }, 20);
 
 
     }, this.duracionFundido);
