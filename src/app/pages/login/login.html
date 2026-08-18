@@ -1,25 +1,43 @@
+<!-- ================= LOGO FUERA DE LA NAVBAR ================= -->
+
+<a href="/" class="navbar__brand">
+
+  <img
+    src="/Logo-xchango/chango.png"
+    alt="Logo XchanGo"
+    class="navbar__chango"
+  >
+
+  <img
+    src="/Logo-xchango/letras-chango.png"
+    alt="XchanGo"
+    class="navbar__wordmark"
+  >
+
+</a>
+
+
+<!-- ================= NAVBAR ================= -->
+
 <header class="navbar">
 
-  <!-- ================= LOGO ================= -->
-  <div class="navbar__brand">
-    <img
-      src="/Logo-xchango/chango.png"
-      alt="Logo XchanGo"
-      class="navbar__chango"
-    >
-    <img
-      src="/Logo-xchango/letras-chango.png"
-      alt="XchanGo"
-      class="navbar__wordmark"
-    >
-  </div>
-
-  <!-- ================= ENLACES ================= -->
   <nav class="nav-links">
 
-    <!-- INICIO -->
+    <!-- ================= INICIO ================= -->
+
     <a href="#" class="nav-item active">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#847A68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#847A68"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="M12 18v4"/>
         <path d="m17 18 1.956-11.468"/>
         <path d="m3 8 7.82-5.615a2 2 0 0 1 2.36 0L21 8"/>
@@ -27,12 +45,27 @@
         <path d="M7 18 5.044 6.532"/>
         <circle cx="12" cy="10" r="2"/>
       </svg>
+
       Inicio
+
     </a>
 
-    <!-- EXPLORAR -->
+
+    <!-- ================= EXPLORAR ================= -->
+
     <a href="#" class="nav-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#847A68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#847A68"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44"/>
         <path d="m13.56 11.747 4.332-.924"/>
         <path d="m16 21-3.105-6.21"/>
@@ -41,17 +74,34 @@
         <path d="m8 21 3.105-6.21"/>
         <circle cx="12" cy="13" r="2"/>
       </svg>
-      Explorar
+
+      Explora
+
     </a>
 
-    <!-- SERVICIOS -->
+
+    <!-- ================= SERVICIOS ================= -->
+
     <a href="#" class="nav-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#847A68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#847A68"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <rect width="18" height="7" x="3" y="3" rx="1"/>
         <rect width="9" height="7" x="3" y="14" rx="1"/>
         <rect width="5" height="7" x="16" y="14" rx="1"/>
       </svg>
+
       Servicios
+
     </a>
 
   </nav>
@@ -59,34 +109,64 @@
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- =========================================================
+     HERO
+     ========================================================= -->
 
 <main class="hero">
 
+
+  <!-- ================= HERO LEFT ================= -->
+
   <section class="hero-left">
 
-    <p class="eyebrow">Bienvenido a XCHANGO</p>
+    <p class="eyebrow">
+      Bienvenido a XCHANGO
+    </p>
+
 
     <h1 class="headline">
+
       Intercambia<br>
       lo que tienes<br>
       por lo que <span class="accent">quieres.</span>
+
     </h1>
 
+
     <p class="subtext">
+
       La plataforma #1 de trueques<br>
       en tu comunidad.
+
     </p>
+
 
     <div class="cta-row">
 
-      <button class="btn btn-dark">
-        Explorar trueques
-        <span class="arrow">→</span>
+      <button
+        class="btn btn-dark"
+        type="button"
+        (click)="abrirModal('registro')"
+      >
+
+        Crear Cuenta
+
+        <span class="arrow">
+          →
+        </span>
+
       </button>
 
-      <button class="btn btn-outline">
-        Publicar un trueque
+
+      <button
+        class="btn btn-outline"
+        type="button"
+        (click)="abrirModal('login')"
+      >
+
+        iniciar sesión
+
       </button>
 
     </div>
@@ -94,38 +174,55 @@
   </section>
 
 
-  <!-- ================= TELÉFONO ================= -->
+
+  <!-- =====================================================
+       TELÉFONO
+       ===================================================== -->
 
   <section class="hero-center">
 
-    <div class="dot-grid" aria-hidden="true"></div>
+    <div
+      class="dot-grid"
+      aria-hidden="true">
+    </div>
+
 
     <div class="phone-wrap">
 
       <img
         src="/Logo-xchango/tel.png"
+        srcset="
+          /Logo-xchango/tel.png 1x,
+          /Logo-xchango/tel@2x.png 2x,
+          /Logo-xchango/tel@3x.png 3x
+        "
         alt="Teléfono XchanGo"
         class="phone-img"
       >
 
+
       <div class="phone-screen">
-
-
 
       </div>
 
     </div>
 
-    <div class="phone-podium"></div>
+
+    <div class="phone-podium">
+    </div>
 
   </section>
 
 
-  <!-- ================= HERO RIGHT ================= -->
+
+  <!-- =====================================================
+       HERO RIGHT
+       ===================================================== -->
 
   <section class="hero-right">
 
-    <!-- BUSCADOR -->
+
+    <!-- ================= BUSCADOR ================= -->
 
     <div class="search-bar">
 
@@ -141,14 +238,23 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       >
+
         <path d="m21 21-4.34-4.34"/>
-        <circle cx="11" cy="11" r="8"/>
+
+        <circle
+          cx="11"
+          cy="11"
+          r="8"
+        />
+
       </svg>
+
 
       <input
         type="text"
         placeholder="Buscar trueques..."
       >
+
 
       <button
         class="filter-btn"
@@ -167,10 +273,19 @@
           stroke-linecap="round"
           stroke-linejoin="round"
         >
+
           <path d="M11 22H5.5a1 1 0 0 1 0-5h4.501"/>
+
           <path d="m21 22-1.879-1.878"/>
+
           <path d="M3 19.5v-15A2.5 2.5 0 0 1 5.5 2H18a1 1 0 0 1 1 1v8"/>
-          <circle cx="17" cy="18" r="3"/>
+
+          <circle
+            cx="17"
+            cy="18"
+            r="3"
+          />
+
         </svg>
 
       </button>
@@ -178,62 +293,169 @@
     </div>
 
 
-    <!-- CATEGORÍAS -->
 
-    <div class="panel">
+    <!-- =================================================
+     CATEGORÍAS
+     ================================================= -->
 
-      <div class="panel-header">
+<div class="panel">
 
-        <h3>
-          Explora por categorías
-        </h3>
+  <div class="panel-header">
 
-        <a href="#" class="see-all">
-          Ver todas ›
-        </a>
+    <h3>
+      Explora por categorías
+    </h3>
 
-      </div>
+    <a
+      href="#"
+      class="see-all"
+    >
+      Ver todas ›
+    </a>
 
-      <div class="categories">
+  </div>
 
-        <div class="category">
-          <div class="category-icon">📱</div>
-          <span>Electrónicos</span>
-        </div>
 
-        <div class="category">
-          <div class="category-icon">🚗</div>
-          <span>Vehículos</span>
-        </div>
+  <div class="categories">
 
-        <div class="category">
-          <div class="category-icon">🎮</div>
-          <span>Videojuegos</span>
-        </div>
 
-        <div class="category">
-          <div class="category-icon">👕</div>
-          <span>Ropa</span>
-        </div>
+    <!-- ================= ELECTRÓNICOS ================= -->
 
-        <div class="category">
-          <div class="category-icon">🛋️</div>
-          <span>Hogar</span>
-        </div>
+    <div class="category">
 
-        <div class="category">
-          <div class="category-icon">•••</div>
-          <span>Más</span>
-        </div>
+      <div class="category-icon">
+
+        <img
+          src="/Logo-xchango/icono_elec.png"
+          alt="Electrónicos"
+        >
 
       </div>
+
+      <span>
+        Electrónicos
+      </span>
 
     </div>
 
 
-    <!-- DESTACADOS -->
+
+    <!-- ================= VEHÍCULOS ================= -->
+
+    <div class="category">
+
+      <div class="category-icon">
+
+        <img
+          src="/Logo-xchango/icono_vehiculo.png"
+          alt="Vehículos"
+        >
+
+      </div>
+
+      <span>
+        Vehículos
+      </span>
+
+    </div>
+
+
+
+    <!-- ================= VIDEOJUEGOS ================= -->
+
+    <div class="category">
+
+      <div class="category-icon">
+
+        <img
+          src="/Logo-xchango/icono_juegos.png"
+          alt="Videojuegos"
+        >
+
+      </div>
+
+      <span>
+        Videojuegos
+      </span>
+
+    </div>
+
+
+
+    <!-- ================= ROPA ================= -->
+
+    <div class="category">
+
+      <div class="category-icon">
+
+        <img
+          src="/Logo-xchango/icono_ropa.png"
+          alt="Ropa"
+        >
+
+      </div>
+
+      <span>
+        Ropa
+      </span>
+
+    </div>
+
+
+
+    <!-- ================= HOGAR ================= -->
+
+    <div class="category">
+
+      <div class="category-icon">
+
+        <img
+          src="/Logo-xchango/icono_hogar.png"
+          alt="Hogar"
+        >
+
+      </div>
+
+      <span>
+        Hogar
+      </span>
+
+    </div>
+
+
+
+    <!-- ================= MÁS ================= -->
+
+    <div class="category">
+
+      <div class="category-icon">
+
+        <img
+          src="/Logo-xchango/icono_mas.png"
+          alt="Más"
+        >
+
+      </div>
+
+      <span>
+        Más ...
+      </span>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+    <!-- =================================================
+         DESTACADOS
+         ================================================= -->
 
     <div class="panel">
+
 
       <div class="panel-header">
 
@@ -241,11 +463,17 @@
           Destacados
         </h3>
 
-        <a href="#" class="see-all">
+
+        <a
+          href="#"
+          class="see-all"
+        >
           Ver todas ›
         </a>
 
       </div>
+
+
 
       <div
         class="products"
@@ -256,21 +484,30 @@
         (focusout)="reanudar()"
       >
 
-        @for (producto of productosVisibles(); track producto.nombre) {
+
+        @for (
+          producto of productosVisibles();
+          track producto.nombre
+        ) {
+
 
           <article class="product-card">
 
+
             <div class="product-img">
+
 
               <img
                 [src]="producto.imagen"
                 [alt]="producto.nombre"
               >
 
+
               <button
                 class="fav-btn"
                 aria-label="Favorito"
               >
+
 
                 <svg
                   class="fav-icon"
@@ -284,19 +521,28 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
+
                   <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/>
+
                   <path d="M7.828 13.07A3 3 0 0 1 12 8.764a3 3 0 0 1 5.004 2.224 3 3 0 0 1-.832 2.083l-3.447 3.62a1 1 0 0 1-1.45-.001z"/>
+
                 </svg>
+
 
               </button>
 
             </div>
 
+
+
             <h4>
               {{ producto.nombre }}
             </h4>
 
+
+
             <p class="location">
+
 
               <svg
                 class="location-icon"
@@ -310,11 +556,20 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
+
                 <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
-                <circle cx="12" cy="10" r="3"/>
+
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="3"
+                />
+
               </svg>
 
+
               {{ producto.ubicacion }}
+
 
             </p>
 
@@ -325,27 +580,35 @@
       </div>
 
 
+
+      <!-- ================= PUNTOS ================= -->
+
       <div class="dots">
+
 
         <span
           class="dot"
           [class.active]="puntoActivo() === 0">
         </span>
 
+
         <span
           class="dot"
           [class.active]="puntoActivo() === 1">
         </span>
+
 
         <span
           class="dot"
           [class.active]="puntoActivo() === 2">
         </span>
 
+
         <span
           class="dot"
           [class.active]="puntoActivo() === 3">
         </span>
+
 
       </div>
 
@@ -356,15 +619,21 @@
 </main>
 
 
-<!-- ================= CARACTERÍSTICAS ================= -->
+
+<!-- =========================================================
+     CARACTERÍSTICAS
+     ========================================================= -->
 
 <section class="features">
 
-  <!-- SEGURO Y CONFIABLE -->
+
+  <!-- ================= SEGURO Y CONFIABLE ================= -->
 
   <div class="feature">
 
+
     <div class="feature-icon">
+
 
       <svg
         class="feature-svg"
@@ -378,29 +647,53 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       >
+
         <path d="M7 3.34V5a3 3 0 0 0 3 3"/>
+
         <path d="M11 21.95V18a2 2 0 0 0-2-2 2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"/>
+
         <path d="M21.54 15H17a2 2 0 0 0-2 2v4.54"/>
+
         <path d="M12 2a10 10 0 1 0 9.54 13"/>
+
         <path d="M20 6V4a2 2 0 1 0-4 0v2"/>
-        <rect width="8" height="5" x="14" y="6" rx="1"/>
+
+        <rect
+          width="8"
+          height="5"
+          x="14"
+          y="6"
+          rx="1"
+        />
+
       </svg>
 
     </div>
 
+
     <div>
-      <h4>Seguro y confiable</h4>
-      <p>Perfiles verificados y transacciones seguras.</p>
+
+      <h4>
+        Seguro y confiable
+      </h4>
+
+      <p>
+        Perfiles verificados y trueques seguros.
+      </p>
+
     </div>
 
   </div>
 
 
-  <!-- COMUNIDAD ACTIVA -->
+
+  <!-- ================= COMUNIDAD ACTIVA ================= -->
 
   <div class="feature">
 
+
     <div class="feature-icon">
+
 
       <svg
         class="feature-svg"
@@ -414,27 +707,47 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       >
+
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+
         <path d="M16 3.128a4 4 0 0 1 0 7.744"/>
+
         <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-        <circle cx="9" cy="7" r="4"/>
+
+        <circle
+          cx="9"
+          cy="7"
+          r="4"
+        />
+
       </svg>
 
     </div>
 
+
     <div>
-      <h4>Comunidad activa</h4>
-      <p>Miles de personas intercambiando cada día.</p>
+
+      <h4>
+        Comunidad activa
+      </h4>
+
+      <p>
+        Miles de personas intercambiando cada día.
+      </p>
+
     </div>
 
   </div>
 
 
-  <!-- FÁCIL Y RÁPIDO -->
+
+  <!-- ================= FÁCIL Y RÁPIDO ================= -->
 
   <div class="feature">
 
+
     <div class="feature-icon">
+
 
       <svg
         class="feature-svg"
@@ -448,24 +761,37 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       >
+
         <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 00-.472-.667z"/>
+
       </svg>
 
     </div>
 
+
     <div>
-      <h4>Fácil y rápido</h4>
-      <p>Publica, negocia e intercambia en minutos.</p>
+
+      <h4>
+        Fácil y rápido
+      </h4>
+
+      <p>
+        Publica, negocia e intercambia en minutos.
+      </p>
+
     </div>
 
   </div>
 
 
-  <!-- SOPORTE -->
+
+  <!-- ================= SOPORTE ================= -->
 
   <div class="feature">
 
+
     <div class="feature-icon">
+
 
       <svg
         class="feature-svg"
@@ -479,25 +805,59 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       >
+
         <path d="M12 6V2H8"/>
+
         <path d="M15 11v2"/>
+
         <path d="M2 12h2"/>
+
         <path d="M20 12h2"/>
+
         <path d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/>
+
         <path d="M9 11v2"/>
+
       </svg>
 
     </div>
 
+
     <div>
-      <h4>Soporte 24/7</h4>
-      <p>Estamos para ayudarte siempre que lo necesites.</p>
+
+      <h4>
+        Soporte 24/7
+      </h4>
+
+      <p>
+        Estamos para ayudarte siempre que lo necesites.
+      </p>
+
     </div>
 
     <div class="terminos">
-      <a href="terminos.html">Términos y condiciones</a>
+
+      <a href="legal-info">
+        Términos y condiciones
+      </a>
+
     </div>
 
   </div>
 
+
 </section>
+
+
+<!-- =========================================================
+     MODAL DE AUTENTICACIÓN
+     ========================================================= -->
+
+<app-metodo-acceso
+  [abierto]="modalAbierto()"
+  [modo]="modoAuth()"
+  (cerrar)="cerrarModal()"
+  (cambiarModo)="cambiarModoAuth($event)"
+  (seleccionarMetodo)="onMetodoSeleccionado($event)"
+>
+</app-metodo-acceso>
