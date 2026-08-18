@@ -26,7 +26,7 @@ interface PublicacionTrueque {
   templateUrl: './Formulario_crear_trueques.html',
   styleUrls: ['./Formulario_crear_trueques.css'],
 })
-export class Formulario_crear_trueques {
+export class Formulario_crear_truequesComponent {
   modelo: PublicacionTrueque = {
     articulo: '',
     descripcion: '',
