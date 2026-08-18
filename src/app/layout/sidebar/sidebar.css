@@ -7,13 +7,20 @@
   --accent-soft: #ece2c9;
   --radius-lg: 20px;
   --radius-sm: 10px;
-  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Nunito', 'Segoe UI', Roboto, sans-serif;
   color: var(--ink);
   display: block;
 }
 
 * {
   box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 .sidebar {
@@ -26,7 +33,9 @@
 }
 
 .sidebar__title {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
   font-size: 1rem;
+  font-weight: 700;
   margin: 0 0 14px;
 }
 

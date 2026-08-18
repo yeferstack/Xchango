@@ -1,30 +1,59 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './perfil.html',
   styleUrl: './perfil.css'
 })
 export class PerfilComponent {
-  // Datos del usuario
+
+  // ==============================
+  // DATOS DEL USUARIO
+  // ==============================
+
   nombreUsuario: string = 'Miguel Perez';
 
-  // Rutas de imágenes centralizadas
-  logoUrl: string = 'assets/logo-xchango.jpeg';
-  avatarUrl: string = 'assets/avatar-miguel.jpeg';
 
-  // Calificación (para las estrellas)
+  // ==============================
+  // IMAGEN DE PERFIL
+  // ==============================
+
+  avatarUrl: string = '/Logo-xchango/avatar-miguel.jpeg';
+
+
+  // ==============================
+  // LOGO DE LA APP
+  // ==============================
+
+  logoUrl: string = '/Logo-xchango/logo-xchango.png';
+
+
+  // ==============================
+  // CALIFICACIONES
+  // ==============================
+
   calificacion: number = 4;
+
   calificacionMaxima: number = 5;
+
   totalCalificacionesRequeridas: number = 5;
 
+
+  // ==============================
+  // GENERAR ESTRELLAS
+  // ==============================
+
   estrellas(): boolean[] {
+
     return Array.from(
       { length: this.calificacionMaxima },
       (_, i) => i < this.calificacion
     );
+
   }
+
 }
