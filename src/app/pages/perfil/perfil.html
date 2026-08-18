@@ -1,767 +1,128 @@
 <div class="perfil-page">
 
-    <!-- ==============================
-         NAVBAR
-    =============================== -->
-
+    <!-- NAVBAR -->
     <header class="navbar">
-
-        <!-- LOGO XCHANGO -->
-        <a href="/" class="navbar__brand">
-
-            <img
-                src="/Logo-xchango/chango.png"
-                alt="XchanGo Logo"
-                class="navbar__chango"
-            >
-
-            <img
-                src="/Logo-xchango/letras-chango.png"
-                alt="XchanGo Texto"
-                class="navbar__letras"
-            >
-
-        </a>
-
-
-        <!-- ==============================
-             MENÚ PRINCIPAL
-        =============================== -->
-
-        <nav class="navbar__pill">
-
-            <!-- INICIO -->
-            <a class="navbar__link">
-
-                <svg class="icon" viewBox="0 0 24 24">
-
-                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-
-                    <path
-                        d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-                    />
-
-                </svg>
-
-                Inicio
-
-            </a>
-
-
-            <!-- EXPLORAR -->
-            <a class="navbar__link">
-
-                <svg class="icon" viewBox="0 0 24 24">
-
-                    <path d="m21 21-4.34-4.34" />
-
-                    <circle
-                        cx="11"
-                        cy="11"
-                        r="8"
-                    />
-
-                </svg>
-
-                Explorar
-
-            </a>
-
-
-            <!-- MIS TRUEQUES -->
-            <a class="navbar__link">
-
-                <svg class="icon" viewBox="0 0 24 24">
-
-                    <path d="m16 3 4 4-4 4" />
-
-                    <path d="M20 7H4" />
-
-                    <path d="m8 21-4-4 4-4" />
-
-                    <path d="M4 17h16" />
-
-                </svg>
-
-                Mis trueques
-
-            </a>
-
-
-            <!-- SERVICIOS -->
-            <a class="navbar__link">
-
-                <svg class="icon" viewBox="0 0 24 24">
-
-                    <rect
-                        width="7"
-                        height="7"
-                        x="3"
-                        y="3"
-                        rx="1"
-                    />
-
-                    <rect
-                        width="7"
-                        height="7"
-                        x="14"
-                        y="3"
-                        rx="1"
-                    />
-
-                    <rect
-                        width="7"
-                        height="7"
-                        x="14"
-                        y="14"
-                        rx="1"
-                    />
-
-                    <rect
-                        width="7"
-                        height="7"
-                        x="3"
-                        y="14"
-                        rx="1"
-                    />
-
-                </svg>
-
-                Servicios
-
-            </a>
-
-
-            <!-- MENSAJES -->
-            <a class="navbar__link">
-
-                <svg class="icon" viewBox="0 0 24 24">
-
-                    <path
-                        d="M22 17a2 2 0 0 1-2 2H6l-4 4V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"
-                    />
-
-                </svg>
-
-                Mensajes
-
-            </a>
-
-
-            <!-- FAVORITOS -->
-            <a class="navbar__link">
-
-                <svg class="icon" viewBox="0 0 24 24">
-
-                    <path
-                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
-                    />
-
-                </svg>
-
-                Favoritos
-
-            </a>
-
-        </nav>
-
-
-        <!-- ==============================
-             ACCIONES DERECHA
-        ============================== -->
-
-        <div class="navbar__actions">
-
-            <!-- NOTIFICACIONES -->
-            <button
-                class="navbar__icon-btn"
-                aria-label="Notificaciones"
-            >
-
-                <svg class="icon" viewBox="0 0 24 24">
-
-                    <path
-                        d="M10.268 21a2 2 0 0 0 3.464 0"
-                    />
-
-                    <path
-                        d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
-                    />
-
-                </svg>
-
-            </button>
-
-
-            <!-- FOTO USUARIO -->
-            <div class="navbar__avatar">
-
-                <img
-                    [src]="avatarUrl"
-                    [alt]="nombreUsuario"
-                >
-
-            </div>
-
-
-            <!-- FLECHA -->
-            <svg
-                class="icon navbar__chevron"
-                viewBox="0 0 24 24"
-            >
-
-                <path d="m6 9 6 6 6-6" />
-
-            </svg>
-
+        <div class="navbar__brand">
+            <img src="Logo-xchango/chango.png" alt="XchanGo" class="navbar__logo" />
+            <span class="navbar__brand-name">XchanGo</span>
         </div>
 
+        <nav class="navbar__pill">
+            <a class="navbar__link"><span class="material-icons">home</span> Inicio</a>
+            <a class="navbar__link"><span class="material-icons">search</span> Explorar</a>
+            <a class="navbar__link"><span class="material-icons">swap_horiz</span> Mis trueques</a>
+            <a class="navbar__link"><span class="material-icons">apps</span> Servicios</a>
+            <a class="navbar__link"><span class="material-icons">chat_bubble_outline</span> Mensajes</a>
+            <a class="navbar__link"><span class="material-icons">favorite_border</span> Favoritos</a>
+        </nav>
+
+        <div class="navbar__actions">
+            <button class="navbar__icon-btn" aria-label="Notificaciones">
+                <span class="material-icons">notifications_none</span>
+            </button>
+            <div class="navbar__avatar">
+                <img [src]="avatarUrl" [alt]="nombreUsuario" />
+            </div>
+            <span class="material-icons navbar__chevron">expand_more</span>
+        </div>
     </header>
 
-
-    <!-- ==============================
-         CONTENIDO PRINCIPAL
-    ============================== -->
-
+    <!-- CONTENIDO -->
     <main class="perfil">
 
         <section class="perfil__card perfil__hero">
 
-
-            <!-- ==============================
-                 COLUMNA IZQUIERDA
-            ============================== -->
-
+            <!-- Columna izquierda: avatar + nombre + rating -->
             <div class="perfil__identity">
-
-
-                <!-- FOTO DE PERFIL -->
-
                 <div class="perfil__avatar-wrap">
-
-                    <img
-                        class="perfil__avatar"
-                        [src]="avatarUrl"
-                        [alt]="'Foto de perfil de ' + nombreUsuario"
-                    >
-
-
-                    <!-- BOTÓN CÁMARA -->
-
-                    <button
-                        class="perfil__avatar-edit"
-                        aria-label="Cambiar foto de perfil"
-                    >
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <path
-                                d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
-                            />
-
-                            <circle
-                                cx="12"
-                                cy="13"
-                                r="3"
-                            />
-
-                        </svg>
-
-                    </button>
-
+                    <img class="perfil__avatar" [src]="avatarUrl" [alt]="'Foto de perfil de ' + nombreUsuario" />
                 </div>
 
-
-                <!-- NOMBRE -->
-
-                <h1 class="perfil__name">
-
-                    {{ nombreUsuario }}
-
-                </h1>
-
-
-                <!-- CALIFICACIONES -->
+                <h1 class="perfil__name">{{ nombreUsuario }}</h1>
 
                 <div class="perfil__rating">
-
-                    <h2 class="perfil__rating-title">
-
-                        Calificaciones y opiniones
-
-                    </h2>
-
-
-                    <div
-                        class="perfil__stars"
-                        [attr.aria-label]="calificacion + ' de ' + calificacionMaxima + ' estrellas'"
-                    >
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                            *ngFor="let llena of estrellas()"
-                            [class.is-filled]="llena"
-                        >
-
-                            <path
-                                d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"
-                            />
-
-                        </svg>
-
+                    <h2 class="perfil__rating-title">Calificaciones y opiniones</h2>
+                    <div class="perfil__stars"
+                        [attr.aria-label]="calificacion + ' de ' + calificacionMaxima + ' estrellas'">
+                        <span class="material-icons" *ngFor="let llena of estrellas()" [class.is-filled]="llena">
+                            star
+                        </span>
                     </div>
-
-
                     <p class="perfil__rating-note">
-
-                        (Solo será visible públicamente tras recibir
-
-                        {{ totalCalificacionesRequeridas }}
-
+                        (Solo será visible públicamente tras recibir {{ totalCalificacionesRequeridas }}
                         calificaciones).
-
                     </p>
-
                 </div>
-
             </div>
 
-
-            <!-- ==============================
-                 COLUMNA DERECHA
-            ============================== -->
-
+            <!-- Columna derecha: grid de opciones -->
             <div class="perfil__options">
 
-
-                <!-- TU INFORMACIÓN -->
-
-                <button
-                    class="option-card"
-                    type="button"
-                >
-
-                    <span class="option-card__icon">
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <path d="M16 10h2" />
-
-                            <path d="M16 14h2" />
-
-                            <path
-                                d="M6.17 15a3 3 0 0 1 5.66 0"
-                            />
-
-                            <circle
-                                cx="9"
-                                cy="11"
-                                r="2"
-                            />
-
-                            <rect
-                                x="2"
-                                y="5"
-                                width="20"
-                                height="14"
-                                rx="2"
-                            />
-
-                        </svg>
-
-                    </span>
-
-
+                <button class="option-card" type="button" routerLink="/perfil/informacion">
+                    <span class="option-card__icon material-icons">badge</span>
                     <div>
-
-                        <h3 class="option-card__title">
-
-                            Tu información
-
-                        </h3>
-
-                        <p class="option-card__desc">
-
-                            Nombre elegido y datos para identificarte.
-
-                        </p>
-
+                        <h3 class="option-card__title">Tu información</h3>
+                        <p class="option-card__desc">Nombre elegido y datos para identificarte.</p>
                     </div>
-
-
-                    <svg
-                        class="icon option-card__chevron"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path d="m9 18 6-6-6-6" />
-
-                    </svg>
-
+                    <span class="material-icons option-card__chevron">chevron_right</span>
                 </button>
 
-
-                <!-- DATOS DE CUENTA -->
-
-                <button
-                    class="option-card"
-                    type="button"
-                >
-
-                    <span class="option-card__icon">
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <circle
-                                cx="12"
-                                cy="12"
-                                r="10"
-                            />
-
-                            <circle
-                                cx="12"
-                                cy="10"
-                                r="3"
-                            />
-
-                            <path
-                                d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"
-                            />
-
-                        </svg>
-
-                    </span>
-
-
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">account_circle</span>
                     <div>
-
-                        <h3 class="option-card__title">
-
-                            Datos de tu cuenta
-
-                        </h3>
-
-                        <p class="option-card__desc">
-
-                            Datos que representan tu cuenta de XchanGo.
-
-                        </p>
-
+                        <h3 class="option-card__title">Datos de tu cuenta</h3>
+                        <p class="option-card__desc">Datos que representan tu cuenta de XchanGo.</p>
                     </div>
-
-
-                    <svg
-                        class="icon option-card__chevron"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path d="m9 18 6-6-6-6" />
-
-                    </svg>
-
+                    <span class="material-icons option-card__chevron">chevron_right</span>
                 </button>
 
-
-                <!-- SEGURIDAD -->
-
-                <button
-                    class="option-card"
-                    type="button"
-                >
-
-                    <span class="option-card__icon">
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <path
-                                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
-                            />
-
-                        </svg>
-
-                    </span>
-
-
+                <button class="option-card" type="button" routerLink="/perfil/seguridad">
+                    <span class="option-card__icon material-icons">shield</span>
                     <div>
-
-                        <h3 class="option-card__title">
-
-                            Seguridad
-
-                        </h3>
-
-                        <p class="option-card__desc">
-
-                            Seguridad de tu cuenta.
-
-                        </p>
-
+                        <h3 class="option-card__title">Seguridad</h3>
+                        <p class="option-card__desc">Seguridad de tu cuenta.</p>
                     </div>
-
-
-                    <svg
-                        class="icon option-card__chevron"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path d="m9 18 6-6-6-6" />
-
-                    </svg>
-
+                    <span class="material-icons option-card__chevron">chevron_right</span>
                 </button>
 
-
-                <!-- UBICACIÓN -->
-
-                <button
-                    class="option-card"
-                    type="button"
-                >
-
-                    <span class="option-card__icon">
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <path
-                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
-                            />
-
-                            <circle
-                                cx="12"
-                                cy="10"
-                                r="3"
-                            />
-
-                        </svg>
-
-                    </span>
-
-
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">location_on</span>
                     <div>
-
-                        <h3 class="option-card__title">
-
-                            Ubicación
-
-                        </h3>
-
-                        <p class="option-card__desc">
-
-                            Ubicación guardada en tu cuenta.
-
-                        </p>
-
+                        <h3 class="option-card__title">Ubicación</h3>
+                        <p class="option-card__desc">Ubicación guardada en tu cuenta.</p>
                     </div>
-
-
-                    <svg
-                        class="icon option-card__chevron"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path d="m9 18 6-6-6-6" />
-
-                    </svg>
-
+                    <span class="material-icons option-card__chevron">chevron_right</span>
                 </button>
 
-
-                <!-- PRIVACIDAD -->
-
-                <button
-                    class="option-card"
-                    type="button"
-                >
-
-                    <span class="option-card__icon">
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <rect
-                                width="18"
-                                height="11"
-                                x="3"
-                                y="11"
-                                rx="2"
-                                ry="2"
-                            />
-
-                            <path
-                                d="M7 11V7a5 5 0 0 1 10 0v4"
-                            />
-
-                        </svg>
-
-                    </span>
-
-
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">lock_outline</span>
                     <div>
-
-                        <h3 class="option-card__title">
-
-                            Privacidad
-
-                        </h3>
-
-                        <p class="option-card__desc">
-
-                            Privacidad y control sobre el uso de tus datos.
-
-                        </p>
-
+                        <h3 class="option-card__title">Privacidad</h3>
+                        <p class="option-card__desc">Privacidad y control sobre el uso de tus datos.</p>
                     </div>
-
-
-                    <svg
-                        class="icon option-card__chevron"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path d="m9 18 6-6-6-6" />
-
-                    </svg>
-
+                    <span class="material-icons option-card__chevron">chevron_right</span>
                 </button>
 
-
-                <!-- CHATS -->
-
-                <button
-                    class="option-card"
-                    type="button"
-                >
-
-                    <span class="option-card__icon">
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <path
-                                d="M22 17a2 2 0 0 1-2 2H6l-4 4V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"
-                            />
-
-                        </svg>
-
-                    </span>
-
-
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">chat_bubble_outline</span>
                     <div>
-
-                        <h3 class="option-card__title">
-
-                            Chats
-
-                        </h3>
-
-                        <p class="option-card__desc">
-
-                            Tus chats más recientes.
-
-                        </p>
-
+                        <h3 class="option-card__title">Chats</h3>
+                        <p class="option-card__desc">Tus chats más recientes.</p>
                     </div>
-
-
-                    <svg
-                        class="icon option-card__chevron"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path d="m9 18 6-6-6-6" />
-
-                    </svg>
-
+                    <span class="material-icons option-card__chevron">chevron_right</span>
                 </button>
 
-
-                <!-- MIS PUBLICACIONES -->
-
-                <button
-                    class="option-card option-card--wide"
-                    type="button"
-                >
-
-                    <span class="option-card__icon">
-
-                        <svg
-                            class="icon"
-                            viewBox="0 0 24 24"
-                        >
-
-                            <rect
-                                width="18"
-                                height="18"
-                                x="3"
-                                y="3"
-                                rx="2"
-                            />
-
-                            <path d="M3 9h18" />
-
-                            <path d="M3 15h18" />
-
-                            <path d="M9 3v18" />
-
-                            <path d="M15 3v18" />
-
-                        </svg>
-
-                    </span>
-
-
+                <button class="option-card option-card--wide" type="button">
+                    <span class="option-card__icon material-icons">grid_view</span>
                     <div>
-
-                        <h3 class="option-card__title">
-
-                            Mis Publicaciones
-
-                        </h3>
-
-                        <p class="option-card__desc">
-
-                            Aquí encontrarás todas tus publicaciones.
-
-                        </p>
-
+                        <h3 class="option-card__title">Mis Publicaciones</h3>
+                        <p class="option-card__desc">Aquí encontrarás todas tus publicaciones.</p>
                     </div>
-
-
-                    <svg
-                        class="icon option-card__chevron"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path d="m9 18 6-6-6-6" />
-
-                    </svg>
-
+                    <span class="material-icons option-card__chevron">chevron_right</span>
                 </button>
 
             </div>
-
         </section>
 
     </main>
-
 </div>
