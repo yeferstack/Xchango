@@ -201,8 +201,6 @@ export class Formulario_crear_truequesComponent implements OnInit {
     // Aquí se integraría el selector de ubicación (Google Maps / Leaflet, etc.)
     console.log('Abrir selector de ubicación en el mapa');
   }
-    console.log('Abrir selector de ubicación en el mapa');
-  }
 
   volver(): void {
     this.router.navigate(['/']);
