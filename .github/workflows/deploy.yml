@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular
-        run: npm run build -- --base-href=/xchango/
+        run: npm run build -- --base-href=/Xchango/
 
       - name: Upload GitHub Pages artifacts
         uses: actions/upload-pages-artifact@v4
