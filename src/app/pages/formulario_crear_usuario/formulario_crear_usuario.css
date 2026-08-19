@@ -11,7 +11,7 @@
   --color-accent-soft: #ddc9a0;
 
   display: block;
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 .page-wrapper {
@@ -68,9 +68,19 @@
   background-color: var(--color-accent-soft);
 }
 
-.dot-tl { top: 4px; left: -14px; }
-.dot-tr { top: -6px; right: -12px; background-color: var(--color-accent); }
-.dot-bl { bottom: 6px; left: -18px; }
+.dot-tl {
+  top: 4px;
+  left: -14px;
+}
+.dot-tr {
+  top: -6px;
+  right: -12px;
+  background-color: var(--color-accent);
+}
+.dot-bl {
+  bottom: 6px;
+  left: -18px;
+}
 
 .form-header h1 {
   font-size: 26px;
@@ -151,7 +161,9 @@ label {
   border-radius: 10px;
   background-color: var(--color-bg-input);
   overflow: hidden;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .field-icon:focus-within {
@@ -194,10 +206,15 @@ label {
 
 select {
   appearance: none;
-  background-image: linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
     linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
-  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
-  background-size: 5px 5px, 5px 5px;
+  background-position:
+    calc(100% - 18px) center,
+    calc(100% - 13px) center;
+  background-size:
+    5px 5px,
+    5px 5px;
   background-repeat: no-repeat;
   cursor: pointer;
 }
@@ -231,7 +248,9 @@ select {
   gap: 4px;
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
   text-align: center;
   min-height: 88px;
 }

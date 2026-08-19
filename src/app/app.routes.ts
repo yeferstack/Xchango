@@ -10,48 +10,48 @@ import { Formulario_crear_truequesComponent } from './pages/formulario-crear-tru
 import { Formulario_crear_usuarioComponent } from './pages/formulario_crear_usuario/formulario_crear_usuario';
 
 export const routes: Routes = [
-    {
-        path: 'login',
-        component: Login,
-    },
-    {
-        path: 'home',
-        component: HomeComponent,
-    },
-    {
-        path: 'trueque/:id',
-        component: ModalDetalleTruequeComponent,
-    },
-    {
-        path: 'trueque',
-        component: Formulario_crear_truequesComponent,
-    },
-    {
-        path: 'formulario',
-        component: Formulario_crear_usuarioComponent,
-    },
-    {
-        path: 'legal-info',
-        component: LegalInfo,
-    },
-    // PERFIL
-    {
-        path: 'perfil',
-        component: PerfilComponent,
-    },
-    // PERFIL > TU INFORMACIÓN
-    {
-        path: 'perfil/informacion',
-        component: InformacionComponent,
-    },
-    // PERFIL > SEGURIDAD
-    {
-        path: 'perfil/seguridad',
-        component: SeguridadComponent,
-    },
-    {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full',
-    },
+  {
+    path: 'login',
+    component: Login,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'trueque/:id',
+    component: ModalDetalleTruequeComponent,
+  },
+  {
+    path: 'trueque',
+    component: Formulario_crear_truequesComponent,
+  },
+  {
+    path: 'formulario',
+    component: Formulario_crear_usuarioComponent,
+  },
+  {
+    path: 'legal-info',
+    component: LegalInfo,
+  },
+  // PERFIL
+  {
+    path: 'perfil',
+    component: PerfilComponent,
+  },
+  // PERFIL > TU INFORMACIÓN
+  {
+    path: 'perfil/informacion',
+    component: InformacionComponent,
+  },
+  // PERFIL > SEGURIDAD
+  {
+    path: 'perfil/seguridad',
+    component: SeguridadComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];
