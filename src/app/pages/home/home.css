@@ -1,4 +1,5 @@
 :host {
+  display: block;
   --bg: #f3efe7;
   --panel: #faf8f3;
   --ink: #1f1b16;
@@ -12,12 +13,19 @@
   --radius-lg: 20px;
   --radius-md: 14px;
   --radius-sm: 10px;
-  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Nunito', 'Segoe UI', Roboto, sans-serif;
   color: var(--ink);
 }
 
 * {
   box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 .page {
@@ -30,152 +38,7 @@ svg {
   height: 18px;
 }
 
-/* ---------- Header ---------- */
-
-.header {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  padding: 16px 32px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--line);
-  flex-wrap: wrap;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 1.25rem;
-  white-space: nowrap;
-}
-
-.logo__mark {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-.search {
-  position: relative;
-  flex: 1 1 240px;
-  max-width: 340px;
-}
-
-.search__icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--ink-soft);
-}
-
-.search__input {
-  width: 100%;
-  padding: 10px 14px 10px 38px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  font-size: 0.9rem;
-  color: var(--ink);
-}
-
-.search__input:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  flex: 2 1 480px;
-}
-
-.nav__item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-  text-decoration: none;
-  white-space: nowrap;
-  padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
-}
-
-.nav__item svg {
-  width: 17px;
-  height: 17px;
-}
-
-.nav__item--active,
-.nav__item:hover {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-}
-
-.nav__count {
-  background: var(--ink);
-  color: #fff;
-  font-size: 0.68rem;
-  font-weight: 700;
-  line-height: 1;
-  padding: 3px 6px;
-  border-radius: 999px;
-}
-
-.header__actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-left: auto;
-}
-
-.icon-btn {
-  position: relative;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: var(--ink);
-  display: flex;
-}
-
-.icon-btn__badge {
-  position: absolute;
-  top: -6px;
-  right: -8px;
-  background: #e0554f;
-  color: #fff;
-  font-size: 0.65rem;
-  line-height: 1;
-  padding: 3px 5px;
-  border-radius: 999px;
-  font-weight: 700;
-}
-
-.avatar-btn {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: var(--ink-soft);
-}
-
-.avatar-btn__img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+/* El header ahora vive en su propio componente: layout/header/header.css */
 
 /* ---------- Body layout ---------- */
 
@@ -184,7 +47,6 @@ svg {
   grid-template-columns: 240px 1fr;
   gap: 28px;
   padding: 28px 32px 56px;
-  align-items: start;
 }
 
 /* El sidebar ahora vive en su propio componente: layout/sidebar/sidebar.css */
@@ -198,6 +60,12 @@ svg {
   gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  padding: 14px 0;
+  box-shadow: 0 8px 12px -10px rgba(31, 27, 22, 0.15);
 }
 
 .tabs {
@@ -360,6 +228,8 @@ svg {
 }
 
 .card__title {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-weight: 600;
   margin: 0;
   font-size: 1rem;
 }
@@ -445,6 +315,8 @@ svg {
 }
 
 .benefit__title {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-weight: 600;
   margin: 0 0 4px;
   font-size: 0.92rem;
 }
@@ -471,12 +343,6 @@ svg {
 @media (max-width: 900px) {
   .body {
     grid-template-columns: 1fr;
-  }
-
-  .nav {
-    order: 3;
-    flex: 1 1 100%;
-    overflow-x: auto;
   }
 }
 

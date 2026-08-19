@@ -1,1 +1,428 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ==============================
+   PALETA GLOBAL XCHANGO
+============================== */
+
+:root {
+    --bg-app: #F4EEE1;
+    --bg-nav: #FBF8F0;
+    --bg-card: #EFE7D6;
+    --bg-option: #E9E0CC;
+    --bg-option-hover: #E1D5B8;
+
+    --accent: #C9AD7E;
+    --accent-dark: #B4966A;
+
+    --text-primary: #1E1B16;
+    --text-secondary: #847A68;
+
+    --border-soft: #DED1B3;
+
+    --star-filled: #C9AD7E;
+    --star-empty: #D8CDB6;
+
+    --danger: #A4403A;
+    --danger-soft: #F0DCD6;
+}
+
+
+/* ==============================
+   BASE
+============================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    background: var(--bg-app);
+
+    color: var(--text-primary);
+
+    font-family:
+        'Poppins',
+        'Inter',
+        system-ui,
+        -apple-system,
+        sans-serif;
+}
+
+
+/* ==============================
+   PAGINA
+============================== */
+
+.perfil-page {
+    min-height: 100vh;
+
+    background: var(--bg-app);
+
+    padding: 24px 40px 60px;
+}
+
+
+/* ==============================
+   NAVBAR
+============================== */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 32px;
+}
+
+.navbar__brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    width: fit-content;
+    height: 52px;
+
+    margin-top: 20px;
+    margin-left: 10px;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+}
+
+.navbar__logo {
+    width: 50px;
+    height: 50px;
+
+    object-fit: contain;
+
+    display: block;
+
+    flex-shrink: 0;
+}
+
+.navbar__brand-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+
+    color: var(--text-primary);
+
+    letter-spacing: 0.01em;
+}
+
+.navbar__pill {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    background: var(--bg-nav);
+
+    border-radius: 999px;
+
+    padding: 8px 10px;
+
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.navbar__link {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.navbar__link .material-icons {
+    font-size: 18px;
+}
+
+.navbar__link:hover {
+    background: var(--bg-option);
+    color: var(--text-primary);
+}
+
+.navbar__link:first-child {
+    background: var(--text-primary);
+    color: #fff;
+}
+
+.navbar__actions {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    flex-shrink: 0;
+}
+
+.navbar__icon-btn {
+    background: var(--bg-nav);
+
+    border: none;
+    border-radius: 50%;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: var(--text-primary);
+
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.navbar__icon-btn:hover {
+    background: var(--bg-option);
+    transform: scale(1.05);
+}
+
+.navbar__icon-btn .material-icons {
+    font-size: 20px;
+}
+
+.navbar__avatar {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    border: 2px solid var(--accent);
+
+    background: var(--bg-option);
+}
+
+.navbar__avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.navbar__chevron {
+    color: var(--text-secondary);
+
+    font-size: 20px;
+}
+
+
+/* ==============================
+   CONTENEDOR Y TARJETA
+============================== */
+
+.perfil {
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+.perfil__hero {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 40px;
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-soft);
+
+    border-radius: 28px;
+
+    padding: 40px;
+}
+
+
+/* ==============================
+   COLUMNA DE IDENTIDAD
+============================== */
+
+.perfil__identity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.perfil__avatar-wrap {
+    position: relative;
+
+    width: 250px;
+    height: 250px;
+
+    margin-bottom: 24px;
+}
+
+.perfil__avatar {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: 5px solid var(--bg-app);
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+
+    background: var(--bg-option);
+}
+
+.perfil__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    color: var(--text-primary);
+
+    margin: 0 0 24px;
+}
+
+.perfil__rating-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+
+    color: var(--text-primary);
+
+    margin: 0 0 10px;
+}
+
+.perfil__stars {
+    display: flex;
+    justify-content: center;
+
+    gap: 4px;
+
+    margin-bottom: 8px;
+}
+
+.perfil__stars .material-icons {
+    font-size: 26px;
+
+    color: var(--star-empty);
+}
+
+.perfil__stars .material-icons.is-filled {
+    color: var(--star-filled);
+}
+
+.perfil__rating-note {
+    font-size: 0.8rem;
+
+    color: var(--text-secondary);
+
+    line-height: 1.4;
+
+    max-width: 220px;
+
+    margin: 0 auto;
+}
+
+
+/* ==============================
+   RESPONSIVE COMPARTIDO
+============================== */
+
+@media (max-width: 1024px) {
+
+    .navbar__pill {
+        display: none;
+    }
+
+    .perfil__hero {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil__rating-note {
+        max-width: none;
+    }
+}
+
+
+@media (max-width: 640px) {
+
+    .perfil-page {
+        padding: 16px;
+    }
+
+    .navbar {
+        gap: 10px;
+    }
+
+    .navbar__brand {
+        margin-left: 0;
+    }
+
+    .navbar__logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .navbar__actions {
+        gap: 6px;
+    }
+
+    .navbar__icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .navbar__avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .perfil__hero {
+        padding: 24px 18px;
+
+        border-radius: 20px;
+    }
+
+    .perfil__avatar-wrap {
+        width: 160px;
+        height: 160px;
+    }
+}

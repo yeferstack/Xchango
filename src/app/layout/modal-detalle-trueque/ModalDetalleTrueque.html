@@ -1,0 +1,100 @@
+<div class="detalle-page">
+  <button class="detalle-volver" type="button" (click)="volver()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    Volver
+  </button>
+
+  <div class="modal" *ngIf="trueque as t; else noEncontrado">
+    <div class="modal__gallery">
+      <div class="modal__thumbs" *ngIf="imagenes.length > 1">
+        <button
+          type="button"
+          *ngFor="let img of imagenes; let i = index"
+          class="modal__thumb"
+          [class.modal__thumb--active]="i === imagenActivaIndex"
+          (click)="seleccionarImagen(i)"
+        >
+          <img [src]="img" alt="" (error)="manejarErrorImagen($event)" />
+          <span class="modal__thumb-mas" *ngIf="i === 2 && imagenes.length > 3">
+            +{{ imagenes.length - 3 }}
+          </span>
+        </button>
+      </div>
+      <div class="modal__image-wrap">
+        <img
+          [src]="imagenes[imagenActivaIndex]"
+          [alt]="t.titulo"
+          class="modal__image"
+          (error)="manejarErrorImagen($event)"
+        />
+      </div>
+    </div>
+
+    <div class="modal__info">
+      <p class="modal__meta">
+        <span *ngIf="t.anio">{{ t.anio }} · </span
+        >{{ t.publicadoHace || 'Publicado recientemente' }}
+      </p>
+      <div class="modal__title-row">
+        <h2 class="modal__title">{{ t.titulo }}</h2>
+        <button
+          class="modal__fav"
+          type="button"
+          [class.modal__fav--active]="t.favorito"
+          (click)="alternarFavorito()"
+          aria-label="Agregar a favoritos"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            [attr.fill]="t.favorito ? 'currentColor' : 'none'"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <span [class]="claseBadge(t.tipo)">{{ t.tipo }}</span>
+
+      <div class="modal__section">
+        <h3 class="modal__section-title">Características del bien</h3>
+        <ul class="modal__features">
+          <li *ngFor="let c of caracteristicas">
+            <strong>{{ c.label }}:</strong> {{ c.valor }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="modal__section">
+        <h3 class="modal__section-title">Descripción</h3>
+        <p class="modal__desc">{{ descripcion }}</p>
+      </div>
+
+      <div class="modal__section">
+        <h3 class="modal__section-title">Intereses por el cambio</h3>
+        <ul class="modal__interests">
+          <li *ngFor="let interes of intereses">{{ interes }}</li>
+        </ul>
+      </div>
+
+      <div class="modal__author">
+        <img [src]="t.avatar" alt="" class="modal__avatar" />
+        <div>
+          <p class="modal__author-name">{{ t.autor }}</p>
+          <p class="modal__author-city">{{ t.ciudad }}</p>
+        </div>
+      </div>
+
+      <button class="modal__cta" type="button">Enviar solicitud</button>
+    </div>
+  </div>
+
+  <ng-template #noEncontrado>
+    <p class="detalle-no-encontrado">No encontramos esta publicación.</p>
+  </ng-template>
+</div>
