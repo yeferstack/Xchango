@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 html,
 body {
@@ -8,8 +8,6 @@ body {
   padding: 0;
   font-family: 'Nunito', sans-serif;
 }
-=======
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 /* ==============================
    PALETA GLOBAL XCHANGO
@@ -428,4 +426,3 @@ body {
         height: 160px;
     }
 }
->>>>>>> origin/develop
