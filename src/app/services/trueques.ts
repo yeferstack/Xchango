@@ -17,6 +17,12 @@ export class TruequesService {
       ciudad: 'Bogotá',
       avatar: 'https://i.pravatar.cc/40?img=12',
       favorito: false,
+      imagenes: [
+        'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=600&q=80',
+        'https://images.unsplash.com/photo-1592286927505-1def25115558?w=600&q=80',
+        'https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&q=80',
+        'https://images.unsplash.com/photo-1603921326210-6edd2d60ca68?w=600&q=80',
+      ],
     },
     {
       id: 2,
@@ -28,6 +34,11 @@ export class TruequesService {
       ciudad: 'Medellín',
       avatar: 'https://i.pravatar.cc/40?img=33',
       favorito: false,
+      imagenes: [
+        'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&q=80',
+        'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&q=80',
+        'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=600&q=80',
+      ],
     },
     {
       id: 3,
@@ -39,6 +50,11 @@ export class TruequesService {
       ciudad: 'Cali',
       avatar: 'https://i.pravatar.cc/40?img=47',
       favorito: false,
+      imagenes: [
+        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80',
+        'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&q=80',
+        'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&q=80',
+      ],
     },
     {
       id: 4,
