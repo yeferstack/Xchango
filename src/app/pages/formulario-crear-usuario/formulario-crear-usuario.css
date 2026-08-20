@@ -330,7 +330,6 @@ select {
   font-weight: 700;
   text-decoration: underline;
 }
-
 @media (max-width: 640px) {
   .form-card {
     padding: 28px 20px 32px;
