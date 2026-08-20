@@ -1,100 +1,282 @@
-<div class="detalle-page">
-  <button class="detalle-volver" type="button" (click)="volver()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <line x1="19" y1="12" x2="5" y2="12"></line>
-      <polyline points="12 19 5 12 12 5"></polyline>
-    </svg>
-    Volver
-  </button>
+<div class="pagina">
 
-  <div class="modal" *ngIf="trueque as t; else noEncontrado">
-    <div class="modal__gallery">
-      <div class="modal__thumbs" *ngIf="imagenes.length > 1">
-        <button
-          type="button"
-          *ngFor="let img of imagenes; let i = index"
-          class="modal__thumb"
-          [class.modal__thumb--active]="i === imagenActivaIndex"
-          (click)="seleccionarImagen(i)"
-        >
-          <img [src]="img" alt="" (error)="manejarErrorImagen($event)" />
-          <span class="modal__thumb-mas" *ngIf="i === 2 && imagenes.length > 3">
-            +{{ imagenes.length - 3 }}
-          </span>
-        </button>
-      </div>
-      <div class="modal__image-wrap">
-        <img
-          [src]="imagenes[imagenActivaIndex]"
-          [alt]="t.titulo"
-          class="modal__image"
-          (error)="manejarErrorImagen($event)"
-        />
-      </div>
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado">
+    <button type="button" class="boton-volver" (click)="volver()">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <div>
+      <h1>Publicar Trueque</h1>
+      <p>Completa la información de lo que ofreces</p>
+    </div>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contenedor-principal">
+
+    <!-- ===================== COLUMNA IZQUIERDA (FORMULARIO) ===================== -->
+    <div class="columna-formulario">
+
+      <!-- Paso 1: Tipo de intercambio -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">1. ¿Qué quieres publicar?</h2>
+        <p class="subtitulo-seccion">Elige el tipo de intercambio que mejor se adapte a lo que ofreces.</p>
+
+        <div class="grid-tipos">
+          <div
+            *ngFor="let tipo of tiposIntercambio"
+            class="tarjeta-tipo"
+            [class.seleccionada]="form.get('tipoIntercambio')?.value === tipo.id"
+            (click)="seleccionarTipo(tipo.id)">
+
+            <div class="tarjeta-tipo-encabezado">
+              <div class="icono-circulo" [ngClass]="tipo.colorClase">
+                <span class="material-icons">{{ tipo.icono }}</span>
+              </div>
+              <span class="radio-personalizado" [class.activo]="form.get('tipoIntercambio')?.value === tipo.id"></span>
+            </div>
+
+            <h3>{{ tipo.titulo }}</h3>
+            <p>{{ tipo.descripcion }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 2: Información básica -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">2. Información básica</h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Nombre del intercambio <span class="requerido">*</span></label>
+            <input type="text" formControlName="nombre" placeholder="Ej: Bicicleta montaña">
+          </div>
+
+          <div class="campo">
+            <label>Categoría <span class="requerido">*</span></label>
+            <select formControlName="categoria">
+              <option value="" disabled>Selecciona una categoría</option>
+              <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label>Descripción <span class="requerido">*</span></label>
+          <textarea
+            formControlName="descripcion"
+            [maxlength]="maxDescripcion"
+            placeholder="Describe tu bien, servicio o producto digital. Incluye detalles importantes...">
+          </textarea>
+          <span class="contador-caracteres">{{ form.get('descripcion')?.value?.length || 0 }}/{{ maxDescripcion }}</span>
+        </div>
+      </section>
+
+      <!-- Paso 3: Detalles del intercambio -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">3. Detalles del intercambio</h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>¿Qué ofreces exactamente?</label>
+            <input type="text" formControlName="ofreces" placeholder="Explica lo que ofreces...">
+          </div>
+
+          <div class="campo">
+            <label>¿Qué buscas a cambio?</label>
+            <input type="text" formControlName="buscas" placeholder="Ej: Clases de inglés, servicios de diseño, otro producto...">
+          </div>
+        </div>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Disponibilidad <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <span class="material-icons">event</span>
+              <select formControlName="disponibilidad">
+                <option value="" disabled>Selecciona disponibilidad</option>
+                <option *ngFor="let opcion of opcionesDisponibilidad" [value]="opcion">{{ opcion }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Cantidad disponible</label>
+            <div class="input-con-icono">
+              <span class="material-icons">tag</span>
+              <input type="text" formControlName="cantidad" placeholder="Ej: 1 unidad / Horas / Sesiones">
+            </div>
+          </div>
+        </div>
+
+        <div class="campo campo-estado">
+          <label>Estado <span class="requerido">*</span></label>
+          <div class="switch-estado">
+            <label class="switch">
+              <input type="checkbox" formControlName="estado">
+              <span class="slider"></span>
+            </label>
+            <div>
+              <strong>Activo</strong>
+              <p>Tu intercambio será visible para otros usuarios</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 4: Ubicación -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">4.</h2>
+
+        <div class="fila-campos fila-tres">
+          <div class="campo">
+            <label>Departamento</label>
+            <div class="input-con-icono">
+              <span class="material-icons">apartment</span>
+              <input type="text" [value]="departamento" disabled readonly>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Municipio <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <span class="material-icons">account_balance</span>
+              <select formControlName="municipio">
+                <option value="" disabled>Selecciona municipio</option>
+                <option *ngFor="let municipio of municipiosCasanare" [value]="municipio">{{ municipio }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Barrio</label>
+            <div class="input-con-icono">
+              <span class="material-icons">place</span>
+              <input type="text" formControlName="barrio" placeholder="Ej: 20 de Julio">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 5: Imágenes -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">5. Imágenes del intercambio</h2>
+
+        <div
+          class="zona-carga"
+          [class.arrastrando]="arrastrandoArchivo"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+          (click)="inputArchivo.click()">
+
+          <span class="material-icons icono-carga">cloud_upload</span>
+          <strong>Sube fotos de tu intercambio</strong>
+          <p>Arrastra y suelta archivos aquí o haz clic para seleccionar</p>
+          <p class="texto-formatos">Formatos: JPG, PNG (Máx. 5MB cada uno)</p>
+
+          <input
+            #inputArchivo
+            type="file"
+            accept="image/jpeg,image/png"
+            multiple
+            hidden
+            (change)="onFileSelected($event)">
+        </div>
+
+        <div class="pie-carga">
+          <span>Puedes subir hasta {{ maxImagenes }} imágenes</span>
+          <span>{{ imagenes.length }}/{{ maxImagenes }}</span>
+        </div>
+
+        <div class="miniaturas" *ngIf="imagenesPreviewUrls.length">
+          <div class="miniatura" *ngFor="let url of imagenesPreviewUrls; let i = index">
+            <img [src]="url" alt="Vista previa de imagen">
+            <button type="button" (click)="eliminarImagen(i)">
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <button type="button" class="boton-ubicacion" (click)="seleccionarUbicacionEnMapa()">
+        <span class="material-icons">location_on</span>
+        Seleccionar ubicación en el mapa
+      </button>
+
+      <button type="submit" class="boton-publicar">Publicar trueque</button>
     </div>
 
-    <div class="modal__info">
-      <p class="modal__meta">
-        <span *ngIf="t.anio">{{ t.anio }} · </span
-        >{{ t.publicadoHace || 'Publicado recientemente' }}
-      </p>
-      <div class="modal__title-row">
-        <h2 class="modal__title">{{ t.titulo }}</h2>
-        <button
-          class="modal__fav"
-          type="button"
-          [class.modal__fav--active]="t.favorito"
-          (click)="alternarFavorito()"
-          aria-label="Agregar a favoritos"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            [attr.fill]="t.favorito ? 'currentColor' : 'none'"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
-            ></path>
-          </svg>
-        </button>
-      </div>
-      <span [class]="claseBadge(t.tipo)">{{ t.tipo }}</span>
+    <!-- ===================== COLUMNA DERECHA (VISTA PREVIA) ===================== -->
+    <aside class="columna-vista-previa">
+      <div class="tarjeta-vista-previa">
+        <div class="encabezado-vista-previa">
+          <span class="material-icons">visibility</span>
+          <div>
+            <strong>Vista previa de tu publicación</strong>
+            <p>Así se verá tu publicación</p>
+          </div>
+        </div>
 
-      <div class="modal__section">
-        <h3 class="modal__section-title">Características del bien</h3>
-        <ul class="modal__features">
-          <li *ngFor="let c of caracteristicas">
-            <strong>{{ c.label }}:</strong> {{ c.valor }}
+        <div class="banner-vista-previa">
+          <div class="icono-circulo icono-banner" [ngClass]="tipoSeleccionado?.colorClase">
+            <span class="material-icons">{{ tipoSeleccionado?.icono || 'inventory_2' }}</span>
+          </div>
+          <h3>{{ tituloVistaPrevia }}</h3>
+        </div>
+
+        <ul class="lista-vista-previa">
+          <li>
+            <span class="material-icons">home</span>
+            <div>
+              <strong>Nombre</strong>
+              <p>{{ form.get('nombre')?.value || 'Ej: Servicios' }}</p>
+            </div>
+          </li>
+          <li>
+            <span class="material-icons">description</span>
+            <div>
+              <strong>Descripción</strong>
+              <p>{{ form.get('descripcion')?.value || 'Descripción de la categoría' }}</p>
+            </div>
           </li>
         </ul>
-      </div>
 
-      <div class="modal__section">
-        <h3 class="modal__section-title">Descripción</h3>
-        <p class="modal__desc">{{ descripcion }}</p>
-      </div>
+        <div class="fila-datos">
+          <span class="material-icons">check_circle</span>
+          <strong>Estado</strong>
+          <span class="etiqueta-activo" *ngIf="form.get('estado')?.value">Activo</span>
+          <span class="etiqueta-inactivo" *ngIf="!form.get('estado')?.value">Inactivo</span>
+        </div>
 
-      <div class="modal__section">
-        <h3 class="modal__section-title">Intereses por el cambio</h3>
-        <ul class="modal__interests">
-          <li *ngFor="let interes of intereses">{{ interes }}</li>
-        </ul>
-      </div>
+        <div class="fila-datos">
+          <span class="material-icons">event</span>
+          <strong>Disponibilidad</strong>
+          <span>{{ form.get('disponibilidad')?.value || 'Ej: Fines de semana' }}</span>
+        </div>
 
-      <div class="modal__author">
-        <img [src]="t.avatar" alt="" class="modal__avatar" />
-        <div>
-          <p class="modal__author-name">{{ t.autor }}</p>
-          <p class="modal__author-city">{{ t.ciudad }}</p>
+        <div class="fila-datos">
+          <span class="material-icons">place</span>
+          <strong>Ubicación</strong>
+          <span>
+            {{ form.get('municipio')?.value || 'Ej: Yopal' }}, {{ departamento }}
+          </span>
+        </div>
+
+        <div class="fila-datos">
+          <span class="material-icons">tag</span>
+          <strong>Cantidad disponible</strong>
+          <span>{{ form.get('cantidad')?.value || 'Ej: 1 unidad' }}</span>
         </div>
       </div>
 
-      <button class="modal__cta" type="button">Enviar solicitud</button>
-    </div>
-  </div>
+      <div class="caja-consejo">
+        <span class="material-icons">lightbulb</span>
+        <div>
+          <strong>Consejo</strong>
+          <p>Añade una buena descripción, imágenes claras y detalles específicos para aumentar tus posibilidades de intercambio.</p>
+        </div>
+      </div>
+    </aside>
 
-  <ng-template #noEncontrado>
-    <p class="detalle-no-encontrado">No encontramos esta publicación.</p>
-  </ng-template>
+  </form>
 </div>
