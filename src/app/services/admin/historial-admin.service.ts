@@ -21,7 +21,7 @@ export class HistorialAdminService {
     this._cargando.set(true);
     this._error.set(null);
 
-    this.http.get<AccionAdmin[]>('/data/historial-acciones.json').subscribe({
+    this.http.get<AccionAdmin[]>('data/historial-acciones.json').subscribe({
       next: datos => {
         this._acciones.set(datos);
         this._cargando.set(false);
