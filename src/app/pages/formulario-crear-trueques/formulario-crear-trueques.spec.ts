@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Formulario_crear_truequesComponent } from './formulario_crear_trueques';
+import { Formulario_crear_truequesComponent } from './formulario-crear-trueques';
 
 describe('Formulario_crear_truequesComponent', () => {
   let component: Formulario_crear_truequesComponent;

@@ -8,8 +8,8 @@ import { TruequesService } from '../../services/trueques';
   selector: 'app-modal-detalle-trueque',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './ModalDetalleTrueque.html',
-  styleUrl: './ModalDetalleTrueque.css',
+  templateUrl: './modal-detalle-trueque.html',
+  styleUrl: './modal-detalle-trueque.css',
 })
 export class ModalDetalleTruequeComponent implements OnInit {
   trueque: Trueque | null = null;

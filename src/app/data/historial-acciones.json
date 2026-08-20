@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ac1",
+    "usuarioId": "u9",
+    "usuarioNombre": "Ricardo Fonseca",
+    "accion": "Suspensión",
+    "descripcion": "Cuenta suspendida por reportes reiterados.",
+    "fecha": "2026-08-17T16:20:00",
+    "administrador": "Miguel Admin"
+  },
+  {
+    "id": "ac2",
+    "usuarioId": "u5",
+    "usuarioNombre": "Jhon Barrera",
+    "accion": "Advertencia",
+    "descripcion": "Advertencia enviada por información engañosa.",
+    "fecha": "2026-08-16T11:05:00",
+    "administrador": "Ana Moderadora"
+  },
+  {
+    "id": "ac3",
+    "usuarioId": "u3",
+    "usuarioNombre": "Andrés Molina",
+    "accion": "Eliminación",
+    "descripcion": "Publicación eliminada por producto falso.",
+    "fecha": "2026-08-15T09:40:00",
+    "administrador": "Miguel Admin"
+  },
+  {
+    "id": "ac4",
+    "usuarioId": "u2",
+    "usuarioNombre": "Daniela Torres",
+    "accion": "Aprobación",
+    "descripcion": "Reporte revisado y descartado.",
+    "fecha": "2026-08-14T15:10:00",
+    "administrador": "Ana Moderadora"
+  },
+  {
+    "id": "ac5",
+    "usuarioId": "u14",
+    "usuarioNombre": "Marcela Vega",
+    "accion": "Advertencia",
+    "descripcion": "Advertencia por publicar productos no verificables.",
+    "fecha": "2026-08-13T08:55:00",
+    "administrador": "Miguel Admin"
+  },
+  {
+    "id": "ac6",
+    "usuarioId": "u3",
+    "usuarioNombre": "Andrés Molina",
+    "accion": "Suspensión",
+    "descripcion": "Cuenta suspendida tras acumular 5 reportes.",
+    "fecha": "2026-08-12T17:30:00",
+    "administrador": "Miguel Admin"
+  },
+  {
+    "id": "ac7",
+    "usuarioId": "u9",
+    "usuarioNombre": "Ricardo Fonseca",
+    "accion": "Eliminación",
+    "descripcion": "Publicación eliminada por producto no permitido.",
+    "fecha": "2026-08-10T14:02:00",
+    "administrador": "Miguel Admin"
+  },
+  {
+    "id": "ac8",
+    "usuarioId": "u10",
+    "usuarioNombre": "Luisa Cárdenas",
+    "accion": "Aprobación",
+    "descripcion": "Publicación restaurada tras revisión manual.",
+    "fecha": "2026-08-08T10:48:00",
+    "administrador": "Ana Moderadora"
+  }
+]

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalDetalleTruequeComponent } from './ModalDetalleTrueque';
+import { ModalDetalleTruequeComponent } from './modal-detalle-trueque';
 
 describe('ModalDetalleTrueque', () => {
   let component: ModalDetalleTruequeComponent;
