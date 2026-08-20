@@ -29,7 +29,7 @@ interface Opcion {
   templateUrl: "./formulario-crear-usuario.html",
   styleUrls: ["./formulario-crear-usuario.css"],
 })
-export class Formulario_crear_usuarioComponent {
+export class formulario_crear_usuarioComponent {
   modelo: RegistroUsuario = {
     nombres: "",
     apellidos: "",

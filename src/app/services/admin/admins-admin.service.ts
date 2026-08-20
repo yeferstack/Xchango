@@ -31,7 +31,7 @@ export class AdminsAdminService {
     this._cargando.set(true);
     try {
       const admins = await firstValueFrom(
-        this.http.get<AdminConPassword[]>('/data/admins.json')
+        this.http.get<AdminConPassword[]>('data/admins.json')
       );
 
       const encontrado = admins.find(
