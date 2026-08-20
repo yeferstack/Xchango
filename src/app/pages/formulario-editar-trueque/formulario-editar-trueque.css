@@ -17,6 +17,42 @@
   font-feature-settings: 'liga';
 }
 
+/* ===================== ESTADOS DE CARGA / ERROR ===================== */
+.estado-carga,
+.estado-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  max-width: 1320px;
+  margin: 0 auto 20px;
+}
+
+.estado-carga {
+  background: var(--color-icon-bg);
+  color: var(--color-text-dark);
+}
+
+.estado-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.girando {
+  animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ===================== BASE ===================== */
 :host {
   --color-page-bg: #f3e6d0;
@@ -145,7 +181,9 @@
   border-radius: 12px;
   padding: 16px;
   cursor: pointer;
-  transition: border-color .15s ease, background .15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .tarjeta-tipo:hover {
@@ -199,9 +237,18 @@
   justify-content: center;
 }
 
-.icono-azul { background: var(--color-icon-bg); color: var(--color-accent); }
-.icono-verde { background: var(--verde-claro); color: var(--verde); }
-.icono-morado { background: var(--morado-claro); color: var(--morado); }
+.icono-azul {
+  background: var(--color-icon-bg);
+  color: var(--color-accent);
+}
+.icono-verde {
+  background: var(--verde-claro);
+  color: var(--verde);
+}
+.icono-morado {
+  background: var(--morado-claro);
+  color: var(--morado);
+}
 
 /* ===================== CAMPOS ===================== */
 .fila-campos {
@@ -216,7 +263,8 @@
 }
 
 @media (max-width: 720px) {
-  .fila-campos, .fila-tres {
+  .fila-campos,
+  .fila-tres {
     grid-template-columns: 1fr;
   }
 }
@@ -330,7 +378,7 @@
   inset: 0;
   background: var(--color-border);
   border-radius: 999px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .slider::before {
@@ -342,7 +390,7 @@
   bottom: 3px;
   background: #fff;
   border-radius: 50%;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .switch input:checked + .slider {
@@ -361,7 +409,9 @@
   text-align: center;
   cursor: pointer;
   color: var(--color-text-muted);
-  transition: border-color .15s ease, background .15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .zona-carga.arrastrando {
@@ -425,7 +475,7 @@
   height: 18px;
   border: none;
   border-radius: 50%;
-  background: rgba(0,0,0,.6);
+  background: rgba(0, 0, 0, 0.6);
   color: #fff;
   display: flex;
   align-items: center;
@@ -453,7 +503,7 @@
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  transition: background-color .15s ease;
+  transition: background-color 0.15s ease;
 }
 
 .boton-ubicacion:hover {
@@ -470,7 +520,7 @@
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color .15s ease;
+  transition: background-color 0.15s ease;
 }
 
 .boton-publicar:hover {
@@ -534,7 +584,7 @@
   position: absolute;
   bottom: 10px;
   right: 12px;
-  background: rgba(0, 0, 0, .55);
+  background: rgba(0, 0, 0, 0.55);
   color: #fff;
   font-size: 11.5px;
   padding: 3px 9px;
@@ -549,7 +599,7 @@
   height: 30px;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, .45);
+  background: rgba(0, 0, 0, 0.45);
   color: #fff;
   display: flex;
   align-items: center;
@@ -558,7 +608,7 @@
 }
 
 .flecha-imagen:hover {
-  background: rgba(0, 0, 0, .65);
+  background: rgba(0, 0, 0, 0.65);
 }
 
 .flecha-izquierda {
