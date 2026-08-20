@@ -28,7 +28,10 @@ jobs:
         run: npm ci
 
       - name: Build Angular
-        run: npm run build -- --base-href=/xchango/
+        run: npm run build -- --base-href=/Xchango/
+
+      - name: Copy index.html to 404.html for SPA routing
+        run: cp dist/xchango/browser/index.html dist/xchango/browser/404.html
 
       - name: Upload GitHub Pages artifacts
         uses: actions/upload-pages-artifact@v4
