@@ -24,6 +24,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/data",
+                "output": "data"
               }
             ],
             "styles": [
@@ -40,6 +45,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
+
                   "maximumWarning": "6kB",
                   "maximumError": "30kB"
                 }

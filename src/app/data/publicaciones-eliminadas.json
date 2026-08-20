@@ -1,0 +1,42 @@
+[
+  {
+    "id": "e1",
+    "titulo": "Venta de licores artesanales",
+    "usuarioNombre": "Ricardo Fonseca",
+    "motivo": "Producto no permitido",
+    "fecha": "2026-08-10",
+    "administrador": "Miguel Admin"
+  },
+  {
+    "id": "e2",
+    "titulo": "Cuenta Netflix compartida",
+    "usuarioNombre": "Andrés Molina",
+    "motivo": "Servicio no permitido",
+    "fecha": "2026-08-08",
+    "administrador": "Ana Moderadora"
+  },
+  {
+    "id": "e3",
+    "titulo": "Repuestos sin procedencia",
+    "usuarioNombre": "Jhon Barrera",
+    "motivo": "Posible estafa",
+    "fecha": "2026-08-05",
+    "administrador": "Miguel Admin"
+  },
+  {
+    "id": "e4",
+    "titulo": "Documentos de trámite personal",
+    "usuarioNombre": "Marcela Vega",
+    "motivo": "Contenido inapropiado",
+    "fecha": "2026-08-02",
+    "administrador": "Ana Moderadora"
+  },
+  {
+    "id": "e5",
+    "titulo": "Celular sin IMEI verificable",
+    "usuarioNombre": "Ricardo Fonseca",
+    "motivo": "Producto falso",
+    "fecha": "2026-07-28",
+    "administrador": "Miguel Admin"
+  }
+]

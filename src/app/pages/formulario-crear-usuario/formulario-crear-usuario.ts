@@ -23,11 +23,11 @@ interface Opcion {
 }
 
 @Component({
-  selector: "formulario_crear_usuario",
+  selector: "formulario-crear-usuario",
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: "./formulario_crear_usuario.html",
-  styleUrls: ["./formulario_crear_usuario.css"],
+  templateUrl: "./formulario-crear-usuario.html",
+  styleUrls: ["./formulario-crear-usuario.css"],
 })
 export class Formulario_crear_usuarioComponent {
   modelo: RegistroUsuario = {
@@ -106,6 +106,7 @@ export class Formulario_crear_usuarioComponent {
     this.fotoPerfilArchivo = archivo;
     this.fotoPerfilNombre = archivo.name;
   }
+
   onSubmit(): void {
     const formData = new FormData();
 

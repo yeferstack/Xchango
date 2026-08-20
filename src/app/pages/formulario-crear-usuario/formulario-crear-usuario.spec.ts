@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Formulario_crear_usuarioComponent } from './formulario_crear_usuario';
+import { Formulario_crear_usuarioComponent } from './formulario-crear-usuario';
 
 describe('Formulario_crear_usuarioComponent', () => {
   let component: Formulario_crear_usuarioComponent;

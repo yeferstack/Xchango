@@ -1,1 +1,4 @@
-<p>badge-estado works!</p>
+<span class="badge" [class]="'badge badge--' + estado()">
+	@if (punto()) { <i class="badge__punto"></i> }
+	{{ etiqueta() || estado() }}
+</span>
