@@ -106,6 +106,7 @@ export class Formulario_crear_usuarioComponent {
     this.fotoPerfilArchivo = archivo;
     this.fotoPerfilNombre = archivo.name;
   }
+
   onSubmit(): void {
     const formData = new FormData();
 
