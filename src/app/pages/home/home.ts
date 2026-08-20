@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   filtroActivo: FiltroTrueque = 'todos';
   categoriaSeleccionada = 'todos';
   mostrarSoloFavoritos = false;
-  orden = 'Más recientes';
+  municipioSeleccionado: string | null = null;
 
   categorias: CategoriaTrueque[] = [
     { id: 'todos', nombre: 'Todos', icono: 'grid' },
@@ -95,6 +95,10 @@ export class HomeComponent implements OnInit {
       resultado = resultado.filter((t) => t.categoria === this.categoriaSeleccionada);
     }
 
+    if (this.municipioSeleccionado) {
+      resultado = resultado.filter((t) => t.ciudad === this.municipioSeleccionado);
+    }
+
     if (this.busqueda.trim()) {
       const termino = this.busqueda.trim().toLowerCase();
       resultado = resultado.filter(
@@ -131,6 +135,10 @@ export class HomeComponent implements OnInit {
     this.mostrarSoloFavoritos = true;
   }
 
+  onMunicipioSeleccionado(municipio: string | null): void {
+    this.municipioSeleccionado = municipio;
+  }
+
   alternarFavorito(trueque: Trueque, evento: Event): void {
     evento.stopPropagation();
     this.truequesService.alternarFavorito(trueque);
@@ -141,6 +149,7 @@ export class HomeComponent implements OnInit {
     this.filtroActivo = 'todos';
     this.categoriaSeleccionada = 'todos';
     this.mostrarSoloFavoritos = false;
+    this.municipioSeleccionado = null;
   }
 
   claseBadge(tipo: Trueque['tipo']): string {
