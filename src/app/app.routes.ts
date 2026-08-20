@@ -7,8 +7,8 @@ import { PerfilComponent } from './pages/perfil/perfil';
 import { InformacionComponent } from './pages/informacion/informacion';
 import { SeguridadComponent } from './pages/seguridad/seguridad';
 import { LegalInfo } from './pages/legal-info/legal-info';
-import { Formulario_crear_truequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
-import { Formulario_crear_usuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
+import { formulario_crear_truequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
+import { formulario_crear_usuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
 import { LoginAdministracion } from './pages/login-administracion/login-administracion';
 import { AdminLayout } from './pages/admin/admin-layout/admin-layout';
 import { Administracion } from './pages/admin/administracion/administracion';
@@ -18,6 +18,7 @@ import { Ranking } from './pages/admin/ranking/ranking';
 import { Reportes } from './pages/admin/reportes/reportes';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { adminAuthGuard, adminInvitadoGuard } from './guards/admin-auth-guard';
+import { FormularioEditarTruequeComponent } from './pages/formulario-editar-trueque/formulario-editar-trueque';
 
 export const routes: Routes = [
 
@@ -56,7 +57,7 @@ export const routes: Routes = [
 
   {
     path: 'trueque',
-    component: Formulario_crear_truequesComponent
+    component: formulario_crear_truequesComponent
   },
 
   // =========================
@@ -64,7 +65,11 @@ export const routes: Routes = [
   // =========================
   {
     path: 'formulario',
-    component: Formulario_crear_usuarioComponent
+    component: formulario_crear_usuarioComponent
+  },
+  {
+    path: 'editar',
+    component: FormularioEditarTruequeComponent
   },
 
   // =========================
