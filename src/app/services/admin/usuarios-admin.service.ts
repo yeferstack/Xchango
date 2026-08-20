@@ -32,7 +32,7 @@ export class UsuariosAdminService {
     this._cargando.set(true);
     this._error.set(null);
 
-    this.http.get<UsuarioPlataforma[]>('/data/usuarios.json').subscribe({
+    this.http.get<UsuarioPlataforma[]>('data/usuarios.json').subscribe({
       next: datos => {
         this._usuarios.set(datos);
         this._cargando.set(false);
