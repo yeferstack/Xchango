@@ -38,7 +38,6 @@ const MUNICIPIOS_CASANARE: string[] = [
   selector: 'app-formulario-crear-trueques',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-
   templateUrl: './formulario-crear-trueques.html',
   styleUrls: ['./formulario-crear-trueques.css']
 })
