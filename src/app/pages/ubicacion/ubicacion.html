@@ -1,5 +1,6 @@
 <!-- ==============================
      NAVBAR
+============================== -->
 
 <header class="navbar">
 
@@ -70,6 +71,7 @@
 
 <!-- ==============================
      CONTENEDOR
+============================== -->
 
 <main class="contenedor">
 
@@ -83,11 +85,13 @@
         <aside class="columna-identidad">
 
             <button class="btn-volver" type="button" (click)="volver()">
+
                 <span class="material-icons">
                     arrow_back
                 </span>
 
                 Volver
+
             </button>
 
 
@@ -207,17 +211,21 @@
                     </div>
 
 
-                    <button class="btn-mapa" type="button" (click)="usarUbicacionActual()"
-                        [disabled]="obteniendoUbicacion()">
+                    <button
+                        class="btn-mapa"
+                        type="button"
+                        (click)="usarUbicacionActual()"
+                        [disabled]="obteniendoUbicacion()"
+                    >
 
                         <span class="material-icons">
                             my_location
                         </span>
 
                         {{
-                        obteniendoUbicacion()
-                        ? 'Buscando...'
-                        : 'Usar mi ubicación'
+                            obteniendoUbicacion()
+                                ? 'Buscando...'
+                                : 'Usar mi ubicación'
                         }}
 
                     </button>
@@ -242,7 +250,11 @@
 
                     <!-- Radio -->
 
-                    <div class="mapa-radio" [style.width.%]="radio() / 1.25" [style.height.%]="radio() / 1.25"></div>
+                    <div
+                        class="mapa-radio"
+                        [style.width.%]="radio() / 1.25"
+                        [style.height.%]="radio() / 1.25"
+                    ></div>
 
 
                     <!-- Usuario -->
@@ -252,9 +264,11 @@
                         <div class="pulso"></div>
 
                         <div class="marcador-centro">
+
                             <span class="material-icons">
                                 person_pin_circle
                             </span>
+
                         </div>
 
                     </div>
@@ -262,8 +276,14 @@
 
                     <!-- Trueques -->
 
-                    <button class="marcador-trueque" type="button" *ngFor="let trueque of truequesCercanos()"
-                        [style.left.%]="trueque.x" [style.top.%]="trueque.y" [attr.aria-label]="trueque.titulo">
+                    <button
+                        class="marcador-trueque"
+                        type="button"
+                        *ngFor="let trueque of truequesCercanos()"
+                        [style.left.%]="trueque.x"
+                        [style.top.%]="trueque.y"
+                        [attr.aria-label]="trueque.titulo"
+                    >
 
                         <span class="material-icons">
                             swap_horiz
@@ -300,13 +320,19 @@
                     <div class="leyenda-mapa">
 
                         <div>
+
                             <span class="leyenda-punto usuario"></span>
+
                             Tu ubicación
+
                         </div>
 
                         <div>
+
                             <span class="leyenda-punto trueque"></span>
+
                             Trueques
+
                         </div>
 
                     </div>
@@ -379,9 +405,11 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
+
                         <span class="material-icons">
                             location_on
                         </span>
+
                     </span>
 
                     <span class="acordeon-texto">
@@ -402,7 +430,10 @@
 
                 <!-- VISTA NORMAL -->
 
-                <div class="ubicacion-actual" *ngIf="!editando()">
+                <div
+                    class="ubicacion-actual"
+                    *ngIf="!editando()"
+                >
 
                     <div class="mapa-mini">
 
@@ -419,22 +450,35 @@
                             {{ municipio() }}, Casanare
                         </strong>
 
-                        <span class="dato" *ngIf="barrio()">
+                        <span
+                            class="dato"
+                            *ngIf="barrio()"
+                        >
                             Barrio {{ barrio() }}
                         </span>
 
-                        <span class="dato" *ngIf="referencia()">
+                        <span
+                            class="dato"
+                            *ngIf="referencia()"
+                        >
                             {{ referencia() }}
                         </span>
 
-                        <span class="dato sin-dato" *ngIf="!barrio() && !referencia()">
+                        <span
+                            class="dato sin-dato"
+                            *ngIf="!barrio() && !referencia()"
+                        >
                             Sin barrio ni referencia registrados.
                         </span>
 
                     </div>
 
 
-                    <button class="btn-secundario" type="button" (click)="iniciarEdicion()">
+                    <button
+                        class="btn-secundario"
+                        type="button"
+                        (click)="iniciarEdicion()"
+                    >
                         Editar
                     </button>
 
@@ -444,7 +488,10 @@
 
                 <!-- FORMULARIO -->
 
-                <div class="formulario" *ngIf="editando()">
+                <div
+                    class="formulario"
+                    *ngIf="editando()"
+                >
 
                     <div class="campo">
 
@@ -452,10 +499,17 @@
                             Municipio
                         </label>
 
-                        <select id="municipio" class="entrada" [ngModel]="tempMunicipio()"
-                            (ngModelChange)="tempMunicipio.set($event)">
+                        <select
+                            id="municipio"
+                            class="entrada"
+                            [ngModel]="tempMunicipio()"
+                            (ngModelChange)="tempMunicipio.set($event)"
+                        >
 
-                            <option *ngFor="let m of municipios" [value]="m">
+                            <option
+                                *ngFor="let m of municipios"
+                                [value]="m"
+                            >
                                 {{ m }}
                             </option>
 
@@ -470,8 +524,14 @@
                             Barrio o vereda
                         </label>
 
-                        <input id="barrio" class="entrada" type="text" placeholder="Ej: El Triunfo"
-                            [ngModel]="tempBarrio()" (ngModelChange)="tempBarrio.set($event)" />
+                        <input
+                            id="barrio"
+                            class="entrada"
+                            type="text"
+                            placeholder="Ej: El Triunfo"
+                            [ngModel]="tempBarrio()"
+                            (ngModelChange)="tempBarrio.set($event)"
+                        />
 
                     </div>
 
@@ -482,8 +542,14 @@
                             Punto de referencia
                         </label>
 
-                        <input id="referencia" class="entrada" type="text" placeholder="Ej: Cerca al parque principal"
-                            [ngModel]="tempReferencia()" (ngModelChange)="tempReferencia.set($event)" />
+                        <input
+                            id="referencia"
+                            class="entrada"
+                            type="text"
+                            placeholder="Ej: Cerca al parque principal"
+                            [ngModel]="tempReferencia()"
+                            (ngModelChange)="tempReferencia.set($event)"
+                        />
 
                         <small class="ayuda">
                             Tu dirección exacta nunca se mostrará
@@ -495,11 +561,19 @@
 
                     <div class="acciones-formulario">
 
-                        <button class="btn-secundario" type="button" (click)="cancelarEdicion()">
+                        <button
+                            class="btn-secundario"
+                            type="button"
+                            (click)="cancelarEdicion()"
+                        >
                             Cancelar
                         </button>
 
-                        <button class="btn-mini" type="button" (click)="guardarUbicacion()">
+                        <button
+                            class="btn-mini"
+                            type="button"
+                            (click)="guardarUbicacion()"
+                        >
                             Guardar ubicación
                         </button>
 
@@ -520,9 +594,11 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
+
                         <span class="material-icons">
                             my_location
                         </span>
+
                     </span>
 
                     <span class="acordeon-texto">
@@ -556,8 +632,15 @@
                     </div>
 
 
-                    <input class="deslizador" type="range" min="5" max="100" step="5" [value]="radio()"
-                        (input)="cambiarRadio($any($event.target).value)" />
+                    <input
+                        class="deslizador"
+                        type="range"
+                        min="5"
+                        max="100"
+                        step="5"
+                        [value]="radio()"
+                        (input)="cambiarRadio($any($event.target).value)"
+                    />
 
 
                     <div class="radio-limites">
@@ -587,9 +670,11 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
+
                         <span class="material-icons">
                             handshake
                         </span>
+
                     </span>
 
                     <span class="acordeon-texto">
@@ -610,7 +695,10 @@
 
                 <ul class="filas">
 
-                    <li class="fila" *ngFor="let p of puntos()">
+                    <li
+                        class="fila"
+                        *ngFor="let p of puntos()"
+                    >
 
                         <span class="material-icons fila-icono">
                             pin_drop
@@ -630,8 +718,12 @@
                         </span>
 
 
-                        <button class="btn-ruta" type="button" (click)="abrirGoogleMaps(p.nombre)"
-                            title="Abrir en Google Maps">
+                        <button
+                            class="btn-ruta"
+                            type="button"
+                            (click)="abrirGoogleMaps(p.nombre)"
+                            title="Abrir en Google Maps"
+                        >
 
                             <span class="material-icons">
                                 directions
@@ -640,7 +732,12 @@
                         </button>
 
 
-                        <button class="btn-icono" type="button" (click)="eliminarPunto(p.id)" title="Eliminar punto">
+                        <button
+                            class="btn-icono"
+                            type="button"
+                            (click)="eliminarPunto(p.id)"
+                            title="Eliminar punto"
+                        >
 
                             <span class="material-icons">
                                 delete_outline
@@ -651,7 +748,10 @@
                     </li>
 
 
-                    <li class="fila" *ngIf="puntos().length === 0">
+                    <li
+                        class="fila"
+                        *ngIf="puntos().length === 0"
+                    >
 
                         <span class="fila-texto">
 
@@ -668,10 +768,20 @@
 
                 <div class="agregar-punto">
 
-                    <input class="entrada" type="text" placeholder="Ej: Parque de la Iglesia" [ngModel]="nuevoPunto()"
-                        (ngModelChange)="nuevoPunto.set($event)" (keyup.enter)="agregarPunto()" />
+                    <input
+                        class="entrada"
+                        type="text"
+                        placeholder="Ej: Parque de la Iglesia"
+                        [ngModel]="nuevoPunto()"
+                        (ngModelChange)="nuevoPunto.set($event)"
+                        (keyup.enter)="agregarPunto()"
+                    />
 
-                    <button class="btn-mini" type="button" (click)="agregarPunto()">
+                    <button
+                        class="btn-mini"
+                        type="button"
+                        (click)="agregarPunto()"
+                    >
 
                         <span class="material-icons">
                             add
@@ -696,9 +806,11 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
+
                         <span class="material-icons">
                             tune
                         </span>
+
                     </span>
 
                     <span class="acordeon-texto">
@@ -718,7 +830,10 @@
 
                 <ul class="filas">
 
-                    <li class="fila" *ngFor="let p of preferencias()">
+                    <li
+                        class="fila"
+                        *ngFor="let p of preferencias()"
+                    >
 
                         <span class="fila-texto">
 
@@ -733,8 +848,13 @@
                         </span>
 
 
-                        <button class="switch" type="button" [class.on]="p.activo" [attr.aria-pressed]="p.activo"
-                            (click)="togglePreferencia(p.id)">
+                        <button
+                            class="switch"
+                            type="button"
+                            [class.on]="p.activo"
+                            [attr.aria-pressed]="p.activo"
+                            (click)="togglePreferencia(p.id)"
+                        >
 
                             <span class="bolita"></span>
 
@@ -754,7 +874,10 @@
 
             <footer class="tarjeta-pie">
 
-                <div class="mensaje-guardado" *ngIf="guardado()">
+                <div
+                    class="mensaje-guardado"
+                    *ngIf="guardado()"
+                >
 
                     <span class="material-icons">
                         check_circle
@@ -765,7 +888,11 @@
                 </div>
 
 
-                <button class="btn-guardar" type="button" (click)="guardarCambios()">
+                <button
+                    class="btn-guardar"
+                    type="button"
+                    (click)="guardarCambios()"
+                >
 
                     <span class="material-icons">
                         save
