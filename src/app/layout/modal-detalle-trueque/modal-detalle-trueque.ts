@@ -47,13 +47,13 @@ export class ModalDetalleTruequeComponent implements OnInit {
 
   claseBadge(tipo: Trueque['tipo']): string {
     switch (tipo) {
-      case 'Electrónicos':
+      case 'Electronicos':
         return 'badge badge--electronicos';
       case 'Servicios':
         return 'badge badge--servicios';
-      case 'Bienes Físicos':
+      case 'Bienes Fisicos':
         return 'badge badge--bienes';
-      case 'Vehículos':
+      case 'Vehiculos':
         return 'badge badge--vehiculos';
       default:
         return 'badge';

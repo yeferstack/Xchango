@@ -50,7 +50,7 @@ export class formulario_crear_truequesComponent implements OnInit {
     {
       id: 'fisico',
       titulo: 'Bien físico',
-      descripcion: 'Ofrece productos tangibles como ropa, libros, electrónicos y más.',
+      descripcion: 'Ofrece productos tangibles como ropa, libros, Electronicos y más.',
       icono: 'inventory_2',
       colorClase: 'icono-azul'
     },

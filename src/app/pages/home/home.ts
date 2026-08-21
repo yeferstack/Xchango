@@ -23,10 +23,36 @@ export class HomeComponent implements OnInit {
   mostrarSoloFavoritos = false;
   municipioSeleccionado: string | null = null;
 
+  /** Municipios del departamento de Casanare */
+  municipios: string[] = [
+    'Aguazul',
+    'Chámeza',
+    'Hato Corozal',
+    'La Salina',
+    'Maní',
+    'Monterrey',
+    'Nunchía',
+    'Orocué',
+    'Paz de Ariporo',
+    'Pore',
+    'Recetor',
+    'Sabanalarga',
+    'Sácama',
+    'San Luis de Palenque',
+    'Támara',
+    'Tauramena',
+    'Trinidad',
+    'Villanueva',
+    'Yopal',
+  ];
+
+  mostrarModalMunicipio = false;
+  municipioTemporal: string | null = null;
+
   categorias: CategoriaTrueque[] = [
     { id: 'todos', nombre: 'Todos', icono: 'grid' },
-    { id: 'electronicos', nombre: 'Electrónicos', icono: 'phone' },
-    { id: 'vehiculos', nombre: 'Vehículos', icono: 'car' },
+    { id: 'electronicos', nombre: 'Electronicos', icono: 'phone' },
+    { id: 'vehiculos', nombre: 'Vehiculos', icono: 'car' },
     { id: 'ropa', nombre: 'Ropa', icono: 'shirt' },
     { id: 'hogar', nombre: 'Hogar', icono: 'home' },
     { id: 'deportes', nombre: 'Deportes', icono: 'bike' },
@@ -83,7 +109,7 @@ export class HomeComponent implements OnInit {
 
     if (this.filtroActivo === 'bienes') {
       resultado = resultado.filter(
-        (t) => t.tipo === 'Bienes Físicos' || t.tipo === 'Vehículos' || t.tipo === 'Electrónicos',
+        (t) => t.tipo === 'Bienes Fisicos' || t.tipo === 'Vehiculos' || t.tipo === 'Electronicos',
       );
     } else if (this.filtroActivo === 'servicios') {
       resultado = resultado.filter((t) => t.tipo === 'Servicios');
@@ -139,6 +165,24 @@ export class HomeComponent implements OnInit {
     this.municipioSeleccionado = municipio;
   }
 
+  abrirModalMunicipio(): void {
+    this.municipioTemporal = this.municipioSeleccionado;
+    this.mostrarModalMunicipio = true;
+  }
+
+  cerrarModalMunicipio(): void {
+    this.mostrarModalMunicipio = false;
+  }
+
+  elegirMunicipioTemporal(municipio: string | null): void {
+    this.municipioTemporal = municipio;
+  }
+
+  confirmarMunicipio(): void {
+    this.onMunicipioSeleccionado(this.municipioTemporal);
+    this.mostrarModalMunicipio = false;
+  }
+
   alternarFavorito(trueque: Trueque, evento: Event): void {
     evento.stopPropagation();
     this.truequesService.alternarFavorito(trueque);
@@ -154,13 +198,13 @@ export class HomeComponent implements OnInit {
 
   claseBadge(tipo: Trueque['tipo']): string {
     switch (tipo) {
-      case 'Electrónicos':
+      case 'Electronicos':
         return 'badge badge--electronicos';
       case 'Servicios':
         return 'badge badge--servicios';
-      case 'Bienes Físicos':
+      case 'Bienes Fisicos':
         return 'badge badge--bienes';
-      case 'Vehículos':
+      case 'Vehiculos':
         return 'badge badge--vehiculos';
       default:
         return 'badge';

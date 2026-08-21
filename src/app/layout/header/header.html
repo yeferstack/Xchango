@@ -1,16 +1,9 @@
 <header class="header">
-  <div class="logo-block">
-    <div class="logo">
-      <span class="logo__mark">🐵</span>
-      <span class="logo__text">XchanGo</span>
-    </div>
-    <button class="place-btn" type="button" (click)="abrirModalMunicipio()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"></path>
-        <circle cx="12" cy="10" r="3"></circle>
-      </svg>
-      <span>{{ municipioSeleccionado || 'Elegir lugar' }}</span>
-    </button>
+  <div class="logo">
+    <span class="logo__mark">
+      <img src="/Logo-xchango/chango.png" alt="XchanGo" class="logo__mark-img" />
+    </span>
+    <span class="logo__text">XchanGo</span>
   </div>
 
   <div class="search">
@@ -62,15 +55,6 @@
       </svg>
       Mis trueques
     </a>
-    <a class="nav__item" href="javascript:void(0)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="7" height="7"></rect>
-        <rect x="14" y="3" width="7" height="7"></rect>
-        <rect x="14" y="14" width="7" height="7"></rect>
-        <rect x="3" y="14" width="7" height="7"></rect>
-      </svg>
-      Servicios
-    </a>
     <a
       class="nav__item"
       [href]="enlaceWhatsApp"
@@ -82,7 +66,7 @@
           d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5c-1.5 0-3-.4-4.3-1.1L3 20l1.1-5.2A8.38 8.38 0 0 1 3.5 11.5 8.38 8.38 0 0 1 12 3a8.38 8.38 0 0 1 9 8.5z"
         ></path>
       </svg>
-      WhatsApp
+      Mensajes
     </a>
     <a
       class="nav__item"
@@ -106,59 +90,131 @@
   </nav>
 
   <div class="header__actions">
-    <button class="icon-btn" type="button" aria-label="Notificaciones">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
-        <path d="M13.7 21a2 2 0 0 1-3.4 0"></path>
-      </svg>
-      <span class="icon-btn__badge" *ngIf="notificaciones > 0">{{ notificaciones }}</span>
-    </button>
-    <button class="avatar-btn" type="button">
-      <img [src]="avatarUrl" alt="Foto de perfil" class="avatar-btn__img" />
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </button>
-  </div>
-</header>
-
-<div class="place-modal__backdrop" *ngIf="mostrarModalMunicipio" (click)="cerrarModalMunicipio()">
-  <div class="place-modal" (click)="$event.stopPropagation()">
-    <button class="place-modal__close" type="button" aria-label="Cerrar" (click)="cerrarModalMunicipio()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-
-    <h2 class="place-modal__title">Elige dónde intercambiar tu trueque</h2>
-    <p class="place-modal__subtitle">
-      Elige tu municipio para ver los trueques disponibles cerca de ti.
-    </p>
-
-    <label class="place-modal__label" for="municipio-select">Municipio</label>
-    <div class="place-modal__list" role="listbox">
+    <div class="dropdown-wrap">
       <button
+        class="icon-btn"
         type="button"
-        class="place-modal__option"
-        [class.place-modal__option--active]="municipioTemporal === null"
-        (click)="elegirMunicipioTemporal(null)"
+        aria-label="Notificaciones"
+        [attr.aria-expanded]="mostrarMenuNotificaciones"
+        (click)="toggleMenuNotificaciones(); $event.stopPropagation()"
       >
-        Todos los municipios
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.7 21a2 2 0 0 1-3.4 0"></path>
+        </svg>
+        <span class="icon-btn__badge" *ngIf="notificaciones > 0">{{ notificaciones }}</span>
       </button>
-      <button
-        type="button"
-        class="place-modal__option"
-        *ngFor="let municipio of municipios"
-        [class.place-modal__option--active]="municipioTemporal === municipio"
-        (click)="elegirMunicipioTemporal(municipio)"
-      >
-        {{ municipio }}
-      </button>
+
+      <div class="dropdown dropdown--notif" *ngIf="mostrarMenuNotificaciones">
+        <div class="dropdown__header">
+          <span>Notificaciones</span>
+          <span class="dropdown__count" *ngIf="notificaciones > 0">{{ notificaciones }} nuevas</span>
+        </div>
+
+        <div class="dropdown__list" *ngIf="notificacionesLista.length; else sinNotificaciones">
+          <button
+            class="notif-item"
+            type="button"
+            *ngFor="let n of notificacionesLista"
+            [class.notif-item--unread]="!n.leida"
+            (click)="onClickNotificacion(n)"
+          >
+            <span class="notif-item__icon" *ngIf="!n.avatar">{{ iconoNotificacion(n.tipo) }}</span>
+            <img
+              class="notif-item__avatar"
+              *ngIf="n.avatar"
+              [src]="n.avatar"
+              alt=""
+            />
+            <span class="notif-item__body">
+              <span class="notif-item__title">{{ n.titulo }}</span>
+              <span class="notif-item__desc">{{ n.descripcion }}</span>
+              <span class="notif-item__time">{{ n.tiempo }}</span>
+            </span>
+            <span class="notif-item__dot" *ngIf="!n.leida"></span>
+          </button>
+        </div>
+
+        <ng-template #sinNotificaciones>
+          <div class="dropdown__empty">No tienes notificaciones por ahora</div>
+        </ng-template>
+
+        <button class="dropdown__footer" type="button" (click)="onVerTodasNotificaciones()">
+          Ver todas las notificaciones
+        </button>
+      </div>
     </div>
 
-    <button class="place-modal__accept" type="button" (click)="confirmarMunicipio()">
-      Aceptar
-    </button>
+    <div class="dropdown-wrap">
+      <button
+        class="avatar-btn"
+        type="button"
+        [attr.aria-expanded]="mostrarMenuPerfil"
+        (click)="toggleMenuPerfil(); $event.stopPropagation()"
+      >
+        <img [src]="avatarUrl" alt="Foto de perfil" class="avatar-btn__img" />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+
+      <div class="dropdown dropdown--perfil" *ngIf="mostrarMenuPerfil">
+        <div class="perfil-card">
+          <img [src]="avatarUrl" alt="Foto de perfil" class="perfil-card__avatar" />
+          <span class="perfil-card__info">
+            <span class="perfil-card__nombre">{{ nombreUsuario }}</span>
+            <span class="perfil-card__correo">{{ correoUsuario }}</span>
+          </span>
+        </div>
+
+        <div class="dropdown__divider"></div>
+
+        <button class="dropdown__item" type="button" (click)="onSeleccionPerfil(irAPerfil)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path>
+          </svg>
+          Ver perfil
+        </button>
+        <button class="dropdown__item" type="button" (click)="onSeleccionPerfil(irAMisPublicaciones)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+            <path d="M3 9h18"></path>
+          </svg>
+          Mis publicaciones
+        </button>
+        <button class="dropdown__item" type="button" (click)="onSeleccionPerfil(irADatosCuenta)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 8v4l3 2"></path>
+          </svg>
+          Datos de la cuenta
+        </button>
+        <button class="dropdown__item" type="button" (click)="onSeleccionPerfil(irASeguridad)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"></path>
+          </svg>
+          Seguridad
+        </button>
+        <button class="dropdown__item" type="button" (click)="onSeleccionPerfil(irAUbicacion)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"></path>
+            <circle cx="12" cy="9" r="2.5"></circle>
+          </svg>
+          Ubicación
+        </button>
+
+        <div class="dropdown__divider"></div>
+
+        <button class="dropdown__item dropdown__item--danger" type="button" (click)="onSeleccionPerfil(cerrarSesion)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
   </div>
-</div>
+</header>

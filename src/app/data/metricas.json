@@ -18,10 +18,10 @@
     { "label": "Ago", "valor": 412 }
   ],
   "publicacionesPorCategoria": [
-    { "label": "Electrónicos", "valor": 342 },
+    { "label": "Electronicos", "valor": 342 },
     { "label": "Ropa", "valor": 218 },
     { "label": "Hogar", "valor": 176 },
-    { "label": "Vehículos", "valor": 143 },
+    { "label": "Vehiculos", "valor": 143 },
     { "label": "Videojuegos", "valor": 128 },
     { "label": "Otros", "valor": 96 }
   ],
@@ -53,10 +53,10 @@
   },
   "crecimientoCategorias": [
     { "label": "Videojuegos", "valor": 34 },
-    { "label": "Electrónicos", "valor": 21 },
+    { "label": "Electronicos", "valor": 21 },
     { "label": "Hogar", "valor": 18 },
     { "label": "Ropa", "valor": 9 },
-    { "label": "Vehículos", "valor": 4 },
+    { "label": "Vehiculos", "valor": 4 },
     { "label": "Otros", "valor": -6 }
   ]
 }
