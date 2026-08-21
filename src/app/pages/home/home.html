@@ -5,10 +5,8 @@
     [notificaciones]="notificaciones"
     [cantidadFavoritos]="cantidadFavoritos"
     [mostrarSoloFavoritos]="mostrarSoloFavoritos"
-    [municipioSeleccionado]="municipioSeleccionado"
     (irAInicio)="irAInicio()"
     (verSoloFavoritos)="verSoloFavoritos()"
-    (municipioSeleccionadoChange)="onMunicipioSeleccionado($event)"
   ></app-header>
 
   <div class="body">
@@ -30,7 +28,7 @@
             [class.tabs__item--active]="filtroActivo === 'bienes'"
             (click)="seleccionarFiltro('bienes')"
           >
-            Bienes Físicos
+            Bienes Fisicos
           </button>
           <button
             type="button"
@@ -49,6 +47,14 @@
             Digitales
           </button>
         </div>
+
+        <button class="place-btn" type="button" (click)="abrirModalMunicipio()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          {{ municipioSeleccionado || 'Elegir lugar' }}
+        </button>
       </div>
 
       <p class="results-info">
@@ -190,5 +196,46 @@
         </div>
       </section>
     </main>
+  </div>
+</div>
+
+<div class="place-modal__backdrop" *ngIf="mostrarModalMunicipio" (click)="cerrarModalMunicipio()">
+  <div class="place-modal" (click)="$event.stopPropagation()">
+    <button class="place-modal__close" type="button" aria-label="Cerrar" (click)="cerrarModalMunicipio()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <h2 class="place-modal__title">Elige dónde intercambiar tu trueque</h2>
+    <p class="place-modal__subtitle">
+      Elige tu municipio para ver los trueques disponibles cerca de ti.
+    </p>
+
+    <label class="place-modal__label">Municipio</label>
+    <div class="place-modal__list" role="listbox">
+      <button
+        type="button"
+        class="place-modal__option"
+        [class.place-modal__option--active]="municipioTemporal === null"
+        (click)="elegirMunicipioTemporal(null)"
+      >
+        Todos los municipios
+      </button>
+      <button
+        type="button"
+        class="place-modal__option"
+        *ngFor="let municipio of municipios"
+        [class.place-modal__option--active]="municipioTemporal === municipio"
+        (click)="elegirMunicipioTemporal(municipio)"
+      >
+        {{ municipio }}
+      </button>
+    </div>
+
+    <button class="place-modal__accept" type="button" (click)="confirmarMunicipio()">
+      Aceptar
+    </button>
   </div>
 </div>

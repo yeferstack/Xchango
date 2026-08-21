@@ -9,14 +9,6 @@
 
   <div class="modal" *ngIf="trueque as t; else noEncontrado">
     <div class="modal__gallery">
-      <div class="modal__image-wrap">
-        <img
-          [src]="imagenes[imagenActivaIndex]"
-          [alt]="t.titulo"
-          class="modal__image"
-          (error)="manejarErrorImagen($event)"
-        />
-      </div>
       <div class="modal__thumbs" *ngIf="imagenes.length > 1">
         <button
           type="button"
@@ -27,6 +19,14 @@
         >
           <img [src]="img" alt="" (error)="manejarErrorImagen($event)" />
         </button>
+      </div>
+      <div class="modal__image-wrap">
+        <img
+          [src]="imagenes[imagenActivaIndex]"
+          [alt]="t.titulo"
+          class="modal__image"
+          (error)="manejarErrorImagen($event)"
+        />
       </div>
     </div>
 
@@ -70,7 +70,6 @@
       <div class="modal__section">
         <h3 class="modal__section-title">Descripción</h3>
         <p class="modal__desc">{{ descripcion }}</p>
-        <button class="modal__cta modal__cta--right" type="button">Ver mas ...</button>
       </div>
 
       <div class="modal__section">

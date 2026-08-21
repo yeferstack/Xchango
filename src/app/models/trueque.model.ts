@@ -1,7 +1,7 @@
 export interface Trueque {
   id: number;
   titulo: string;
-  tipo: 'Electrónicos' | 'Servicios' | 'Bienes Físicos' | 'Vehículos' | 'Digitales';
+  tipo: 'Electronicos' | 'Servicios' | 'Bienes Fisicos' | 'Vehiculos' | 'Digitales';
   categoria: string;
   imagen: string;
   autor: string;
@@ -13,6 +13,7 @@ export interface Trueque {
   anio?: number;
   publicadoHace?: string;
   descripcion?: string;
+  descripcionDetallada?: string;
   caracteristicas?: { label: string; valor: string }[];
   interesesCambio?: string[];
 }

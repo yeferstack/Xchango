@@ -43,7 +43,7 @@ export class LegalInfo {
           heading: 'Nuestro ecosistema de intercambio',
           items: [
             'El Marketplace de Trueque: es el espacio principal donde las personas usuarias publican lo que ya no necesitan y encuentran lo que buscan, gestionando propuestas de intercambio directo.',
-            'XchanGo Especializados (VIS): conectamos a personas interesadas en realizar permutas o intercambios de mayor envergadura, como vehículos, inmuebles o servicios profesionales.',
+            'XchanGo Especializados (VIS): conectamos a personas interesadas en realizar permutas o intercambios de mayor envergadura, como Vehiculos, inmuebles o servicios profesionales.',
             'Logística XchanGo: ponemos a disposición soluciones tecnológicas para que las personas usuarias puedan coordinar el envío y la recepción de los objetos intercambiados de forma eficiente.',
             'XchanGo Ads & Comunidad: ofrecemos herramientas para destacar publicaciones y fortalecer la red de confianza entre usuarios, con el fin de democratizar el acceso a bienes y servicios sin depender del capital financiero.',
           ],

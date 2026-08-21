@@ -78,7 +78,7 @@ svg {
 .modal__gallery {
   background: var(--bg);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 20px;
   gap: 14px;
 }
@@ -99,12 +99,16 @@ svg {
 
 .modal__thumbs {
   display: flex;
+  flex-direction: column;
   gap: 8px;
+  overflow-y: auto;
+  max-height: 100%;
 }
 
 .modal__thumb {
   width: 56px;
   height: 56px;
+  flex-shrink: 0;
   border-radius: var(--radius-sm);
   overflow: hidden;
   border: 2px solid transparent;
@@ -265,11 +269,6 @@ svg {
   opacity: 0.9;
 }
 
-.modal__cta--right {
-  display: block;
-  margin-left: auto;
-  margin-right: 0;
-}
 
 @media (max-width: 720px) {
   .modal {
@@ -278,6 +277,14 @@ svg {
 
   .modal__gallery {
     padding: 16px;
+    flex-direction: column;
+  }
+
+  .modal__thumbs {
+    flex-direction: row;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: visible;
   }
 
   .modal__image-wrap {
