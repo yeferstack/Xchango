@@ -36,6 +36,13 @@ svg {
   flex-wrap: wrap;
 }
 
+.logo-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -43,6 +50,40 @@ svg {
   font-weight: 700;
   font-size: 1.25rem;
   white-space: nowrap;
+}
+
+.place-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 170px;
+}
+
+.place-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.place-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.place-btn:hover {
+  border-color: var(--accent);
+  color: var(--ink);
 }
 
 .logo__text {
@@ -183,4 +224,112 @@ svg {
     flex: 1 1 100%;
     overflow-x: auto;
   }
+}
+
+/* ---------- Modal "Elegir lugar" ---------- */
+
+.place-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 27, 22, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.place-modal {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  max-height: 80vh;
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 28px 24px 20px;
+  box-shadow: 0 20px 50px rgba(31, 27, 22, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.place-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: flex;
+}
+
+.place-modal__title {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  padding-right: 20px;
+}
+
+.place-modal__subtitle {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+
+.place-modal__label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+}
+
+.place-modal__list {
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.place-modal__option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.place-modal__option:last-child {
+  border-bottom: none;
+}
+
+.place-modal__option:hover {
+  background: var(--bg);
+}
+
+.place-modal__option--active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.place-modal__accept {
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.place-modal__accept:hover {
+  opacity: 0.9;
 }

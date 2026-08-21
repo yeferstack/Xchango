@@ -7,8 +7,9 @@ import { PerfilComponent } from './pages/perfil/perfil';
 import { InformacionComponent } from './pages/informacion/informacion';
 import { SeguridadComponent } from './pages/seguridad/seguridad';
 import { LegalInfo } from './pages/legal-info/legal-info';
-import { Formulario_crear_truequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
-import { Formulario_crear_usuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
+import { formulario_crear_truequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
+import { FormularioCrearUsuarioAdminComponent } from './pages/formulario-crear-usuario-admin/formulario-crear-usuario-admin';
+import { FormularioCrearUsuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
 import { LoginAdministracion } from './pages/login-administracion/login-administracion';
 import { AdminLayout } from './pages/admin/admin-layout/admin-layout';
 import { Administracion } from './pages/admin/administracion/administracion';
@@ -18,6 +19,10 @@ import { Ranking } from './pages/admin/ranking/ranking';
 import { Reportes } from './pages/admin/reportes/reportes';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { adminAuthGuard, adminInvitadoGuard } from './guards/admin-auth-guard';
+import { FormularioEditarTruequeComponent } from './pages/formulario-editar-trueque/formulario-editar-trueque';
+import { DatosCuentaComponent } from './pages/datos_cuenta/datos_cuenta';
+import { UbicacionComponent } from './pages/ubicacion/ubicacion';
+import { MisPublicacionesComponent } from './pages/mis_publicaciones/mis_publicaciones';
 
 export const routes: Routes = [
 
@@ -56,7 +61,7 @@ export const routes: Routes = [
 
   {
     path: 'trueque',
-    component: Formulario_crear_truequesComponent
+    component: formulario_crear_truequesComponent
   },
 
   // =========================
@@ -64,8 +69,40 @@ export const routes: Routes = [
   // =========================
   {
     path: 'formulario',
-    component: Formulario_crear_usuarioComponent
+    component: FormularioCrearUsuarioComponent
   },
+  //formulario-crear-trueques
+{
+  path: 'moderador',
+  component: FormularioCrearUsuarioAdminComponent
+},
+  {
+    path: 'editar',
+    component: FormularioEditarTruequeComponent
+  },
+
+  // =========================
+// PERFIL > DATOS DE TU CUENTA
+// =========================
+{
+  path: 'perfil/cuenta',
+  component: DatosCuentaComponent
+},
+
+// =========================
+// PERFIL > UBICACIÓN
+// =========================
+{
+  path: 'perfil/ubicacion',
+  component: UbicacionComponent
+},
+// =========================
+// MIS PUBLICACIONES
+// =========================
+{
+  path: 'mis-publicaciones',
+  component: MisPublicacionesComponent
+},
 
   // =========================
   // INFORMACIÓN LEGAL
