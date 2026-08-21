@@ -1,99 +1,182 @@
-<section class="panel">
-    <header class="panel__head">
-        <a class="volver" routerLink="/perfil" aria-label="Volver al perfil">
-            <span class="material-icons">arrow_back</span>
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <a class="marca" routerLink="/home">
+        <img src="/logo-xchango.png" alt="" class="logo" />
+        <span class="marca-texto">XchanGo</span>
+    </a>
+
+    <nav class="nav-pill">
+        <a routerLink="/home" class="nav-item activo">
+            <span class="material-icons">home</span> Inicio
         </a>
-        <div>
-            <h2 class="panel__titulo">Seguridad</h2>
-            <p class="panel__sub">Protege tu cuenta de XchanGo.</p>
-        </div>
-    </header>
+        <a routerLink="/explorar" class="nav-item">
+            <span class="material-icons">search</span> Explorar
+        </a>
+        <a routerLink="/mis-trueques" class="nav-item">
+            <span class="material-icons">swap_horiz</span> Mis trueques
+        </a>
+        <a routerLink="/servicios" class="nav-item">
+            <span class="material-icons">apps</span> Servicios
+        </a>
+        <a routerLink="/mensajes" class="nav-item">
+            <span class="material-icons">chat_bubble_outline</span> Mensajes
+        </a>
+        <a routerLink="/favoritos" class="nav-item">
+            <span class="material-icons">favorite_border</span> Favoritos
+        </a>
+    </nav>
 
-    <p class="aviso" *ngIf="mensaje">{{ mensaje }}</p>
-
-    <!-- ===== Métodos de verificación ===== -->
-    <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'verificacion'">
-        <button type="button" class="bloque__cabeza" (click)="alternarSeccion('verificacion')"
-            [attr.aria-expanded]="seccionAbierta === 'verificacion'">
-            <span class="bloque__icono material-icons">verified_user</span>
-            <span class="bloque__texto">
-                <span class="bloque__titulo">Métodos de verificación</span>
-                <span class="bloque__desc">Activa los métodos necesarios para proteger tu cuenta.</span>
-            </span>
-            <span class="bloque__flecha material-icons">expand_more</span>
+    <div class="nav-derecha">
+        <button class="btn-campana" type="button">
+            <span class="material-icons">notifications_none</span>
         </button>
-
-        <div class="bloque__cuerpo" *ngIf="seccionAbierta === 'verificacion'">
-            <div class="fila" *ngFor="let m of metodosVerificacion; trackBy: trackPorId">
-                <div class="fila__texto">
-                    <span class="fila__titulo">{{ m.titulo }}</span>
-                    <span class="fila__desc">{{ m.descripcion }}</span>
-                </div>
-                <button type="button" class="switch" role="switch" [class.switch--on]="m.activo"
-                    [attr.aria-checked]="m.activo" [attr.aria-label]="m.titulo" (click)="alternarOpcion(m)">
-                    <span class="switch__bolita"></span>
-                </button>
-            </div>
+        <div class="avatar-nav">
+            <img src="/avatar.png" alt="" />
         </div>
-    </article>
+        <span class="material-icons chevron-nav">expand_more</span>
+    </div>
+</header>
 
-    <!-- ===== Dispositivos vinculados ===== -->
-    <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'dispositivos'">
-        <button type="button" class="bloque__cabeza" (click)="alternarSeccion('dispositivos')"
-            [attr.aria-expanded]="seccionAbierta === 'dispositivos'">
-            <span class="bloque__icono material-icons">devices</span>
-            <span class="bloque__texto">
-                <span class="bloque__titulo">Dispositivos vinculados</span>
-                <span class="bloque__desc">Gestiona los dispositivos donde iniciaste sesión.</span>
-            </span>
-            <span class="bloque__flecha material-icons">expand_more</span>
-        </button>
+<!-- ===== CONTENEDOR BEIGE ===== -->
+<main class="contenedor">
+    <div class="panel">
 
-        <div class="bloque__cuerpo" *ngIf="seccionAbierta === 'dispositivos'">
-            <div class="fila" *ngFor="let d of dispositivos; trackBy: trackPorId">
-                <div class="fila__texto">
-                    <span class="fila__titulo">
-                        {{ d.nombre }}
-                        <em class="etiqueta" *ngIf="d.actual">Este dispositivo</em>
-                    </span>
-                    <span class="fila__desc">{{ d.sistema }} · {{ d.ubicacion }} · {{ d.ultimoAcceso }}</span>
-                </div>
-                <button type="button" class="btn-texto" *ngIf="!d.actual" (click)="cerrarSesion(d)">
-                    Cerrar sesión
-                </button>
+        <!-- Columna izquierda: identidad -->
+        <aside class="columna-identidad">
+            <button class="btn-volver" type="button" (click)="volver()">
+                <span class="material-icons">arrow_back</span> Volver
+            </button>
+
+            <div class="foto-perfil">
+                <img src="/avatar.png" alt="" />
             </div>
 
-            <div class="fila fila--acciones" *ngIf="dispositivos.length > 1">
-                <button type="button" class="btn-secundario" (click)="cerrarTodas()">
-                    Cerrar sesión en los demás dispositivos
-                </button>
-            </div>
-        </div>
-    </article>
+            <h2 class="nombre">Miguel Perez</h2>
 
-    <!-- ===== Alertas de seguridad ===== -->
-    <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'alertas'">
-        <button type="button" class="bloque__cabeza" (click)="alternarSeccion('alertas')"
-            [attr.aria-expanded]="seccionAbierta === 'alertas'">
-            <span class="bloque__icono material-icons">notifications_active</span>
-            <span class="bloque__texto">
-                <span class="bloque__titulo">Alertas de seguridad</span>
-                <span class="bloque__desc">Revisa tus alertas y dónde las recibes.</span>
-            </span>
-            <span class="bloque__flecha material-icons">expand_more</span>
-        </button>
-
-        <div class="bloque__cuerpo" *ngIf="seccionAbierta === 'alertas'">
-            <div class="fila" *ngFor="let a of alertas; trackBy: trackPorId">
-                <div class="fila__texto">
-                    <span class="fila__titulo">{{ a.titulo }}</span>
-                    <span class="fila__desc">{{ a.descripcion }}</span>
-                </div>
-                <button type="button" class="switch" role="switch" [class.switch--on]="a.activo"
-                    [attr.aria-checked]="a.activo" [attr.aria-label]="a.titulo" (click)="alternarOpcion(a)">
-                    <span class="switch__bolita"></span>
-                </button>
+            <h3 class="subtitulo-calif">Calificaciones y opiniones</h3>
+            <div class="estrellas">
+                <span class="material-icons llena">star</span>
+                <span class="material-icons llena">star</span>
+                <span class="material-icons llena">star</span>
+                <span class="material-icons llena">star</span>
+                <span class="material-icons vacia">star</span>
             </div>
-        </div>
-    </article>
-</section>
+            <p class="nota-calif">(Solo será visible públicamente tras recibir 5 calificaciones).</p>
+        </aside>
+
+        <!-- Tarjeta blanca: contenido -->
+        <section class="tarjeta">
+
+            <header class="tarjeta-encabezado">
+                <h1 class="titulo">Seguridad</h1>
+                <p class="descripcion">Protege tu cuenta de XchanGo.</p>
+            </header>
+
+            <div class="lista-acordeones">
+
+                <!-- Métodos de verificación -->
+                <article class="acordeon" [class.abierto]="panelAbierto() === 'metodos'">
+                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('metodos')">
+                        <span class="icono-caja"><span class="material-icons">verified_user</span></span>
+                        <span class="acordeon-texto">
+                            <strong>Métodos de verificación</strong>
+                            <small>Activa los métodos necesarios para proteger tu cuenta.</small>
+                        </span>
+                        <span class="material-icons chevron">expand_more</span>
+                    </button>
+
+                    <div class="acordeon-cuerpo">
+                        <div class="acordeon-contenido">
+                            <ul class="filas">
+                                <li class="fila" *ngFor="let m of metodos()">
+                                    <span class="material-icons fila-icono">{{ m.icono }}</span>
+                                    <span class="fila-texto">
+                                        <strong>{{ m.titulo }}</strong>
+                                        <small>{{ m.detalle }}</small>
+                                    </span>
+                                    <button class="switch" type="button" [class.on]="m.activo"
+                                        [attr.aria-pressed]="m.activo" (click)="toggleMetodo(m.id)">
+                                        <span class="bolita"></span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Dispositivos vinculados -->
+                <article class="acordeon" [class.abierto]="panelAbierto() === 'dispositivos'">
+                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('dispositivos')">
+                        <span class="icono-caja"><span class="material-icons">devices</span></span>
+                        <span class="acordeon-texto">
+                            <strong>Dispositivos vinculados</strong>
+                            <small>Gestiona los dispositivos donde iniciaste sesión.</small>
+                        </span>
+                        <span class="material-icons chevron">expand_more</span>
+                    </button>
+
+                    <div class="acordeon-cuerpo">
+                        <div class="acordeon-contenido">
+                            <ul class="filas">
+                                <li class="fila" *ngFor="let d of dispositivos()">
+                                    <span class="material-icons fila-icono">{{ d.icono }}</span>
+                                    <span class="fila-texto">
+                                        <strong class="con-etiqueta">
+                                            {{ d.nombre }}
+                                            <em class="etiqueta" *ngIf="d.actual">Este dispositivo</em>
+                                        </strong>
+                                        <small>{{ d.lugar }} · {{ d.fecha }}</small>
+                                    </span>
+                                    <button class="btn-cerrar" type="button" *ngIf="!d.actual"
+                                        (click)="cerrarSesionDispositivo(d.id)">
+                                        Cerrar sesión
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <p class="vacio" *ngIf="dispositivos().length === 0">
+                                No hay otros dispositivos vinculados.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Alertas de seguridad -->
+                <article class="acordeon" [class.abierto]="panelAbierto() === 'alertas'">
+                    <button class="acordeon-cabecera" type="button" (click)="togglePanel('alertas')">
+                        <span class="icono-caja"><span class="material-icons">notifications_active</span></span>
+                        <span class="acordeon-texto">
+                            <strong>Alertas de seguridad</strong>
+                            <small>Revisa tus alertas y dónde las recibes.</small>
+                        </span>
+                        <span class="material-icons chevron">expand_more</span>
+                    </button>
+
+                    <div class="acordeon-cuerpo">
+                        <div class="acordeon-contenido">
+                            <ul class="filas">
+                                <li class="fila" *ngFor="let a of alertas()">
+                                    <span class="fila-texto">
+                                        <strong>{{ a.titulo }}</strong>
+                                        <small>{{ a.detalle }}</small>
+                                    </span>
+                                    <button class="switch" type="button" [class.on]="a.activo"
+                                        [attr.aria-pressed]="a.activo" (click)="toggleAlerta(a.id)">
+                                        <span class="bolita"></span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <footer class="tarjeta-pie">
+                <button class="btn-guardar" type="button">Guardar cambios</button>
+            </footer>
+
+        </section>
+
+    </div>
+</main>
