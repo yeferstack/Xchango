@@ -130,7 +130,7 @@ header {
   z-index: 90;
 
   width: fit-content;
-  height: 64px;
+  height: 66px;
   margin: 0;
 
   display: flex;
@@ -139,14 +139,14 @@ header {
 
   padding: 8px 12px;
 
-  background: rgba(255, 255, 255, .48);
-  border: 1px solid rgba(255, 255, 255, .85);
+  background: rgba(255, 255, 255, .60);
+  border: 1px solid rgba(255, 255, 255, .92);
   border-radius: 999px;
 
   box-shadow:
-    0 14px 35px rgba(96, 77, 51, .08),
-    0 0 0 8px rgba(255, 255, 255, .10),
-    inset 0 2px 5px rgba(255, 255, 255, .65);
+    0 18px 40px rgba(96, 77, 51, .14),
+    0 0 0 8px rgba(255, 255, 255, .14),
+    inset 0 2px 5px rgba(255, 255, 255, .75);
 
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -159,30 +159,32 @@ header {
 
   padding: 5px;
 
-  background: rgba(255, 255, 255, .54);
-  border: 1px solid rgba(255, 255, 255, .70);
+  background: rgba(255, 255, 255, .58);
+  border: 1px solid rgba(255, 255, 255, .75);
   border-radius: 20px;
 
-  box-shadow: 0 8px 20px rgba(102, 78, 44, .05);
+  box-shadow: 0 8px 20px rgba(102, 78, 44, .06);
 
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
 }
 
 .nav-item {
-  min-height: 40px;
-  padding: 0 15px;
+  position: relative;
+  min-height: 42px;
+  padding: 0 18px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 8px;
 
   border-radius: 14px;
   color: #645c52;
 
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 700;
+  letter-spacing: .1px;
   white-space: nowrap;
 
   text-decoration: none;
@@ -201,17 +203,35 @@ header {
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, .72);
+  background: rgba(255, 255, 255, .78);
   color: #111;
   transform: translateY(-1px);
 }
 
 .nav-item.active {
-  background: rgba(238, 228, 214, .92);
+  background: rgba(233, 220, 200, .95);
   color: #111;
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .65);
+    inset 0 1px 0 rgba(255, 255, 255, .7),
+    0 2px 8px rgba(180, 141, 91, .18);
+}
+
+.nav-item.active svg {
+  color: #b08d5b;
+}
+
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #b08d5b;
 }
 
 
@@ -225,7 +245,7 @@ header {
 
   top: 105px;
   right: 60px;
-  bottom: 120px;
+  bottom: 148px;
   left: 60px;
 
   display: grid;
@@ -998,23 +1018,23 @@ header {
   right: 60px;
   bottom: 18px;
 
-  height: 92px;
+  height: 118px;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
 
-  padding: 12px 20px;
+  padding: 16px 24px;
 
-  border: 1px solid rgba(255, 255, 255, .82);
-  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, .88);
+  border-radius: 26px;
 
-  background: rgba(255, 255, 255, .57);
+  background: rgba(255, 255, 255, .68);
 
   box-shadow:
-    0 14px 35px rgba(91, 69, 43, .07),
-    0 0 0 8px rgba(255, 255, 255, .10),
-    inset 0 2px 5px rgba(255, 255, 255, .55);
+    0 18px 42px rgba(91, 69, 43, .12),
+    0 0 0 8px rgba(255, 255, 255, .14),
+    inset 0 2px 5px rgba(255, 255, 255, .65);
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -1026,18 +1046,18 @@ header {
 
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 
-  padding: 5px 20px;
+  padding: 6px 24px;
 }
 
 .feature + .feature {
-  border-left: 1px solid rgba(139, 119, 93, .15);
+  border-left: 1px solid rgba(139, 119, 93, .18);
 }
 
 .feature-icon {
-  width: 42px;
-  height: 42px;
+  width: 54px;
+  height: 54px;
 
   display: flex;
   align-items: center;
@@ -1045,34 +1065,36 @@ header {
 
   flex-shrink: 0;
 
-  border: 1px solid rgba(146, 121, 88, .14);
+  border: 1px solid rgba(146, 121, 88, .18);
   border-radius: 50%;
 
-  background: rgba(250, 244, 236, .88);
-  color: #847a68;
+  background: rgba(250, 244, 236, .95);
+  color: #6b6152;
+
+  box-shadow: 0 4px 10px rgba(91, 69, 43, .08);
 }
 
 .feature-svg {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
 }
 
 .feature h4 {
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 
   color: #2a261f;
 
   font-family: "Baloo 2", sans-serif;
-  font-size: 13px;
-  line-height: 1;
+  font-size: 16px;
+  line-height: 1.1;
 }
 
 .feature p {
-  max-width: 180px;
+  max-width: 210px;
 
-  color: #82786b;
-  font-size: 9px;
-  line-height: 1.35;
+  color: #6f6555;
+  font-size: 11.5px;
+  line-height: 1.4;
   font-weight: 600;
 }
 
@@ -1193,7 +1215,7 @@ header {
 
   .hero {
     top: 88px;
-    bottom: 105px;
+    bottom: 125px;
     left: 30px;
     right: 30px;
 
@@ -1264,31 +1286,31 @@ header {
     right: 30px;
     bottom: 12px;
 
-    height: 78px;
-    padding: 8px 12px;
+    height: 100px;
+    padding: 10px 16px;
   }
 
   .feature {
-    padding: 4px 13px;
-    gap: 8px;
+    padding: 5px 16px;
+    gap: 11px;
   }
 
   .feature-icon {
-    width: 37px;
-    height: 37px;
+    width: 46px;
+    height: 46px;
   }
 
   .feature-svg {
-    width: 19px;
-    height: 19px;
+    width: 23px;
+    height: 23px;
   }
 
   .feature h4 {
-    font-size: 11px;
+    font-size: 13.5px;
   }
 
   .feature p {
-    font-size: 8px;
+    font-size: 10px;
   }
 }
 
@@ -1310,7 +1332,7 @@ header {
 
   .hero {
     top: 78px;
-    bottom: 92px;
+    bottom: 108px;
     gap: 12px;
   }
 
@@ -1332,29 +1354,29 @@ header {
 
   .features {
     bottom: 8px;
-    height: 70px;
+    height: 88px;
   }
 
   .feature {
-    padding: 3px 8px;
+    padding: 4px 10px;
   }
 
   .feature-icon {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
   }
 
   .feature-svg {
-    width: 17px;
-    height: 17px;
+    width: 21px;
+    height: 21px;
   }
 
   .feature h4 {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .feature p {
-    font-size: 7px;
+    font-size: 9px;
   }
 }
 
@@ -1392,7 +1414,7 @@ header {
 
   .hero {
     top: 65px;
-    bottom: 78px;
+    bottom: 92px;
     left: 20px;
     right: 20px;
     gap: 8px;
@@ -1430,30 +1452,30 @@ header {
     right: 20px;
     bottom: 5px;
 
-    height: 65px;
-    padding: 4px 7px;
+    height: 80px;
+    padding: 6px 10px;
   }
 
   .feature {
-    gap: 6px;
+    gap: 9px;
   }
 
   .feature-icon {
-    width: 27px;
-    height: 27px;
+    width: 34px;
+    height: 34px;
   }
 
   .feature-svg {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
   }
 
   .feature h4 {
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .feature p {
-    font-size: 6px;
+    font-size: 8px;
   }
 }
 

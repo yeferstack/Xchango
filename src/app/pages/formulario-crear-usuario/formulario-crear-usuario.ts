@@ -1,124 +1,205 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-interface RegistroUsuario {
-  nombres: string;
-  apellidos: string;
-  fechaNacimiento: string;
-  sexo: string;
-  direccion: string;
-  ciudad: string;
-  estado: string;
-  barrio: string;
-  email: string;
-  telefono: string;
-  tipoDocumento: string;
-  numeroDocumento: string;
+// Representa una zona de carga de imagen individual (perfil, frente o reverso)
+interface CampoImagen {
+  archivo: File | null;
+  previewUrl: string | null;
+  arrastrando: boolean;
 }
 
-interface Opcion {
-  value: string;
-  label: string;
-}
+type ClaveImagen = 'perfil' | 'documentoFrente' | 'documentoReverso';
 
 @Component({
-  selector: "formulario-crear-usuario",
+  selector: 'app-formulario-crear-usuario',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: "./formulario-crear-usuario.html",
-  styleUrls: ["./formulario-crear-usuario.css"],
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './formulario-crear-usuario.html',
+  styleUrls: ['./formulario-crear-usuario.css']
 })
-export class formulario_crear_usuarioComponent {
-  modelo: RegistroUsuario = {
-    nombres: "",
-    apellidos: "",
-    fechaNacimiento: "",
-    sexo: "",
-    direccion: "",
-    ciudad: "",
-    estado: "",
-    barrio: "",
-    email: "",
-    telefono: "+57 ",
-    tipoDocumento: "",
-    numeroDocumento: "",
+export class FormularioCrearUsuarioComponent implements OnInit {
+
+  // ---------------------------------------------------------
+  // Catálogos usados en los selects
+  // ---------------------------------------------------------
+  opcionesSexo: string[] = ['Masculino', 'Femenino', 'Otro', 'Prefiero no decir'];
+
+  tiposDocumento: string[] = [
+    'Cédula de ciudadanía',
+    'Cédula de extranjería',
+    'Tarjeta de identidad',
+    'Pasaporte'
+  ];
+
+  // ---------------------------------------------------------
+  // Estado del formulario
+  // ---------------------------------------------------------
+  form!: FormGroup;
+
+  // Una entrada por cada zona de carga de imagen del formulario
+  imagenes: Record<ClaveImagen, CampoImagen> = {
+    perfil: { archivo: null, previewUrl: null, arrastrando: false },
+    documentoFrente: { archivo: null, previewUrl: null, arrastrando: false },
+    documentoReverso: { archivo: null, previewUrl: null, arrastrando: false }
   };
 
-  fotoPerfilArchivo: File | null = null;
-  fotoPerfilNombre = "";
-  isDragOver = false;
+  readonly fechaRegistro = new Date();
 
-  /** Datos de los <select>: cada uno se recorre en el HTML con *ngFor. */
-  readonly opcionesSexo: Opcion[] = [
-    { value: "femenino", label: "Femenino" },
-    { value: "masculino", label: "Masculino" },
-    { value: "otro", label: "Otro" },
-  ];
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.asegurarFuenteMaterialIcons();
+  }
 
-  readonly tiposDocumento: Opcion[] = [
-    { value: "cc", label: "Cédula de ciudadanía" },
-    { value: "ce", label: "Cédula de extranjería" },
-    { value: "ti", label: "Tarjeta de identidad" },
-    { value: "pasaporte", label: "Pasaporte" },
-  ];
+  /**
+   * Inyecta el link de Google Fonts para Material Icons si el proyecto
+   * todavía no lo tiene cargado (evita que los íconos se vean como texto).
+   */
+  private asegurarFuenteMaterialIcons(): void {
+    const idLink = 'material-icons-font';
+    if (document.getElementById(idLink)) {
+      return;
+    }
+    const link = document.createElement('link');
+    link.id = idLink;
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+    document.head.appendChild(link);
+  }
 
-  private readonly tiposPermitidos = ["image/png", "image/jpeg"];
-  private readonly tamanoMaximoBytes = 5 * 1024 * 1024; // 5MB
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      nombres: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      sexo: ['', Validators.required],
+      direccion: ['', Validators.required],
+      ciudad: ['', Validators.required],
+      estadoProvincia: ['', Validators.required],
+      barrio: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', Validators.required],
+      tipoDocumento: ['', Validators.required],
+      numeroDocumento: ['', Validators.required]
+    });
+  }
 
-  onFotoPerfilSeleccionada(event: Event): void {
+  // ---------------------------------------------------------
+  // Helpers de plantilla
+  // ---------------------------------------------------------
+  get nombreCompleto(): string {
+    const nombres = this.form.get('nombres')?.value || '';
+    const apellidos = this.form.get('apellidos')?.value || '';
+    const nombreCompleto = `${nombres} ${apellidos}`.trim();
+    return nombreCompleto || 'Juan Pérez';
+  }
+
+  get ubicacionVistaPrevia(): string {
+    const ciudad = this.form.get('ciudad')?.value;
+    const estado = this.form.get('estadoProvincia')?.value;
+    if (ciudad && estado) return `${ciudad}, ${estado}`;
+    return 'Yopal, Casanare';
+  }
+
+  get telefonoVistaPrevia(): string {
+    return this.form.get('telefono')?.value || '+57 300 123 4567';
+  }
+
+  get emailVistaPrevia(): string {
+    return this.form.get('email')?.value || 'juan@correo.com';
+  }
+
+  get fechaRegistroFormateada(): string {
+    const dia = String(this.fechaRegistro.getDate()).padStart(2, '0');
+    const mes = String(this.fechaRegistro.getMonth() + 1).padStart(2, '0');
+    const anio = this.fechaRegistro.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+  }
+
+  // ---------------------------------------------------------
+  // Manejo de imágenes (drag & drop + input) — genérico para
+  // perfil, frente y reverso del documento
+  // ---------------------------------------------------------
+  onDragOver(event: DragEvent, clave: ClaveImagen): void {
+    event.preventDefault();
+    this.imagenes[clave] = { ...this.imagenes[clave], arrastrando: true };
+  }
+
+  onDragLeave(event: DragEvent, clave: ClaveImagen): void {
+    event.preventDefault();
+    this.imagenes[clave] = { ...this.imagenes[clave], arrastrando: false };
+  }
+
+  onDrop(event: DragEvent, clave: ClaveImagen): void {
+    event.preventDefault();
+    this.imagenes[clave] = { ...this.imagenes[clave], arrastrando: false };
+    if (event.dataTransfer?.files?.length) {
+      this.asignarImagen(event.dataTransfer.files[0], clave);
+    }
+  }
+
+  onFileSelected(event: Event, clave: ClaveImagen): void {
     const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) {
-      return;
+    if (input.files?.length) {
+      this.asignarImagen(input.files[0], clave);
     }
-    this.asignarFotoPerfil(input.files[0]);
+    input.value = '';
   }
 
-  onDragOver(event: DragEvent): void {
-    event.preventDefault();
-    this.isDragOver = true;
+  private asignarImagen(file: File, clave: ClaveImagen): void {
+    if (!file.type.match(/image\/(jpeg|png)/)) return;
+    if (file.size > 5 * 1024 * 1024) return; // máx 5MB
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagenes[clave] = {
+        archivo: file,
+        previewUrl: reader.result as string,
+        arrastrando: false
+      };
+      this.cdr.detectChanges();
+    };
+    reader.readAsDataURL(file);
   }
 
-  onDragLeave(event: DragEvent): void {
-    event.preventDefault();
-    this.isDragOver = false;
+  quitarImagen(clave: ClaveImagen): void {
+    this.imagenes[clave] = { archivo: null, previewUrl: null, arrastrando: false };
   }
 
-  onDrop(event: DragEvent): void {
-    event.preventDefault();
-    this.isDragOver = false;
-
-    const archivo = event.dataTransfer?.files?.[0];
-    if (archivo) {
-      this.asignarFotoPerfil(archivo);
-    }
-  }
-
-  private asignarFotoPerfil(archivo: File): void {
-    if (!this.tiposPermitidos.includes(archivo.type)) {
-      console.warn("Formato no permitido. Usa JPG o PNG.");
-      return;
-    }
-    if (archivo.size > this.tamanoMaximoBytes) {
-      console.warn("El archivo supera el máximo de 5MB.");
-      return;
-    }
-    this.fotoPerfilArchivo = archivo;
-    this.fotoPerfilNombre = archivo.name;
+  // ---------------------------------------------------------
+  // Navegación / envío
+  // ---------------------------------------------------------
+  volver(): void {
+    this.router.navigate(['/']);
   }
 
   onSubmit(): void {
-    const formData = new FormData();
+    const faltaFotoPerfil = !this.imagenes.perfil.archivo;
+    const faltaDocumentoFrente = !this.imagenes.documentoFrente.archivo;
+    const faltaDocumentoReverso = !this.imagenes.documentoReverso.archivo;
 
-    Object.entries(this.modelo).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
-
-    if (this.fotoPerfilArchivo) {
-      formData.append("fotoPerfil", this.fotoPerfilArchivo);
+    if (this.form.invalid || faltaFotoPerfil || faltaDocumentoFrente || faltaDocumentoReverso) {
+      this.form.markAllAsTouched();
+      return;
     }
 
-    // TODO: reemplazar con la llamada al servicio real
-    console.log("Formulario listo para enviar:", this.modelo, formData);
+    const formData = new FormData();
+    Object.entries(this.form.getRawValue()).forEach(([key, value]) => {
+      formData.append(key, String(value));
+    });
+    formData.append('fotoPerfil', this.imagenes.perfil.archivo as File);
+    formData.append('documentoFrente', this.imagenes.documentoFrente.archivo as File);
+    formData.append('documentoReverso', this.imagenes.documentoReverso.archivo as File);
+
+    // TODO: reemplazar por la llamada real al servicio de usuarios
+    console.log('Usuario listo para crear:', this.form.getRawValue(), {
+      fotoPerfil: this.imagenes.perfil.archivo,
+      documentoFrente: this.imagenes.documentoFrente.archivo,
+      documentoReverso: this.imagenes.documentoReverso.archivo
+    });
   }
 }
