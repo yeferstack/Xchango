@@ -1,0 +1,277 @@
+<div class="pagina">
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado">
+    <button type="button" class="boton-volver" (click)="volver()">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <div>
+      <h1>Crear Usuario (Moderador / Administrador)</h1>
+      <p>Completa la información para crear un nuevo usuario.</p>
+    </div>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contenedor-principal">
+    <!-- ===================== COLUMNA IZQUIERDA (FORMULARIO) ===================== -->
+    <div class="columna-formulario">
+      <!-- 1. Información personal -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">
+          <span class="material-icons">person</span>
+          1. Información personal
+        </h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Nombre completo <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <span class="material-icons">person</span>
+              <input
+                type="text"
+                formControlName="nombreCompleto"
+                placeholder="Ej: Juan Pérez Gómez"
+              />
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Correo electrónico <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <span class="material-icons">mail</span>
+              <input type="email" formControlName="correo" placeholder="Ej: juan@correo.com" />
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Teléfono (opcional)</label>
+            <div class="input-con-icono">
+              <span class="material-icons">call</span>
+              <input type="tel" formControlName="telefono" placeholder="Ej: 300 123 4567" />
+            </div>
+          </div>
+        </div>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Nombre de usuario <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <span class="material-icons">alternate_email</span>
+              <input type="text" formControlName="nombreUsuario" placeholder="Ej: juanperez" />
+            </div>
+            <p class="texto-ayuda">Este será el usuario para iniciar sesión.</p>
+          </div>
+
+          <div class="campo">
+            <label>Contraseña <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <span class="material-icons">lock</span>
+              <input
+                [type]="mostrarContrasena ? 'text' : 'password'"
+                formControlName="contrasena"
+                placeholder="Ingresa una contraseña segura"
+              />
+              <button type="button" class="boton-ojo" (click)="togglMostrarContrasena()">
+                <span class="material-icons">{{
+                  mostrarContrasena ? 'visibility' : 'visibility_off'
+                }}</span>
+              </button>
+            </div>
+            <p class="texto-ayuda">Mínimo 8 caracteres.</p>
+          </div>
+
+          <div class="campo">
+            <label>Confirmar contraseña <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <span class="material-icons">lock</span>
+              <input
+                [type]="mostrarConfirmarContrasena ? 'text' : 'password'"
+                formControlName="confirmarContrasena"
+                placeholder="Confirma la contraseña"
+              />
+              <button type="button" class="boton-ojo" (click)="toggleMostrarConfirmarContrasena()">
+                <span class="material-icons">{{
+                  mostrarConfirmarContrasena ? 'visibility' : 'visibility_off'
+                }}</span>
+              </button>
+            </div>
+            <p class="texto-ayuda texto-error" *ngIf="contrasenasNoCoinciden">
+              Las contraseñas no coinciden.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Rol del usuario -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">
+          <span class="material-icons">shield</span>
+          2. Rol del usuario
+        </h2>
+        <p class="subtitulo-seccion">Selecciona el rol que tendrá este usuario en la plataforma.</p>
+
+        <div class="grid-roles">
+          <div
+            *ngFor="let rol of roles"
+            class="tarjeta-rol"
+            [class.seleccionada]="form.get('rol')?.value === rol.id"
+            (click)="seleccionarRol(rol.id)"
+          >
+            <div class="tarjeta-rol-encabezado">
+              <div class="icono-circulo" [ngClass]="rol.colorClase">
+                <span class="material-icons">{{ rol.icono }}</span>
+              </div>
+              <span
+                class="radio-personalizado"
+                [class.activo]="form.get('rol')?.value === rol.id"
+              ></span>
+            </div>
+
+            <h3>{{ rol.titulo }}</h3>
+            <p>{{ rol.descripcion }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Información adicional -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">
+          <span class="material-icons">description</span>
+          3. Información adicional
+        </h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Estado de la cuenta <span class="requerido">*</span></label>
+            <div class="grupo-estado">
+              <button
+                type="button"
+                class="boton-estado"
+                [class.activo-seleccionado]="form.get('estado')?.value === 'activo'"
+                (click)="seleccionarEstado('activo')"
+              >
+                <span class="material-icons">check_circle</span>
+                Activo
+              </button>
+
+              <button
+                type="button"
+                class="boton-estado"
+                [class.inactivo-seleccionado]="form.get('estado')?.value === 'inactivo'"
+                (click)="seleccionarEstado('inactivo')"
+              >
+                <span class="material-icons">cancel</span>
+                Inactivo
+              </button>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Fecha de creación</label>
+            <div class="input-con-icono">
+              <span class="material-icons">calendar_month</span>
+              <input type="text" [value]="fechaCreacionFormateada" disabled readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label>Notas (opcional)</label>
+          <textarea
+            formControlName="notas"
+            [maxlength]="maxNotas"
+            placeholder="Ej: Responsable del área de soporte, turno nocturno, etc."
+          >
+          </textarea>
+          <span class="contador-caracteres"
+            >{{ form.get('notas')?.value?.length || 0 }}/{{ maxNotas }}</span
+          >
+        </div>
+      </section>
+
+      <div class="fila-botones">
+        <button type="button" class="boton-cancelar" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="boton-crear">
+          <span class="material-icons">person_add</span>
+          Crear usuario
+        </button>
+      </div>
+    </div>
+
+    <!-- ===================== COLUMNA DERECHA (VISTA PREVIA) ===================== -->
+    <aside class="columna-vista-previa">
+      <div class="tarjeta-vista-previa">
+        <div class="encabezado-vista-previa">
+          <span class="material-icons">visibility</span>
+          <div>
+            <strong>Vista previa del usuario</strong>
+            <p>Así se creará el nuevo usuario en el sistema.</p>
+          </div>
+        </div>
+
+        <div class="banner-perfil">
+          <span class="destello destello-1">✦</span>
+          <span class="destello destello-2">✦</span>
+          <span class="destello destello-3">✦</span>
+
+          <div class="avatar-circulo">
+            <span class="material-icons">person</span>
+          </div>
+        </div>
+
+        <div class="fila-datos">
+          <span class="material-icons">person</span>
+          <div>
+            <strong>Nombre completo</strong>
+            <p>{{ nombreCompletoVistaPrevia }}</p>
+          </div>
+        </div>
+
+        <div class="fila-datos">
+          <span class="material-icons">mail</span>
+          <div>
+            <strong>Correo electrónico</strong>
+            <p>{{ correoVistaPrevia }}</p>
+          </div>
+        </div>
+
+        <div class="fila-datos">
+          <span class="material-icons">alternate_email</span>
+          <div>
+            <strong>Nombre de usuario</strong>
+            <p>{{ usuarioVistaPrevia }}</p>
+          </div>
+        </div>
+
+        <div class="fila-datos fila-datos-etiqueta">
+          <span class="material-icons">shield</span>
+          <strong>Rol asignado</strong>
+          <span class="etiqueta-rol">{{ rolSeleccionado?.titulo }}</span>
+        </div>
+
+        <div class="fila-datos fila-datos-etiqueta">
+          <span class="material-icons">check_circle</span>
+          <strong>Estado</strong>
+          <span class="etiqueta-activo" *ngIf="form.get('estado')?.value === 'activo'">Activo</span>
+          <span class="etiqueta-inactivo" *ngIf="form.get('estado')?.value === 'inactivo'"
+            >Inactivo</span
+          >
+        </div>
+
+        <div class="fila-datos">
+          <span class="material-icons">event</span>
+          <strong>Fecha de creación</strong>
+          <span>{{ fechaCreacionFormateada }}</span>
+        </div>
+      </div>
+
+      <div class="caja-consejo">
+        <span class="material-icons">lightbulb</span>
+        <div>
+          <strong>Consejo</strong>
+          <p>
+            Asegúrate de asignar el rol correcto y revisar la información antes de crear el usuario.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </form>
+</div>

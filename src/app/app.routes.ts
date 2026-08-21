@@ -8,7 +8,8 @@ import { InformacionComponent } from './pages/informacion/informacion';
 import { SeguridadComponent } from './pages/seguridad/seguridad';
 import { LegalInfo } from './pages/legal-info/legal-info';
 import { formulario_crear_truequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
-import { formulario_crear_usuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
+import { FormularioCrearUsuarioAdminComponent } from './pages/formulario-crear-usuario-admin/formulario-crear-usuario-admin';
+import { FormularioCrearUsuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
 import { LoginAdministracion } from './pages/login-administracion/login-administracion';
 import { AdminLayout } from './pages/admin/admin-layout/admin-layout';
 import { Administracion } from './pages/admin/administracion/administracion';
@@ -68,8 +69,13 @@ export const routes: Routes = [
   // =========================
   {
     path: 'formulario',
-    component: formulario_crear_usuarioComponent
+    component: FormularioCrearUsuarioComponent
   },
+  //formulario-crear-trueques
+{
+  path: 'moderador',
+  component: FormularioCrearUsuarioAdminComponent
+},
   {
     path: 'editar',
     component: FormularioEditarTruequeComponent
