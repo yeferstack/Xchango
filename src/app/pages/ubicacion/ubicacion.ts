@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { MUNICIPIOS_CASANARE } from '../../shared/municipios-casanare';
 
 @Component({
     selector: 'app-ubicacion',
@@ -17,7 +16,27 @@ export class UbicacionComponent {
         UNICIPIOS DE CASANARE
     ============================== */
 
-    municipios: readonly string[] = MUNICIPIOS_CASANARE;
+    municipios: string[] = [
+        'Yopal',
+        'Aguazul',
+        'Chámeza',
+        'Hato Corozal',
+        'La Salina',
+        'Maní',
+        'Monterrey',
+        'Nunchía',
+        'Orocué',
+        'Paz de Ariporo',
+        'Pore',
+        'Recetor',
+        'Sabanalarga',
+        'Sácama',
+        'San Luis de Palenque',
+        'Támara',
+        'Tauramena',
+        'Trinidad',
+        'Villanueva'
+    ];
 
 
     /* ==============================

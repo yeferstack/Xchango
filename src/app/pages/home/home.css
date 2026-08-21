@@ -93,19 +93,6 @@ svg {
   font-weight: 600;
 }
 
-.sort {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 0.85rem;
-  color: var(--ink);
-  cursor: pointer;
-}
-
 .results-info {
   display: flex;
   align-items: center;

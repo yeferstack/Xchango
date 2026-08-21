@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface TipoIntercambio {
   id: string;
@@ -9,6 +9,23 @@ interface TipoIntercambio {
   descripcion: string;
   icono: string;      // nombre de material icon
   colorClase: string; // clase css para el color del icono/tarjeta
+}
+
+// Estructura de un trueque tal como vendría del backend
+interface Trueque {
+  id: string;
+  tipoIntercambio: string;
+  nombre: string;
+  categoria: string;
+  descripcion: string;
+  ofreces: string;
+  buscas: string;
+  disponibilidad: string;
+  cantidad: string;
+  estado: boolean;
+  municipio: string;
+  barrio: string;
+  imagenes: string[]; // URLs ya subidas al servidor
 }
 
 // Municipios de Casanare (único departamento manejado por la plataforma)
@@ -35,13 +52,13 @@ const MUNICIPIOS_CASANARE: string[] = [
 ];
 
 @Component({
-  selector: 'app-formulario-crear-trueques',
+  selector: 'app-formulario-editar-trueque',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './formulario-crear-trueques.html',
-  styleUrls: ['./formulario-crear-trueques.css']
+  templateUrl: './formulario-editar-trueque.html',
+  styleUrls: ['./formulario-editar-trueque.css']
 })
-export class formulario_crear_truequesComponent implements OnInit {
+export class FormularioEditarTruequeComponent implements OnInit {
 
   // ---------------------------------------------------------
   // 1. Tipos de intercambio (tarjetas seleccionables)
@@ -101,8 +118,20 @@ export class formulario_crear_truequesComponent implements OnInit {
   // ---------------------------------------------------------
   form!: FormGroup;
 
-  imagenes: File[] = [];
-  imagenesPreviewUrls: string[] = [];
+  // El id del trueque que se está editando (viene de la ruta)
+  truequeId: string | null = null;
+  cargandoTrueque = false;
+  errorCarga = '';
+
+  // Imágenes ya subidas al servidor, mostradas como URL directa
+  imagenesExistentes: string[] = [];
+  // Ids/URLs de imágenes existentes que el usuario marcó para eliminar
+  imagenesEliminadas: string[] = [];
+
+  // Imágenes nuevas seleccionadas en esta sesión de edición
+  imagenesNuevas: File[] = [];
+  imagenesNuevasPreviewUrls: string[] = [];
+
   indiceImagenVistaPrevia = 0;
   readonly maxImagenes = 5;
   readonly maxDescripcion = 500;
@@ -111,6 +140,7 @@ export class formulario_crear_truequesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {
     this.asegurarFuenteMaterialIcons();
@@ -147,6 +177,92 @@ export class formulario_crear_truequesComponent implements OnInit {
       municipio: ['', Validators.required],
       barrio: ['']
     });
+
+    // Toma el id desde la ruta, ej: /trueque/:id/editar
+    this.truequeId = this.route.snapshot.paramMap.get('id');
+
+    if (this.truequeId) {
+      this.cargarTrueque(this.truequeId);
+    }
+  }
+
+  // ---------------------------------------------------------
+  // Carga y precarga del trueque a editar
+  // ---------------------------------------------------------
+  private cargarTrueque(id: string): void {
+    this.cargandoTrueque = true;
+    this.errorCarga = '';
+
+    // TODO: reemplazar por la llamada real al servicio/backend, ej:
+    // this.truequeService.obtenerPorId(id).subscribe({
+    //   next: (trueque) => this.precargarFormulario(trueque),
+    //   error: () => this.errorCarga = 'No se pudo cargar la publicación.',
+    //   complete: () => this.cargandoTrueque = false
+    // });
+
+    // Simulación temporal para poder probar la precarga sin backend conectado.
+    setTimeout(() => {
+      const truequeSimulado = this.obtenerTruequeDeEjemplo(id);
+
+      if (!truequeSimulado) {
+        this.errorCarga = 'No se encontró la publicación que intentas editar.';
+        this.cargandoTrueque = false;
+        return;
+      }
+
+      this.precargarFormulario(truequeSimulado);
+      this.cargandoTrueque = false;
+    }, 400);
+  }
+
+  /**
+   * Llena el formulario reactivo con los datos de un trueque existente.
+   * Las imágenes ya subidas se guardan aparte (imagenesExistentes) para
+   * poder diferenciarlas de las nuevas que el usuario agregue.
+   */
+  private precargarFormulario(trueque: Trueque): void {
+    this.form.patchValue({
+      tipoIntercambio: trueque.tipoIntercambio,
+      nombre: trueque.nombre,
+      categoria: trueque.categoria,
+      descripcion: trueque.descripcion,
+      ofreces: trueque.ofreces,
+      buscas: trueque.buscas,
+      disponibilidad: trueque.disponibilidad,
+      cantidad: trueque.cantidad,
+      estado: trueque.estado,
+      municipio: trueque.municipio,
+      barrio: trueque.barrio
+    });
+
+    this.imagenesExistentes = [...trueque.imagenes];
+    this.indiceImagenVistaPrevia = 0;
+    this.cdr.detectChanges();
+  }
+
+  /**
+   * Stub de datos de ejemplo — simula lo que devolvería el backend.
+   * Bórralo cuando conectes el servicio real de trueques.
+   */
+  private obtenerTruequeDeEjemplo(id: string): Trueque | null {
+    return {
+      id,
+      tipoIntercambio: 'fisico',
+      nombre: 'Bicicleta montaña',
+      categoria: 'Deportes',
+      descripcion: 'Bicicleta todoterreno rodado 26, poco uso, frenos de disco.',
+      ofreces: 'Bicicleta completa con casco incluido',
+      buscas: 'Clases de inglés o una laptop en buen estado',
+      disponibilidad: 'Fines de semana',
+      cantidad: '1 unidad',
+      estado: true,
+      municipio: 'Yopal',
+      barrio: '20 de Julio',
+      imagenes: [
+        'https://via.placeholder.com/400x300.png?text=Bicicleta+1',
+        'https://via.placeholder.com/400x300.png?text=Bicicleta+2'
+      ]
+    };
   }
 
   // ---------------------------------------------------------
@@ -167,6 +283,15 @@ export class formulario_crear_truequesComponent implements OnInit {
   get descripcionRestante(): number {
     const valor = this.form.get('descripcion')?.value || '';
     return this.maxDescripcion - valor.length;
+  }
+
+  /** Todas las imágenes a mostrar en la vista previa: existentes + nuevas */
+  get imagenesPreviewUrls(): string[] {
+    return [...this.imagenesExistentes, ...this.imagenesNuevasPreviewUrls];
+  }
+
+  get totalImagenes(): number {
+    return this.imagenesExistentes.length + this.imagenesNuevas.length;
   }
 
   // ---------------------------------------------------------
@@ -199,43 +324,55 @@ export class formulario_crear_truequesComponent implements OnInit {
   }
 
   private agregarImagenes(files: FileList): void {
-    const disponibles = this.maxImagenes - this.imagenes.length;
+    const disponibles = this.maxImagenes - this.totalImagenes;
     Array.from(files)
       .slice(0, disponibles)
       .forEach(file => {
         if (!file.type.match(/image\/(jpeg|png)/)) return;
         if (file.size > 5 * 1024 * 1024) return; // máx 5MB
 
-        // Reasigna el arreglo (en vez de mutar con push) para que Angular
-        // detecte el cambio incluso con estrategias de detección estrictas.
-        this.imagenes = [...this.imagenes, file];
+        this.imagenesNuevas = [...this.imagenesNuevas, file];
 
         const reader = new FileReader();
         reader.onload = () => {
-          this.imagenesPreviewUrls = [...this.imagenesPreviewUrls, reader.result as string];
+          this.imagenesNuevasPreviewUrls = [...this.imagenesNuevasPreviewUrls, reader.result as string];
           this.cdr.detectChanges();
         };
         reader.readAsDataURL(file);
       });
   }
 
+  /**
+   * Elimina una imagen de la vista previa combinada (existentes + nuevas).
+   * Si la imagen eliminada era una que ya estaba en el servidor, se guarda
+   * su URL en imagenesEliminadas para que el backend sepa que debe borrarla.
+   */
   eliminarImagen(index: number): void {
-    this.imagenes = this.imagenes.filter((_, i) => i !== index);
-    this.imagenesPreviewUrls = this.imagenesPreviewUrls.filter((_, i) => i !== index);
+    const esExistente = index < this.imagenesExistentes.length;
 
-    if (this.indiceImagenVistaPrevia >= this.imagenesPreviewUrls.length) {
-      this.indiceImagenVistaPrevia = Math.max(0, this.imagenesPreviewUrls.length - 1);
+    if (esExistente) {
+      const url = this.imagenesExistentes[index];
+      this.imagenesEliminadas = [...this.imagenesEliminadas, url];
+      this.imagenesExistentes = this.imagenesExistentes.filter((_, i) => i !== index);
+    } else {
+      const indiceNueva = index - this.imagenesExistentes.length;
+      this.imagenesNuevas = this.imagenesNuevas.filter((_, i) => i !== indiceNueva);
+      this.imagenesNuevasPreviewUrls = this.imagenesNuevasPreviewUrls.filter((_, i) => i !== indiceNueva);
+    }
+
+    if (this.indiceImagenVistaPrevia >= this.totalImagenes) {
+      this.indiceImagenVistaPrevia = Math.max(0, this.totalImagenes - 1);
     }
   }
 
   imagenAnterior(): void {
-    this.indiceImagenVistaPrevia =
-      (this.indiceImagenVistaPrevia - 1 + this.imagenesPreviewUrls.length) % this.imagenesPreviewUrls.length;
+    const total = this.imagenesPreviewUrls.length;
+    this.indiceImagenVistaPrevia = (this.indiceImagenVistaPrevia - 1 + total) % total;
   }
 
   imagenSiguiente(): void {
-    this.indiceImagenVistaPrevia =
-      (this.indiceImagenVistaPrevia + 1) % this.imagenesPreviewUrls.length;
+    const total = this.imagenesPreviewUrls.length;
+    this.indiceImagenVistaPrevia = (this.indiceImagenVistaPrevia + 1) % total;
   }
 
   // ---------------------------------------------------------
@@ -257,13 +394,23 @@ export class formulario_crear_truequesComponent implements OnInit {
     }
 
     const formData = new FormData();
+    formData.append('id', this.truequeId ?? '');
     formData.append('departamento', this.departamento);
     Object.entries(this.form.getRawValue()).forEach(([key, value]) => {
       formData.append(key, String(value));
     });
-    this.imagenes.forEach(img => formData.append('imagenes', img));
 
-    // TODO: reemplazar por la llamada real al servicio de trueques
-    console.log('Publicación lista para enviar:', this.form.getRawValue(), this.imagenes);
+    this.imagenesNuevas.forEach(img => formData.append('imagenesNuevas', img));
+    formData.append('imagenesEliminadas', JSON.stringify(this.imagenesEliminadas));
+    formData.append('imagenesConservadas', JSON.stringify(this.imagenesExistentes));
+
+    // TODO: reemplazar por la llamada real al servicio de trueques (PUT/PATCH)
+    console.log('Cambios listos para guardar:', {
+      id: this.truequeId,
+      valores: this.form.getRawValue(),
+      imagenesNuevas: this.imagenesNuevas,
+      imagenesEliminadas: this.imagenesEliminadas,
+      imagenesConservadas: this.imagenesExistentes
+    });
   }
 }
