@@ -5,8 +5,10 @@
     [notificaciones]="notificaciones"
     [cantidadFavoritos]="cantidadFavoritos"
     [mostrarSoloFavoritos]="mostrarSoloFavoritos"
+    [municipioSeleccionado]="municipioSeleccionado"
     (irAInicio)="irAInicio()"
     (verSoloFavoritos)="verSoloFavoritos()"
+    (municipioSeleccionadoChange)="onMunicipioSeleccionado($event)"
   ></app-header>
 
   <div class="body">
@@ -47,17 +49,11 @@
             Digitales
           </button>
         </div>
-
-        <button class="sort" type="button">
-          {{ orden }}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
       </div>
 
       <p class="results-info">
         <span *ngIf="mostrarSoloFavoritos">Mostrando tus favoritos — </span>
+        <span *ngIf="municipioSeleccionado">En {{ municipioSeleccionado }} — </span>
         {{ truequesFiltrados.length }}
         {{ truequesFiltrados.length === 1 ? 'resultado' : 'resultados' }}
         <button
@@ -67,7 +63,8 @@
             busqueda ||
             filtroActivo !== 'todos' ||
             categoriaSeleccionada !== 'todos' ||
-            mostrarSoloFavoritos
+            mostrarSoloFavoritos ||
+            municipioSeleccionado
           "
           (click)="limpiarFiltros()"
         >
@@ -131,7 +128,7 @@
                 </svg>
                 <span>{{ trueque.ciudad }}</span>
               </div>
-              <button class="card__cta" type="button">Intercambio</button>
+              <button class="card__cta" type="button">Ver ...</button>
             </div>
           </div>
         </article>

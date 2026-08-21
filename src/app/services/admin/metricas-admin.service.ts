@@ -51,7 +51,7 @@ export class MetricasAdminService {
     if (this.cargado) return;
     this.cargado = true;
     this._cargando.set(true);
-    this.http.get<MetricasData>('/data/metricas.json').subscribe({
+    this.http.get<MetricasData>('data/metricas.json').subscribe({
       next: datos => {
         this.datos.set(datos);
         this.resumen.set(datos.resumen);
@@ -84,7 +84,7 @@ export class MetricasAdminService {
   }
 
   private recargar(): void {
-    this.http.get<MetricasData>('/data/metricas.json').subscribe(datos => {
+    this.http.get<MetricasData>('data/metricas.json').subscribe(datos => {
       this.datos.set(datos);
       this.resumen.set(datos.resumen);
       this.comparativas.set(datos.comparativas);

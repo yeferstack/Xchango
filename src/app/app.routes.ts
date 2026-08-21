@@ -19,6 +19,9 @@ import { Reportes } from './pages/admin/reportes/reportes';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { adminAuthGuard, adminInvitadoGuard } from './guards/admin-auth-guard';
 import { FormularioEditarTruequeComponent } from './pages/formulario-editar-trueque/formulario-editar-trueque';
+import { DatosCuentaComponent } from './pages/datos_cuenta/datos_cuenta';
+import { UbicacionComponent } from './pages/ubicacion/ubicacion';
+import { MisPublicacionesComponent } from './pages/mis_publicaciones/mis_publicaciones';
 
 export const routes: Routes = [
 
@@ -71,6 +74,29 @@ export const routes: Routes = [
     path: 'editar',
     component: FormularioEditarTruequeComponent
   },
+
+  // =========================
+// PERFIL > DATOS DE TU CUENTA
+// =========================
+{
+  path: 'perfil/cuenta',
+  component: DatosCuentaComponent
+},
+
+// =========================
+// PERFIL > UBICACIÓN
+// =========================
+{
+  path: 'perfil/ubicacion',
+  component: UbicacionComponent
+},
+// =========================
+// MIS PUBLICACIONES
+// =========================
+{
+  path: 'mis-publicaciones',
+  component: MisPublicacionesComponent
+},
 
   // =========================
   // INFORMACIÓN LEGAL

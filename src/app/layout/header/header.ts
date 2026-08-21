@@ -32,6 +32,62 @@ export class HeaderComponent {
   /** Se emite al hacer clic en "Favoritos" */
   @Output() verSoloFavoritos = new EventEmitter<void>();
 
+  /** Municipio de Casanare seleccionado (controlado desde el padre, soporta [(municipioSeleccionado)]) */
+  @Input() municipioSeleccionado: string | null = null;
+  @Output() municipioSeleccionadoChange = new EventEmitter<string | null>();
+
+  /** Número al que redirige el botón "Mensajes" (formato internacional, sin + ni espacios) */
+  @Input() numeroWhatsApp = '573001112233';
+
+  get enlaceWhatsApp(): string {
+    return `https://wa.me/${this.numeroWhatsApp}`;
+  }
+
+  /** Municipios del departamento de Casanare */
+  municipios: string[] = [
+    'Aguazul',
+    'Chameza',
+    'Hato Corozal',
+    'La Salina',
+    'Mani',
+    'Monterrey',
+    'Nunchia',
+    'Orocue',
+    'Paz de Ariporo',
+    'Pore',
+    'Recetor',
+    'Sabanalarga',
+    'Sacama',
+    'San Luis de Palenque',
+    'Tamara',
+    'Tauramena',
+    'Trinidad',
+    'Villanueva',
+    'Yopal',
+  ];
+
+  mostrarModalMunicipio = false;
+  municipioTemporal: string | null = null;
+
+  abrirModalMunicipio(): void {
+    this.municipioTemporal = this.municipioSeleccionado;
+    this.mostrarModalMunicipio = true;
+  }
+
+  cerrarModalMunicipio(): void {
+    this.mostrarModalMunicipio = false;
+  }
+
+  elegirMunicipioTemporal(municipio: string | null): void {
+    this.municipioTemporal = municipio;
+  }
+
+  confirmarMunicipio(): void {
+    this.municipioSeleccionado = this.municipioTemporal;
+    this.municipioSeleccionadoChange.emit(this.municipioSeleccionado);
+    this.mostrarModalMunicipio = false;
+  }
+
   onBusquedaChange(valor: string): void {
     this.busqueda = valor;
     this.busquedaChange.emit(valor);

@@ -24,7 +24,7 @@ export class AlertasAdminService {
     this._cargando.set(true);
     this._error.set(null);
 
-    this.http.get<Alerta[]>('/data/alertas.json').subscribe({
+    this.http.get<Alerta[]>('data/alertas.json').subscribe({
       next: datos => {
         this._alertas.set(datos);
         this._cargando.set(false);
