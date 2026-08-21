@@ -43,7 +43,7 @@ export class PublicacionesAdminService {
     if (this.cargado) return;
     this.cargado = true;
     this._cargando.set(true);
-    this.http.get<PublicacionReportada[]>('/data/publicaciones-reportadas.json').subscribe({
+    this.http.get<PublicacionReportada[]>('data/publicaciones-reportadas.json').subscribe({
       next: datos => { this._reportadas.set(datos); this._cargando.set(false); this.cargarEliminadas(); },
       error: () => { this.cargado = false; this._error.set('No se pudieron cargar las publicaciones reportadas.'); this._cargando.set(false); },
     });
@@ -75,7 +75,7 @@ export class PublicacionesAdminService {
   }
 
   private cargarEliminadas(): void {
-    this.http.get<PublicacionEliminada[]>('/data/publicaciones-eliminadas.json').subscribe({
+    this.http.get<PublicacionEliminada[]>('data/publicaciones-eliminadas.json').subscribe({
       next: datos => this._eliminadas.set(datos),
       error: () => this._eliminadas.set([]),
     });
