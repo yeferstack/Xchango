@@ -33,7 +33,7 @@ export class PerfilComponent implements OnInit {
   }
 
   get avatarUrl(): string {
-    return this.servicio.usuarioActual()?.avatar ?? 'Logo-xchango/avatar-miguel.jpeg';
+    return this.servicio.usuarioActual()?.avatar ?? 'Logo-xchango/avatar-miguel.png';
   }
 
   get ubicacion(): string {
