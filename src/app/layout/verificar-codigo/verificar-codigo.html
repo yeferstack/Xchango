@@ -1,0 +1,42 @@
+<div class="vc-overlay">
+  <div class="vc-modal" role="dialog" aria-modal="true">
+
+    <div class="vc-logo">
+      <img src="/Logo-xchango/chango.png" alt="Logo XchanGo" class="vc-logo__chango" />
+      <img src="/Logo-xchango/letras-chango.png" alt="XchanGo" class="vc-logo__wordmark" />
+    </div>
+
+    <h2 class="vc-titulo">Verifica tu correo</h2>
+    <p class="vc-subtitulo">
+      Enviamos un código a <strong>{{ correo || 'tu correo' }}</strong>.
+      Escríbelo para continuar.
+    </p>
+
+    <form class="vc-form" (ngSubmit)="confirmar()">
+      <input
+        class="vc-input"
+        type="text"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="0000"
+        [ngModel]="codigo()"
+        (ngModelChange)="onCodigoChange($event)"
+        name="codigo"
+        autocomplete="one-time-code"
+      />
+
+      <p class="vc-error" *ngIf="error()">{{ error() }}</p>
+
+      <button class="vc-btn" type="submit" [disabled]="enviando()">
+        {{ enviando() ? 'Verificando...' : 'Verificar' }}
+      </button>
+    </form>
+
+    <p class="vc-nota">Código de prueba en esta versión: <strong>0000</strong></p>
+
+    <button type="button" class="vc-volver" (click)="volverAtras()">
+      ‹ Volver
+    </button>
+
+  </div>
+</div>

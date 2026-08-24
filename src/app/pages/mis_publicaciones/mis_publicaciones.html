@@ -1,36 +1,39 @@
 <!-- ===== NAVBAR ===== -->
 <header class="navbar">
     <a class="marca" routerLink="/home">
-        <img src="Logo-xchango/logo-xchango.png" alt="" class="logo" />
+        <img src="/Logo-xchango/logo-xchango.png" alt="" class="logo" />
         <span class="marca-texto">XchanGo</span>
     </a>
 
     <nav class="nav-pill">
         <a routerLink="/home" class="nav-item activo">
-            <span class="material-icons">home</span> Inicio
+            <app-icono nombre="home"></app-icono> Inicio
         </a>
         <a routerLink="/explorar" class="nav-item">
-            <span class="material-icons">search</span> Explorar
+            <app-icono nombre="search"></app-icono> Explorar
         </a>
         <a routerLink="/mis-trueques" class="nav-item">
-            <span class="material-icons">swap_horiz</span> Mis trueques
+            <app-icono nombre="swap_horiz"></app-icono> Mis trueques
         </a>
         <a routerLink="/servicios" class="nav-item">
-            <span class="material-icons">apps</span> Servicios
+            <app-icono nombre="apps"></app-icono> Servicios
+        </a>
+        <a routerLink="/mensajes" class="nav-item">
+            <app-icono nombre="chat_bubble_outline"></app-icono> Mensajes
         </a>
         <a routerLink="/favoritos" class="nav-item">
-            <span class="material-icons">favorite_border</span> Favoritos
+            <app-icono nombre="favorite_border"></app-icono> Favoritos
         </a>
     </nav>
 
     <div class="nav-derecha">
-        <button class="btn-campana" type="button">
-            <span class="material-icons">notifications_none</span>
+        <button class="btn-campana" type="button" routerLink="/notificaciones" title="Ver notificaciones">
+            <app-icono nombre="notifications_none"></app-icono>
         </button>
         <div class="avatar-nav">
             <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
         </div>
-        <span class="material-icons chevron-nav">expand_more</span>
+        <app-icono nombre="expand_more"></app-icono>
     </div>
 </header>
 
@@ -41,7 +44,7 @@
         <!-- Columna izquierda: identidad -->
         <aside class="columna-identidad">
             <button class="btn-volver" type="button" (click)="volver()">
-                <span class="material-icons">arrow_back</span> Volver
+                <app-icono nombre="arrow_back"></app-icono> Volver
             </button>
 
             <div class="foto-perfil">
@@ -52,11 +55,11 @@
 
             <h3 class="subtitulo-calif">Calificaciones y opiniones</h3>
             <div class="estrellas">
-                <span class="material-icons llena">star</span>
-                <span class="material-icons llena">star</span>
-                <span class="material-icons llena">star</span>
-                <span class="material-icons llena">star</span>
-                <span class="material-icons vacia">star</span>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
             </div>
             <p class="nota-calif">(Solo será visible públicamente tras recibir 5 calificaciones).</p>
         </aside>
@@ -70,7 +73,7 @@
                     <p class="descripcion">Administra los trueques que has publicado.</p>
                 </div>
                 <button class="btn-guardar" type="button" routerLink="/publicar">
-                    <span class="material-icons">add</span> Publicar trueque
+                    <app-icono nombre="add"></app-icono> Publicar trueque
                 </button>
             </header>
 
@@ -101,6 +104,8 @@
 
             <!-- Grilla de publicaciones -->
             <div class="grilla" *ngIf="publicacionesFiltradas().length > 0">
+                <p class="aviso-demo" *ngIf="aviso">{{ aviso }}</p>
+
                 <article class="pub" *ngFor="let p of publicacionesFiltradas()">
 
                     <div class="pub-imagen">
@@ -115,32 +120,35 @@
                         <h3 class="pub-titulo">{{ p.titulo }}</h3>
 
                         <p class="pub-meta">
-                            <span class="material-icons">place</span> {{ p.municipio }}
+                            <app-icono nombre="place"></app-icono> {{ p.ciudad }}
                             <span class="separador">·</span>
-                            {{ p.fecha }}
+                            {{ p.fechaCreacion }}
                         </p>
 
                         <div class="pub-stats">
-                            <span><span class="material-icons">visibility</span> {{ p.vistas }}</span>
-                            <span><span class="material-icons">swap_horiz</span> {{ p.propuestas }}</span>
+                            <span><app-icono nombre="visibility"></app-icono> {{ p.vistas }}</span>
+                            <span><app-icono nombre="swap_horiz"></app-icono> {{ p.propuestas }}</span>
                         </div>
                     </div>
 
                     <div class="pub-acciones">
                         <button class="btn-accion" type="button" [routerLink]="['/trueque', p.id]">
-                            <span class="material-icons">visibility</span> Ver
+                            <app-icono nombre="visibility"></app-icono> Ver
+                        </button>
+
+                        <button class="btn-accion" type="button" *ngIf="p.estado !== 'finalizada'"
+                            [routerLink]="['/trueque', p.id, 'editar']">
+                            <app-icono nombre="edit"></app-icono> Editar
                         </button>
 
                         <button class="btn-accion" type="button" *ngIf="p.estado !== 'finalizada'"
                             (click)="alternarPausa(p.id)">
-                            <span class="material-icons">
-                                {{ p.estado === 'activa' ? 'pause' : 'play_arrow' }}
-                            </span>
+                            <app-icono [nombre]="p.estado === 'activa' ? 'pause' : 'play_arrow'"></app-icono>
                             {{ p.estado === 'activa' ? 'Pausar' : 'Activar' }}
                         </button>
 
                         <button class="btn-accion btn-accion--peligro" type="button" (click)="eliminar(p.id)">
-                            <span class="material-icons">delete_outline</span> Eliminar
+                            <app-icono nombre="delete_outline"></app-icono> Eliminar
                         </button>
                     </div>
 
@@ -149,7 +157,7 @@
 
             <!-- Estado vacío -->
             <div class="sin-datos" *ngIf="publicacionesFiltradas().length === 0">
-                <span class="material-icons">inventory_2</span>
+                <app-icono nombre="inventory_2"></app-icono>
                 <h3>No hay publicaciones aquí</h3>
                 <p>Cuando publiques un trueque aparecerá en esta sección.</p>
             </div>

@@ -1,36 +1,39 @@
 <!-- ===== NAVBAR ===== -->
 <header class="navbar">
     <a class="marca" routerLink="/home">
-        <img src="Logo-xchango/logo-xchango.png" alt="" class="logo" />
+        <img src="/Logo-xchango/logo-xchango.png" alt="" class="logo" />
         <span class="marca-texto">XchanGo</span>
     </a>
 
     <nav class="nav-pill">
         <a routerLink="/home" class="nav-item activo">
-            <span class="material-icons">home</span> Inicio
+            <app-icono nombre="home"></app-icono> Inicio
         </a>
         <a routerLink="/explorar" class="nav-item">
-            <span class="material-icons">search</span> Explorar
+            <app-icono nombre="search"></app-icono> Explorar
         </a>
         <a routerLink="/mis-trueques" class="nav-item">
-            <span class="material-icons">swap_horiz</span> Mis trueques
+            <app-icono nombre="swap_horiz"></app-icono> Mis trueques
         </a>
         <a routerLink="/servicios" class="nav-item">
-            <span class="material-icons">apps</span> Servicios
+            <app-icono nombre="apps"></app-icono> Servicios
+        </a>
+        <a routerLink="/mensajes" class="nav-item">
+            <app-icono nombre="chat_bubble_outline"></app-icono> Mensajes
         </a>
         <a routerLink="/favoritos" class="nav-item">
-            <span class="material-icons">favorite_border</span> Favoritos
+            <app-icono nombre="favorite_border"></app-icono> Favoritos
         </a>
     </nav>
 
     <div class="nav-derecha">
-        <button class="btn-campana" type="button">
-            <span class="material-icons">notifications_none</span>
+        <button class="btn-campana" type="button" routerLink="/notificaciones" title="Ver notificaciones">
+            <app-icono nombre="notifications_none"></app-icono>
         </button>
         <div class="avatar-nav">
             <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
         </div>
-        <span class="material-icons chevron-nav">expand_more</span>
+        <app-icono nombre="expand_more"></app-icono>
     </div>
 </header>
 
@@ -41,7 +44,7 @@
         <!-- Columna izquierda: identidad -->
         <aside class="columna-identidad">
             <button class="btn-volver" type="button" (click)="volver()">
-                <span class="material-icons">arrow_back</span> Volver
+                <app-icono nombre="arrow_back"></app-icono> Volver
             </button>
 
             <div class="foto-perfil">
@@ -52,11 +55,11 @@
 
             <h3 class="subtitulo-calif">Calificaciones y opiniones</h3>
             <div class="estrellas">
-                <span class="material-icons llena">star</span>
-                <span class="material-icons llena">star</span>
-                <span class="material-icons llena">star</span>
-                <span class="material-icons llena">star</span>
-                <span class="material-icons vacia">star</span>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
             </div>
             <p class="nota-calif">(Solo será visible públicamente tras recibir 5 calificaciones).</p>
         </aside>
@@ -72,7 +75,7 @@
             <!-- ===== GRUPO: Información de la cuenta ===== -->
             <div class="grupo">
                 <div class="grupo-cabecera">
-                    <span class="icono-caja"><span class="material-icons">account_circle</span></span>
+                    <span class="icono-caja"><app-icono nombre="account_circle"></app-icono></span>
                     <span class="acordeon-texto">
                         <strong>Información de la cuenta</strong>
                         <small>Datos con los que te identificamos dentro de la plataforma.</small>
@@ -83,7 +86,7 @@
 
                     <!-- Correo -->
                     <li class="fila">
-                        <span class="material-icons fila-icono">mail</span>
+                        <app-icono nombre="mail"></app-icono>
                         <span class="fila-texto">
                             <strong>Correo electrónico</strong>
                             <small *ngIf="editando() !== 'correo'">{{ correo() }}</small>
@@ -109,7 +112,7 @@
 
                     <!-- Nombre de usuario -->
                     <li class="fila">
-                        <span class="material-icons fila-icono">alternate_email</span>
+                        <app-icono nombre="alternate_email"></app-icono>
                         <span class="fila-texto">
                             <strong>Nombre de usuario</strong>
                             <small *ngIf="editando() !== 'usuario'">{{ usuario() }}</small>
@@ -131,7 +134,7 @@
 
                     <!-- ID de cuenta -->
                     <li class="fila">
-                        <span class="material-icons fila-icono">badge</span>
+                        <app-icono nombre="badge"></app-icono>
                         <span class="fila-texto">
                             <strong>Identificador de cuenta</strong>
                             <small>{{ idCuenta() }}</small>
@@ -141,7 +144,7 @@
 
                     <!-- Tipo de cuenta -->
                     <li class="fila">
-                        <span class="material-icons fila-icono">workspace_premium</span>
+                        <app-icono nombre="workspace_premium"></app-icono>
                         <span class="fila-texto">
                             <strong>Tipo de cuenta</strong>
                             <small>Cuenta {{ tipoCuenta() }}</small>
@@ -150,7 +153,7 @@
 
                     <!-- Fecha de registro -->
                     <li class="fila">
-                        <span class="material-icons fila-icono">event</span>
+                        <app-icono nombre="event"></app-icono>
                         <span class="fila-texto">
                             <strong>Miembro desde</strong>
                             <small>{{ fechaRegistro() }}</small>
@@ -163,7 +166,7 @@
             <!-- ===== GRUPO: Acceso ===== -->
             <div class="grupo">
                 <div class="grupo-cabecera">
-                    <span class="icono-caja"><span class="material-icons">key</span></span>
+                    <span class="icono-caja"><app-icono nombre="key"></app-icono></span>
                     <span class="acordeon-texto">
                         <strong>Acceso</strong>
                         <small>Credenciales con las que ingresas a XchanGo.</small>
@@ -171,32 +174,13 @@
                 </div>
 
                 <ul class="filas">
-                    <li class="fila">
-                        <span class="material-icons fila-icono">lock_outline</span>
-                        <span class="fila-texto">
-                            <strong>Contraseña</strong>
-                            <small>Actualizada hace 2 meses.</small>
-                        </span>
-                        <button class="btn-secundario" type="button">Cambiar contraseña</button>
-                    </li>
-
-                    <li class="fila">
-                        <span class="material-icons fila-icono">shield</span>
-                        <span class="fila-texto">
-                            <strong>Verificación en dos pasos</strong>
-                            <small>Configúrala desde la sección de Seguridad.</small>
-                        </span>
-                        <button class="btn-secundario" type="button" routerLink="/perfil/seguridad">
-                            Ir a Seguridad
-                        </button>
-                    </li>
                 </ul>
             </div>
 
             <!-- ===== GRUPO: Preferencias ===== -->
             <div class="grupo">
                 <div class="grupo-cabecera">
-                    <span class="icono-caja"><span class="material-icons">tune</span></span>
+                    <span class="icono-caja"><app-icono nombre="tune"></app-icono></span>
                     <span class="acordeon-texto">
                         <strong>Preferencias de la cuenta</strong>
                         <small>Ajustes generales de correos y sesión.</small>
@@ -221,7 +205,7 @@
             <div class="grupo grupo--riesgo">
                 <div class="grupo-cabecera">
                     <span class="icono-caja icono-caja--riesgo">
-                        <span class="material-icons">warning_amber</span>
+                        <app-icono nombre="warning_amber"></app-icono>
                     </span>
                     <span class="acordeon-texto">
                         <strong>Zona de riesgo</strong>
@@ -235,7 +219,7 @@
                             <strong>Desactivar cuenta temporalmente</strong>
                             <small>Tu perfil y publicaciones dejan de ser visibles hasta que vuelvas a entrar.</small>
                         </span>
-                        <button class="btn-secundario" type="button">Desactivar</button>
+                        <button class="btn-secundario" type="button" (click)="pedirDesactivar()">Desactivar</button>
                     </li>
 
                     <li class="fila">
@@ -243,16 +227,31 @@
                             <strong>Eliminar cuenta</strong>
                             <small>Se borran tus publicaciones, trueques y calificaciones. No se puede deshacer.</small>
                         </span>
-                        <button class="btn-peligro" type="button">Eliminar cuenta</button>
+                        <button class="btn-peligro" type="button" (click)="pedirEliminar()">Eliminar cuenta</button>
                     </li>
                 </ul>
             </div>
 
             <footer class="tarjeta-pie">
-                <button class="btn-guardar" type="button">Guardar cambios</button>
+                <button class="btn-guardar" type="button" (click)="guardarCambios()">Guardar cambios</button>
             </footer>
 
         </section>
 
     </div>
 </main>
+
+<!-- Aviso que aparece al guardar o confirmar una acción -->
+<p class="aviso-exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+
+<!-- Confirmación antes de desactivar o eliminar la cuenta -->
+<div class="modal-fondo" *ngIf="confirmacion" (click)="cerrarConfirmacion()">
+    <div class="modal-caja" (click)="$event.stopPropagation()">
+        <h3 class="modal-titulo">{{ confirmacion.titulo }}</h3>
+        <p class="modal-texto">{{ confirmacion.texto }}</p>
+        <div class="modal-acciones">
+            <button class="btn-secundario" type="button" (click)="cerrarConfirmacion()">Cancelar</button>
+            <button class="btn-peligro" type="button" (click)="confirmarAccion()">Confirmar</button>
+        </div>
+    </div>
+</div>

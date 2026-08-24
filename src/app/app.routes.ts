@@ -8,7 +8,6 @@ import { InformacionComponent } from './pages/informacion/informacion';
 import { SeguridadComponent } from './pages/seguridad/seguridad';
 import { LegalInfo } from './pages/legal-info/legal-info';
 import { formulario_crear_truequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
-import { FormularioCrearUsuarioAdminComponent } from './pages/formulario-crear-usuario-admin/formulario-crear-usuario-admin';
 import { FormularioCrearUsuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
 import { LoginAdministracion } from './pages/login-administracion/login-administracion';
 import { AdminLayout } from './pages/admin/admin-layout/admin-layout';
@@ -23,6 +22,13 @@ import { FormularioEditarTruequeComponent } from './pages/formulario-editar-true
 import { DatosCuentaComponent } from './pages/datos_cuenta/datos_cuenta';
 import { UbicacionComponent } from './pages/ubicacion/ubicacion';
 import { MisPublicacionesComponent } from './pages/mis_publicaciones/mis_publicaciones';
+import { MisTruequesComponent } from './pages/mis_trueques/mis_trueques';
+import { NotificacionesComponent } from './pages/notificaciones/notificaciones';
+import { AccesoComponent } from './pages/acceso/acceso';
+import { authGuard } from './guards/auth.guard';
+import { soloAdminGuard } from './guards/solo-admin.guard';
+import { DocumentosComponent } from './pages/admin/documentos/documentos';
+import { FormularioCrearUsuarioAdminComponent } from './pages/admin/formulario-crear-usuario-admin/formulario-crear-usuario-admin';
 
 export const routes: Routes = [
 
@@ -41,6 +47,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: Login
+  },
+  {
+    // Formulario de correo y contraseña
+    path: 'acceso',
+    component: AccesoComponent
   },
 
   // =========================
@@ -61,7 +72,8 @@ export const routes: Routes = [
 
   {
     path: 'trueque',
-    component: formulario_crear_truequesComponent
+    component: formulario_crear_truequesComponent,
+    canActivate: [authGuard]
   },
 
   // =========================
@@ -71,14 +83,16 @@ export const routes: Routes = [
     path: 'formulario',
     component: FormularioCrearUsuarioComponent
   },
-  //formulario-crear-trueques
-{
-  path: 'moderador',
-  component: FormularioCrearUsuarioAdminComponent
-},
   {
+    path: 'trueque/:id/editar',
+    component: FormularioEditarTruequeComponent,
+    canActivate: [authGuard]
+  },
+  {
+    // Se conserva la ruta antigua para no romper enlaces existentes.
     path: 'editar',
-    component: FormularioEditarTruequeComponent
+    component: FormularioEditarTruequeComponent,
+    canActivate: [authGuard]
   },
 
   // =========================
@@ -86,7 +100,8 @@ export const routes: Routes = [
 // =========================
 {
   path: 'perfil/cuenta',
-  component: DatosCuentaComponent
+  component: DatosCuentaComponent,
+    canActivate: [authGuard]
 },
 
 // =========================
@@ -94,14 +109,16 @@ export const routes: Routes = [
 // =========================
 {
   path: 'perfil/ubicacion',
-  component: UbicacionComponent
+  component: UbicacionComponent,
+    canActivate: [authGuard]
 },
 // =========================
 // MIS PUBLICACIONES
 // =========================
 {
   path: 'mis-publicaciones',
-  component: MisPublicacionesComponent
+  component: MisPublicacionesComponent,
+    canActivate: [authGuard]
 },
 
   // =========================
@@ -117,7 +134,8 @@ export const routes: Routes = [
   // =========================
   {
     path: 'perfil',
-    component: PerfilComponent
+    component: PerfilComponent,
+    canActivate: [authGuard]
   },
 
   // =========================
@@ -125,7 +143,8 @@ export const routes: Routes = [
   // =========================
   {
     path: 'perfil/informacion',
-    component: InformacionComponent
+    component: InformacionComponent,
+    canActivate: [authGuard]
   },
 
   // =========================
@@ -133,7 +152,8 @@ export const routes: Routes = [
   // =========================
   {
     path: 'perfil/seguridad',
-    component: SeguridadComponent
+    component: SeguridadComponent,
+    canActivate: [authGuard]
   },
 
   // =========================
@@ -153,11 +173,38 @@ export const routes: Routes = [
       { path: 'dashboard', component: Dashboard },
       { path: 'reportes', component: Reportes },
       { path: 'administracion', component: Administracion },
+      // Crear moderadores: solo el administrador entra aquí.
+      { path: 'crear-usuario', component: FormularioCrearUsuarioAdminComponent, canActivate: [soloAdminGuard] },
+      { path: 'documentos', component: DocumentosComponent },
       { path: 'usuarios', component: Usuarios },
       { path: 'moderacion', component: Moderacion },
       { path: 'ranking', component: Ranking },
     ],
   },
+
+  // =========================
+  // TRUEQUES Y AVISOS DEL USUARIO
+  // =========================
+  {
+    path: 'mis-trueques',
+    component: MisTruequesComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'notificaciones',
+    component: NotificacionesComponent,
+    canActivate: [authGuard]
+  },
+
+  // =========================
+  // ALIAS: cierran enlaces que antes no resolvían
+  // =========================
+  { path: 'explorar', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'servicios', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'favoritos', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'publicar', redirectTo: 'trueque', pathMatch: 'full' },
+  { path: 'mensajes', redirectTo: 'notificaciones', pathMatch: 'full' },
+  { path: 'perfil/privacidad', redirectTo: 'perfil/seguridad', pathMatch: 'full' },
 
   // =========================
   // RUTA NO ENCONTRADA

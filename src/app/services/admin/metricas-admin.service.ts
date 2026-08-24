@@ -1,37 +1,31 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import {
+  Comparativa,
+  MetricasData,
+  MetricasResumen,
+  SerieGrafico,
+} from '../../models/admin/metrica';
+
 export type Periodo = '1d' | '7d' | '30d' | '90d' | 'anio';
 
-export interface SerieGrafico {
-  label: string;
-  valor: number;
-}
+/**
+ * Estas interfaces se redeclaraban aquí, duplicando `models/admin/metrica.ts`.
+ * Ahora se importan de allí y se reexportan para no romper a quien las
+ * importaba desde este archivo.
+ */
+export type { MetricasData, MetricasResumen, SerieGrafico };
+export type MetricaComparativa = Comparativa;
 
-export interface MetricasResumen {
-  usuarios: number;
-  usuariosActivos: number;
-  publicaciones: number;
-  intercambios: number;
-  publicacionesReportadas: number;
-  usuariosSuspendidos: number;
-}
-
-export interface MetricaComparativa {
-  actual: number;
-  anterior: number;
-  porcentaje: number;
-}
-
-export interface MetricasData {
-  resumen: MetricasResumen;
-  comparativas: Record<string, MetricaComparativa>;
-  actividadMensual: SerieGrafico[];
-  intercambiosPorMes: SerieGrafico[];
-  publicacionesPorCategoria: SerieGrafico[];
-  actividadPorUbicacion: SerieGrafico[];
-  crecimientoCategorias: SerieGrafico[];
-}
+const RESUMEN_VACIO: MetricasResumen = {
+  usuarios: 0,
+  usuariosActivos: 0,
+  publicaciones: 0,
+  intercambios: 0,
+  publicacionesReportadas: 0,
+  usuariosSuspendidos: 0,
+};
 
 @Injectable({ providedIn: 'root' })
 export class MetricasAdminService {
@@ -44,18 +38,16 @@ export class MetricasAdminService {
 
   readonly cargando = this._cargando.asReadonly();
   readonly error = this._error.asReadonly();
-  readonly resumen = signal<MetricasResumen>({ usuarios: 0, usuariosActivos: 0, publicaciones: 0, intercambios: 0, publicacionesReportadas: 0, usuariosSuspendidos: 0 });
-  readonly comparativas = signal<Record<string, MetricaComparativa>>({});
+  readonly resumen = signal<MetricasResumen>({ ...RESUMEN_VACIO });
+  readonly comparativas = signal<Record<string, Comparativa>>({});
 
   cargar(): void {
     if (this.cargado) return;
     this.cargado = true;
     this._cargando.set(true);
     this.http.get<MetricasData>('data/metricas.json').subscribe({
-      next: datos => {
-        this.datos.set(datos);
-        this.resumen.set(datos.resumen);
-        this.comparativas.set(datos.comparativas);
+      next: (datos) => {
+        this.aplicar(datos);
         this._cargando.set(false);
       },
       error: () => {
@@ -84,11 +76,13 @@ export class MetricasAdminService {
   }
 
   private recargar(): void {
-    this.http.get<MetricasData>('data/metricas.json').subscribe(datos => {
-      this.datos.set(datos);
-      this.resumen.set(datos.resumen);
-      this.comparativas.set(datos.comparativas);
-    });
+    this.http.get<MetricasData>('data/metricas.json').subscribe((datos) => this.aplicar(datos));
+  }
+
+  private aplicar(datos: MetricasData): void {
+    this.datos.set(datos);
+    this.resumen.set(datos.resumen);
+    this.comparativas.set(datos.comparativas);
   }
 
   private recortar(datos: SerieGrafico[], periodo: Periodo): SerieGrafico[] {

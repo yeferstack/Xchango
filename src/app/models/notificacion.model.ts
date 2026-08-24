@@ -1,6 +1,5 @@
 /**
- * Aviso dirigido a un usuario (data/notificaciones.json). Cubre HU44, HU46,
- * HU47, HU53, HU54, HU58 y HU59.
+ * Aviso de un trueque (data/notificaciones.json).
  *
  * ESTO NO ES UN CHAT. No hay emisor, ni hilo, ni respuesta, ni conversación
  * almacenada: es un aviso de una sola vía que le dice al usuario que ocurrió
@@ -9,13 +8,9 @@
  * `alertas.json` no servía para esto: es del panel admin y no tiene usuarioId.
  */
 export type TipoNotificacion =
-  | 'solicitud'     // HU44: alguien propuso un trueque
-  | 'aceptada'      // HU46
-  | 'rechazada'     // HU47
-  | 'completada'    // HU53: trueque cerrado, ya se puede calificar
-  | 'recordatorio'  // HU58, HU59: solicitudes sin responder o publicaciones inactivas
-  | 'verificacion'  // HU15-HU17
-  | 'moderacion';   // HU73, HU74: advertencia o publicación retirada
+  | 'solicitud'   // alguien quiere truequear con una publicación tuya
+  | 'aceptada'    // el dueño aceptó tu propuesta
+  | 'rechazada';  // el dueño no aceptó tu propuesta  
 
 export interface Notificacion {
   id: string;

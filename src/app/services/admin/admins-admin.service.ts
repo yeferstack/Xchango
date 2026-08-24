@@ -22,6 +22,116 @@ export class AdminsAdminService {
   readonly cargando = this._cargando.asReadonly();
   readonly autenticado = computed(() => this._admin() !== null);
 
+  /** Solo el administrador puede crear usuarios internos y borrar cuentas. */
+  readonly esAdministrador = computed(() => this._admin()?.rol === 'admin');
+
+  /** Lista de usuarios internos (administradores y moderadores). */
+  private readonly _lista = signal<AdminUsuario[]>([]);
+  readonly lista = this._lista.asReadonly();
+  private yaCargo = false;
+
+  /** Trae los usuarios internos desde data/admins.json. */
+  cargar(): void {
+    if (this.yaCargo) return;
+    this.yaCargo = true;
+
+    const guardados = this.leerGuardados();
+    if (guardados) {
+      this._lista.set(guardados);
+      return;
+    }
+
+    this.http.get<AdminConPassword[]>('data/admins.json').subscribe({
+      next: (datos) => {
+        this._lista.set(datos);
+        this.guardarLista();
+      },
+      error: () => {
+        this.yaCargo = false;
+      },
+    });
+  }
+
+  /**
+   * Crea un moderador o administrador.
+   * Devuelve null si se creó bien, o el mensaje de error.
+   */
+  crearUsuarioInterno(datos: {
+    nombre: string;
+    email: string;
+    password: string;
+    rol: 'admin' | 'moderador';
+    estado: 'activo' | 'inactivo';
+  }): string | null {
+    if (!this.esAdministrador()) {
+      return 'Solo un administrador puede crear usuarios internos.';
+    }
+
+    const correo = datos.email.trim().toLowerCase();
+    if (this._lista().some((a) => a.email.toLowerCase() === correo)) {
+      return 'Ya existe un usuario interno con ese correo.';
+    }
+
+    const nuevo = {
+      id: this.siguienteId(),
+      nombre: datos.nombre.trim(),
+      email: correo,
+      password: datos.password,
+      rol: datos.rol,
+      estado: datos.estado,
+      avatar: 'https://i.pravatar.cc/80?u=' + encodeURIComponent(correo),
+      ultimoAcceso: new Date().toISOString(),
+    } as AdminConPassword;
+
+    this._lista.update((l) => [...l, nuevo]);
+    this.guardarLista();
+    return null;
+  }
+
+  /** Activa o desactiva un usuario interno. Solo el administrador. */
+  cambiarEstado(id: string, estado: 'activo' | 'inactivo'): boolean {
+    if (!this.esAdministrador()) return false;
+    this._lista.update((l) => l.map((a) => (a.id === id ? { ...a, estado } : a)));
+    this.guardarLista();
+    return true;
+  }
+
+  /** Elimina un usuario interno. Solo el administrador, y no a sí mismo. */
+  eliminarUsuarioInterno(id: string): string | null {
+    if (!this.esAdministrador()) return 'Solo un administrador puede eliminar cuentas.';
+    if (id === this.idActual()) return 'No puedes eliminar tu propia cuenta.';
+
+    this._lista.update((l) => l.filter((a) => a.id !== id));
+    this.guardarLista();
+    return null;
+  }
+
+  private siguienteId(): string {
+    let mayor = 0;
+    for (const a of this._lista()) {
+      const n = Number(a.id.replace('a', ''));
+      if (!Number.isNaN(n) && n > mayor) mayor = n;
+    }
+    return 'a' + (mayor + 1);
+  }
+
+  private guardarLista(): void {
+    try {
+      localStorage.setItem('xchango_admins', JSON.stringify(this._lista()));
+    } catch {
+      // Sin almacenamiento la lista dura hasta recargar.
+    }
+  }
+
+  private leerGuardados(): AdminUsuario[] | null {
+    try {
+      const texto = localStorage.getItem('xchango_admins');
+      return texto ? (JSON.parse(texto) as AdminUsuario[]) : null;
+    } catch {
+      return null;
+    }
+  }
+
   /**
    * Login contra /data/admins.json.
    * Cuando exista NestJS, esto se vuelve un POST /api/admin/login
@@ -58,7 +168,12 @@ export class AdminsAdminService {
     this._admin.set(null);
   }
 
-  /** Nombre del admin en sesión, para firmar acciones en el historial. */
+  /** ID del admin en sesión. Es lo que se guarda en el historial. */
+  idActual(): string {
+    return this._admin()?.id ?? 'a1';
+  }
+
+  /** Nombre del admin en sesión, solo para mostrar en pantalla. */
   nombreActual(): string {
     return this._admin()?.nombre ?? 'Administrador';
   }

@@ -48,55 +48,5 @@
     "mensaje": "Carlos Ospina rechazó tu propuesta por \"Bicicleta todoterreno rin 29\".",
     "leida": true,
     "fecha": "2026-08-01T11:20:00"
-  },
-  {
-    "id": "not6",
-    "usuarioId": "u1",
-    "tipo": "completada",
-    "referenciaId": "tr10",
-    "titulo": "Trueque completado",
-    "mensaje": "El trueque con Diego Salamanca quedó cerrado. Ya puedes calificar la experiencia.",
-    "leida": false,
-    "fecha": "2026-08-18T18:00:00"
-  },
-  {
-    "id": "not7",
-    "usuarioId": "u4",
-    "tipo": "recordatorio",
-    "referenciaId": "tr6",
-    "titulo": "Tienes una solicitud sin responder",
-    "mensaje": "La propuesta de Daniela Torres lleva varios días esperando tu respuesta.",
-    "leida": false,
-    "fecha": "2026-08-19T08:00:00"
-  },
-  {
-    "id": "not8",
-    "usuarioId": "u12",
-    "tipo": "recordatorio",
-    "referenciaId": "pub6",
-    "titulo": "Publicación pausada hace tiempo",
-    "mensaje": "\"Juego de sala de 3 puestos\" lleva pausada varios días. Actívala para recibir propuestas.",
-    "leida": false,
-    "fecha": "2026-08-19T08:00:00"
-  },
-  {
-    "id": "not9",
-    "usuarioId": "u7",
-    "tipo": "verificacion",
-    "referenciaId": null,
-    "titulo": "Verifica tu cuenta",
-    "mensaje": "Tu cuenta sigue sin verificar. Confirma tu correo para poder publicar.",
-    "leida": false,
-    "fecha": "2026-08-15T07:30:00"
-  },
-  {
-    "id": "not10",
-    "usuarioId": "u14",
-    "tipo": "moderacion",
-    "referenciaId": "pub13",
-    "titulo": "Publicación retirada",
-    "mensaje": "Tu publicación fue retirada por contenido inapropiado. Revisa las normas de la comunidad.",
-    "leida": true,
-    "fecha": "2026-08-02T09:45:00"
   }
 ]

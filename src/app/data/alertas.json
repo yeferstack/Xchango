@@ -12,7 +12,7 @@
     "id": "al2",
     "tipo": "moderacion",
     "titulo": "Publicaciones pendientes de revisión",
-    "mensaje": "Hay 8 publicaciones reportadas esperando revisión.",
+    "mensaje": "Hay reportes de publicaciones esperando revisión.",
     "fecha": "2026-08-18T07:30:00",
     "leida": false,
     "prioridad": "media"
@@ -21,7 +21,7 @@
     "id": "al3",
     "tipo": "usuario",
     "titulo": "Usuario con múltiples reportes",
-    "mensaje": "Andrés Molina acumula 5 reportes en los últimos 30 días.",
+    "mensaje": "Ricardo Fonseca acumula varios reportes en los últimos 30 días.",
     "fecha": "2026-08-17T20:15:00",
     "leida": false,
     "prioridad": "alta"
@@ -53,5 +53,4 @@
     "leida": true,
     "prioridad": "baja"
   }
-  
 ]

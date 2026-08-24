@@ -1,12 +1,14 @@
 import { Component, signal } from '@angular/core';
+import { IconoComponent } from '../../components/icono/icono';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { MUNICIPIOS_CASANARE } from '../../shared/municipios-casanare';
 
 @Component({
     selector: 'app-ubicacion',
     standalone: true,
-    imports: [CommonModule, FormsModule, RouterLink],
+    imports: [IconoComponent, CommonModule, FormsModule, RouterLink],
     templateUrl: './ubicacion.html',
     styleUrl: './ubicacion.css'
 })
@@ -16,27 +18,7 @@ export class UbicacionComponent {
         UNICIPIOS DE CASANARE
     ============================== */
 
-    municipios: string[] = [
-        'Yopal',
-        'Aguazul',
-        'Chámeza',
-        'Hato Corozal',
-        'La Salina',
-        'Maní',
-        'Monterrey',
-        'Nunchía',
-        'Orocué',
-        'Paz de Ariporo',
-        'Pore',
-        'Recetor',
-        'Sabanalarga',
-        'Sácama',
-        'San Luis de Palenque',
-        'Támara',
-        'Tauramena',
-        'Trinidad',
-        'Villanueva'
-    ];
+    municipios: readonly string[] = MUNICIPIOS_CASANARE;
 
 
     /* ==============================
@@ -170,7 +152,16 @@ export class UbicacionComponent {
     guardado = signal(false);
 
 
+    /** Trueque del marcador que se tocó en el mapa. null = ninguno. */
+    truequeSeleccionado: { titulo: string; distancia: number } | null = null;
+
     constructor(private location: Location) { }
+
+    /** Al tocar un marcador se muestra de qué publicación es. */
+    verMarcador(trueque: { titulo: string; distancia: number }): void {
+        this.truequeSeleccionado =
+            this.truequeSeleccionado?.titulo === trueque.titulo ? null : trueque;
+    }
 
 
     /* ==============================
