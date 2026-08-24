@@ -124,27 +124,28 @@ export class Moderacion implements OnInit {
     const m = this.modal();
     if (!m) return;
 
-    const admin = this.auth.nombreActual();
+    // El historial guarda el ID del admin, nunca su nombre.
+    const adminId = this.auth.idActual();
 
     switch (m.tipo) {
       case 'aprobar':
         this.publicacionesSrv.aprobar(m.pub.id);
-        this.registrar(m.pub, 'Aprobación', 'Reporte revisado y descartado.', admin);
+        this.registrar(m.pub, 'Aprobación', 'Reporte revisado y descartado.', adminId);
         break;
 
       case 'eliminar':
-        this.publicacionesSrv.eliminar(m.pub.id, motivo, admin);
-        this.registrar(m.pub, 'Eliminación', `Publicación eliminada: ${motivo}`, admin);
+        this.publicacionesSrv.eliminar(m.pub.id, motivo, adminId);
+        this.registrar(m.pub, 'Eliminación', `Publicación eliminada: ${motivo}`, adminId);
         break;
 
       case 'advertir':
         this.usuariosSrv.advertir(m.pub.usuarioId);
-        this.registrar(m.pub, 'Advertencia', motivo, admin);
+        this.registrar(m.pub, 'Advertencia', motivo, adminId);
         break;
 
       case 'suspender':
         this.usuariosSrv.suspender(m.pub.usuarioId);
-        this.registrar(m.pub, 'Suspensión', motivo, admin);
+        this.registrar(m.pub, 'Suspensión', motivo, adminId);
         break;
     }
 
@@ -152,13 +153,17 @@ export class Moderacion implements OnInit {
     this.detalle.set(null);
   }
 
-  private registrar(pub: PublicacionReportada, accion: string, descripcion: string, administrador: string): void {
+  private registrar(
+    pub: PublicacionReportada,
+    accion: string,
+    descripcion: string,
+    adminId: string,
+  ): void {
     this.historialSrv.registrar({
       usuarioId: pub.usuarioId,
-      usuarioNombre: pub.usuarioNombre,
+      adminId,
       accion,
       descripcion,
-      administrador,
     });
   }
 }

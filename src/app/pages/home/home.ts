@@ -1,40 +1,87 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { MUNICIPIOS_CASANARE } from '../../shared/municipios-casanare';
+import { AvisoUbicacion } from '../../models/aviso-ubicacion.model';
+import { ModalDetalleTruequeComponent } from '../../layout/modal-detalle-trueque/modal-detalle-trueque';
+import { Component, OnInit, HostListener, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { HeaderComponent } from '../../layout/header/header';
-import { SidebarComponent, CategoriaTrueque } from '../../layout/sidebar/sidebar';
-import { Trueque } from '../../models/trueque.model';
+import { Router, RouterLink } from '@angular/router';
+import { Categoria } from '../../models/categoria.model';
+import { PublicacionVista, TipoPublicacion } from '../../models/publicacion.model';
 import { TruequesService } from '../../services/trueques';
 
 type FiltroTrueque = 'todos' | 'bienes' | 'servicios' | 'digitales';
 
+/** Cada pestaña del home corresponde a un tipo real de publicación. */
+const TIPO_POR_FILTRO: Record<Exclude<FiltroTrueque, 'todos'>, TipoPublicacion> = {
+  bienes: 'bien_fisico',
+  servicios: 'servicio',
+  digitales: 'bien_digital',
+};
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, SidebarComponent],
+  imports: [ModalDetalleTruequeComponent, CommonModule, FormsModule, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class HomeComponent implements OnInit {
   busqueda = '';
-  filtroActivo: FiltroTrueque = 'todos';
+  filtroActivo: FiltroTrueque = 'bienes';
   categoriaSeleccionada = 'todos';
   mostrarSoloFavoritos = false;
-  municipioSeleccionado: string | null = null;
 
-  categorias: CategoriaTrueque[] = [
-    { id: 'todos', nombre: 'Todos', icono: 'grid' },
-    { id: 'electronicos', nombre: 'Electrónicos', icono: 'phone' },
-    { id: 'vehiculos', nombre: 'Vehículos', icono: 'car' },
-    { id: 'ropa', nombre: 'Ropa', icono: 'shirt' },
-    { id: 'hogar', nombre: 'Hogar', icono: 'home' },
-    { id: 'deportes', nombre: 'Deportes', icono: 'bike' },
-    { id: 'videojuegos', nombre: 'Videojuegos', icono: 'gamepad' },
-    { id: 'libros', nombre: 'Libros', icono: 'book' },
-    { id: 'muebles', nombre: 'Muebles', icono: 'cabinet' },
-    { id: 'juguetes', nombre: 'Juguetes', icono: 'toy' },
-  ];
+  /** Municipio elegido. Vacío = todo Casanare. */
+  municipioSeleccionado = '';
+
+  /** Municipios de Casanare, del catálogo compartido del proyecto. */
+  readonly municipios: readonly string[] = MUNICIPIOS_CASANARE;
+
+  /** Categorías para el desplegable (reemplazan la barra lateral). */
+  get listaCategorias(): Categoria[] {
+    return this.truequesService.categorias();
+  }
+
+  /** true cuando el panel de categorías está desplegado. */
+  categoriasAbiertas = false;
+
+  get textoCategoria(): string {
+    if (this.categoriaSeleccionada === 'todos') return 'Todas las categorías';
+    const categoria = this.listaCategorias.find((c) => c.id === this.categoriaSeleccionada);
+    return categoria ? categoria.nombre : 'Todas las categorías';
+  }
+
+  alternarCategorias(): void {
+    this.categoriasAbiertas = !this.categoriasAbiertas;
+  }
+
+  /** true cuando el panel de ubicación está desplegado. */
+  ubicacionAbierta = false;
+
+  /** Texto que muestra el botón de ubicación. */
+  get textoUbicacion(): string {
+    return this.municipioSeleccionado || 'Todo Casanare';
+  }
+
+  /** Aviso del municipio (data/avisos-ubicacion.json). Solo informativo. */
+  get avisoUbicacion(): AvisoUbicacion | undefined {
+    return this.truequesService.avisoDeUbicacion(this.municipioSeleccionado);
+  }
+
+  alternarUbicacion(): void {
+    this.ubicacionAbierta = !this.ubicacionAbierta;
+  }
+
+  cerrarUbicacion(): void {
+    this.ubicacionAbierta = false;
+  }
+
+  /**
+   * Catálogo único (data/categorias.json). Viene de un `computed` del servicio,
+   * así que devuelve SIEMPRE la misma referencia hasta que cambian los datos.
+   * No construir aquí un array nuevo: el sidebar lo recibe por @Input y Angular
+   * lo vería como cambiado en cada ciclo de detección de cambios.
+   */
 
   beneficios = [
     {
@@ -59,44 +106,112 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  notificaciones = 2;
+  /** Avisos sin leer del usuario en sesión. Antes era un 2 fijo. */
+  get notificaciones(): number {
+    return this.truequesService.notificacionesSinLeer();
+  }
+
+  /** Foto del usuario en sesión, para el botón del header. */
+  get avatarUrl(): string {
+    return this.truequesService.usuarioActual()?.avatar ?? 'https://i.pravatar.cc/80?img=68';
+  }
+
+  /** Nombre del usuario en sesión, para el mini menú de perfil. */
+  get nombreUsuario(): string {
+    return this.truequesService.usuarioActual()?.nombre ?? 'Invitado';
+  }
+
+  /* =========================================================
+     MINI MENÚ DE PERFIL Y NOTIFICACIONES (header)
+     ========================================================= */
+
+  readonly menuPerfilAbierto = signal(false);
+  readonly notificacionesAbiertas = signal(false);
+
+  toggleMenuPerfil(): void {
+    this.notificacionesAbiertas.set(false);
+    this.menuPerfilAbierto.update((v) => !v);
+  }
+
+  toggleNotificaciones(): void {
+    this.menuPerfilAbierto.set(false);
+    this.notificacionesAbiertas.update((v) => !v);
+  }
+
+  /** Últimos avisos para el mini panel de la campana ("solo para ver"). */
+  get ultimasNotificaciones() {
+    return this.truequesService.notificaciones().slice(0, 4);
+  }
+
+  /** Cierra los menús del header y el de ubicación al hacer clic en cualquier otro lugar. */
+  @HostListener('document:click')
+  cerrarMenusHeader(): void {
+    this.menuPerfilAbierto.set(false);
+    this.notificacionesAbiertas.set(false);
+    this.cerrarUbicacion();
+  }
+
+  cerrarSesion(): void {
+    this.truequesService.cerrarSesion();
+    this.router.navigate(['/login']);
+  }
 
   constructor(
     private truequesService: TruequesService,
     private router: Router,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.truequesService.cargar();
+  }
 
-  /** Todos los trueques, tomados del servicio compartido. */
-  get trueques(): Trueque[] {
-    return this.truequesService.trueques;
+  /** Catálogo visible, ya resuelto contra usuarios y categorías. */
+  get trueques(): PublicacionVista[] {
+    return this.truequesService.publicaciones();
+  }
+
+  /** true mientras se cargan los JSON. */
+  get cargando(): boolean {
+    return this.truequesService.cargando();
+  }
+
+  /** Mensaje de error si los JSON no se pudieron cargar. */
+  get errorCarga(): string | null {
+    return this.truequesService.error();
+  }
+
+  /** Abre WhatsApp con el dueño. XchanGo no tiene chat interno. */
+  contactarPorWhatsApp(publicacion: PublicacionVista, evento?: Event): void {
+    evento?.stopPropagation();
+    const enlace = this.truequesService.enlaceWhatsApp(publicacion);
+    if (enlace) {
+      window.open(enlace, '_blank');
+    }
   }
 
   /** Combina búsqueda + tab (Bienes/Servicios/Digitales) + categoría del sidebar + solo-favoritos */
-  get truequesFiltrados(): Trueque[] {
+  get truequesFiltrados(): PublicacionVista[] {
     let resultado = this.trueques;
 
     if (this.mostrarSoloFavoritos) {
       resultado = resultado.filter((t) => t.favorito);
     }
 
-    if (this.filtroActivo === 'bienes') {
+    // Un bien digital no tiene municipio: se entrega de una vez,
+    // por eso se muestra siempre sin importar el filtro de ubicación.
+    if (this.municipioSeleccionado) {
       resultado = resultado.filter(
-        (t) => t.tipo === 'Bienes Físicos' || t.tipo === 'Vehículos' || t.tipo === 'Electrónicos',
+        (t) => t.tipo === 'bien_digital' || t.ciudad === this.municipioSeleccionado,
       );
-    } else if (this.filtroActivo === 'servicios') {
-      resultado = resultado.filter((t) => t.tipo === 'Servicios');
-    } else if (this.filtroActivo === 'digitales') {
-      resultado = resultado.filter((t) => t.tipo === 'Digitales' || t.categoria === 'digitales');
+    }
+
+    if (this.filtroActivo !== 'todos') {
+      const tipo = TIPO_POR_FILTRO[this.filtroActivo];
+      resultado = resultado.filter((t) => t.tipo === tipo);
     }
 
     if (this.categoriaSeleccionada !== 'todos') {
-      resultado = resultado.filter((t) => t.categoria === this.categoriaSeleccionada);
-    }
-
-    if (this.municipioSeleccionado) {
-      resultado = resultado.filter((t) => t.ciudad === this.municipioSeleccionado);
+      resultado = resultado.filter((t) => t.categoriaId === this.categoriaSeleccionada);
     }
 
     if (this.busqueda.trim()) {
@@ -116,12 +231,39 @@ export class HomeComponent implements OnInit {
     return this.trueques.filter((t) => t.favorito).length;
   }
 
+  /** "Carlos Ospina" -> "Carlos O." para que quepa junto a la ciudad. */
+  nombreCorto(nombre: string): string {
+    const partes = nombre.trim().split(' ');
+    if (partes.length < 2) return nombre;
+    return partes[0] + ' ' + partes[1].charAt(0) + '.';
+  }
+
+  trackPorId(_indice: number, t: PublicacionVista): string {
+    return t.id;
+  }
+
+  /** Filtra las publicaciones por municipio y cierra el panel. */
+  seleccionarMunicipio(municipio: string): void {
+    this.municipioSeleccionado = municipio;
+    this.ubicacionAbierta = false;
+  }
+
   seleccionarFiltro(filtro: FiltroTrueque): void {
     this.filtroActivo = filtro;
+
+    // "Todos" limpia TODO: tipo, categoría, municipio, búsqueda y favoritos,
+    // para que de verdad se vean todos los trueques.
+    if (filtro === 'todos') {
+      this.categoriaSeleccionada = 'todos';
+      this.municipioSeleccionado = '';
+      this.mostrarSoloFavoritos = false;
+      this.busqueda = '';
+    }
   }
 
   seleccionarCategoria(id: string): void {
     this.categoriaSeleccionada = id;
+    this.categoriasAbiertas = false;
   }
 
   irAInicio(): void {
@@ -135,11 +277,7 @@ export class HomeComponent implements OnInit {
     this.mostrarSoloFavoritos = true;
   }
 
-  onMunicipioSeleccionado(municipio: string | null): void {
-    this.municipioSeleccionado = municipio;
-  }
-
-  alternarFavorito(trueque: Trueque, evento: Event): void {
+  alternarFavorito(trueque: PublicacionVista, evento: Event): void {
     evento.stopPropagation();
     this.truequesService.alternarFavorito(trueque);
   }
@@ -149,27 +287,20 @@ export class HomeComponent implements OnInit {
     this.filtroActivo = 'todos';
     this.categoriaSeleccionada = 'todos';
     this.mostrarSoloFavoritos = false;
-    this.municipioSeleccionado = null;
   }
 
-  claseBadge(tipo: Trueque['tipo']): string {
-    switch (tipo) {
-      case 'Electrónicos':
-        return 'badge badge--electronicos';
-      case 'Servicios':
-        return 'badge badge--servicios';
-      case 'Bienes Físicos':
-        return 'badge badge--bienes';
-      case 'Vehículos':
-        return 'badge badge--vehiculos';
-      default:
-        return 'badge';
-    }
+  /**
+   * Clase del badge por TIPO. Reutiliza SOLO clases que ya existen en tu CSS
+   * (badge--bienes, badge--servicios, badge--electronicos). Cero cambios de
+   * estilo.
+   */
+  claseBadge(tipo: TipoPublicacion): string {
+    return this.truequesService.claseBadge(tipo);
   }
 
+  /** Abre el formulario para crear una publicación. */
   publicarTrueque(): void {
-    // Punto de integración: abrir modal o navegar a la ruta de publicación
-    console.log('Publicar un trueque');
+    this.router.navigate(['/trueque']);
   }
 
   manejarErrorImagen(evento: Event): void {
@@ -177,8 +308,22 @@ export class HomeComponent implements OnInit {
     img.src = 'https://placehold.co/600x450/ece2c9/1f1b16?text=Sin+imagen';
   }
 
-  /** Navega a la página de detalle del trueque (/trueque/:id). */
-  irADetalle(trueque: Trueque): void {
-    this.router.navigate(['/trueque', trueque.id]);
+  /**
+   * Publicación abierta en el modal. null = no hay ninguno abierto.
+   * Se abre ENCIMA del home para que el fondo se vea difuminado detrás,
+   * igual que el modal de inicio de sesión.
+   */
+  detalleAbierto: string | null = null;
+
+  irADetalle(trueque: PublicacionVista): void {
+    this.detalleAbierto = trueque.id;
+
+    // Bloquea el scroll del fondo mientras el modal está abierto.
+    document.body.style.overflow = 'hidden';
+  }
+
+  cerrarDetalle(): void {
+    this.detalleAbierto = null;
+    document.body.style.overflow = '';
   }
 }

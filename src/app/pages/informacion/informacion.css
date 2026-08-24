@@ -88,7 +88,7 @@
     white-space: nowrap;
 }
 
-.navbar__link .material-icons {
+.navbar__link app-icono {
     font-size: 18px;
 }
 
@@ -174,7 +174,7 @@
     cursor: pointer;
 }
 
-.perfil__back .material-icons {
+.perfil__back app-icono {
     font-size: 18px;
 }
 
@@ -223,12 +223,12 @@
     margin-bottom: 8px;
 }
 
-.perfil__stars .material-icons {
+.perfil__stars app-icono {
     font-size: 26px;
     color: var(--star-empty);
 }
 
-.perfil__stars .material-icons.is-filled {
+.perfil__stars app-icono.is-filled {
     color: var(--star-filled);
 }
 

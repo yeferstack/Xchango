@@ -1,3 +1,26 @@
+/* Esta página usa los tokens de XchanGo definidos en src/styles.css,
+   que salen de la paleta y las fuentes del login. */
+
+:host {
+  display: block;
+  background: var(--xg-bg);
+  color: var(--xg-texto);
+  font-family: var(--xg-fuente-texto);
+  min-height: 100vh;
+}
+
+/* Los iconos heredan el trazo del texto, igual que en el login. */
+app-icono {
+  color: var(--xg-texto-tenue);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--xg-fuente-titulo);
+  color: var(--xg-texto);
+}
+
 :host {
     display: block;
 }
@@ -289,7 +312,7 @@
 
     background: var(--accent);
 
-    color: #fff;
+    color: var(--xg-card);
 }
 
 
@@ -331,7 +354,7 @@
 
     border-radius: 50%;
 
-    background: #fff;
+    background: var(--xg-card);
 
     transition: transform 0.2s ease;
 }
@@ -393,7 +416,7 @@
 
 .btn-secundario:hover {
     background: var(--accent);
-    color: #fff;
+    color: var(--xg-card);
 }
 
 

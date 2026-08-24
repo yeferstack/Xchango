@@ -14,13 +14,13 @@
 
   padding: 20px;
 
-  background: rgba(25, 23, 20, .45);
-
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-
   animation: maOverlayIn .22s ease;
 
+
+  /* Efecto vidrio: oscurece y difumina todo lo que hay detrás. */
+  background: rgba(31, 27, 22, 0.42);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
 }
 
 @keyframes maOverlayIn {

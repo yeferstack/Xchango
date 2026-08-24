@@ -138,7 +138,6 @@ export class Usuarios implements OnInit {
     const m = this.modal();
     if (!m) return;
 
-    const admin = this.auth.nombreActual();
     const acciones: Record<TipoAccion, { ejecutar: () => void; nombre: string; texto: string }> = {
       suspender: {
         ejecutar: () => this.usuariosSrv.suspender(m.usuario.id),
@@ -163,10 +162,9 @@ export class Usuarios implements OnInit {
     // Queda registrada en el historial (HU71)
     this.historialSrv.registrar({
       usuarioId: m.usuario.id,
-      usuarioNombre: m.usuario.nombre,
+      adminId: this.auth.idActual(),
       accion: accion.nombre,
       descripcion: accion.texto,
-      administrador: admin,
     });
 
     // Refresca el panel de detalle si está abierto

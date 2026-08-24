@@ -75,8 +75,7 @@
   background: var(--admin-surface);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
-  padding: 20px 22px;
-  box-shadow: var(--admin-sombra);
+  padding: 18px 20px;
 }
 
 .tabla-scroll { overflow-x: auto; margin: 0 -22px; padding: 0 22px; }
@@ -118,14 +117,14 @@
 }
 
 .avatar {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: var(--admin-accent-soft);
-  color: var(--admin-accent);
+  background: var(--admin-dark);
+  color: #f0e6db;
   display: grid;
   place-items: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -241,7 +240,8 @@
 .cajon__cuerpo { flex: 1; overflow-y: auto; padding: 22px; }
 
 .cajon__titulo {
-  font-size: 17px;
+  font-family: var(--admin-fuente-titulo);
+  font-size: 18px;
   font-weight: 700;
   color: var(--admin-text);
   margin: 0 0 4px;

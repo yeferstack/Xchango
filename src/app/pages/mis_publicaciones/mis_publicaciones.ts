@@ -1,27 +1,19 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { IconoComponent } from '../../components/icono/icono';
 import { CommonModule, Location } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TruequesService } from '../../services/trueques';
+import { PublicacionVista } from '../../models/publicacion.model';
 
-interface Publicacion {
-    id: number;
-    titulo: string;
-    categoria: string;
-    municipio: string;
-    fecha: string;
-    imagen: string;
-    estado: 'activa' | 'pausada' | 'finalizada';
-    vistas: number;
-    propuestas: number;
-}
 
 @Component({
     selector: 'app-mis-publicaciones',
     standalone: true,
-    imports: [CommonModule, RouterLink],
+    imports: [IconoComponent, CommonModule, RouterLink],
     templateUrl: './mis_publicaciones.html',
     styleUrl: './mis_publicaciones.css'
 })
-export class MisPublicacionesComponent {
+export class MisPublicacionesComponent implements OnInit {
 
     filtro = signal<'todas' | 'activa' | 'pausada' | 'finalizada'>('todas');
 
@@ -32,54 +24,15 @@ export class MisPublicacionesComponent {
         { id: 'finalizada', etiqueta: 'Finalizadas' }
     ] as const;
 
-    publicaciones = signal<Publicacion[]>([
-        {
-            id: 1,
-            titulo: 'Guitarra acústica Yamaha F310',
-            categoria: 'Instrumentos',
-            municipio: 'Yopal',
-            fecha: '12 de agosto',
-            imagen: '/publicaciones/guitarra.jpg',
-            estado: 'activa',
-            vistas: 128,
-            propuestas: 4
-        },
-        {
-            id: 2,
-            titulo: 'Bicicleta todoterreno rin 29',
-            categoria: 'Deportes',
-            municipio: 'Yopal',
-            fecha: '5 de agosto',
-            imagen: '/publicaciones/bicicleta.jpg',
-            estado: 'activa',
-            vistas: 96,
-            propuestas: 2
-        },
-        {
-            id: 3,
-            titulo: 'Monitor LG 24 pulgadas',
-            categoria: 'Tecnología',
-            municipio: 'Aguazul',
-            fecha: '28 de julio',
-            imagen: '/publicaciones/monitor.jpg',
-            estado: 'pausada',
-            vistas: 210,
-            propuestas: 7
-        },
-        {
-            id: 4,
-            titulo: 'Silla ergonómica de escritorio',
-            categoria: 'Hogar',
-            municipio: 'Yopal',
-            fecha: '14 de julio',
-            imagen: '/publicaciones/silla.jpg',
-            estado: 'finalizada',
-            vistas: 340,
-            propuestas: 11
-        }
-    ]);
+    private readonly srv = inject(TruequesService);
 
-    publicacionesFiltradas = computed(() => {
+    /** Mensaje que se muestra al tocar un botón que todavía no guarda. */
+    aviso = '';
+
+    /** Publicaciones reales del usuario en sesión. */
+    readonly publicaciones = this.srv.misPublicaciones;
+
+    publicacionesFiltradas = computed<PublicacionVista[]>(() => {
         const f = this.filtro();
         return f === 'todas'
             ? this.publicaciones()
@@ -89,6 +42,10 @@ export class MisPublicacionesComponent {
     totalActivas = computed(() => this.publicaciones().filter(p => p.estado === 'activa').length);
     totalPropuestas = computed(() => this.publicaciones().reduce((suma, p) => suma + p.propuestas, 0));
     totalVistas = computed(() => this.publicaciones().reduce((suma, p) => suma + p.vistas, 0));
+
+    ngOnInit(): void {
+        this.srv.cargar();
+    }
 
     constructor(private location: Location) { }
 
@@ -111,18 +68,20 @@ export class MisPublicacionesComponent {
         return mapa[estado] ?? estado;
     }
 
-    alternarPausa(id: number): void {
-        this.publicaciones.update(lista =>
-            lista.map(p => {
-                if (p.id !== id || p.estado === 'finalizada') return p;
-                return { ...p, estado: p.estado === 'activa' ? 'pausada' : 'activa' };
-            })
-        );
+    alternarPausa(id: string): void {
+        this.srv.alternarEstadoPublicacion(id);
     }
 
-    eliminar(id: number): void {
-        this.publicaciones.update(lista => lista.filter(p => p.id !== id));
+    eliminar(id: string): void {
+        if (confirm('¿Eliminar esta publicación? Dejará de estar visible para los demás.')) {
+            this.srv.eliminarPublicacion(id);
+        }
     }
+
+    /** Total de solicitudes de trueque recibidas por mis publicaciones. */
+    readonly propuestasRecibidas = computed(() =>
+        this.publicaciones().reduce((s, p) => s + p.propuestas, 0)
+    );
 
     volver(): void {
         this.location.back();

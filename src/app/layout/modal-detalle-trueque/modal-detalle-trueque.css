@@ -31,13 +31,31 @@ svg {
 }
 
 .detalle-page {
-  background: var(--bg);
+  position: relative;
   min-height: 100vh;
-  padding: 28px 32px 56px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  padding: 26px 24px 60px;
+
+  /* El fondo de los lados toma el color de la página; encima va una capa
+     desenfocada, como el modal del login. */
+  background: var(--xg-bg);
+  isolation: isolate;
+}
+
+/* Capa desenfocada detrás de la tarjeta */
+.detalle-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  /* Fondo limpio, como detrás del modal del login: un solo halo suave
+     desde arriba. Las manchas de colores se veían sucias. */
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(255, 253, 248, 0.9) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(201, 168, 107, 0.14) 0%, transparent 70%),
+    var(--xg-bg);
+
+  pointer-events: none;
 }
 
 .detalle-volver {
@@ -45,14 +63,17 @@ svg {
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--line);
-  background: var(--panel);
   color: var(--ink);
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
+
+  background: var(--xg-card);
+  border: 1px solid var(--xg-borde-suave);
+  border-radius: var(--xg-radio-pill);
+  box-shadow: 0 4px 14px rgba(96, 77, 51, 0.08);
 }
 
 .detalle-volver:hover {
@@ -65,29 +86,49 @@ svg {
 }
 
 .modal {
-  background: var(--panel);
-  border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: 980px;
+  position: relative;
+  z-index: 1;
+
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(31, 27, 22, 0.18);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 28px;
+
+  /* stretch: la galería crece hasta la altura de la columna de datos,
+     así no queda el hueco blanco debajo de las fotos. */
+  align-items: stretch;
+
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px;
+
+  background: var(--xg-card);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+
+  box-shadow:
+    0 40px 90px rgba(96, 77, 51, 0.16),
+    0 8px 24px rgba(96, 77, 51, 0.06);
 }
 
 .modal__gallery {
-  background: var(--bg);
   display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 14px;
+  gap: 12px;
+  align-items: stretch;
+
+  /* Alto mínimo para que la foto se vea grande aunque haya pocos datos */
+  min-height: 440px;
 }
 
 .modal__image-wrap {
   flex: 1;
-  border-radius: var(--radius-md);
+  min-width: 0;
+
+  position: relative;
+  border-radius: 20px;
   overflow: hidden;
-  min-height: 320px;
+
+  /* Sin proporción fija: ocupa todo el alto disponible de la columna */
+  background: var(--xg-crema);
 }
 
 .modal__image {
@@ -98,19 +139,48 @@ svg {
 }
 
 .modal__thumbs {
+  flex: 0 0 92px;
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .modal__thumb {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 2px solid transparent;
+  /* Las miniaturas se reparten el alto de la columna en partes iguales */
+  flex: 1;
+  width: 100%;
+  min-height: 0;
   padding: 0;
+
+  border: 2px solid transparent;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--xg-crema);
   cursor: pointer;
-  background: none;
+
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+
+.modal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal__thumb:hover {
+  transform: translateY(-2px);
+}
+
+.modal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal__thumb:hover {
+  transform: translateY(-2px);
 }
 
 .modal__thumb img {
@@ -121,14 +191,14 @@ svg {
 }
 
 .modal__thumb--active {
-  border-color: var(--accent);
+  border-color: var(--xg-acento);
 }
 
 .modal__info {
-  padding: 28px 26px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  min-width: 0;
 }
 
 .modal__meta {
@@ -169,31 +239,10 @@ svg {
   color: #e0554f;
 }
 
-.badge {
-  align-self: flex-start;
-  padding: 5px 10px;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: #fff;
-  background: var(--ink);
-}
 
-.badge--electronicos {
-  background: var(--blue);
-}
 
-.badge--servicios {
-  background: var(--violet);
-}
 
-.badge--bienes {
-  background: var(--green);
-}
 
-.badge--vehiculos {
-  background: #d97757;
-}
 
 .modal__section-title {
   margin: 0 0 8px;
@@ -265,12 +314,6 @@ svg {
   opacity: 0.9;
 }
 
-.modal__cta--right {
-  display: block;
-  margin-left: auto;
-  margin-right: 0;
-}
-
 @media (max-width: 720px) {
   .modal {
     grid-template-columns: 1fr;
@@ -282,5 +325,247 @@ svg {
 
   .modal__image-wrap {
     min-height: 220px;
+  }
+}
+/* --- Acciones de trueque (agregado por la migración) --- */
+.modal__acciones { display: flex; flex-direction: column; gap: 10px; }
+.modal__input {
+  border: 1px solid #e5dcc8; border-radius: 10px; padding: 11px 13px;
+  font: inherit; background: #fff; color: #1f1b16;
+
+  /* Empuja los botones al fondo de la columna */
+  margin-top: auto;
+  padding-top: 4px;
+}
+.modal__input:focus { outline: none; border-color: #c8a86b; }
+.modal__cta--wa { background: #1f8a4c; border-color: #1f8a4c; color: #fff; }
+.modal__aviso {
+  margin: 2px 0 0; font-size: .88rem; color: #7a6f5d;
+  background: #fffaef; border-radius: 8px; padding: 9px 11px;
+}
+
+/* ===== Flechas y contador de la galería ===== */
+.modal__flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+
+  color: var(--xg-texto);
+  cursor: pointer;
+
+  box-shadow: 0 4px 14px rgba(96, 77, 51, 0.16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition: transform 0.16s ease;
+}
+
+.modal__flecha:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.modal__flecha svg {
+  width: 18px;
+  height: 18px;
+}
+
+.modal__flecha--izq {
+  left: 12px;
+}
+
+.modal__flecha--der {
+  right: 12px;
+}
+
+.modal__contador {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 2;
+
+  padding: 5px 12px;
+
+  background: rgba(31, 27, 22, 0.62);
+  color: #fffdf8;
+  border-radius: var(--xg-radio-pill);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ===== Pantallas angostas ===== */
+@media (max-width: 900px) {
+  .modal {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .modal__gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .modal__thumbs {
+    order: 2;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .modal__thumb {
+    flex-shrink: 0;
+  }
+}
+
+/* ===== Etiqueta de tipo: mismo chip claro de las tarjetas del home ===== */
+.badge {
+  display: inline-flex;
+  align-self: flex-start;
+  width: fit-content;
+  align-items: center;
+  gap: 7px;
+
+  padding: 7px 15px;
+
+  background: var(--xg-crema);
+  border: 1px solid var(--xg-borde-suave);
+  border-radius: var(--xg-radio-pill);
+
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--xg-texto);
+}
+
+.badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--xg-acento);
+}
+
+.badge--servicios::before {
+  background: #6f9a7a;
+}
+
+.badge--electronicos::before {
+  background: #8a93b8;
+}
+
+/* =========================================================
+   MODO MODAL — encima del home, como el de iniciar sesión
+   ========================================================= */
+
+.detalle-page--modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  display: grid;
+  place-items: center;
+  padding: 28px 20px;
+  overflow-y: auto;
+
+  /* Oscurece y difumina TODO lo que hay detrás: el home queda borroso,
+     igual que en el modal de inicio de sesión. */
+  background: rgba(31, 27, 22, 0.42);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+
+  animation: modalAparece 0.22s ease;
+}
+
+/* En modo modal el fondo decorativo estorba */
+.detalle-page--modal::before {
+  display: none;
+}
+
+.detalle-page--modal .modal {
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+
+  /* Sombra fuerte para que se despegue del fondo oscuro */
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.32),
+    0 10px 30px rgba(0, 0, 0, 0.16);
+
+  animation: modalSube 0.24s ease;
+}
+
+/* Botón de cerrar redondo, como la X del modal del login */
+.modal__cerrar {
+  position: fixed;
+  top: 26px;
+  right: 30px;
+  z-index: 210;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  background: var(--xg-card);
+  border: 1px solid var(--xg-borde-suave);
+  border-radius: 50%;
+
+  color: var(--xg-texto);
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  transition: transform 0.16s ease;
+}
+
+.modal__cerrar:hover {
+  transform: scale(1.08);
+}
+
+.modal__cerrar svg {
+  width: 19px;
+  height: 19px;
+}
+
+@keyframes modalAparece {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSube {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .modal__cerrar {
+    top: 14px;
+    right: 16px;
+  }
+
+  .detalle-page--modal {
+    padding: 14px 12px;
   }
 }

@@ -1,0 +1,271 @@
+<div class="pagina">
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado">
+    <button type="button" class="boton-volver" (click)="volver()">
+      <app-icono nombre="arrow_back"></app-icono>
+    </button>
+    <div>
+      <h1>Crear Usuario (Moderador / Administrador)</h1>
+      <p>Completa la información para crear un nuevo usuario.</p>
+    </div>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contenedor-principal">
+    <!-- ===================== COLUMNA IZQUIERDA (FORMULARIO) ===================== -->
+    <div class="columna-formulario">
+      <!-- 1. Información personal -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">
+          <app-icono nombre="person"></app-icono>
+          1. Información personal
+        </h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Nombre completo <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <app-icono nombre="person"></app-icono>
+              <input
+                type="text"
+                formControlName="nombreCompleto"
+                placeholder="Ej: Juan Pérez Gómez"
+              />
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Correo electrónico <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <app-icono nombre="mail"></app-icono>
+              <input type="email" formControlName="correo" placeholder="Ej: juan@correo.com" />
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Teléfono (opcional)</label>
+            <div class="input-con-icono">
+              <app-icono nombre="call"></app-icono>
+              <input type="tel" formControlName="telefono" placeholder="Ej: 300 123 4567" />
+            </div>
+          </div>
+        </div>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Nombre de usuario <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <app-icono nombre="alternate_email"></app-icono>
+              <input type="text" formControlName="nombreUsuario" placeholder="Ej: juanperez" />
+            </div>
+            <p class="texto-ayuda">Este será el usuario para iniciar sesión.</p>
+          </div>
+
+          <div class="campo">
+            <label>Contraseña <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <app-icono nombre="lock"></app-icono>
+              <input
+                [type]="mostrarContrasena ? 'text' : 'password'"
+                formControlName="contrasena"
+                placeholder="Ingresa una contraseña segura"
+              />
+              <button type="button" class="boton-ojo" (click)="togglMostrarContrasena()">
+                <app-icono [nombre]="mostrarContrasena ? 'visibility' : 'visibility_off'"></app-icono>
+              </button>
+            </div>
+            <p class="texto-ayuda">Mínimo 8 caracteres.</p>
+          </div>
+
+          <div class="campo">
+            <label>Confirmar contraseña <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <app-icono nombre="lock"></app-icono>
+              <input
+                [type]="mostrarConfirmarContrasena ? 'text' : 'password'"
+                formControlName="confirmarContrasena"
+                placeholder="Confirma la contraseña"
+              />
+              <button type="button" class="boton-ojo" (click)="toggleMostrarConfirmarContrasena()">
+                <app-icono [nombre]="mostrarConfirmarContrasena ? 'visibility' : 'visibility_off'"></app-icono>
+              </button>
+            </div>
+            <p class="texto-ayuda texto-error" *ngIf="contrasenasNoCoinciden">
+              Las contraseñas no coinciden.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Rol del usuario -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">
+          <app-icono nombre="shield"></app-icono>
+          2. Rol del usuario
+        </h2>
+        <p class="subtitulo-seccion">Selecciona el rol que tendrá este usuario en la plataforma.</p>
+
+        <div class="grid-roles">
+          <div
+            *ngFor="let rol of roles"
+            class="tarjeta-rol"
+            [class.seleccionada]="form.get('rol')?.value === rol.id"
+            (click)="seleccionarRol(rol.id)"
+          >
+            <div class="tarjeta-rol-encabezado">
+              <div class="icono-circulo" [ngClass]="rol.colorClase">
+                <app-icono [nombre]="rol.icono"></app-icono>
+              </div>
+              <span
+                class="radio-personalizado"
+                [class.activo]="form.get('rol')?.value === rol.id"
+              ></span>
+            </div>
+
+            <h3>{{ rol.titulo }}</h3>
+            <p>{{ rol.descripcion }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Información adicional -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">
+          <app-icono nombre="description"></app-icono>
+          3. Información adicional
+        </h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Estado de la cuenta <span class="requerido">*</span></label>
+            <div class="grupo-estado">
+              <button
+                type="button"
+                class="boton-estado"
+                [class.activo-seleccionado]="form.get('estado')?.value === 'activo'"
+                (click)="seleccionarEstado('activo')"
+              >
+                <app-icono nombre="check_circle"></app-icono>
+                Activo
+              </button>
+
+              <button
+                type="button"
+                class="boton-estado"
+                [class.inactivo-seleccionado]="form.get('estado')?.value === 'inactivo'"
+                (click)="seleccionarEstado('inactivo')"
+              >
+                <app-icono nombre="cancel"></app-icono>
+                Inactivo
+              </button>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Fecha de creación</label>
+            <div class="input-con-icono">
+              <app-icono nombre="calendar_month"></app-icono>
+              <input type="text" [value]="fechaCreacionFormateada" disabled readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label>Notas (opcional)</label>
+          <textarea
+            formControlName="notas"
+            [maxlength]="maxNotas"
+            placeholder="Ej: Responsable del área de soporte, turno nocturno, etc."
+          >
+          </textarea>
+          <span class="contador-caracteres"
+            >{{ form.get('notas')?.value?.length || 0 }}/{{ maxNotas }}</span
+          >
+        </div>
+      </section>
+
+      <p class="texto-ayuda texto-error" *ngIf="mensajeError">{{ mensajeError }}</p>
+
+      <div class="fila-botones">
+        <button type="button" class="boton-cancelar" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="boton-crear">
+          <app-icono nombre="person_add"></app-icono>
+          Crear usuario
+        </button>
+      </div>
+    </div>
+
+    <!-- ===================== COLUMNA DERECHA (VISTA PREVIA) ===================== -->
+    <aside class="columna-vista-previa">
+      <div class="tarjeta-vista-previa">
+        <div class="encabezado-vista-previa">
+          <app-icono nombre="visibility"></app-icono>
+          <div>
+            <strong>Vista previa del usuario</strong>
+            <p>Así se creará el nuevo usuario en el sistema.</p>
+          </div>
+        </div>
+
+        <div class="banner-perfil">
+          <div class="avatar-circulo">
+            <app-icono nombre="person"></app-icono>
+          </div>
+        </div>
+
+        <div class="fila-datos">
+          <app-icono nombre="person"></app-icono>
+          <div>
+            <strong>Nombre completo</strong>
+            <p>{{ nombreCompletoVistaPrevia }}</p>
+          </div>
+        </div>
+
+        <div class="fila-datos">
+          <app-icono nombre="mail"></app-icono>
+          <div>
+            <strong>Correo electrónico</strong>
+            <p>{{ correoVistaPrevia }}</p>
+          </div>
+        </div>
+
+        <div class="fila-datos">
+          <app-icono nombre="alternate_email"></app-icono>
+          <div>
+            <strong>Nombre de usuario</strong>
+            <p>{{ usuarioVistaPrevia }}</p>
+          </div>
+        </div>
+
+        <div class="fila-datos fila-datos-etiqueta">
+          <app-icono nombre="shield"></app-icono>
+          <strong>Rol asignado</strong>
+          <span class="etiqueta-rol">{{ rolSeleccionado?.titulo }}</span>
+        </div>
+
+        <div class="fila-datos fila-datos-etiqueta">
+          <app-icono nombre="check_circle"></app-icono>
+          <strong>Estado</strong>
+          <span class="etiqueta-activo" *ngIf="form.get('estado')?.value === 'activo'">Activo</span>
+          <span class="etiqueta-inactivo" *ngIf="form.get('estado')?.value === 'inactivo'"
+            >Inactivo</span
+          >
+        </div>
+
+        <div class="fila-datos">
+          <app-icono nombre="event"></app-icono>
+          <strong>Fecha de creación</strong>
+          <span>{{ fechaCreacionFormateada }}</span>
+        </div>
+      </div>
+
+      <div class="caja-consejo">
+        <app-icono nombre="lightbulb"></app-icono>
+        <div>
+          <strong>Consejo</strong>
+          <p>
+            Asegúrate de asignar el rol correcto y revisar la información antes de crear el usuario.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </form>
+</div>

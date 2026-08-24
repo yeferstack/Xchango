@@ -1,3 +1,26 @@
+/* Esta página usa los tokens de XchanGo definidos en src/styles.css,
+   que salen de la paleta y las fuentes del login. */
+
+:host {
+  display: block;
+  background: var(--xg-bg);
+  color: var(--xg-texto);
+  font-family: var(--xg-fuente-texto);
+  min-height: 100vh;
+}
+
+/* Los iconos heredan el trazo del texto, igual que en el login. */
+app-icono {
+  color: var(--xg-texto-tenue);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--xg-fuente-titulo);
+  color: var(--xg-texto);
+}
+
 /* =========================================
    BASE
 ========================================= */
@@ -6,11 +29,11 @@
     display: block;
     min-height: 100vh;
 
-    background: var(--color-fondo, #F7F1E5);
+    background: var(--color-fondo, var(--xg-crema));
 
-    font-family: var(--fuente, 'Poppins', sans-serif);
+    font-family: var(--xg-fuente-texto);
 
-    color: var(--color-texto, #1E1B2E);
+    color: var(--color-texto, var(--xg-texto));
 }
 
 
@@ -90,7 +113,7 @@
 
     text-decoration: none;
 
-    color: var(--color-texto, #1E1B2E);
+    color: var(--color-texto, var(--xg-texto));
 
     font-size: 14px;
     font-weight: 500;
@@ -103,7 +126,7 @@
 }
 
 
-.nav-item .material-icons {
+.nav-item app-icono {
     font-size: 18px;
 }
 
@@ -114,7 +137,7 @@
 
 
 .nav-item.activo {
-    background: #2A2118;
+    background: var(--xg-texto);
     color: white;
 }
 
@@ -157,7 +180,7 @@
 
     border-radius: 50%;
 
-    background: #DFD5BE;
+    background: var(--xg-borde);
 
     border: 3px solid white;
 }
@@ -172,7 +195,7 @@
 
 
 .chevron-nav {
-    color: #2A2118;
+    color: var(--xg-texto);
 }
 
 
@@ -200,7 +223,7 @@
 
     padding: 40px;
 
-    background: #EBE2CD;
+    background: var(--xg-borde-suave);
 
     border-radius: 28px;
 }
@@ -240,7 +263,7 @@
     font-size: 15px;
     font-weight: 500;
 
-    color: #1E1B2E;
+    color: var(--xg-texto);
 }
 
 
@@ -249,7 +272,7 @@
 }
 
 
-.btn-volver .material-icons {
+.btn-volver app-icono {
     font-size: 19px;
 }
 
@@ -264,7 +287,7 @@
 
     border-radius: 50%;
 
-    background: #DFD5BE;
+    background: var(--xg-borde);
 
     border: 4px solid rgba(255, 255, 255, .7);
 }
@@ -302,18 +325,18 @@
 }
 
 
-.estrellas .material-icons {
+.estrellas app-icono {
     font-size: 26px;
 }
 
 
 .estrellas .llena {
-    color: #D6A756;
+    color: var(--xg-acento);
 }
 
 
 .estrellas .vacia {
-    color: #CFC4AC;
+    color: var(--xg-acento);
 }
 
 
@@ -326,7 +349,7 @@
 
     line-height: 1.55;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -358,7 +381,7 @@
 
     margin-bottom: 24px;
 
-    border-bottom: 1px solid #EFE9DC;
+    border-bottom: 1px solid var(--xg-crema);
 }
 
 
@@ -372,7 +395,7 @@
 
     letter-spacing: .9px;
 
-    color: #9B825D;
+    color: var(--xg-acento-oscuro);
 }
 
 
@@ -389,7 +412,7 @@
 
     font-size: 14px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -403,7 +426,7 @@
 
     border-radius: 999px;
 
-    background: #F5EFE3;
+    background: var(--xg-crema);
 
     font-size: 12px;
     font-weight: 600;
@@ -418,7 +441,7 @@
 
     border-radius: 50%;
 
-    background: #71905B;
+    background: var(--xg-ok);
 }
 
 
@@ -455,7 +478,7 @@
 
     font-size: 12.5px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -467,13 +490,13 @@
 
     padding: 10px 15px;
 
-    border: 1px solid #DCD3BF;
+    border: 1px solid var(--xg-borde);
 
     border-radius: 999px;
 
     background: white;
 
-    color: #2E2545;
+    color: var(--xg-texto-suave);
 
     font-family: inherit;
 
@@ -487,9 +510,9 @@
 
 
 .btn-mapa:hover {
-    background: #F5EFE3;
+    background: var(--xg-crema);
 
-    border-color: #C9BC9F;
+    border-color: var(--xg-acento);
 }
 
 
@@ -500,7 +523,7 @@
 }
 
 
-.btn-mapa .material-icons {
+.btn-mapa app-icono {
     font-size: 17px;
 }
 
@@ -517,9 +540,9 @@
     border-radius: 18px;
 
     background:
-        linear-gradient(135deg, #E8E0CE, #F2EBDD);
+        linear-gradient(135deg, var(--xg-borde-suave), var(--xg-crema));
 
-    border: 1px solid #DED4BF;
+    border: 1px solid var(--xg-borde);
 
     box-shadow:
         inset 0 0 40px rgba(90, 72, 40, .05);
@@ -654,7 +677,7 @@
 
     border-radius: 50%;
 
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 
     color: white;
 
@@ -664,7 +687,7 @@
 }
 
 
-.marcador-centro .material-icons {
+.marcador-centro app-icono {
     font-size: 25px;
 }
 
@@ -715,7 +738,7 @@
 
     border-radius: 50%;
 
-    background: #9B7B4B;
+    background: var(--xg-acento-oscuro);
 
     color: white;
 
@@ -732,11 +755,11 @@
 .marcador-trueque:hover {
     transform: translate(-50%, -50%) scale(1.15);
 
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 }
 
 
-.marcador-trueque .material-icons {
+.marcador-trueque app-icono {
     font-size: 18px;
 }
 
@@ -766,8 +789,8 @@
 }
 
 
-.etiqueta-mapa .material-icons {
-    color: #8A6A45;
+.etiqueta-mapa app-icono {
+    color: var(--xg-acento-oscuro);
 }
 
 
@@ -785,7 +808,7 @@
 .etiqueta-mapa small {
     font-size: 10px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -831,12 +854,12 @@
 
 
 .leyenda-punto.usuario {
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 }
 
 
 .leyenda-punto.trueque {
-    background: #9B7B4B;
+    background: var(--xg-acento-oscuro);
 }
 
 
@@ -862,10 +885,10 @@
 }
 
 
-.resumen-item>.material-icons {
+.resumen-item>app-icono {
     font-size: 21px;
 
-    color: #8A6A45;
+    color: var(--xg-acento-oscuro);
 }
 
 
@@ -885,7 +908,7 @@
 .resumen-item small {
     font-size: 10.5px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -893,7 +916,7 @@
     width: 1px;
     height: 30px;
 
-    background: #E7DFCE;
+    background: var(--xg-borde-suave);
 }
 
 
@@ -906,9 +929,9 @@
 
     margin-bottom: 14px;
 
-    background: #FBF7EF;
+    background: var(--xg-superficie);
 
-    border: 1px solid #E7DFCE;
+    border: 1px solid var(--xg-borde-suave);
 
     border-radius: 16px;
 }
@@ -922,7 +945,7 @@
 
     padding: 16px 20px;
 
-    background: #EBE2CD;
+    background: var(--xg-borde-suave);
 }
 
 
@@ -937,13 +960,13 @@
 
     border-radius: 12px;
 
-    background: #FBF7EF;
+    background: var(--xg-superficie);
 
-    color: #8A6A45;
+    color: var(--xg-acento-oscuro);
 }
 
 
-.icono-caja .material-icons {
+.icono-caja app-icono {
     font-size: 22px;
 }
 
@@ -971,7 +994,7 @@
 
     line-height: 1.4;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -1004,9 +1027,9 @@
 
     border-radius: 15px;
 
-    background: #E8DEC9;
+    background: var(--xg-borde-suave);
 
-    color: #8A6A45;
+    color: var(--xg-acento-oscuro);
 }
 
 
@@ -1025,7 +1048,7 @@
 }
 
 
-.mapa-mini .material-icons {
+.mapa-mini app-icono {
     position: relative;
 
     z-index: 2;
@@ -1055,7 +1078,7 @@
 .dato {
     font-size: 12.5px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -1103,13 +1126,13 @@
 
     padding: 11px 14px;
 
-    border: 1px solid #DCD3BF;
+    border: 1px solid var(--xg-borde);
 
     border-radius: 10px;
 
     background: white;
 
-    color: #1E1B2E;
+    color: var(--xg-texto);
 
     font-family: inherit;
 
@@ -1122,7 +1145,7 @@
 
 
 .entrada:focus {
-    border-color: #2E2545;
+    border-color: var(--xg-texto-suave);
 }
 
 
@@ -1134,7 +1157,7 @@ select.entrada {
 .ayuda {
     font-size: 11.5px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -1176,7 +1199,7 @@ select.entrada {
 .radio-valor .unidad {
     font-size: 13px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -1189,7 +1212,7 @@ select.entrada {
 
     border-radius: 999px;
 
-    background: #DCD3BF;
+    background: var(--xg-borde);
 
     outline: none;
 
@@ -1206,7 +1229,7 @@ select.entrada {
 
     border-radius: 50%;
 
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 
     border: 3px solid white;
 
@@ -1222,7 +1245,7 @@ select.entrada {
 
     border-radius: 50%;
 
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 
     border: 3px solid white;
 
@@ -1238,7 +1261,7 @@ select.entrada {
 
     font-size: 11.5px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -1262,7 +1285,7 @@ select.entrada {
 
     padding: 14px 20px;
 
-    border-bottom: 1px solid #F0EADC;
+    border-bottom: 1px solid var(--xg-crema);
 }
 
 
@@ -1276,7 +1299,7 @@ select.entrada {
 
     font-size: 21px;
 
-    color: #8A6A45;
+    color: var(--xg-acento-oscuro);
 }
 
 
@@ -1301,7 +1324,7 @@ select.entrada {
 .fila-texto small {
     font-size: 11.5px;
 
-    color: #8A8072;
+    color: var(--xg-texto-tenue);
 }
 
 
@@ -1314,13 +1337,13 @@ select.entrada {
 
     padding: 8px 16px;
 
-    border: 1px solid #DCD3BF;
+    border: 1px solid var(--xg-borde);
 
     border-radius: 999px;
 
     background: white;
 
-    color: #1E1B2E;
+    color: var(--xg-texto);
 
     font-family: inherit;
 
@@ -1334,9 +1357,9 @@ select.entrada {
 
 
 .btn-secundario:hover {
-    background: #F5EFE3;
+    background: var(--xg-crema);
 
-    border-color: #C9BC9F;
+    border-color: var(--xg-acento);
 }
 
 
@@ -1355,7 +1378,7 @@ select.entrada {
 
     border-radius: 999px;
 
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 
     color: white;
 
@@ -1379,7 +1402,7 @@ select.entrada {
 }
 
 
-.btn-mini .material-icons {
+.btn-mini app-icono {
     font-size: 17px;
 }
 
@@ -1395,13 +1418,13 @@ select.entrada {
 
     flex-shrink: 0;
 
-    border: 1px solid #E7DFCE;
+    border: 1px solid var(--xg-borde-suave);
 
     border-radius: 9px;
 
     background: white;
 
-    color: #8A6A45;
+    color: var(--xg-acento-oscuro);
 
     cursor: pointer;
 
@@ -1410,13 +1433,13 @@ select.entrada {
 
 
 .btn-ruta:hover {
-    background: #F3EBDD;
+    background: var(--xg-crema);
 
-    border-color: #CDBD9F;
+    border-color: var(--xg-acento);
 }
 
 
-.btn-ruta .material-icons {
+.btn-ruta app-icono {
     font-size: 18px;
 }
 
@@ -1432,13 +1455,13 @@ select.entrada {
 
     flex-shrink: 0;
 
-    border: 1px solid #E7DFCE;
+    border: 1px solid var(--xg-borde-suave);
 
     border-radius: 9px;
 
     background: white;
 
-    color: #A33F3F;
+    color: var(--xg-peligro);
 
     cursor: pointer;
 
@@ -1447,9 +1470,9 @@ select.entrada {
 
 
 .btn-icono:hover {
-    background: #FBEDED;
+    background: var(--xg-peligro-suave);
 
-    border-color: #E3B9B9;
+    border-color: var(--xg-peligro-suave);
 }
 
 
@@ -1462,7 +1485,7 @@ select.entrada {
 
     padding: 16px 20px 20px;
 
-    border-top: 1px solid #F0EADC;
+    border-top: 1px solid var(--xg-crema);
 }
 
 
@@ -1484,7 +1507,7 @@ select.entrada {
 
     border-radius: 999px;
 
-    background: #D6CDB8;
+    background: var(--xg-borde);
 
     cursor: pointer;
 
@@ -1512,7 +1535,7 @@ select.entrada {
 
 
 .switch.on {
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 }
 
 
@@ -1536,7 +1559,7 @@ select.entrada {
 
     padding-top: 20px;
 
-    border-top: 1px solid #EFE9DC;
+    border-top: 1px solid var(--xg-crema);
 }
 
 
@@ -1552,7 +1575,7 @@ select.entrada {
 
     border-radius: 999px;
 
-    background: #2E2545;
+    background: var(--xg-texto-suave);
 
     color: white;
 
@@ -1576,7 +1599,7 @@ select.entrada {
 }
 
 
-.btn-guardar .material-icons {
+.btn-guardar app-icono {
     font-size: 17px;
 }
 
@@ -1590,11 +1613,11 @@ select.entrada {
     font-size: 12px;
     font-weight: 600;
 
-    color: #5E7C50;
+    color: var(--xg-ok);
 }
 
 
-.mensaje-guardado .material-icons {
+.mensaje-guardado app-icono {
     font-size: 17px;
 }
 
@@ -1732,4 +1755,21 @@ select.entrada {
         width: 100%;
     }
 
+}
+/* Nombre del trueque cuando se toca un marcador del mapa */
+.marcador-detalle {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    margin: 0;
+    background: var(--xg-card);
+    border: 1px solid var(--xg-borde);
+    border-radius: var(--xg-radio-pill);
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--xg-texto);
+    box-shadow: var(--xg-sombra-suave);
+    white-space: nowrap;
 }

@@ -16,32 +16,32 @@
     <nav class="nav-pill">
 
         <a routerLink="/home" class="nav-item activo">
-            <span class="material-icons">home</span>
+            <app-icono nombre="home"></app-icono>
             Inicio
         </a>
 
         <a routerLink="/explorar" class="nav-item">
-            <span class="material-icons">search</span>
+            <app-icono nombre="search"></app-icono>
             Explorar
         </a>
 
         <a routerLink="/mis-trueques" class="nav-item">
-            <span class="material-icons">swap_horiz</span>
+            <app-icono nombre="swap_horiz"></app-icono>
             Mis trueques
         </a>
 
         <a routerLink="/servicios" class="nav-item">
-            <span class="material-icons">apps</span>
+            <app-icono nombre="apps"></app-icono>
             Servicios
         </a>
 
         <a routerLink="/mensajes" class="nav-item">
-            <span class="material-icons">chat_bubble_outline</span>
+            <app-icono nombre="chat_bubble_outline"></app-icono>
             Mensajes
         </a>
 
         <a routerLink="/favoritos" class="nav-item">
-            <span class="material-icons">favorite_border</span>
+            <app-icono nombre="favorite_border"></app-icono>
             Favoritos
         </a>
 
@@ -50,19 +50,15 @@
 
     <div class="nav-derecha">
 
-        <button class="btn-campana" type="button">
-            <span class="material-icons">
-                notifications_none
-            </span>
+        <button class="btn-campana" type="button" routerLink="/notificaciones" title="Ver notificaciones">
+            <app-icono nombre="notifications_none"></app-icono>
         </button>
 
         <div class="avatar-nav">
             <img src="/Logo-xchango/avatar-miguel.jpeg" alt="Miguel Perez" />
         </div>
 
-        <span class="material-icons chevron-nav">
-            expand_more
-        </span>
+        <app-icono nombre="expand_more"></app-icono>
 
     </div>
 
@@ -85,9 +81,7 @@
         <aside class="columna-identidad">
 
             <button class="btn-volver" type="button" (click)="volver()">
-                <span class="material-icons">
-                    arrow_back
-                </span>
+                <app-icono nombre="arrow_back"></app-icono>
 
                 Volver
             </button>
@@ -112,25 +106,15 @@
 
             <div class="estrellas">
 
-                <span class="material-icons llena">
-                    star
-                </span>
+                <app-icono nombre="star"></app-icono>
 
-                <span class="material-icons llena">
-                    star
-                </span>
+                <app-icono nombre="star"></app-icono>
 
-                <span class="material-icons llena">
-                    star
-                </span>
+                <app-icono nombre="star"></app-icono>
 
-                <span class="material-icons llena">
-                    star
-                </span>
+                <app-icono nombre="star"></app-icono>
 
-                <span class="material-icons vacia">
-                    star
-                </span>
+                <app-icono nombre="star"></app-icono>
 
             </div>
 
@@ -212,9 +196,7 @@
                     <button class="btn-mapa" type="button" (click)="usarUbicacionActual()"
                         [disabled]="obteniendoUbicacion()">
 
-                        <span class="material-icons">
-                            my_location
-                        </span>
+                        <app-icono nombre="my_location"></app-icono>
 
                         {{
                         obteniendoUbicacion()
@@ -223,6 +205,11 @@
                         }}
 
                     </button>
+
+                    <!-- Nombre del trueque del marcador que se tocó -->
+                    <p class="marcador-detalle" *ngIf="truequeSeleccionado">
+                        {{ truequeSeleccionado.titulo }} · a {{ truequeSeleccionado.distancia }} km
+                    </p>
 
                 </div>
 
@@ -254,9 +241,7 @@
                         <div class="pulso"></div>
 
                         <div class="marcador-centro">
-                            <span class="material-icons">
-                                person_pin_circle
-                            </span>
+                            <app-icono nombre="person_pin_circle"></app-icono>
                         </div>
 
                     </div>
@@ -265,11 +250,9 @@
                     <!-- Trueques -->
 
                     <button class="marcador-trueque" type="button" *ngFor="let trueque of truequesCercanos()"
-                        [style.left.%]="trueque.x" [style.top.%]="trueque.y" [attr.aria-label]="trueque.titulo">
+                        [style.left.%]="trueque.x" [style.top.%]="trueque.y" [attr.aria-label]="trueque.titulo" (click)="verMarcador(trueque)">
 
-                        <span class="material-icons">
-                            swap_horiz
-                        </span>
+                        <app-icono nombre="swap_horiz"></app-icono>
 
                     </button>
 
@@ -278,9 +261,7 @@
 
                     <div class="etiqueta-mapa">
 
-                        <span class="material-icons">
-                            location_on
-                        </span>
+                        <app-icono nombre="location_on"></app-icono>
 
                         <div>
 
@@ -323,9 +304,7 @@
 
                     <div class="resumen-item">
 
-                        <span class="material-icons">
-                            swap_horiz
-                        </span>
+                        <app-icono nombre="swap_horiz"></app-icono>
 
                         <div>
 
@@ -348,9 +327,7 @@
 
                     <div class="resumen-item">
 
-                        <span class="material-icons">
-                            explore
-                        </span>
+                        <app-icono nombre="explore"></app-icono>
 
                         <div>
 
@@ -381,9 +358,7 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
-                        <span class="material-icons">
-                            location_on
-                        </span>
+                        <app-icono nombre="location_on"></app-icono>
                     </span>
 
                     <span class="acordeon-texto">
@@ -408,9 +383,7 @@
 
                     <div class="mapa-mini">
 
-                        <span class="material-icons">
-                            location_on
-                        </span>
+                        <app-icono nombre="location_on"></app-icono>
 
                     </div>
 
@@ -522,9 +495,7 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
-                        <span class="material-icons">
-                            my_location
-                        </span>
+                        <app-icono nombre="my_location"></app-icono>
                     </span>
 
                     <span class="acordeon-texto">
@@ -589,9 +560,7 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
-                        <span class="material-icons">
-                            handshake
-                        </span>
+                        <app-icono nombre="handshake"></app-icono>
                     </span>
 
                     <span class="acordeon-texto">
@@ -614,9 +583,7 @@
 
                     <li class="fila" *ngFor="let p of puntos()">
 
-                        <span class="material-icons fila-icono">
-                            pin_drop
-                        </span>
+                        <app-icono nombre="pin_drop"></app-icono>
 
 
                         <span class="fila-texto">
@@ -635,18 +602,14 @@
                         <button class="btn-ruta" type="button" (click)="abrirGoogleMaps(p.nombre)"
                             title="Abrir en Google Maps">
 
-                            <span class="material-icons">
-                                directions
-                            </span>
+                            <app-icono nombre="directions"></app-icono>
 
                         </button>
 
 
                         <button class="btn-icono" type="button" (click)="eliminarPunto(p.id)" title="Eliminar punto">
 
-                            <span class="material-icons">
-                                delete_outline
-                            </span>
+                            <app-icono nombre="delete_outline"></app-icono>
 
                         </button>
 
@@ -675,9 +638,7 @@
 
                     <button class="btn-mini" type="button" (click)="agregarPunto()">
 
-                        <span class="material-icons">
-                            add
-                        </span>
+                        <app-icono nombre="add"></app-icono>
 
                         Agregar
 
@@ -698,9 +659,7 @@
                 <div class="grupo-cabecera">
 
                     <span class="icono-caja">
-                        <span class="material-icons">
-                            tune
-                        </span>
+                        <app-icono nombre="tune"></app-icono>
                     </span>
 
                     <span class="acordeon-texto">
@@ -758,9 +717,7 @@
 
                 <div class="mensaje-guardado" *ngIf="guardado()">
 
-                    <span class="material-icons">
-                        check_circle
-                    </span>
+                    <app-icono nombre="check_circle"></app-icono>
 
                     Cambios guardados
 
@@ -769,9 +726,7 @@
 
                 <button class="btn-guardar" type="button" (click)="guardarCambios()">
 
-                    <span class="material-icons">
-                        save
-                    </span>
+                    <app-icono nombre="save"></app-icono>
 
                     Guardar cambios
 

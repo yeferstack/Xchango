@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { IconoComponent } from '../../components/icono/icono';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export interface CategoriaTrueque {
@@ -10,11 +11,12 @@ export interface CategoriaTrueque {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [IconoComponent, CommonModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
 export class SidebarComponent {
+
   /** Lista de categorías a mostrar; la define el componente padre (home) */
   @Input() categorias: CategoriaTrueque[] = [];
 

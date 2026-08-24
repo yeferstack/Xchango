@@ -1,12 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostListener,
   OnDestroy,
   OnInit,
   computed,
   signal
 } from '@angular/core';
 
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { MetodoAcceso, ModoAuth, MetodoAuth } from './metodo-acceso/metodo-acceso';
 
 export interface Producto {
@@ -20,7 +25,7 @@ export interface Producto {
   templateUrl: './login.html',
   styleUrl: './login.css',
   standalone: true,
-  imports: [MetodoAcceso],
+  imports: [MetodoAcceso, RouterLink, FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login implements OnInit, OnDestroy {
@@ -173,6 +178,37 @@ export class Login implements OnInit, OnDestroy {
 
 
   /* =========================================================
+     BUSCADOR Y REDES SOCIALES (sin sesión)
+     ========================================================= */
+
+  terminoBusqueda = '';
+
+  readonly redesSocialesAbiertas = signal(false);
+
+  toggleRedesSociales(): void {
+    this.redesSocialesAbiertas.update((v) => !v);
+  }
+
+  @HostListener('document:click')
+  cerrarRedesSociales(): void {
+    if (this.redesSocialesAbiertas()) {
+      this.redesSocialesAbiertas.set(false);
+    }
+  }
+
+  /** "Explora" deja navegar por el home sin cuenta, solo para ver. */
+  explorarComoInvitado(): void {
+    this.router.navigate(['/home']);
+  }
+
+  /** El buscador del hero también funciona sin haber iniciado sesión. */
+  buscarComoInvitado(): void {
+    const termino = this.terminoBusqueda.trim();
+    this.router.navigate(['/home'], termino ? { queryParams: { buscar: termino } } : {});
+  }
+
+
+  /* =========================================================
      PRODUCTOS VISIBLES
      ========================================================= */
 
@@ -291,13 +327,17 @@ export class Login implements OnInit, OnDestroy {
 
   }
 
+  private readonly router = inject(Router);
+
   onMetodoSeleccionado(metodo: MetodoAuth): void {
+    this.cerrarModal();
 
-    // Punto de enganche para la autenticación real (Firebase,
-    // Google OAuth, Apple OAuth, correo). Por ahora solo se deja
-    // preparado el flujo visual.
-    console.log('Método de autenticación seleccionado:', metodo, this.modoAuth());
-
+    // Google y Apple no están implementados, todo se resuelve por correo.
+    if (this.modoAuth() === 'registro') {
+      this.router.navigate(['/formulario']);
+    } else {
+      this.router.navigate(['/acceso']);
+    }
   }
 
 

@@ -1,5 +1,5 @@
-<div class="detalle-page">
-  <button class="detalle-volver" type="button" (click)="volver()">
+<div class="detalle-page" [class.detalle-page--modal]="esModal" (click)="cerrarPorFondo($event)">
+  <button class="detalle-volver" type="button" *ngIf="!esModal" (click)="volver()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <line x1="19" y1="12" x2="5" y2="12"></line>
       <polyline points="12 19 5 12 12 5"></polyline>
@@ -7,16 +7,16 @@
     Volver
   </button>
 
+  <button class="modal__cerrar" type="button" *ngIf="esModal" (click)="volver()" aria-label="Cerrar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 6 12 12"></path><path d="m18 6-12 12"></path>
+    </svg>
+  </button>
+
   <div class="modal" *ngIf="trueque as t; else noEncontrado">
     <div class="modal__gallery">
-      <div class="modal__image-wrap">
-        <img
-          [src]="imagenes[imagenActivaIndex]"
-          [alt]="t.titulo"
-          class="modal__image"
-          (error)="manejarErrorImagen($event)"
-        />
-      </div>
+      <!-- Miniaturas en columna, al lado de la foto grande -->
       <div class="modal__thumbs" *ngIf="imagenes.length > 1">
         <button
           type="button"
@@ -24,9 +24,50 @@
           class="modal__thumb"
           [class.modal__thumb--active]="i === imagenActivaIndex"
           (click)="seleccionarImagen(i)"
+          [attr.aria-label]="'Ver foto ' + (i + 1)"
         >
           <img [src]="img" alt="" (error)="manejarErrorImagen($event)" />
         </button>
+      </div>
+
+      <div class="modal__image-wrap">
+        <img
+          [src]="imagenes[imagenActivaIndex]"
+          [alt]="t.titulo"
+          class="modal__image"
+          (error)="manejarErrorImagen($event)"
+        />
+
+        <!-- Flechas para pasar de foto -->
+        <button
+          class="modal__flecha modal__flecha--izq"
+          type="button"
+          *ngIf="imagenes.length > 1"
+          (click)="fotoAnterior()"
+          aria-label="Foto anterior"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 5-7 7 7 7"></path>
+          </svg>
+        </button>
+
+        <button
+          class="modal__flecha modal__flecha--der"
+          type="button"
+          *ngIf="imagenes.length > 1"
+          (click)="fotoSiguiente()"
+          aria-label="Foto siguiente"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 5 7 7-7 7"></path>
+          </svg>
+        </button>
+
+        <span class="modal__contador" *ngIf="imagenes.length > 1">
+          {{ imagenActivaIndex + 1 }} / {{ imagenes.length }}
+        </span>
       </div>
     </div>
 
@@ -56,7 +97,7 @@
           </svg>
         </button>
       </div>
-      <span [class]="claseBadge(t.tipo)">{{ t.tipo }}</span>
+      <span [class]="claseBadge(t.tipo)">{{ t.tipoEtiqueta }}</span>
 
       <div class="modal__section">
         <h3 class="modal__section-title">Características del bien</h3>
@@ -70,7 +111,6 @@
       <div class="modal__section">
         <h3 class="modal__section-title">Descripción</h3>
         <p class="modal__desc">{{ descripcion }}</p>
-        <button class="modal__cta modal__cta--right" type="button">Ver mas ...</button>
       </div>
 
       <div class="modal__section">
@@ -88,7 +128,27 @@
         </div>
       </div>
 
-      <button class="modal__cta" type="button">Enviar solicitud</button>
+      <div class="modal__acciones">
+        <ng-container *ngIf="!esMia">
+          <input
+            class="modal__input"
+            type="text"
+            placeholder="¿Qué ofreces a cambio?"
+            [(ngModel)]="ofrezco"
+          />
+          <button class="modal__cta" type="button" (click)="solicitarTrueque()">
+            Enviar solicitud de trueque
+          </button>
+          <button class="modal__cta modal__cta--wa" type="button" (click)="contactarPorWhatsApp()">
+            Negociar por WhatsApp
+          </button>
+        </ng-container>
+        <button *ngIf="esMia" class="modal__cta" type="button" (click)="irAEditar()">
+          Editar mi publicación
+        </button>
+        <p class="modal__aviso" *ngIf="mensaje">{{ mensaje }}</p>
+      </div>
+
     </div>
   </div>
 

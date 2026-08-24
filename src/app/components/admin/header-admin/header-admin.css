@@ -1,7 +1,7 @@
-.header { display: flex; align-items: center; gap: 15px; min-height: 78px; padding: 0 30px; border-bottom: 1px solid #eadfd3; background: #fffdfb; }
-.header h1 { margin: 0; color: #2a211b; font-size: 22px; }
-.header p { margin: 4px 0 0; color: #927e6e; font-size: 12px; }
-.header__menu, .header__salir { display: grid; place-items: center; border: 0; color: #6d5847; background: transparent; cursor: pointer; }
+.header { display: flex; align-items: center; gap: 15px; min-height: 68px; padding: 0 28px; border-bottom: 1px solid var(--admin-border, #eadfd3); background: var(--admin-surface, #fffdfb); }
+.header h1 { margin: 0; color: var(--admin-text, #2a211b); font-family: var(--admin-fuente-titulo, 'Baloo 2', sans-serif); font-weight: 700; font-size: 20px; }
+.header p { margin: 2px 0 0; color: var(--admin-text-2, #927e6e); font-size: 12px; }
+.header__menu, .header__salir { display: grid; place-items: center; border: 0; color: var(--admin-text-2, #6d5847); background: transparent; cursor: pointer; padding: 6px; border-radius: var(--admin-radius-chico, 6px); }
+.header__salir:hover, .header__menu:hover { background: var(--admin-surface-2, #f5ede2); }
 .header__menu { display: none; }
-.header__salir { margin-left: auto; }
 @media (max-width: 760px) { .header { padding: 0 18px; } .header__menu { display: grid; } }
