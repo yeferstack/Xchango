@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 export class InformacionComponent {
     // Datos generales del perfil (mismo header lateral que en /perfil)
     nombreUsuario: string = 'Miguel Perez';
-    avatarUrl: string = 'assets/avatar-miguel.jpeg';
+    avatarUrl: string = 'assets/avatar-miguel.png';
     logoUrl: string = 'assets/logo-xchango.jpeg';
 
     calificacion: number = 4;
