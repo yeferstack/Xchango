@@ -10,7 +10,6 @@ interface RolUsuario {
   icono: string;
   colorClase: string;
 }
-
 @Component({
   selector: 'app-formulario-crear-usuario-admin',
   standalone: true,
