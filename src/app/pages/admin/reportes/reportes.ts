@@ -77,12 +77,12 @@ export class Reportes implements OnInit, OnDestroy {
     this.metricasSrv.actividadPorUbicacion()
   );
 
-  /** HU76 — ranking de usuarios más activos. */
+  // HU76 — ranking de usuarios más activos.
   readonly ranking = computed(() =>
     this.usuariosSrv.ranking('actividad', 5)
   );
 
-  /** HU68 — historial filtrado por rango de fechas. */
+  // HU68 — historial filtrado por rango de fechas.
   readonly historial = computed(() =>
     this.historialSrv.entreFechas(
       this.desde() || undefined,
@@ -137,10 +137,8 @@ export class Reportes implements OnInit, OnDestroy {
     return this.comparativas()[clave]?.porcentaje ?? null;
   }
 
-  /**
-   * HU67 — exportación CSV.
-   * Excel puede abrir el archivo directamente.
-   */
+  // HU67 — exportación CSV.
+  // Excel puede abrir el archivo directamente.
   exportarCSV(): void {
 
     const filas = [
@@ -179,7 +177,7 @@ export class Reportes implements OnInit, OnDestroy {
     this.avisar('CSV');
   }
 
-  /** Abre el diálogo de impresión para guardar como PDF. */
+  // Abre el diálogo de impresión para guardar como PDF.
   exportarPDF(): void {
     this.avisar('PDF');
 

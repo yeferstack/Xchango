@@ -1,0 +1,19 @@
+@if (apilado) {
+  <span class="logo logo--apilado logo--{{ tamano }}">
+    <img src="Logo-xchango/logo.png" alt="XchanGo" class="logo__completo" />
+  </span>
+} @else if (enlace) {
+  <a class="logo logo--{{ tamano }}" [routerLink]="enlace" aria-label="XchanGo">
+    <img src="Logo-xchango/chango.png" alt="" class="logo__chango" />
+    @if (!soloChango) {
+      <img src="Logo-xchango/letras-chango.png" alt="XchanGo" class="logo__letras" />
+    }
+  </a>
+} @else {
+  <span class="logo logo--{{ tamano }}">
+    <img src="Logo-xchango/chango.png" alt="" class="logo__chango" />
+    @if (!soloChango) {
+      <img src="Logo-xchango/letras-chango.png" alt="XchanGo" class="logo__letras" />
+    }
+  </span>
+}

@@ -20,18 +20,14 @@ export type MetodoAuth = 'google' | 'apple' | 'correo';
 })
 export class MetodoAcceso {
 
-  /* =========================================================
-     ENTRADAS
-     ========================================================= */
+  // entradas
 
   @Input() abierto = false;
 
   @Input() modo: ModoAuth = 'login';
 
 
-  /* =========================================================
-     SALIDAS
-     ========================================================= */
+  // salidas
 
   @Output() cerrar = new EventEmitter<void>();
 
@@ -40,9 +36,7 @@ export class MetodoAcceso {
   @Output() seleccionarMetodo = new EventEmitter<MetodoAuth>();
 
 
-  /* =========================================================
-     TEXTOS SEGÚN MODO
-     ========================================================= */
+  // textos según modo
 
   get titulo(): string {
 
@@ -77,9 +71,7 @@ export class MetodoAcceso {
   }
 
 
-  /* =========================================================
-     ACCIONES
-     ========================================================= */
+  // acciones
 
   cerrarModal(): void {
 

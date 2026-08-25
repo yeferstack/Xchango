@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Formulario_crear_truequesComponent } from './formulario-crear-trueques';
-
-describe('Formulario_crear_truequesComponent', () => {
-  let component: Formulario_crear_truequesComponent;
-  let fixture: ComponentFixture<Formulario_crear_truequesComponent>;
+import { FormularioCrearUsuarioComponent } from '../formulario-crear-usuario/formulario-crear-usuario';
+describe('FormularioCrearUsuarioComponent', () => {
+  let component: FormularioCrearUsuarioComponent;
+  let fixture: ComponentFixture<FormularioCrearUsuarioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Formulario_crear_truequesComponent],
+      imports: [FormularioCrearUsuarioComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Formulario_crear_truequesComponent);
+    fixture = TestBed.createComponent(FormularioCrearUsuarioComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "not1",
+    "usuarioId": "u12",
+    "tipo": "solicitud",
+    "referenciaId": "tr7",
+    "titulo": "Nueva solicitud de trueque",
+    "mensaje": "Julián Ospina quiere truequear por tu publicación \"Juego de sala de 3 puestos\".",
+    "leida": false,
+    "fecha": "2026-08-18T10:12:00"
+  },
+  {
+    "id": "not2",
+    "usuarioId": "u2",
+    "tipo": "solicitud",
+    "referenciaId": "tr8",
+    "titulo": "Nueva solicitud de trueque",
+    "mensaje": "Luisa Cárdenas quiere truequear por tu publicación \"Clases de inglés personalizadas\".",
+    "leida": false,
+    "fecha": "2026-08-19T09:05:00"
+  },
+  {
+    "id": "not3",
+    "usuarioId": "u5",
+    "tipo": "solicitud",
+    "referenciaId": "tr9",
+    "titulo": "Nueva solicitud de trueque",
+    "mensaje": "Óscar Peña quiere truequear por tu publicación \"Reparación de computadores\".",
+    "leida": false,
+    "fecha": "2026-08-19T14:40:00"
+  },
+  {
+    "id": "not4",
+    "usuarioId": "u2",
+    "tipo": "aceptada",
+    "referenciaId": "tr6",
+    "titulo": "Tu solicitud fue aceptada",
+    "mensaje": "Valentina Ríos aceptó tu propuesta. Continúa la negociación por WhatsApp.",
+    "leida": true,
+    "fecha": "2026-08-14T16:30:00"
+  },
+  {
+    "id": "not5",
+    "usuarioId": "u12",
+    "tipo": "rechazada",
+    "referenciaId": "tr2",
+    "titulo": "Tu solicitud fue rechazada",
+    "mensaje": "Carlos Ospina rechazó tu propuesta por \"Bicicleta todoterreno rin 29\".",
+    "leida": true,
+    "fecha": "2026-08-01T11:20:00"
+  }
+]

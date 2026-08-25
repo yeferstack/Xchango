@@ -1,4 +1,46 @@
-<div class="page-wrapper">
+<div class="ac-wrap" *ngIf="paso() === 'correo'">
+
+  <a routerLink="/login" class="ac__marca">
+    <img src="Logo-xchango/chango.png" alt="Logo XchanGo" class="ac__marca-chango" />
+    <img src="Logo-xchango/letras-chango.png" alt="XchanGo" class="ac__marca-wordmark" />
+  </a>
+
+  <form class="ac__card" (ngSubmit)="continuarConCorreo()">
+
+    <h1 class="ac__title">Únete a XchanGo</h1>
+    <p class="ac__sub">Primero, dinos tu correo. Te enviaremos un código para verificarlo.</p>
+
+    <label class="ac__label" for="correo-inicial">Correo</label>
+    <input
+      id="correo-inicial"
+      name="correoInicial"
+      type="email"
+      class="ac__input"
+      placeholder="tucorreo@mail.com"
+      [(ngModel)]="modelo.email"
+      required
+    />
+
+    <p class="ac__error" *ngIf="errorRegistro">{{ errorRegistro }}</p>
+
+    <button type="submit" class="ac__btn">Continuar</button>
+
+    <p class="ac__foot">
+      ¿Ya tienes cuenta? <a routerLink="/acceso">Inicia sesión</a>
+    </p>
+
+  </form>
+
+</div>
+
+<app-verificar-codigo
+  *ngIf="paso() === 'verificar'"
+  [correo]="modelo.email"
+  (verificado)="onCodigoVerificado()"
+  (volver)="paso.set('correo')"
+></app-verificar-codigo>
+
+<div class="page-wrapper" *ngIf="paso() === 'formulario'">
   <div class="form-card">
     <header class="form-header">
       <div class="header-icon-wrap">
@@ -21,7 +63,7 @@
         </div>
       </div>
       <h1>Únete a la red de intercambio <span class="accent-text">XchanGo</span></h1>
-      <p class="subtitle">Crea tu cuenta y comienza a intercambiar.</p>
+      <p class="subtitle">Ya verificamos tu correo. Completa tus datos para terminar.</p>
     </header>
 
     <form class="registro-form" (ngSubmit)="onSubmit()" #registroForm="ngForm">
@@ -318,9 +360,11 @@
                 type="email"
                 placeholder="ejemplo@correo.com"
                 [(ngModel)]="modelo.email"
-                required
+                readonly
+                title="Ya verificamos este correo en el paso anterior"
               />
             </div>
+            <p class="form-hint">Este correo ya quedó verificado.</p>
           </div>
 
           <div class="form-group">
@@ -448,6 +492,7 @@
         </div>
       </section>
 
+      <p class="error-registro" *ngIf="errorRegistro" style="color:#a8453b;margin:0 0 10px;">{{ errorRegistro }}</p>
       <button type="submit" class="btn-primary">
         <svg
           viewBox="0 0 24 24"
@@ -477,7 +522,7 @@
           <path d="M8 10V7a4 4 0 0 1 8 0v3" />
         </svg>
         Al crear una cuenta, aceptas nuestros
-        <a href="#">Términos y Condiciones</a> y nuestra <a href="#">Política de Privacidad</a>.
+        <a routerLink="/legal-info">Términos y Condiciones</a> y nuestra <a routerLink="/legal-info">Política de Privacidad</a>.
       </p>
     </form>
   </div>

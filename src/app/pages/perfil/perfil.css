@@ -1,29 +1,47 @@
+/* Esta página usa los tokens de XchanGo definidos en src/styles.css,
+   que salen de la paleta y las fuentes del login. */
+
 :host {
-    --bg-app: #F4EEE1;
-    --bg-nav: #FBF8F0;
-    --bg-card: #EFE7D6;
-    --bg-option: #E9E0CC;
-    --bg-option-hover: #E1D5B8;
+  display: block;
+  background: var(--xg-bg);
+  color: var(--xg-texto);
+  font-family: var(--xg-fuente-texto);
+  min-height: 100vh;
+}
 
-    --accent: #C9AD7E;
-    --accent-dark: #B4966A;
+/* Los iconos heredan el trazo del texto, igual que en el login. */
+app-icono {
+  color: var(--xg-texto-tenue);
+}
 
-    --text-primary: #1E1B16;
-    --text-secondary: #847A68;
+h1,
+h2,
+h3 {
+  font-family: var(--xg-fuente-titulo);
+  color: var(--xg-texto);
+}
 
-    --border-soft: #DED1B3;
+:host {
+    --bg-app: var(--xg-bg);
+    --bg-nav: var(--xg-superficie);
+    --bg-card: var(--xg-crema);
+    --bg-option: var(--xg-crema-fuerte);
+    --bg-option-hover: var(--xg-borde);
 
-    --star-filled: #C9AD7E;
-    --star-empty: #D8CDB6;
+    --accent: var(--xg-acento);
+    --accent-dark: var(--xg-acento-oscuro);
+
+    --text-primary: var(--xg-texto);
+    --text-secondary: var(--xg-texto-tenue);
+
+    --border-soft: var(--xg-borde);
+
+    --star-filled: var(--xg-acento);
+    --star-empty: var(--xg-borde);
 
     display: block;
 
-    font-family:
-        'Poppins',
-        'Inter',
-        system-ui,
-        -apple-system,
-        sans-serif;
+    font-family: var(--xg-fuente-texto);
 
     background: var(--bg-app);
 
@@ -31,40 +49,12 @@
 }
 
 
-/* ==============================
-   GENERAL
-============================== */
-
 * {
     box-sizing: border-box;
 }
 
 
-/* ==============================
-   ICONOS
-============================== */
-
-.icon {
-    display: block;
-
-    width: 24px;
-    height: 24px;
-
-    fill: none;
-
-    stroke: currentColor;
-    stroke-width: 2;
-
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    flex-shrink: 0;
-}
-
-
-/* ==============================
-   PAGINA
-============================== */
+/* pagina */
 
 .perfil-page {
     min-height: 100vh;
@@ -75,26 +65,18 @@
 }
 
 
-/* ==============================
-   NAVBAR
-============================== */
-
 .navbar {
+    position: relative;
+    z-index: 100;
+
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     gap: 24px;
-
+    min-height: 64px;
     margin-bottom: 32px;
 }
 
-
-/* ==============================
-   LOGO XCHANGO
-============================== */
 
 .navbar__brand {
     display: flex;
@@ -103,14 +85,14 @@
 
     justify-content: flex-start;
 
-    gap: 5px;
+    gap: 8px;
 
     width: fit-content;
 
     height: 52px;
 
-    margin-top: 20px;
-    margin-left: 10px;
+    margin-top: 0;
+    margin-left: -12px;
 
     padding: 0;
 
@@ -120,88 +102,46 @@
 }
 
 
-/* CHANGO */
-
-.navbar__chango {
-    width: 50px;
-    height: 50px;
-
-    object-fit: contain;
-    object-position: center;
-
-    display: block;
-
-    flex-shrink: 0;
-
-    transform: scale(1.05);
-
-    transform-origin: center;
-}
-
-
-/* LETRAS */
-
-.navbar__letras {
-    width: 90px;
-    height: auto;
-
-    object-fit: contain;
-    object-position: center;
-
-    display: block;
-
-    flex-shrink: 0;
-}
-
-
-/* ==============================
-   NAVBAR CENTRO
-============================== */
+/* navbar centro */
 
 .navbar__pill {
     display: flex;
-
     align-items: center;
+    gap: 5px;
 
-    gap: 4px;
+    padding: 5px;
 
-    background: var(--bg-nav);
+    /* Mismo vidrio de la navbar del login */
+    background: rgba(255, 255, 255, 0.54);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
 
-    border-radius: 999px;
+    box-shadow: var(--xg-sombra-suave);
 
-    padding: 8px 10px;
-
-    box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 
 .navbar__link {
+    min-height: 40px;
+    padding: 0 15px;
+
     display: flex;
-
     align-items: center;
+    justify-content: center;
+    gap: 7px;
 
-    gap: 6px;
+    border-radius: 14px;
+    color: var(--xg-texto-suave);
 
-    padding: 8px 14px;
-
-    border-radius: 999px;
-
-    font-size: 0.9rem;
-
-    font-weight: 500;
-
-    color: var(--text-secondary);
-
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
     cursor: pointer;
 
-    white-space: nowrap;
-
-    text-decoration: none;
-
-    transition:
-        background 0.15s ease,
-        color 0.15s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 
@@ -212,22 +152,32 @@
 
 
 .navbar__link:hover {
-    background: var(--bg-option);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--xg-texto-fuerte);
+    transform: translateY(-1px);
+}
 
-    color: var(--text-primary);
+/* Enlace de la página en la que estás, igual que en el login */
+.navbar__link--activo {
+    background: rgba(238, 228, 214, 0.92);
+    color: var(--xg-texto-fuerte);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.navbar__link app-icono {
+    color: var(--xg-texto-tenue);
+    font-size: 18px;
 }
 
 
 .navbar__link:first-child {
     background: var(--text-primary);
 
-    color: #fff;
+    color: var(--xg-card);
 }
 
 
-/* ==============================
-   ACCIONES DERECHA
-============================== */
+/* acciones derecha */
 
 .navbar__actions {
     display: flex;
@@ -278,9 +228,7 @@
 }
 
 
-/* ==============================
-   AVATAR NAVBAR
-============================== */
+/* avatar navbar */
 
 .navbar__avatar {
     width: 38px;
@@ -306,17 +254,7 @@
 }
 
 
-.navbar__chevron {
-    width: 20px;
-    height: 20px;
-
-    color: var(--text-secondary);
-}
-
-
-/* ==============================
-   CONTENIDO PRINCIPAL
-============================== */
+/* contenido principal */
 
 .perfil {
     max-width: 1200px;
@@ -325,9 +263,7 @@
 }
 
 
-/* ==============================
-   TARJETA PRINCIPAL
-============================== */
+/* tarjeta principal */
 
 .perfil__hero {
     display: grid;
@@ -346,9 +282,7 @@
 }
 
 
-/* ==============================
-   IDENTIDAD
-============================== */
+/* identidad */
 
 .perfil__identity {
     display: flex;
@@ -361,9 +295,7 @@
 }
 
 
-/* ==============================
-   FOTO DE PERFIL
-============================== */
+/* foto de perfil */
 
 .perfil__avatar-wrap {
     position: relative;
@@ -396,56 +328,7 @@
 }
 
 
-/* ==============================
-   BOTON CAMARA
-============================== */
-
-.perfil__avatar-edit {
-    position: absolute;
-
-    bottom: 8px;
-    right: 8px;
-
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    border: 4px solid var(--bg-card);
-
-    background: var(--accent);
-
-    color: #fff;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
-}
-
-
-.perfil__avatar-edit:hover {
-    background: var(--accent-dark);
-
-    transform: scale(1.08);
-}
-
-
-.perfil__avatar-edit .icon {
-    width: 21px;
-    height: 21px;
-}
-
-
-/* ==============================
-   NOMBRE
-============================== */
+/* nombre */
 
 .perfil__name {
     font-size: 1.5rem;
@@ -458,9 +341,7 @@
 }
 
 
-/* ==============================
-   CALIFICACIONES
-============================== */
+/* calificaciones */
 
 .perfil__rating-title {
     font-size: 1.05rem;
@@ -512,9 +393,7 @@
 }
 
 
-/* ==============================
-   GRID OPCIONES
-============================== */
+/* grid opciones */
 
 .perfil__options {
     display: grid;
@@ -527,9 +406,7 @@
 }
 
 
-/* ==============================
-   TARJETAS DE OPCIONES
-============================== */
+/* tarjetas de opciones */
 
 .option-card {
     display: flex;
@@ -570,9 +447,7 @@
 }
 
 
-/* ==============================
-   ICONOS OPCIONES
-============================== */
+/* iconos opciones */
 
 .option-card__icon {
     flex-shrink: 0;
@@ -599,9 +474,7 @@
 }
 
 
-/* ==============================
-   TEXTOS
-============================== */
+/* textos */
 
 .option-card__title {
     font-size: 1rem;
@@ -624,26 +497,6 @@
     line-height: 1.35;
 }
 
-
-/* ==============================
-   FLECHAS
-============================== */
-
-.option-card__chevron {
-    margin-left: auto;
-
-    width: 20px;
-    height: 20px;
-
-    color: var(--text-secondary);
-
-    flex-shrink: 0;
-}
-
-
-/* ==============================
-   RESPONSIVE
-============================== */
 
 @media (max-width: 1200px) {
 
@@ -688,7 +541,7 @@
 }
 
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
 
     .perfil-page {
         padding: 16px;
@@ -706,17 +559,6 @@
         min-width: auto;
 
         margin-left: 0;
-    }
-
-
-    .navbar__chango {
-        width: 45px;
-        height: 45px;
-    }
-
-
-    .navbar__letras {
-        width: 75px;
     }
 
 
@@ -755,17 +597,266 @@
     }
 
 
-    .perfil__avatar-edit {
-        width: 42px;
-        height: 42px;
-
-        right: 4px;
-        bottom: 4px;
-    }
-
-
     .option-card--wide {
         grid-column: auto;
     }
 
+}
+/* ARREGLOS DE LA CABECERA */
+
+/* El logo salía a tamaño natural (256px) porque el HTML usa
+   .navbar__logo y el CSS solo tenía regla para .navbar__chango. */
+.navbar__logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+
+.navbar__brand-name {
+    font-family: var(--xg-fuente-titulo);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--xg-texto);
+    letter-spacing: -0.01em;
+}
+
+/* ubicación del usuario */
+
+.perfil__ubicacion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    margin: 6px 0 0;
+
+    font-size: 14px;
+    color: var(--xg-texto-tenue);
+}
+
+.perfil__ubicacion app-icono {
+    font-size: 16px;
+    color: var(--xg-acento-oscuro);
+}
+
+/* estrellas */
+
+.perfil__stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    margin: 10px 0;
+}
+
+.perfil__star {
+    font-size: 24px;
+    color: var(--xg-borde);
+}
+
+.perfil__star--llena {
+    color: var(--xg-acento);
+}
+
+.perfil__rating-valor {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--xg-texto);
+}
+
+.perfil__rating-valor span {
+    display: block;
+    margin-top: 2px;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--xg-texto-tenue);
+}
+
+/* Flecha de cada tarjeta de opción */
+.option-card__arrow {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 20px;
+    color: var(--xg-texto-tenue);
+    transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.option-card:hover .option-card__arrow {
+    color: var(--xg-acento-oscuro);
+    transform: translateX(3px);
+}
+
+/* Tarjeta contenedora del perfil */
+.perfil__card {
+    background: var(--xg-superficie);
+    border: 1px solid var(--xg-borde-suave);
+    border-radius: 22px;
+    padding: 26px;
+}
+
+
+/* MINI MENÚ DEL AVATAR (nuevo) */
+
+.navbar__perfil-wrap {
+    position: relative;
+}
+
+.navbar__avatar-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.navbar__menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 300;
+
+    width: 250px;
+    padding: 12px;
+
+    background: var(--bg-nav);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+
+    box-shadow: 0 16px 34px rgba(31, 27, 22, 0.14);
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    animation: perfilMenuIn 0.16s ease;
+}
+
+@keyframes perfilMenuIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar__menu-nombre {
+    margin: 0 0 6px;
+    padding: 0 8px;
+
+    font-family: var(--xg-fuente-titulo);
+    font-size: 13.5px;
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+.navbar__menu-link,
+.navbar__menu-salir {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 8px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: transparent;
+
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-align: left;
+    text-decoration: none;
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+}
+
+.navbar__menu-link app-icono,
+.navbar__menu-salir app-icono {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.navbar__menu-link:hover,
+.navbar__menu-salir:hover {
+    background: var(--bg-option);
+    color: var(--text-primary);
+}
+
+.navbar__menu-salir {
+    margin-top: 4px;
+    border-top: 1px solid var(--border-soft);
+    border-radius: 0;
+    padding-top: 12px;
+    color: #b4453a;
+}
+
+
+/* VERIFICADO / MIEMBRO DESDE / STATS (nuevo) */
+
+.perfil__badge-verificado {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    margin-left: 8px;
+    padding: 3px 10px 3px 6px;
+
+    background: var(--xg-verde-fondo);
+    color: var(--xg-verde-claro);
+
+    border-radius: 999px;
+
+    font-size: 11.5px;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.perfil__badge-verificado app-icono {
+    width: 14px;
+    height: 14px;
+    color: var(--xg-verde-claro);
+}
+
+.perfil__miembro-desde {
+    margin: 2px 0 14px;
+    color: var(--text-secondary);
+    font-size: 12.5px;
+}
+
+.perfil__descripcion {
+    margin: 0 0 18px;
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+
+.perfil__stats {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 18px;
+}
+
+.perfil__stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil__stat strong {
+    font-family: var(--xg-fuente-titulo);
+    font-size: 20px;
+    color: var(--text-primary);
+}
+
+.perfil__stat span {
+    font-size: 11.5px;
+    color: var(--text-secondary);
 }

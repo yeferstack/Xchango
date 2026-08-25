@@ -1,0 +1,68 @@
+[
+  {
+    "id": "doc1",
+    "usuarioId": "u3",
+    "tipoDocumento": "Cédula de ciudadanía",
+    "numero": "1118543210",
+    "archivo": "cedula-andres-molina.jpg",
+    "fechaSubida": "2026-08-14",
+    "estado": "pendiente",
+    "observacion": "",
+    "revisadoPor": null
+  },
+  {
+    "id": "doc2",
+    "usuarioId": "u7",
+    "tipoDocumento": "Cédula de ciudadanía",
+    "numero": "1006778941",
+    "archivo": "cedula-sebastian-nieto.jpg",
+    "fechaSubida": "2026-08-16",
+    "estado": "pendiente",
+    "observacion": "",
+    "revisadoPor": null
+  },
+  {
+    "id": "doc3",
+    "usuarioId": "u9",
+    "tipoDocumento": "Cédula de ciudadanía",
+    "numero": "1120334455",
+    "archivo": "cedula-ricardo-fonseca.jpg",
+    "fechaSubida": "2026-08-10",
+    "estado": "rechazado",
+    "observacion": "La foto está borrosa y no se lee el número.",
+    "revisadoPor": "a1"
+  },
+  {
+    "id": "doc4",
+    "usuarioId": "u14",
+    "tipoDocumento": "Cédula de extranjería",
+    "numero": "E-448120",
+    "archivo": "cedula-marcela-vega.jpg",
+    "fechaSubida": "2026-08-12",
+    "estado": "pendiente",
+    "observacion": "",
+    "revisadoPor": null
+  },
+  {
+    "id": "doc5",
+    "usuarioId": "u1",
+    "tipoDocumento": "Cédula de ciudadanía",
+    "numero": "1118220145",
+    "archivo": "cedula-carlos-ospina.jpg",
+    "fechaSubida": "2026-08-05",
+    "estado": "aprobado",
+    "observacion": "Documento legible y coincide con el perfil.",
+    "revisadoPor": "a1"
+  },
+  {
+    "id": "doc6",
+    "usuarioId": "u2",
+    "tipoDocumento": "Cédula de ciudadanía",
+    "numero": "1006554120",
+    "archivo": "cedula-daniela-torres.jpg",
+    "fechaSubida": "2026-08-06",
+    "estado": "aprobado",
+    "observacion": "Verificado sin novedad.",
+    "revisadoPor": "a2"
+  }
+]

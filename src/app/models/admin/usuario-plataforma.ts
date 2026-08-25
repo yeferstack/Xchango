@@ -1,12 +1,9 @@
-export interface UsuarioPlataforma {
-  id: string;
-  nombre: string;
-  email: string;
-  estado: 'activo' | 'suspendido' | 'advertido';
-  fechaRegistro: string;
-  publicaciones: number;
-  intercambios: number;
-  reportes: number;
-  ubicacion: string;
-  nivelActividad: 'bajo' | 'medio' | 'alto';
-}
+import { Usuario, EstadoUsuario, NivelActividad } from '../usuario.model';
+
+// El panel de administración consume exactamente el mismo usuario que el resto
+// de la aplicación. Se conserva el nombre `UsuarioPlataforma` para no romper los
+// servicios y componentes admin que ya lo importan, pero los campos se definen
+// en un único lugar: `models/usuario.model.ts`.
+export interface UsuarioPlataforma extends Usuario {}
+
+export type { EstadoUsuario, NivelActividad };

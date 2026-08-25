@@ -1,0 +1,31 @@
+<form class="correo__form" (ngSubmit)="continuar()">
+
+  <label class="xg-label" for="campo-correo">Correo electrónico</label>
+
+  <input
+    id="campo-correo"
+    class="xg-input"
+    type="email"
+    name="correo"
+    placeholder="tucorreo@mail.com"
+    autocomplete="email"
+    [class.xg-input--invalido]="error()"
+    [(ngModel)]="correo"
+    (ngModelChange)="onCorreoChange()"
+  />
+
+  @if (error()) {
+    <p class="xg-error">{{ error() }}</p>
+  }
+
+  <button
+    class="xg-btn xg-btn--primario xg-btn--bloque"
+    type="submit"
+    [disabled]="enviando()"
+  >
+    {{ enviando() ? 'Enviando...' : textoBoton }}
+  </button>
+
+</form>
+
+<p class="xg-nota correo__nota">Te mandamos un PIN de 6 dígitos para confirmar que el correo es tuyo.</p>
