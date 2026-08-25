@@ -16,7 +16,7 @@ export class PerfilComponent implements OnInit {
   private servicio = inject(TruequesService);
   private router = inject(Router);
 
-  /** Cuántas calificaciones hacen falta para mostrar el promedio en público. */
+  // Cuántas calificaciones hacen falta para mostrar el promedio en público.
   readonly totalCalificacionesRequeridas = 5;
   readonly calificacionMaxima = 5;
 
@@ -24,9 +24,7 @@ export class PerfilComponent implements OnInit {
     this.servicio.cargar();
   }
 
-  // ==============================
   // DATOS DEL USUARIO EN SESIÓN
-  // ==============================
 
   get nombreUsuario(): string {
     return this.servicio.usuarioActual()?.nombre ?? 'Invitado';
@@ -48,7 +46,7 @@ export class PerfilComponent implements OnInit {
     return this.servicio.usuarioActual()?.totalCalificaciones ?? 0;
   }
 
-  /** Texto libre del perfil (HU21). Si no ha escrito nada, un texto de ayuda. */
+  // Texto libre del perfil (HU21). Si no ha escrito nada, un texto de ayuda.
   get descripcion(): string {
     const texto = this.servicio.usuarioActual()?.descripcion?.trim();
     return texto || 'Todavía no has agregado una descripción a tu perfil.';
@@ -58,7 +56,7 @@ export class PerfilComponent implements OnInit {
     return this.servicio.usuarioActual()?.verificacion === 'verificado';
   }
 
-  /** Fecha de registro en bruto (se formatea en el template con DatePipe). */
+  // Fecha de registro en bruto (se formatea en el template con DatePipe).
   get fechaRegistro(): string | null {
     return this.servicio.usuarioActual()?.fechaRegistro ?? null;
   }
@@ -71,17 +69,17 @@ export class PerfilComponent implements OnInit {
     return this.servicio.usuarioActual()?.intercambios ?? 0;
   }
 
-  /** Avisos sin leer, para el punto rojo de la campana. */
+  // Avisos sin leer, para el punto rojo de la campana.
   get notificaciones(): number {
     return this.servicio.notificacionesSinLeer();
   }
 
-  /** true cuando ya tiene suficientes calificaciones para mostrarlas. */
+  // true cuando ya tiene suficientes calificaciones para mostrarlas.
   get muestraCalificacion(): boolean {
     return this.totalCalificaciones >= this.totalCalificacionesRequeridas;
   }
 
-  /** Estrellas llenas y vacías según el promedio. */
+  // Estrellas llenas y vacías según el promedio.
   estrellas(): boolean[] {
     return Array.from(
       { length: this.calificacionMaxima },
@@ -89,9 +87,7 @@ export class PerfilComponent implements OnInit {
     );
   }
 
-  // ==============================
   // MINI MENÚ DEL AVATAR
-  // ==============================
 
   readonly menuAbierto = signal(false);
 

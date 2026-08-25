@@ -11,7 +11,7 @@
 
     <p class="aviso" *ngIf="mensaje">{{ mensaje }}</p>
 
-    <!-- ===== Alertas de seguridad ===== -->
+    <!-- Alertas de seguridad -->
     <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'alertas'">
         <button type="button" class="bloque__cabeza" (click)="alternarSeccion('alertas')"
             [attr.aria-expanded]="seccionAbierta === 'alertas'">

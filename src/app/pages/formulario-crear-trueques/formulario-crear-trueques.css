@@ -1,5 +1,5 @@
-/* ===================== ÍCONOS ===================== */
-.material-icons {
+/* íconos */
+app-icono {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
@@ -17,7 +17,7 @@
   font-feature-settings: 'liga';
 }
 
-/* ===================== BASE ===================== */
+
 :host {
   --color-page-bg: #f3e6d0;
   --color-card-bg: #fffdf9;
@@ -52,7 +52,7 @@
   border-radius: 20px;
 }
 
-/* ===================== ENCABEZADO ===================== */
+
 .encabezado {
   display: flex;
   align-items: center;
@@ -85,7 +85,7 @@
   font-size: 14px;
 }
 
-/* ===================== LAYOUT PRINCIPAL ===================== */
+/* layout principal */
 .contenedor-principal {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -93,7 +93,7 @@
   align-items: start;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 900px) {
   .contenedor-principal {
     grid-template-columns: 1fr;
   }
@@ -106,7 +106,7 @@
   gap: 20px;
 }
 
-/* ===================== SECCIONES ===================== */
+
 .seccion {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
@@ -127,14 +127,14 @@
   color: var(--color-text-muted);
 }
 
-/* ===================== TARJETAS DE TIPO ===================== */
+/* tarjetas de tipo */
 .grid-tipos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 600px) {
   .grid-tipos {
     grid-template-columns: 1fr;
   }
@@ -203,7 +203,7 @@
 .icono-verde { background: var(--verde-claro); color: var(--verde); }
 .icono-morado { background: var(--morado-claro); color: var(--morado); }
 
-/* ===================== CAMPOS ===================== */
+
 .fila-campos {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -215,7 +215,7 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 600px) {
   .fila-campos, .fila-tres {
     grid-template-columns: 1fr;
   }
@@ -241,7 +241,7 @@
 }
 
 .requerido {
-  color: #dc2626;
+  color: var(--xg-rojo-fuerte);
 }
 
 .campo input,
@@ -281,7 +281,7 @@
   align-items: center;
 }
 
-.input-con-icono .material-icons {
+.input-con-icono app-icono {
   position: absolute;
   left: 10px;
   font-size: 18px;
@@ -293,7 +293,7 @@
   padding-left: 34px;
 }
 
-/* ===================== ESTADO / SWITCH ===================== */
+/* estado / switch */
 .campo-estado {
   margin-top: 4px;
 }
@@ -353,7 +353,7 @@
   transform: translateX(18px);
 }
 
-/* ===================== CARGA DE IMÁGENES ===================== */
+/* carga de imágenes */
 .zona-carga {
   border: 2px dashed var(--color-border);
   border-radius: 12px;
@@ -367,13 +367,6 @@
 .zona-carga.arrastrando {
   border-color: var(--color-accent);
   background: var(--color-icon-bg);
-}
-
-.icono-carga {
-  font-size: 30px;
-  color: var(--color-accent);
-  display: block;
-  margin-bottom: 6px;
 }
 
 .zona-carga strong {
@@ -434,11 +427,11 @@
   padding: 0;
 }
 
-.miniatura .material-icons {
+.miniatura app-icono {
   font-size: 12px;
 }
 
-/* ===================== BOTONES ===================== */
+/* botones */
 .boton-ubicacion {
   width: 100%;
   padding: 14px;
@@ -477,7 +470,7 @@
   background: var(--color-accent-dark);
 }
 
-/* ===================== VISTA PREVIA ===================== */
+
 .tarjeta-vista-previa {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
@@ -492,7 +485,7 @@
   padding: 18px 20px;
 }
 
-.encabezado-vista-previa .material-icons {
+.encabezado-vista-previa app-icono {
   color: var(--color-accent-dark);
   background: var(--color-icon-bg);
   padding: 8px;
@@ -576,7 +569,7 @@
   background: var(--color-card-bg);
 }
 
-.icono-banner .material-icons {
+.icono-banner app-icono {
   font-size: 28px;
 }
 
@@ -601,7 +594,7 @@
   align-items: flex-start;
 }
 
-.lista-vista-previa .material-icons {
+.lista-vista-previa app-icono {
   color: var(--color-text-muted);
   font-size: 18px;
   margin-top: 2px;
@@ -628,7 +621,7 @@
   font-size: 13px;
 }
 
-.fila-datos .material-icons {
+.fila-datos app-icono {
   font-size: 17px;
   color: var(--color-text-muted);
 }
@@ -656,15 +649,15 @@
 
 .etiqueta-inactivo {
   margin-left: auto;
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--xg-rojo-fondo);
+  color: var(--xg-rojo-fuerte);
   font-size: 11.5px;
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 999px;
 }
 
-/* ===================== CAJA CONSEJO ===================== */
+
 .caja-consejo {
   display: flex;
   gap: 10px;
@@ -674,7 +667,7 @@
   padding: 16px;
 }
 
-.caja-consejo .material-icons {
+.caja-consejo app-icono {
   color: var(--color-accent);
 }
 

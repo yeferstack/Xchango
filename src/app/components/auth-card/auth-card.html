@@ -1,0 +1,23 @@
+<div class="auth">
+
+  <app-logo-xchango class="auth__marca" tamano="lg" enlace="/login"></app-logo-xchango>
+
+  <div class="auth__modal">
+
+    <div class="auth__logo">
+      <app-logo-xchango tamano="md" [apilado]="true"></app-logo-xchango>
+    </div>
+
+    @if (titulo) {
+      <h1 class="auth__titulo">{{ titulo }}</h1>
+    }
+
+    @if (subtitulo) {
+      <p class="auth__subtitulo">{{ subtitulo }}</p>
+    }
+
+    <ng-content></ng-content>
+
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-<!-- ================= LOGO FUERA DE LA NAVBAR ================= -->
+<!-- logo fuera de la navbar -->
 
 <a href="/" class="navbar__brand">
 
@@ -16,8 +16,7 @@
 
 </a>
 
-
-<!-- ================= ACCESO ADMINISTRATIVO ================= -->
+<!-- acceso administrativo -->
 
 <a routerLink="/admin/login" class="admin-link" title="Ingresar como administrador o moderador">
 
@@ -30,14 +29,11 @@
 
 </a>
 
-
-<!-- ================= NAVBAR ================= -->
-
 <header class="navbar">
 
   <nav class="nav-links">
 
-    <!-- ================= INICIO ================= -->
+    <!-- inicio -->
 
     <a href="javascript:void(0)" class="nav-item active" (click)="abrirModal('login')">
 
@@ -64,9 +60,6 @@
 
     </a>
 
-
-    <!-- ================= EXPLORAR ================= -->
-
     <a href="javascript:void(0)" class="nav-item" (click)="explorarComoInvitado()">
 
       <svg
@@ -92,9 +85,6 @@
       Explora
 
     </a>
-
-
-    <!-- ================= REDES SOCIALES ================= -->
 
     <div class="nav-item nav-item--redes" (click)="toggleRedesSociales(); $event.stopPropagation()">
 
@@ -144,22 +134,13 @@
 
 </header>
 
-
-<!-- =========================================================
-     HERO
-     ========================================================= -->
-
 <main class="hero">
-
-
-  <!-- ================= HERO LEFT ================= -->
 
   <section class="hero-left">
 
     <p class="eyebrow">
       Bienvenido a XCHANGO
     </p>
-
 
     <h1 class="headline">
 
@@ -169,14 +150,12 @@
 
     </h1>
 
-
     <p class="subtext">
 
       La plataforma #1 de trueques<br>
       en tu comunidad.
 
     </p>
-
 
     <div class="cta-row">
 
@@ -189,11 +168,10 @@
         Crear Cuenta
 
         <span class="arrow">
-          →
+
         </span>
 
       </button>
-
 
       <button
         class="btn btn-outline"
@@ -209,10 +187,7 @@
 
   </section>
 
-
-  <!-- =====================================================
-       TELÉFONO
-       ===================================================== -->
+  <!-- teléfono -->
 
   <section class="hero-center">
 
@@ -220,7 +195,6 @@
       class="dot-grid"
       aria-hidden="true">
     </div>
-
 
     <div class="phone-wrap">
 
@@ -235,28 +209,20 @@
         class="phone-img"
       >
 
-
       <div class="phone-screen">
 
       </div>
 
     </div>
 
-
     <div class="phone-podium">
     </div>
 
   </section>
 
-
-  <!-- =====================================================
-       HERO RIGHT
-       ===================================================== -->
-
   <section class="hero-right">
 
-
-    <!-- ================= BUSCADOR ================= -->
+    <!-- buscador -->
 
     <div class="search-bar">
 
@@ -283,14 +249,12 @@
 
       </svg>
 
-
       <input
         type="text"
         placeholder="Buscar trueques..."
         [(ngModel)]="terminoBusqueda"
         (keydown.enter)="buscarComoInvitado()"
       >
-
 
       <button
         class="filter-btn"
@@ -330,10 +294,7 @@
 
     </div>
 
-
-    <!-- =================================================
-         CATEGORÍAS
-         ================================================= -->
+    <!-- categorías -->
 
     <div class="panel">
 
@@ -353,11 +314,9 @@
 
       </div>
 
-
       <div class="categories">
 
-
-        <!-- ================= ELECTRÓNICOS ================= -->
+        <!-- electrónicos -->
 
         <div class="category">
 
@@ -376,8 +335,7 @@
 
         </div>
 
-
-        <!-- ================= VEHÍCULOS ================= -->
+        <!-- vehículos -->
 
         <div class="category">
 
@@ -396,8 +354,7 @@
 
         </div>
 
-
-        <!-- ================= VIDEOJUEGOS ================= -->
+        <!-- videojuegos -->
 
         <div class="category">
 
@@ -416,8 +373,7 @@
 
         </div>
 
-
-        <!-- ================= ROPA ================= -->
+        <!-- ropa -->
 
         <div class="category">
 
@@ -436,8 +392,7 @@
 
         </div>
 
-
-        <!-- ================= HOGAR ================= -->
+        <!-- hogar -->
 
         <div class="category">
 
@@ -456,8 +411,7 @@
 
         </div>
 
-
-        <!-- ================= MÁS ================= -->
+        <!-- más -->
 
         <div class="category">
 
@@ -476,15 +430,11 @@
 
         </div>
 
-
       </div>
 
     </div>
 
-
-    <!-- =================================================
-         DESTACADOS
-         ================================================= -->
+    <!-- destacados -->
 
     <div class="panel">
 
@@ -503,7 +453,6 @@
         </a>
 
       </div>
-
 
       <div
         class="products"
@@ -558,11 +507,9 @@
 
             </div>
 
-
             <h4>
               {{ producto.nombre }}
             </h4>
-
 
             <p class="location">
 
@@ -599,8 +546,7 @@
 
       </div>
 
-
-      <!-- ================= PUNTOS ================= -->
+      <!-- puntos -->
 
       <div class="dots">
 
@@ -632,14 +578,11 @@
 
 </main>
 
-
-<!-- =========================================================
-     CARACTERÍSTICAS
-     ========================================================= -->
+<!-- características -->
 
 <section class="features">
 
-  <!-- ================= SEGURO Y CONFIABLE ================= -->
+  <!-- seguro y confiable -->
 
   <div class="feature">
 
@@ -694,8 +637,7 @@
 
   </div>
 
-
-  <!-- ================= COMUNIDAD ACTIVA ================= -->
+  <!-- comunidad activa -->
 
   <div class="feature">
 
@@ -744,8 +686,7 @@
 
   </div>
 
-
-  <!-- ================= FÁCIL Y RÁPIDO ================= -->
+  <!-- fácil y rápido -->
 
   <div class="feature">
 
@@ -784,8 +725,7 @@
 
   </div>
 
-
-  <!-- ================= SOPORTE ================= -->
+  <!-- soporte -->
 
   <div class="feature">
 
@@ -844,10 +784,7 @@
 
 </section>
 
-
-<!-- =========================================================
-     MODAL DE AUTENTICACIÓN
-     ========================================================= -->
+<!-- modal de autenticación -->
 
 <app-metodo-acceso
   [abierto]="modalAbierto()"

@@ -2,19 +2,14 @@ import { Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
-/**
- * Icono de XchanGo.
- *
- * Antes había dos estilos mezclados: la fuente Material Icons en unas páginas
- * y SVG de línea en otras. Se dejó el estilo del login (SVG con trazo de 2 y
- * puntas redondeadas) porque es el que mejor se ve, y este componente lo aplica
- * en toda la app.
- *
- * Uso:  <app-icono nombre="home"></app-icono>
- *       <app-icono nombre="search" [tamano]="20"></app-icono>
- *
- * El color se hereda del texto (currentColor), así que se cambia con CSS.
- */
+// Icono de XchanGo.
+// Antes había dos estilos mezclados: la fuente Material Icons en unas páginas
+// y SVG de línea en otras. Se dejó el estilo del login (SVG con trazo de 2 y
+// puntas redondeadas) porque es el que mejor se ve, y este componente lo aplica
+// en toda la app.
+// Uso:  <app-icono nombre="home"></app-icono>
+//       <app-icono nombre="search" [tamano]="20"></app-icono>
+// El color se hereda del texto (currentColor), así que se cambia con CSS.
 @Component({
   selector: 'app-icono',
   standalone: true,
@@ -28,16 +23,14 @@ export class IconoComponent {
   // escritos por nosotros, nunca vienen del usuario.
   constructor(private sanitizer: DomSanitizer) {}
 
-  /** Nombre del icono. Si no existe, se muestra un punto. */
+  // Nombre del icono. Si no existe, se muestra un punto.
   @Input() nombre = '';
 
-  /** Tamaño en píxeles. */
+
   @Input() tamano = 20;
 
-  /**
-   * Dibujo de cada icono. Son trazos SVG sobre una caja de 24x24.
-   * Para agregar uno nuevo, se pone su nombre y su trazo en esta lista.
-   */
+  // Dibujo de cada icono. Son trazos SVG sobre una caja de 24x24.
+  // Para agregar uno nuevo, se pone su nombre y su trazo en esta lista.
   private dibujos: Record<string, string> = {
     home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/>',
     search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',

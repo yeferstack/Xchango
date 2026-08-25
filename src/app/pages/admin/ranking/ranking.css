@@ -172,10 +172,6 @@
   flex-shrink: 0;
 }
 
-.rank__pos--1 { background: #f5e6c8; color: #8a6d1f; }
-.rank__pos--2 { background: #eceaea; color: #6e6a6a; }
-.rank__pos--3 { background: #f2e2d5; color: #8a5a3a; }
-
 .rank__avatar {
   width: 30px;
   height: 30px;
@@ -219,6 +215,6 @@
 
 .vacio { padding: 40px 0; text-align: center; color: var(--admin-muted); font-size: 14px; }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   .grid-2 { grid-template-columns: 1fr; }
 }

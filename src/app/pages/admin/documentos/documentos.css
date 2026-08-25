@@ -21,7 +21,7 @@
 .doc__filtro { border: 1px solid var(--doc-line); background: var(--doc-card);
   color: var(--doc-soft); border-radius: 999px; padding: 8px 16px; cursor: pointer; font: inherit; }
 .doc__filtro:hover { border-color: var(--doc-acc); }
-.doc__filtro--on { background: var(--doc-ink); color: #fffdf8; border-color: var(--doc-ink); }
+.doc__filtro--on { background: var(--doc-ink); color: var(--xg-papel); border-color: var(--doc-ink); }
 
 .doc__vacio { color: var(--doc-soft); background: var(--doc-card);
   border: 1px dashed var(--doc-line); border-radius: 14px; padding: 26px; text-align: center; }
@@ -47,7 +47,7 @@
 .doc__datos dd { margin: 2px 0 0; color: var(--doc-ink); }
 
 .doc__archivo { display: flex; align-items: center; gap: 8px; color: var(--doc-soft);
-  background: #f7f3ea; border-radius: 10px; padding: 10px 12px; font-size: .88rem; margin-bottom: 12px; }
+  background: var(--xg-papel-crema); border-radius: 10px; padding: 10px 12px; font-size: .88rem; margin-bottom: 12px; }
 
 .doc__obs { width: 100%; border: 1px solid var(--doc-line); border-radius: 10px;
   padding: 10px 12px; font: inherit; margin-bottom: 10px; background: #fff; color: var(--doc-ink); }
@@ -60,4 +60,4 @@
 .doc__btn--no { background: #fff; border-color: var(--doc-no); color: var(--doc-no); }
 
 .doc__obs-texto { margin: 0; color: var(--doc-soft); font-size: .88rem;
-  background: #f7f3ea; border-radius: 10px; padding: 10px 12px; }
+  background: var(--xg-papel-crema); border-radius: 10px; padding: 10px 12px; }

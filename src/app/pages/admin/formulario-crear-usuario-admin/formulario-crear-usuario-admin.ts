@@ -14,12 +14,9 @@ interface RolUsuario {
   colorClase: string;
 }
 
-/**
- * Crear usuarios internos (moderadores).
- *
- * Solo el administrador puede entrar aquí. El moderador no crea usuarios,
- * por eso la ruta usa el guard `soloAdminGuard`.
- */
+// Crear usuarios internos (moderadores).
+// Solo el administrador puede entrar aquí. El moderador no crea usuarios,
+// por eso la ruta usa el guard `soloAdminGuard`.
 @Component({
   selector: 'app-formulario-crear-usuario-admin',
   standalone: true,
@@ -32,7 +29,7 @@ export class FormularioCrearUsuarioAdminComponent implements OnInit {
   private router = inject(Router);
   private adminsSrv = inject(AdminsAdminService);
 
-  /** Tarjetas de rol que se pueden elegir. */
+  // Tarjetas de rol que se pueden elegir.
   roles: RolUsuario[] = [
     {
       id: 'moderador',
@@ -76,9 +73,7 @@ export class FormularioCrearUsuarioAdminComponent implements OnInit {
     });
   }
 
-  // ---------------------------------------------------------
   // Ayudas para la plantilla
-  // ---------------------------------------------------------
 
   seleccionarRol(id: 'administrador' | 'moderador'): void {
     this.form.get('rol')?.setValue(id);
@@ -119,16 +114,14 @@ export class FormularioCrearUsuarioAdminComponent implements OnInit {
     this.mostrarConfirmarContrasena = !this.mostrarConfirmarContrasena;
   }
 
-  /** Revisa que la confirmación sea igual a la contraseña. */
+  // Revisa que la confirmación sea igual a la contraseña.
   get contrasenasNoCoinciden(): boolean {
     const contrasena = this.form.get('contrasena')?.value;
     const confirmar = this.form.get('confirmarContrasena')?.value;
     return !!confirmar && contrasena !== confirmar;
   }
 
-  // ---------------------------------------------------------
   // Navegación y guardado
-  // ---------------------------------------------------------
 
   cancelar(): void {
     this.router.navigate(['/admin/administracion']);

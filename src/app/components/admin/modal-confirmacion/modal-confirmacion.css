@@ -1,6 +1,6 @@
 .modal__velo { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 20px; background: rgba(31, 27, 22, 0.5); }
 .modal { width: min(100%, 420px); padding: 22px; border-radius: var(--admin-radius, 10px); background: var(--admin-surface, #fffdfb); border: 1px solid var(--admin-border, #e4dcce); }
-.modal__icono { display: grid; place-items: center; width: 34px; height: 34px; color: var(--admin-warn, #a3690f); }
+.modal__icono { display: grid; place-items: center; width: 34px; height: 34px; color: var(--admin-warn, var(--xg-ambar)); }
 .modal h2 { margin: 10px 0 6px; color: var(--admin-text, #2a211b); font-family: var(--admin-fuente-titulo, 'Baloo 2', sans-serif); font-size: 18px; }
 .modal p { color: var(--admin-text-2, #806f61); font-size: 13.5px; line-height: 1.5; }
 .modal label { display: grid; gap: 6px; margin-top: 14px; color: var(--admin-text-2, #5d4a3b); font-size: 12px; font-weight: 700; }

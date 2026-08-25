@@ -7,12 +7,9 @@ import { TruequesService } from '../../services/trueques';
 import { Notificacion } from '../../models/notificacion.model';
 import { TruequeVista } from '../../models/trueque.model';
 
-/**
- * HU54-HU59: bandeja de avisos.
- *
- * NO es mensajería. Son avisos de una sola vía; la conversación real ocurre en
- * WhatsApp. Por eso no hay campo para responder.
- */
+// HU54-HU59: bandeja de avisos.
+// NO es mensajería. Son avisos de una sola vía; la conversación real ocurre en
+// WhatsApp. Por eso no hay campo para responder.
 @Component({
   selector: 'app-notificaciones',
   standalone: true,
@@ -28,16 +25,14 @@ export class NotificacionesComponent implements OnInit {
   readonly notificaciones = this.srv.notificaciones;
   readonly sinLeer = this.srv.notificacionesSinLeer;
 
-  /** Busca el trueque al que se refiere el aviso. */
+  // Busca el trueque al que se refiere el aviso.
   truequeDe(n: Notificacion): TruequeVista | undefined {
     if (!n.referenciaId) return undefined;
     return this.srv.trueques().find((t) => t.id === n.referenciaId);
   }
 
-  /**
-   * Solo se puede responder si el aviso es una solicitud, el trueque sigue
-   * pendiente y el usuario es el dueño de la publicación.
-   */
+  // Solo se puede responder si el aviso es una solicitud, el trueque sigue
+  // pendiente y el usuario es el dueño de la publicación.
   puedeResponder(n: Notificacion): boolean {
     const t = this.truequeDe(n);
     if (!t) return false;
@@ -76,7 +71,7 @@ export class NotificacionesComponent implements OnInit {
     this.srv.marcarTodasLeidas();
   }
 
-  /** Marca como leída y navega al trueque o a la publicación referenciada. */
+  // Marca como leída y navega al trueque o a la publicación referenciada.
   abrir(n: Notificacion): void {
     this.srv.marcarNotificacionLeida(n.id);
 

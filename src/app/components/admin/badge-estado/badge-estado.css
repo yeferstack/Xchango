@@ -10,10 +10,6 @@
   letter-spacing: 0.03em;
 }
 
-.badge--alta, .badge--danger, .badge--eliminada { color: var(--admin-danger, #a63f3f); }
-.badge--media, .badge--warn, .badge--pendiente { color: var(--admin-warn, #9c6717); }
-.badge--baja, .badge--ok, .badge--aprobada { color: var(--admin-ok, #27704b); }
-
 .badge__punto {
   width: 6px;
   height: 6px;

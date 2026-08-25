@@ -9,13 +9,10 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-/**
- * Paso de verificación por correo, reutilizado en /acceso y /formulario.
- *
- * Es una simulación: en este proyecto no hay backend de correo, así que
- * cualquier código no vacío se acepta. El código "0000" queda como pista
- * visible para quien pruebe la app.
- */
+// Paso de verificación por correo, reutilizado en /acceso y /formulario.
+// Es una simulación: en este proyecto no hay backend de correo, así que
+// cualquier código no vacío se acepta. El código "0000" queda como pista
+// visible para quien pruebe la app.
 @Component({
   selector: 'app-verificar-codigo',
   standalone: true,
@@ -25,7 +22,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerificarCodigoComponent {
-  /** Correo al que "llegó" el código, solo para mostrarlo en el texto. */
+  // Correo al que "llegó" el código, solo para mostrarlo en el texto.
   @Input() correo = '';
 
   @Output() verificado = new EventEmitter<void>();

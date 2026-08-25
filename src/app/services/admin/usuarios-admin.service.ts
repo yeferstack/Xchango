@@ -25,7 +25,7 @@ export class UsuariosAdminService {
   readonly total = computed(() => this._usuarios().length);
   readonly suspendidos = computed(() => this._usuarios().filter(u => u.estado === 'suspendido').length);
 
-  /** Carga una sola vez. Llamar desde ngOnInit del componente. */
+  // Carga una sola vez. Llamar desde ngOnInit del componente.
   cargar(): void {
     if (this.cargado) return;
     this.cargado = true;
@@ -47,7 +47,7 @@ export class UsuariosAdminService {
 
   // ---------- Consultas ----------
 
-  /** Buscador + filtros combinados. */
+  // Buscador + filtros combinados.
   filtrar(f: FiltroUsuarios): UsuarioPlataforma[] {
     const texto = (f.busqueda ?? '').trim().toLowerCase();
 
@@ -61,7 +61,7 @@ export class UsuariosAdminService {
     });
   }
 
-  /** Corta una lista ya filtrada en la página pedida. */
+  // Corta una lista ya filtrada en la página pedida.
   paginar<T>(lista: T[], pagina: number, porPagina: number): T[] {
     const inicio = (pagina - 1) * porPagina;
     return lista.slice(inicio, inicio + porPagina);
@@ -71,12 +71,12 @@ export class UsuariosAdminService {
     return this._usuarios().find(u => u.id === id);
   }
 
-  /** Valores únicos para llenar el <select> de ubicación. */
+  // Valores únicos para llenar el <select> de ubicación.
   ubicaciones(): string[] {
     return [...new Set(this._usuarios().map(u => u.ubicacion))].sort();
   }
 
-  /** Rankings de la sección 8 / HU76. */
+  // Rankings de la sección 8 / HU76.
   ranking(criterio: 'publicaciones' | 'intercambios' | 'actividad', limite = 5): UsuarioPlataforma[] {
     const lista = [...this._usuarios()];
 

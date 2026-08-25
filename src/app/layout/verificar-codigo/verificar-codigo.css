@@ -64,7 +64,7 @@
   text-align: center;
 }
 
-.vc-subtitulo strong { color: #29251f; }
+.vc-subtitulo strong { color: var(--xg-tinta-media); }
 
 .vc-form {
   margin-top: 22px;
@@ -78,7 +78,7 @@
   border: 1px solid rgba(146, 116, 80, .30);
   border-radius: 16px;
   background: rgba(255, 252, 247, .70);
-  color: #29251f;
+  color: var(--xg-tinta-media);
   font-size: 22px;
   font-weight: 800;
   letter-spacing: 0.3em;
@@ -93,7 +93,7 @@
 }
 
 .vc-error {
-  color: #a63f33;
+  color: var(--xg-rojo-medio);
   font-size: 12.5px;
   font-weight: 600;
   text-align: center;
@@ -135,4 +135,4 @@
   cursor: pointer;
 }
 
-.vc-volver:hover { color: #29251f; }
+.vc-volver:hover { color: var(--xg-tinta-media); }

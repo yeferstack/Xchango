@@ -123,31 +123,6 @@
 
 .fila__meta { font-size: 11.5px; color: var(--admin-muted); margin-top: 3px; display: block; }
 
-.avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--admin-dark);
-  color: #f0e6db;
-  display: grid;
-  place-items: center;
-  font-size: 11px;
-  font-weight: 700;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.avatar__online {
-  position: absolute;
-  right: -1px;
-  bottom: -1px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--admin-ok);
-  border: 2px solid var(--admin-surface);
-}
-
 .icono-caja {
   width: 28px;
   display: grid;
@@ -155,10 +130,6 @@
   flex-shrink: 0;
   color: var(--admin-muted);
 }
-
-.icono-caja--alta { color: var(--admin-danger); }
-.icono-caja--media { color: var(--admin-warn); }
-.icono-caja--baja { color: var(--admin-text-2); }
 
 .alerta--leida { opacity: 0.55; }
 
@@ -176,13 +147,5 @@
 }
 
 .btn-mini:hover { background: var(--admin-surface-2); color: var(--admin-text); }
-
-.punto-servicio {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--admin-ok);
-  flex-shrink: 0;
-}
 
 .vacio { padding: 34px 0; text-align: center; color: var(--admin-muted); font-size: 13.5px; }

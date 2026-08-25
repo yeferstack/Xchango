@@ -49,40 +49,12 @@ h3 {
 }
 
 
-/* ==============================
-   GENERAL
-============================== */
-
 * {
     box-sizing: border-box;
 }
 
 
-/* ==============================
-   ICONOS
-============================== */
-
-.icon {
-    display: block;
-
-    width: 24px;
-    height: 24px;
-
-    fill: none;
-
-    stroke: currentColor;
-    stroke-width: 2;
-
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    flex-shrink: 0;
-}
-
-
-/* ==============================
-   PAGINA
-============================== */
+/* pagina */
 
 .perfil-page {
     min-height: 100vh;
@@ -92,10 +64,6 @@ h3 {
     padding: 24px 40px 60px;
 }
 
-
-/* ==============================
-   NAVBAR
-============================== */
 
 .navbar {
     position: relative;
@@ -110,10 +78,6 @@ h3 {
 }
 
 
-/* ==============================
-   LOGO XCHANGO
-============================== */
-
 .navbar__brand {
     display: flex;
 
@@ -121,14 +85,14 @@ h3 {
 
     justify-content: flex-start;
 
-    gap: 5px;
+    gap: 8px;
 
     width: fit-content;
 
     height: 52px;
 
-    margin-top: 20px;
-    margin-left: 10px;
+    margin-top: 0;
+    margin-left: -12px;
 
     padding: 0;
 
@@ -138,43 +102,7 @@ h3 {
 }
 
 
-/* CHANGO */
-
-.navbar__chango {
-    width: 50px;
-    height: 50px;
-
-    object-fit: contain;
-    object-position: center;
-
-    display: block;
-
-    flex-shrink: 0;
-
-    transform: scale(1.05);
-
-    transform-origin: center;
-}
-
-
-/* LETRAS */
-
-.navbar__letras {
-    width: 90px;
-    height: auto;
-
-    object-fit: contain;
-    object-position: center;
-
-    display: block;
-
-    flex-shrink: 0;
-}
-
-
-/* ==============================
-   NAVBAR CENTRO
-============================== */
+/* navbar centro */
 
 .navbar__pill {
     display: flex;
@@ -249,9 +177,7 @@ h3 {
 }
 
 
-/* ==============================
-   ACCIONES DERECHA
-============================== */
+/* acciones derecha */
 
 .navbar__actions {
     display: flex;
@@ -302,9 +228,7 @@ h3 {
 }
 
 
-/* ==============================
-   AVATAR NAVBAR
-============================== */
+/* avatar navbar */
 
 .navbar__avatar {
     width: 38px;
@@ -330,17 +254,7 @@ h3 {
 }
 
 
-.navbar__chevron {
-    width: 20px;
-    height: 20px;
-
-    color: var(--text-secondary);
-}
-
-
-/* ==============================
-   CONTENIDO PRINCIPAL
-============================== */
+/* contenido principal */
 
 .perfil {
     max-width: 1200px;
@@ -349,9 +263,7 @@ h3 {
 }
 
 
-/* ==============================
-   TARJETA PRINCIPAL
-============================== */
+/* tarjeta principal */
 
 .perfil__hero {
     display: grid;
@@ -370,9 +282,7 @@ h3 {
 }
 
 
-/* ==============================
-   IDENTIDAD
-============================== */
+/* identidad */
 
 .perfil__identity {
     display: flex;
@@ -385,9 +295,7 @@ h3 {
 }
 
 
-/* ==============================
-   FOTO DE PERFIL
-============================== */
+/* foto de perfil */
 
 .perfil__avatar-wrap {
     position: relative;
@@ -420,56 +328,7 @@ h3 {
 }
 
 
-/* ==============================
-   BOTON CAMARA
-============================== */
-
-.perfil__avatar-edit {
-    position: absolute;
-
-    bottom: 8px;
-    right: 8px;
-
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    border: 4px solid var(--bg-card);
-
-    background: var(--accent);
-
-    color: var(--xg-card);
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
-}
-
-
-.perfil__avatar-edit:hover {
-    background: var(--accent-dark);
-
-    transform: scale(1.08);
-}
-
-
-.perfil__avatar-edit .icon {
-    width: 21px;
-    height: 21px;
-}
-
-
-/* ==============================
-   NOMBRE
-============================== */
+/* nombre */
 
 .perfil__name {
     font-size: 1.5rem;
@@ -482,9 +341,7 @@ h3 {
 }
 
 
-/* ==============================
-   CALIFICACIONES
-============================== */
+/* calificaciones */
 
 .perfil__rating-title {
     font-size: 1.05rem;
@@ -536,9 +393,7 @@ h3 {
 }
 
 
-/* ==============================
-   GRID OPCIONES
-============================== */
+/* grid opciones */
 
 .perfil__options {
     display: grid;
@@ -551,9 +406,7 @@ h3 {
 }
 
 
-/* ==============================
-   TARJETAS DE OPCIONES
-============================== */
+/* tarjetas de opciones */
 
 .option-card {
     display: flex;
@@ -594,9 +447,7 @@ h3 {
 }
 
 
-/* ==============================
-   ICONOS OPCIONES
-============================== */
+/* iconos opciones */
 
 .option-card__icon {
     flex-shrink: 0;
@@ -623,9 +474,7 @@ h3 {
 }
 
 
-/* ==============================
-   TEXTOS
-============================== */
+/* textos */
 
 .option-card__title {
     font-size: 1rem;
@@ -648,26 +497,6 @@ h3 {
     line-height: 1.35;
 }
 
-
-/* ==============================
-   FLECHAS
-============================== */
-
-.option-card__chevron {
-    margin-left: auto;
-
-    width: 20px;
-    height: 20px;
-
-    color: var(--text-secondary);
-
-    flex-shrink: 0;
-}
-
-
-/* ==============================
-   RESPONSIVE
-============================== */
 
 @media (max-width: 1200px) {
 
@@ -712,7 +541,7 @@ h3 {
 }
 
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
 
     .perfil-page {
         padding: 16px;
@@ -730,17 +559,6 @@ h3 {
         min-width: auto;
 
         margin-left: 0;
-    }
-
-
-    .navbar__chango {
-        width: 45px;
-        height: 45px;
-    }
-
-
-    .navbar__letras {
-        width: 75px;
     }
 
 
@@ -779,27 +597,18 @@ h3 {
     }
 
 
-    .perfil__avatar-edit {
-        width: 42px;
-        height: 42px;
-
-        right: 4px;
-        bottom: 4px;
-    }
-
-
     .option-card--wide {
         grid-column: auto;
     }
 
 }
-/* ===================== ARREGLOS DE LA CABECERA ===================== */
+/* ARREGLOS DE LA CABECERA */
 
 /* El logo salía a tamaño natural (256px) porque el HTML usa
    .navbar__logo y el CSS solo tenía regla para .navbar__chango. */
 .navbar__logo {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
     object-fit: contain;
     display: block;
     flex-shrink: 0;
@@ -813,7 +622,7 @@ h3 {
     letter-spacing: -0.01em;
 }
 
-/* ===================== UBICACIÓN DEL USUARIO ===================== */
+/* ubicación del usuario */
 
 .perfil__ubicacion {
     display: flex;
@@ -832,7 +641,7 @@ h3 {
     color: var(--xg-acento-oscuro);
 }
 
-/* ===================== ESTRELLAS ===================== */
+/* estrellas */
 
 .perfil__stars {
     display: flex;
@@ -890,9 +699,7 @@ h3 {
 }
 
 
-/* ==============================
-   MINI MENÚ DEL AVATAR (nuevo)
-============================== */
+/* MINI MENÚ DEL AVATAR (nuevo) */
 
 .navbar__perfil-wrap {
     position: relative;
@@ -993,9 +800,7 @@ h3 {
 }
 
 
-/* ==============================
-   VERIFICADO / MIEMBRO DESDE / STATS (nuevo)
-============================== */
+/* VERIFICADO / MIEMBRO DESDE / STATS (nuevo) */
 
 .perfil__badge-verificado {
     display: inline-flex;
@@ -1005,8 +810,8 @@ h3 {
     margin-left: 8px;
     padding: 3px 10px 3px 6px;
 
-    background: #e8f3ed;
-    color: #2f7d5d;
+    background: var(--xg-verde-fondo);
+    color: var(--xg-verde-claro);
 
     border-radius: 999px;
 
@@ -1018,7 +823,7 @@ h3 {
 .perfil__badge-verificado app-icono {
     width: 14px;
     height: 14px;
-    color: #2f7d5d;
+    color: var(--xg-verde-claro);
 }
 
 .perfil__miembro-desde {

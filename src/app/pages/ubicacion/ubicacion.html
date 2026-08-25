@@ -1,7 +1,3 @@
-<!-- ==============================
-     NAVBAR
-================================ -->
-
 <header class="navbar">
 
     <a class="marca" routerLink="/home">
@@ -11,7 +7,6 @@
             XchanGo
         </span>
     </a>
-
 
     <nav class="nav-pill">
 
@@ -47,7 +42,6 @@
 
     </nav>
 
-
     <div class="nav-derecha">
 
         <button class="btn-campana" type="button" routerLink="/notificaciones" title="Ver notificaciones">
@@ -64,19 +58,11 @@
 
 </header>
 
-
-<!-- ==============================
-     CONTENEDOR
-================================ -->
-
 <main class="contenedor">
 
     <div class="panel">
 
-
-        <!-- ==============================
-             COLUMNA IZQUIERDA
-        ============================== -->
+        <!-- columna izquierda -->
 
         <aside class="columna-identidad">
 
@@ -86,23 +72,19 @@
                 Volver
             </button>
 
-
             <div class="foto-perfil">
 
                 <img src="/Logo-xchango/avatar-miguel.jpeg" alt="Foto de Miguel Perez" />
 
             </div>
 
-
             <h2 class="nombre">
                 Miguel Perez
             </h2>
 
-
             <h3 class="subtitulo-calif">
                 Calificaciones y opiniones
             </h3>
-
 
             <div class="estrellas">
 
@@ -118,7 +100,6 @@
 
             </div>
 
-
             <p class="nota-calif">
                 Solo será visible públicamente tras recibir
                 5 calificaciones.
@@ -126,16 +107,7 @@
 
         </aside>
 
-
-
-        <!-- ==============================
-             CONTENIDO
-        ============================== -->
-
         <section class="tarjeta">
-
-
-            <!-- ENCABEZADO -->
 
             <header class="tarjeta-encabezado">
 
@@ -156,7 +128,6 @@
 
                 </div>
 
-
                 <div class="estado-ubicacion">
 
                     <span class="estado-punto"></span>
@@ -168,12 +139,6 @@
                 </div>
 
             </header>
-
-
-
-            <!-- ==============================
-                 MAPA
-            ============================== -->
 
             <div class="mapa-seccion">
 
@@ -191,7 +156,6 @@
                         </p>
 
                     </div>
-
 
                     <button class="btn-mapa" type="button" (click)="usarUbicacionActual()"
                         [disabled]="obteniendoUbicacion()">
@@ -213,13 +177,11 @@
 
                 </div>
 
-
-                <!-- MAPA VISUAL -->
+                <!-- mapa visual -->
 
                 <div class="mapa-principal">
 
                     <div class="mapa-cuadricula"></div>
-
 
                     <!-- Calles -->
 
@@ -228,11 +190,9 @@
                     <div class="calle calle-3"></div>
                     <div class="calle calle-4"></div>
 
-
                     <!-- Radio -->
 
                     <div class="mapa-radio" [style.width.%]="radio() / 1.25" [style.height.%]="radio() / 1.25"></div>
-
 
                     <!-- Usuario -->
 
@@ -246,7 +206,6 @@
 
                     </div>
 
-
                     <!-- Trueques -->
 
                     <button class="marcador-trueque" type="button" *ngFor="let trueque of truequesCercanos()"
@@ -255,7 +214,6 @@
                         <app-icono nombre="swap_horiz"></app-icono>
 
                     </button>
-
 
                     <!-- Etiqueta ubicación -->
 
@@ -277,7 +235,6 @@
 
                     </div>
 
-
                     <!-- Leyenda -->
 
                     <div class="leyenda-mapa">
@@ -296,9 +253,7 @@
 
                 </div>
 
-
-
-                <!-- RESUMEN DEL MAPA -->
+                <!-- resumen del mapa -->
 
                 <div class="resumen-mapa">
 
@@ -321,9 +276,7 @@
 
                     </div>
 
-
                     <div class="separador-resumen"></div>
-
 
                     <div class="resumen-item">
 
@@ -347,11 +300,7 @@
 
             </div>
 
-
-
-            <!-- ==============================
-                 UBICACIÓN PRINCIPAL
-            ============================== -->
+            <!-- ubicación principal -->
 
             <div class="grupo">
 
@@ -376,8 +325,7 @@
 
                 </div>
 
-
-                <!-- VISTA NORMAL -->
+                <!-- vista normal -->
 
                 <div class="ubicacion-actual" *ngIf="!editando()">
 
@@ -386,7 +334,6 @@
                         <app-icono nombre="location_on"></app-icono>
 
                     </div>
-
 
                     <div class="ubicacion-datos">
 
@@ -408,16 +355,11 @@
 
                     </div>
 
-
                     <button class="btn-secundario" type="button" (click)="iniciarEdicion()">
                         Editar
                     </button>
 
                 </div>
-
-
-
-                <!-- FORMULARIO -->
 
                 <div class="formulario" *ngIf="editando()">
 
@@ -438,7 +380,6 @@
 
                     </div>
 
-
                     <div class="campo">
 
                         <label for="barrio">
@@ -449,7 +390,6 @@
                             [ngModel]="tempBarrio()" (ngModelChange)="tempBarrio.set($event)" />
 
                     </div>
-
 
                     <div class="campo campo--ancho">
 
@@ -467,7 +407,6 @@
 
                     </div>
 
-
                     <div class="acciones-formulario">
 
                         <button class="btn-secundario" type="button" (click)="cancelarEdicion()">
@@ -484,11 +423,7 @@
 
             </div>
 
-
-
-            <!-- ==============================
-                 RADIO
-            ============================== -->
+            <!-- radio -->
 
             <div class="grupo">
 
@@ -513,7 +448,6 @@
 
                 </div>
 
-
                 <div class="bloque-radio">
 
                     <div class="radio-valor">
@@ -528,10 +462,8 @@
 
                     </div>
 
-
                     <input class="deslizador" type="range" min="5" max="100" step="5" [value]="radio()"
                         (input)="cambiarRadio($any($event.target).value)" />
-
 
                     <div class="radio-limites">
 
@@ -549,11 +481,7 @@
 
             </div>
 
-
-
-            <!-- ==============================
-                 PUNTOS DE ENCUENTRO
-            ============================== -->
+            <!-- puntos de encuentro -->
 
             <div class="grupo">
 
@@ -578,13 +506,11 @@
 
                 </div>
 
-
                 <ul class="filas">
 
                     <li class="fila" *ngFor="let p of puntos()">
 
                         <app-icono nombre="pin_drop"></app-icono>
-
 
                         <span class="fila-texto">
 
@@ -598,14 +524,12 @@
 
                         </span>
 
-
                         <button class="btn-ruta" type="button" (click)="abrirGoogleMaps(p.nombre)"
                             title="Abrir en Google Maps">
 
                             <app-icono nombre="directions"></app-icono>
 
                         </button>
-
 
                         <button class="btn-icono" type="button" (click)="eliminarPunto(p.id)" title="Eliminar punto">
 
@@ -614,7 +538,6 @@
                         </button>
 
                     </li>
-
 
                     <li class="fila" *ngIf="puntos().length === 0">
 
@@ -629,7 +552,6 @@
                     </li>
 
                 </ul>
-
 
                 <div class="agregar-punto">
 
@@ -648,11 +570,7 @@
 
             </div>
 
-
-
-            <!-- ==============================
-                 PREFERENCIAS
-            ============================== -->
+            <!-- preferencias -->
 
             <div class="grupo">
 
@@ -676,7 +594,6 @@
 
                 </div>
 
-
                 <ul class="filas">
 
                     <li class="fila" *ngFor="let p of preferencias()">
@@ -693,7 +610,6 @@
 
                         </span>
 
-
                         <button class="switch" type="button" [class.on]="p.activo" [attr.aria-pressed]="p.activo"
                             (click)="togglePreferencia(p.id)">
 
@@ -707,12 +623,6 @@
 
             </div>
 
-
-
-            <!-- ==============================
-                 PIE
-            ============================== -->
-
             <footer class="tarjeta-pie">
 
                 <div class="mensaje-guardado" *ngIf="guardado()">
@@ -722,7 +632,6 @@
                     Cambios guardados
 
                 </div>
-
 
                 <button class="btn-guardar" type="button" (click)="guardarCambios()">
 

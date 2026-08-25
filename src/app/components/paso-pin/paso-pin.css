@@ -1,0 +1,80 @@
+:host {
+  display: block;
+}
+
+.pin__destino {
+  margin: 18px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.pin__destino strong {
+  color: var(--color-primary);
+  word-break: break-all;
+}
+
+.pin__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.pin__input {
+  padding: 0 14px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-align: center;
+}
+
+.pin__aviso {
+  margin: 0;
+  color: var(--color-ok);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.pin__reenvio {
+  margin: 18px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.pin__espera {
+  margin-left: 4px;
+  color: var(--color-text-faint);
+}
+
+.pin__demo {
+  margin-top: 14px;
+}
+
+.pin__volver {
+  display: block;
+  margin: 16px auto 0;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pin__volver:hover {
+  color: var(--color-primary);
+}
+
+@media (max-width: 480px) {
+  .pin__input {
+    font-size: 19px;
+    letter-spacing: 0.2em;
+  }
+}

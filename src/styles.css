@@ -1,57 +1,110 @@
-/* =========================================================
-   XchanGo — estilos globales y tokens de diseño
-   =========================================================
-   Los colores y las fuentes salen del login, que es la
-   pantalla que define la identidad visual de la aplicación.
-   Cualquier página puede usarlos con var(--xg-...).
-   ========================================================= */
+/*
+  Estilos globales de XchanGo.
+  Los valores salen de la pantalla de login, que es la que define
+  la identidad visual. Cualquier página los usa con var(--...).
+*/
 
 :root {
-  /* Fondos */
-  --xg-bg: #f4eee1;
-  --xg-superficie: #fbf8f0;
-  --xg-card: #ffffff;
-  --xg-crema: #efe6d9;
+  /* color de acción: el botón oscuro del login */
+  --color-primary: #111111;
+  --color-primary-dark: #222222;
+
+  /* dorado de la marca */
+  --color-accent: #c9a876;
+  --color-accent-dark: #a27f59;
+  --color-accent-link: #927654;
+
+  /* fondos */
+  --color-background: #f4eee1;
+  --color-surface: #fffdfa;
+  --color-surface-soft: rgba(255, 252, 247, 0.7);
+  --color-cream: #efe6d9;
+
+  /* el vidrio de la navbar y del buscador del login */
+  --color-glass: rgba(255, 255, 255, 0.48);
+  --color-glass-border: rgba(255, 255, 255, 0.85);
+
+  /* texto */
+  --color-text: #191714;
+  --color-text-secondary: #524b43;
+  --color-text-muted: #847a68;
+  --color-text-faint: #958c81;
+
+  /* bordes */
+  --color-border: rgba(146, 116, 80, 0.3);
+  --color-border-solid: #e5dcc8;
+
+  /* estados */
+  --color-error: #a8453b;
+  --color-error-soft: #f6e2e0;
+  --color-ok: #3f7d52;
+  --color-ok-soft: #eafaf0;
+  --color-warn: #8a6b1f;
+  --color-warn-soft: #fbf1d8;
+
+  /* formas */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 26px;
+  --radius-pill: 999px;
+
+  --shadow: 0 14px 35px rgba(96, 77, 51, 0.08);
+  --shadow-soft: 0 8px 20px rgba(102, 78, 44, 0.05);
+  --shadow-card:
+    0 24px 60px rgba(60, 45, 26, 0.22),
+    0 0 0 8px rgba(255, 255, 255, 0.06),
+    inset 0 2px 5px rgba(255, 255, 255, 0.65);
+
+  /* tipografía */
+  --font-title: "Baloo 2", "Nunito", sans-serif;
+  --font-text: "Nunito", "Segoe UI", Arial, sans-serif;
+
+  /* alto de los inputs y botones del login */
+  --control-height: 52px;
+
+  /* alto real de la barra: 14 + 44 de contenido + 14 + 1 de borde */
+  --xg-alto-header: 73px;
+}
+
+/*
+  Nombres viejos. Las páginas que ya existían los usan por todos lados,
+  así que en vez de buscar y reemplazar archivo por archivo, apuntan a
+  los tokens de arriba y quedan con los colores del login.
+*/
+:root {
+  --xg-bg: var(--color-background);
+  --xg-superficie: var(--color-surface);
+  --xg-card: var(--color-surface);
+  --xg-crema: var(--color-cream);
   --xg-crema-fuerte: #eee4d7;
 
-  /* Bordes */
-  --xg-borde: #ded1b3;
+  --xg-borde: var(--color-border-solid);
   --xg-borde-suave: #e7dfce;
 
-  /* Texto */
-  --xg-texto: #1e1b16;
-  --xg-texto-fuerte: #111111;
-  --xg-texto-suave: #645c52;
-  --xg-texto-tenue: #847a68;
+  --xg-texto: var(--color-text);
+  --xg-texto-fuerte: var(--color-primary);
+  --xg-texto-suave: var(--color-text-secondary);
+  --xg-texto-tenue: var(--color-text-muted);
 
-  /* Acentos */
-  --xg-acento: #c9ad7e;
-  --xg-acento-oscuro: #a27f59;
+  --xg-acento: var(--color-accent);
+  --xg-acento-oscuro: var(--color-accent-dark);
 
-  /* Estados */
-  --xg-ok: #3f7d52;
-  --xg-ok-suave: #eafaf0;
-  --xg-peligro: #a33f3f;
-  --xg-peligro-suave: #f7e6e4;
-  --xg-aviso: #8a6b1f;
-  --xg-aviso-suave: #fbf1d8;
+  --xg-ok: var(--color-ok);
+  --xg-ok-suave: var(--color-ok-soft);
+  --xg-peligro: var(--color-error);
+  --xg-peligro-suave: var(--color-error-soft);
+  --xg-aviso: var(--color-warn);
+  --xg-aviso-suave: var(--color-warn-soft);
 
-  /* Alto real de la barra: 14 + 44 de contenido + 14 + 1 de borde */
-  --xg-alto-header: 73px;
+  --xg-radio: var(--radius);
+  --xg-radio-chico: var(--radius-sm);
+  --xg-radio-pill: var(--radius-pill);
+  --xg-sombra: var(--shadow);
+  --xg-sombra-suave: var(--shadow-soft);
 
-  /* Formas */
-  --xg-radio: 14px;
-  --xg-radio-chico: 10px;
-  --xg-radio-pill: 999px;
-  --xg-sombra: 0 14px 35px rgba(96, 77, 51, 0.08);
-  --xg-sombra-suave: 0 8px 20px rgba(102, 78, 44, 0.05);
-
-  /* Tipografía: la misma del login */
-  --xg-fuente-titulo: "Baloo 2", "Nunito", sans-serif;
-  --xg-fuente-texto: "Nunito", "Segoe UI", Arial, sans-serif;
-
-  /* Nombre viejo que usaban algunas páginas; se conserva para no romperlas */
-  --fuente: "Nunito", "Segoe UI", Arial, sans-serif;
+  --xg-fuente-titulo: var(--font-title);
+  --xg-fuente-texto: var(--font-text);
+  --fuente: var(--font-text);
 }
 
 * {
@@ -66,16 +119,16 @@ body {
 }
 
 body {
-  font-family: var(--xg-fuente-texto);
-  background: var(--xg-bg);
-  color: var(--xg-texto);
+  font-family: var(--font-text);
+  background: var(--color-background);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--xg-fuente-titulo);
+  font-family: var(--font-title);
 }
 
 img {
@@ -89,9 +142,190 @@ select {
   font-family: inherit;
 }
 
-
-
-/* Cuando la barra de arriba se esconde, la de filtros sube a ocupar su lugar. */
+/* cuando la barra de arriba se esconde, la de filtros sube a ocupar su lugar */
 body.header-oculto {
   --xg-alto-header: 8px;
+}
+
+/*
+  Fondo de las pantallas de entrar y crear cuenta.
+  Estaba dentro de login.css, pero un CSS de componente no puede pintar
+  el <body>: Angular le pega el atributo de encapsulación y la regla
+  nunca coincide. Por eso vive aquí y las páginas de auth se ponen la
+  clase cuando entran.
+*/
+body.xg-auth {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 247, 241, 0.84),
+      rgba(243, 235, 223, 0.76) 48%,
+      rgba(236, 223, 205, 0.82)
+    ),
+    url("/Logo-xchango/fondo.jpg") center / cover no-repeat fixed;
+}
+
+/* el login es una landing y no debería hacer scroll */
+body.xg-auth-landing {
+  overflow: hidden;
+}
+
+/*
+  Piezas que se repiten en varias pantallas: botón, input, etiqueta,
+  título, error. Antes cada página se escribía las suyas y ninguna
+  quedaba igual a la del login.
+*/
+.xg-btn {
+  min-height: var(--control-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.xg-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.xg-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.xg-btn--primario {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(178, 138, 87, 0.35);
+}
+
+.xg-btn--primario:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.xg-btn--suave {
+  border-color: var(--color-border);
+  background: var(--color-surface-soft);
+  color: #29251f;
+}
+
+.xg-btn--suave:hover:not(:disabled) {
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(96, 77, 51, 0.1);
+}
+
+.xg-btn--bloque {
+  width: 100%;
+}
+
+.xg-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.xg-input {
+  width: 100%;
+  min-height: var(--control-height);
+  padding: 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface-soft);
+  color: #29251f;
+  font: inherit;
+  font-weight: 600;
+}
+
+.xg-input::placeholder {
+  color: var(--color-text-faint);
+  font-weight: 500;
+}
+
+.xg-input:focus {
+  outline: none;
+  border-color: var(--color-accent-dark);
+  background: #fff;
+}
+
+.xg-input--invalido {
+  border-color: var(--color-error);
+}
+
+.xg-titulo {
+  margin: 0;
+  color: var(--color-primary);
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.xg-sub {
+  margin: 6px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.xg-error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.xg-nota {
+  margin: 0;
+  color: var(--color-text-faint);
+  font-size: 11.5px;
+  text-align: center;
+}
+
+.xg-nota strong {
+  color: #6a4f30;
+}
+
+.xg-enlace {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-accent-link);
+  font: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.xg-enlace:hover {
+  color: #6a4f30;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --control-height: 48px;
+  }
+
+  .xg-titulo {
+    font-size: 21px;
+  }
 }

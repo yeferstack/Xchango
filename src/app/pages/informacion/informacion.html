@@ -1,6 +1,5 @@
 <div class="perfil-page">
 
-    <!-- NAVBAR -->
     <header class="navbar">
         <div class="navbar__brand">
         <img src="Logo-xchango/chango.png" alt="XchanGo" class="navbar__logo" />
@@ -8,12 +7,9 @@
         </div>
 
         <nav class=" navbar__pill">
-            <a class="navbar__link"><app-icono nombre="home"></app-icono> Inicio</a>
-            <a class="navbar__link"><app-icono nombre="search"></app-icono> Explorar</a>
-            <a class="navbar__link"><app-icono nombre="swap_horiz"></app-icono> Mis trueques</a>
-            <a class="navbar__link"><app-icono nombre="apps"></app-icono> Servicios</a>
-            <a class="navbar__link"><app-icono nombre="chat_bubble_outline"></app-icono> Mensajes</a>
-            <a class="navbar__link"><app-icono nombre="favorite_border"></app-icono> Favoritos</a>
+            <a class="navbar__link" routerLink="/home"><app-icono nombre="home"></app-icono> Inicio</a>
+            <a class="navbar__link" routerLink="/mis-trueques"><app-icono nombre="swap_horiz"></app-icono> Mis trueques</a>
+            <a class="navbar__link" routerLink="/mis-publicaciones"><app-icono nombre="apps"></app-icono> Mis publicaciones</a>
         </nav>
 
         <div class="navbar__actions">
@@ -27,7 +23,6 @@
         </div>
     </header>
 
-    <!-- CONTENIDO -->
     <main class="perfil">
         <section class="perfil__card perfil__hero">
 
@@ -47,7 +42,12 @@
                     <h2 class="perfil__rating-title">Calificaciones y opiniones</h2>
                     <div class="perfil__stars"
                         [attr.aria-label]="calificacion + ' de ' + calificacionMaxima + ' estrellas'">
-                        <app-icono nombre="star"></app-icono>
+                        <app-icono
+                            *ngFor="let llena of estrellas()"
+                            class="perfil__star"
+                            [class.perfil__star--llena]="llena"
+                            nombre="star"
+                        ></app-icono>
                     </div>
                     <p class="perfil__rating-note">
                         (Solo será visible públicamente tras recibir

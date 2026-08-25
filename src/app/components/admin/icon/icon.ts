@@ -1,18 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * app-icon
- * Componente reutilizable de íconos estilo Lucide.
- *
- * Uso:
- *   <app-icon name="check" [size]="14" />
- *   <app-icon name="home" color="#847A68" />
- *
- * Para agregar un ícono nuevo: copia el <path>/<circle>/<rect> de
- * https://lucide.dev y agrégalo al objeto icons de abajo con el
- * mismo nombre que usa Lucide (kebab-case).
- */
+// app-icon
+// Componente reutilizable de íconos estilo Lucide.
+// Uso:
+//   <app-icon name="check" [size]="14" />
+//   <app-icon name="home" color="#847A68" />
+// Para agregar un ícono nuevo: copia el <path>/<circle>/<rect> de
+// https://lucide.dev y agrégalo al objeto icons de abajo con el
+// mismo nombre que usa Lucide (kebab-case).
 @Component({
   selector: 'app-icon',
   standalone: true,

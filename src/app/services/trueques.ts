@@ -17,7 +17,7 @@ import { AvisoUbicacion } from '../models/aviso-ubicacion.model';
 
 const CLAVE_DATOS = 'xchango_datos';
 const CLAVE_SESION = 'xchango_sesion';
-/** Si se cambian los JSON, subir este número para que se vuelvan a leer. */
+// Si se cambian los JSON, subir este número para que se vuelvan a leer.
 const VERSION = 9;
 
 const IMAGEN_RESPALDO = 'https://placehold.co/600x450/ece2c9/1f1b16?text=Sin+imagen';
@@ -38,7 +38,7 @@ export interface CategoriaSidebar {
   icono: string;
 }
 
-/** Lo que mandan los formularios de crear y editar publicación. */
+// Lo que mandan los formularios de crear y editar publicación.
 export interface DatosPublicacion {
   tipo: TipoPublicacion;
   categoriaId: string;
@@ -53,16 +53,12 @@ export interface DatosPublicacion {
   imagenes?: string[];
 }
 
-/**
- * Servicio principal de XchanGo.
- *
- * La primera vez lee los archivos de src/app/data y de ahí en adelante trabaja
- * con localStorage, así los cambios no se pierden al recargar la página.
- * Mientras no exista la API, esto hace las veces del servidor.
- *
- * Los JSON guardan solo los ids (usuarioId, categoriaId). Aquí se unen para
- * mostrar el nombre del autor, la categoría, la ciudad, etc.
- */
+// Servicio principal de XchanGo.
+// La primera vez lee los archivos de src/app/data y de ahí en adelante trabaja
+// con localStorage, así los cambios no se pierden al recargar la página.
+// Mientras no exista la API, esto hace las veces del servidor.
+// Los JSON guardan solo los ids (usuarioId, categoriaId). Aquí se unen para
+// mostrar el nombre del autor, la categoría, la ciudad, etc.
 @Injectable({ providedIn: 'root' })
 export class TruequesService {
   private http = inject(HttpClient);
@@ -85,7 +81,7 @@ export class TruequesService {
   usuarios = this.listaUsuarios.asReadonly();
   categorias = this.listaCategorias.asReadonly();
 
-  /** Id del usuario que inició sesión. null = nadie. */
+  // Id del usuario que inició sesión. null = nadie.
   usuarioActualId = signal<string | null>(this.leerSesion());
 
   usuarioActual = computed<Usuario | null>(
@@ -99,11 +95,9 @@ export class TruequesService {
     ...this.listaCategorias().map((c) => ({ id: c.id, nombre: c.nombre, icono: c.icono })),
   ]);
 
-  // ==================================================================
   // Cargar y guardar
-  // ==================================================================
 
-  /** Se llama desde el ngOnInit de cada página. Solo carga una vez. */
+  // Se llama desde el ngOnInit de cada página. Solo carga una vez.
   cargar(): void {
     if (this.datosListos() || this.pidiendo) return;
 
@@ -150,7 +144,7 @@ export class TruequesService {
     });
   }
 
-  /** Borra lo guardado y vuelve a los JSON originales. */
+  // Borra lo guardado y vuelve a los JSON originales.
   reiniciarDatos(): void {
     try {
       localStorage.removeItem(CLAVE_DATOS);
@@ -221,26 +215,17 @@ export class TruequesService {
     }
   }
 
-  // ==================================================================
   // Sesión
-  // ==================================================================
 
-  /**
-   * Devuelve null si entró bien, o el mensaje de error.
-   *
-   * Simulación de práctica: no se exige que el correo esté en la base de
-   * datos ni se valida la contraseña contra nada. Cualquier correo con
-   * formato válido entra; si no existe todavía, se crea la cuenta al
-   * vuelo (la "verificación" real ocurre antes, en la pantalla de código).
-   */
-  iniciarSesion(email: string, password: string): string | null {
+  // Devuelve null si entró bien, o el mensaje de error.
+  // Simulación de práctica: aquí no se usan contraseñas, solo el correo +
+  // el código de verificación (pantalla previa a esta llamada). Si el
+  // correo no existe todavía, se crea la cuenta al vuelo.
+  iniciarSesion(email: string): string | null {
     const correo = email.trim().toLowerCase();
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
       return 'Ingresa un correo válido.';
-    }
-    if (!password) {
-      return 'Ingresa una contraseña.';
     }
 
     let usuario = this.listaUsuarios().find((u) => u.email.toLowerCase() === correo);
@@ -253,14 +238,14 @@ export class TruequesService {
         nombre: correo.split('@')[0],
         email: correo,
         telefono: '',
-        password,
+        password: '',
         estado: 'activo',
         verificacion: 'verificado',
         descripcion: '',
         fechaRegistro: this.hoy(),
         ubicacion: 'Yopal',
         nivelActividad: 'bajo',
-        avatar: 'https://i.pravatar.cc/80?u=' + encodeURIComponent(correo),
+        avatar: this.avatarAleatorio(),
         publicaciones: 0,
         intercambios: 0,
         reportes: 0,
@@ -276,16 +261,31 @@ export class TruequesService {
     return null;
   }
 
+  // Foto de perfil para una cuenta nueva. Se elige de una lista curada de
+  // fotos de pravatar.cc (las mismas que ya usan los usuarios de prueba),
+  // en vez de generar una al azar por hash de correo, que a veces salía
+  // una imagen rara o poco presentable.
+  private avatarAleatorio(): string {
+    const fotos = [12, 5, 15, 33, 44, 45, 47, 48, 60, 65, 68, 47, 32, 20, 25];
+    const numero = fotos[Math.floor(Math.random() * fotos.length)];
+    return `https://i.pravatar.cc/80?img=${numero}`;
+  }
+
   cerrarSesion(): void {
     this.usuarioActualId.set(null);
     this.guardarSesion(null);
   }
 
-  /** Devuelve null si registró bien, o el mensaje de error. */
+  // Devuelve null si registró bien, o el mensaje de error.
+  // true si ya existe una cuenta con ese correo (para el paso 1 del registro).
+  correoRegistrado(email: string): boolean {
+    const correo = email.trim().toLowerCase();
+    return this.listaUsuarios().some((u) => u.email.toLowerCase() === correo);
+  }
+
   registrar(datos: {
     nombre: string;
     email: string;
-    password: string;
     telefono: string;
     ubicacion: string;
   }): string | null {
@@ -295,23 +295,20 @@ export class TruequesService {
     if (this.listaUsuarios().some((u) => u.email.toLowerCase() === correo)) {
       return 'Ese correo ya está registrado.';
     }
-    if (datos.password.length < 8) {
-      return 'La contraseña debe tener al menos 8 caracteres.';
-    }
 
     const nuevo: Usuario = {
       id: this.siguienteId('u', this.listaUsuarios()),
       nombre: datos.nombre.trim(),
       email: correo,
       telefono: datos.telefono.replace(/\D/g, ''),
-      password: datos.password,
+      password: '',
       estado: 'activo',
       verificacion: 'no_verificado',
       descripcion: '',
       fechaRegistro: this.hoy(),
       ubicacion: datos.ubicacion || 'Yopal',
       nivelActividad: 'bajo',
-      avatar: 'https://i.pravatar.cc/80?u=' + encodeURIComponent(correo),
+      avatar: this.avatarAleatorio(),
       publicaciones: 0,
       intercambios: 0,
       reportes: 0,
@@ -326,7 +323,7 @@ export class TruequesService {
     return null;
   }
 
-  /** Actualiza los datos del perfil del usuario que tiene la sesión. */
+  // Actualiza los datos del perfil del usuario que tiene la sesión.
   actualizarPerfil(cambios: {
     nombre?: string;
     telefono?: string;
@@ -344,7 +341,7 @@ export class TruequesService {
     return true;
   }
 
-  /** Devuelve null si cambió bien, o el mensaje de error. */
+  // Devuelve null si cambió bien, o el mensaje de error.
   cambiarPassword(actual: string, nueva: string): string | null {
     const usuario = this.usuarioActual();
     if (!usuario) return 'No hay sesión activa.';
@@ -367,9 +364,7 @@ export class TruequesService {
     this.guardar();
   }
 
-  // ==================================================================
   // Publicaciones
-  // ==================================================================
 
   todas = computed<PublicacionVista[]>(() => {
     const usuarios = new Map(this.listaUsuarios().map((u) => [u.id, u]));
@@ -425,7 +420,7 @@ export class TruequesService {
     return this.todas().find((p) => p.id === id);
   }
 
-  /** Crea la publicación y devuelve su id, o null si no hay sesión. */
+  // Crea la publicación y devuelve su id, o null si no hay sesión.
   crearPublicacion(datos: DatosPublicacion): string | null {
     const usuario = this.usuarioActual();
     if (!usuario) return null;
@@ -486,7 +481,7 @@ export class TruequesService {
     return true;
   }
 
-  /** No borra el registro: le cambia el estado a eliminada. */
+  // No borra el registro: le cambia el estado a eliminada.
   eliminarPublicacion(id: string): boolean {
     const p = this.listaPublicaciones().find((x) => x.id === id);
     if (!p || p.usuarioId !== this.usuarioActualId()) return false;
@@ -499,7 +494,7 @@ export class TruequesService {
     return true;
   }
 
-  /** Pausa una publicación activa, o reactiva una pausada. */
+  // Pausa una publicación activa, o reactiva una pausada.
   alternarEstadoPublicacion(id: string): void {
     this.listaPublicaciones.update((lista) =>
       lista.map((p) => {
@@ -512,11 +507,9 @@ export class TruequesService {
     this.guardar();
   }
 
-  /**
-   * Arma la publicación según el tipo. Aquí está la regla principal:
-   * el bien físico lleva municipio y barrio, el servicio solo municipio,
-   * y el bien digital no lleva ubicación ni cantidad ni disponibilidad.
-   */
+  // Arma la publicación según el tipo. Aquí está la regla principal:
+  // el bien físico lleva municipio y barrio, el servicio solo municipio,
+  // y el bien digital no lleva ubicación ni cantidad ni disponibilidad.
   private armarPublicacion(
     base: Record<string, unknown>,
     datos: DatosPublicacion,
@@ -545,7 +538,7 @@ export class TruequesService {
     return { ...base, tipo: 'bien_digital' } as unknown as Publicacion;
   }
 
-  /** Vuelve a contar cuántas publicaciones tiene el usuario. */
+  // Vuelve a contar cuántas publicaciones tiene el usuario.
   private contarPublicaciones(usuarioId: string): void {
     const total = this.listaPublicaciones().filter(
       (p) => p.usuarioId === usuarioId && p.estado !== 'eliminada',
@@ -560,7 +553,7 @@ export class TruequesService {
     return ETIQUETA_TIPO[tipo];
   }
 
-  /** Usa solo clases que ya existen en el CSS del proyecto. */
+  // Usa solo clases que ya existen en el CSS del proyecto.
   claseBadge(tipo: TipoPublicacion): string {
     return CLASE_BADGE_TIPO[tipo] ?? 'badge';
   }
@@ -593,13 +586,10 @@ export class TruequesService {
     return filas;
   }
 
-  /**
-   * Parte el texto de "buscas" para mostrarlo como etiquetas.
-   *
-   * OJO con la ñ: en una expresión regular \b la trata como si NO fuera letra,
-   * así que /\bo\b/ partía "Diseño" en "Diseñ" + "o". Por eso aquí se separa
-   * solo por coma o por " o " con espacios reales a los lados.
-   */
+  // Parte el texto de "buscas" para mostrarlo como etiquetas.
+  // OJO con la ñ: en una expresión regular \b la trata como si NO fuera letra,
+  // así que /\bo\b/ partía "Diseño" en "Diseñ" + "o". Por eso aquí se separa
+  // solo por coma o por " o " con espacios reales a los lados.
   private separarIntereses(buscas: string): string[] {
     const partes = buscas
       .split(/\s*,\s*|\s+o\s+/i)
@@ -615,9 +605,7 @@ export class TruequesService {
     return 'Publicado hace ' + dias + ' días';
   }
 
-  // ==================================================================
   // Trueques
-  // ==================================================================
 
   trueques = computed<TruequeVista[]>(() => {
     const usuarios = new Map(this.listaUsuarios().map((u) => [u.id, u]));
@@ -652,7 +640,7 @@ export class TruequesService {
     () => this.truequesRecibidos().filter((t) => t.estado === 'pendiente').length,
   );
 
-  /** Devuelve null si la solicitud se envió, o el mensaje de error. */
+  // Devuelve null si la solicitud se envió, o el mensaje de error.
   solicitarTrueque(publicacionId: string, ofrece: string): string | null {
     const yo = this.usuarioActual();
     if (!yo) return 'Inicia sesión para proponer un trueque.';
@@ -728,7 +716,7 @@ export class TruequesService {
     this.guardar();
   }
 
-  /** Cada parte confirma. Cuando confirman las dos, queda completado. */
+  // Cada parte confirma. Cuando confirman las dos, queda completado.
   confirmarTrueque(truequeId: string): void {
     const yo = this.usuarioActualId();
     if (!yo) return;
@@ -774,7 +762,7 @@ export class TruequesService {
     this.guardar();
   }
 
-  /** Nota de 1 a 5 que pone el usuario que tiene la sesión. */
+  // Nota de 1 a 5 que pone el usuario que tiene la sesión.
   calificarTrueque(truequeId: string, nota: number): void {
     const yo = this.usuarioActualId();
     if (!yo || nota < 1 || nota > 5) return;
@@ -791,7 +779,7 @@ export class TruequesService {
     this.guardar();
   }
 
-  /** Nota que ya puso el usuario en ese trueque (0 si todavía no califica). */
+  // Nota que ya puso el usuario en ese trueque (0 si todavía no califica).
   miCalificacion(t: TruequeVista): number {
     const yo = this.usuarioActualId();
     if (t.solicitanteId === yo) return t.calificacionSolicitante ?? 0;
@@ -828,7 +816,7 @@ export class TruequesService {
     );
   }
 
-  /** Saca el promedio de las notas que recibió cada usuario. */
+  // Saca el promedio de las notas que recibió cada usuario.
   private calcularCalificaciones(): void {
     const notasPorUsuario = new Map<string, number[]>();
 
@@ -860,9 +848,7 @@ export class TruequesService {
     );
   }
 
-  // ==================================================================
   // Notificaciones (avisos de una sola vía, no es un chat)
-  // ==================================================================
 
   notificaciones = computed<Notificacion[]>(() => {
     const id = this.usuarioActualId();
@@ -876,10 +862,8 @@ export class TruequesService {
     () => this.notificaciones().filter((n) => !n.leida).length,
   );
 
-  /**
-   * Aviso del municipio elegido. Sale de data/avisos-ubicacion.json y es
-   * solo para mostrar: no se guarda ni se marca como leído.
-   */
+  // Aviso del municipio elegido. Sale de data/avisos-ubicacion.json y es
+  // solo para mostrar: no se guarda ni se marca como leído.
   avisoDeUbicacion(municipio: string): AvisoUbicacion | undefined {
     const lista = this.listaAvisos();
     return lista.find((a) => a.municipio === municipio) ?? lista.find((a) => a.municipio === '');
@@ -922,9 +906,7 @@ export class TruequesService {
     ]);
   }
 
-  // ==================================================================
   // WhatsApp: XchanGo no tiene chat interno
-  // ==================================================================
 
   enlaceWhatsApp(publicacion: PublicacionVista): string | null {
     if (!publicacion.telefono) return null;
@@ -959,16 +941,14 @@ export class TruequesService {
     }
   }
 
-  /** Le pone el indicativo de Colombia al número. */
+  // Le pone el indicativo de Colombia al número.
   private armarEnlace(telefono: string, texto: string): string {
     const numeros = telefono.replace(/\D/g, '');
     const conIndicativo = numeros.startsWith('57') ? numeros : '57' + numeros;
     return 'https://wa.me/' + conIndicativo + '?text=' + encodeURIComponent(texto);
   }
 
-  // ==================================================================
   // Favoritos
-  // ==================================================================
 
   alternarFavorito(publicacion: { id: string }): void {
     const copia = new Set(this.favoritos());
@@ -985,11 +965,9 @@ export class TruequesService {
     return this.favoritos().has(id);
   }
 
-  // ==================================================================
   // Ayudas
-  // ==================================================================
 
-  /** Busca el número más alto y devuelve el siguiente: pub13 -> pub14 */
+  // Busca el número más alto y devuelve el siguiente: pub13 -> pub14
   private siguienteId(prefijo: string, lista: { id: string }[]): string {
     let mayor = 0;
     for (const item of lista) {

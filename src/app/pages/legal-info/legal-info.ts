@@ -24,7 +24,7 @@ interface LegalSection {
   styleUrls: ['./legal-info.css'],
 })
 export class LegalInfo {
-  /** Tab activo. Cambia el contenido sin navegar a otra ruta. */
+  // Tab activo. Cambia el contenido sin navegar a otra ruta.
   activeTab = signal<string>('terminos');
 
   readonly sections: LegalSection[] = [

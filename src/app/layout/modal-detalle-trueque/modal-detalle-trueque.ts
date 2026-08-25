@@ -13,16 +13,14 @@ import { TruequesService } from '../../services/trueques';
   styleUrl: './modal-detalle-trueque.css',
 })
 export class ModalDetalleTruequeComponent implements OnInit {
-  /**
-   * Id de la publicación cuando el detalle se abre COMO MODAL sobre el home.
-   * Si no llega, se toma de la ruta /trueque/:id (entrada directa por URL).
-   */
+  // Id de la publicación cuando el detalle se abre COMO MODAL sobre el home.
+  // Si no llega, se toma de la ruta /trueque/:id (entrada directa por URL).
   @Input() publicacionId: string | null = null;
 
-  /** Avisa al home que hay que cerrar el modal. */
+  // Avisa al home que hay que cerrar el modal.
   @Output() cerrado = new EventEmitter<void>();
 
-  /** true cuando se muestra encima del home, false cuando es su propia página. */
+  // true cuando se muestra encima del home, false cuando es su propia página.
   get esModal(): boolean {
     return this.publicacionId !== null;
   }
@@ -30,11 +28,9 @@ export class ModalDetalleTruequeComponent implements OnInit {
   private id = '';
   imagenActivaIndex = 0;
 
-  /**
-   * Getter en lugar de propiedad: los datos llegan por HTTP. `obtenerPorId`
-   * busca dentro de un `computed` memorizado, así que devuelve siempre la
-   * misma referencia y no dispara re-render en cada ciclo.
-   */
+  // Getter en lugar de propiedad: los datos llegan por HTTP. `obtenerPorId`
+  // busca dentro de un `computed` memorizado, así que devuelve siempre la
+  // misma referencia y no dispara re-render en cada ciclo.
   get trueque(): PublicacionVista | null {
     return this.truequesService.obtenerPorId(this.id) ?? null;
   }
@@ -61,7 +57,7 @@ export class ModalDetalleTruequeComponent implements OnInit {
     }
   }
 
-  /** Cierra al hacer clic en el fondo oscuro, no al tocar la tarjeta. */
+  // Cierra al hacer clic en el fondo oscuro, no al tocar la tarjeta.
   cerrarPorFondo(evento: MouseEvent): void {
     if (this.esModal && evento.target === evento.currentTarget) {
       this.volver();
@@ -74,13 +70,13 @@ export class ModalDetalleTruequeComponent implements OnInit {
     }
   }
 
-  /** Pasa a la foto anterior; al llegar al inicio vuelve a la última. */
+  // Pasa a la foto anterior; al llegar al inicio vuelve a la última.
   fotoAnterior(): void {
     const total = this.imagenes.length;
     this.imagenActivaIndex = (this.imagenActivaIndex - 1 + total) % total;
   }
 
-  /** Pasa a la siguiente; al llegar al final vuelve a la primera. */
+  // Pasa a la siguiente; al llegar al final vuelve a la primera.
   fotoSiguiente(): void {
     this.imagenActivaIndex = (this.imagenActivaIndex + 1) % this.imagenes.length;
   }
@@ -94,7 +90,7 @@ export class ModalDetalleTruequeComponent implements OnInit {
     img.src = 'https://placehold.co/600x450/ece2c9/1f1b16?text=Sin+imagen';
   }
 
-  /** Texto que el usuario ofrece a cambio (HU42). */
+  // Texto que el usuario ofrece a cambio (HU42).
   ofrezco = '';
   mensaje = '';
 
@@ -103,7 +99,7 @@ export class ModalDetalleTruequeComponent implements OnInit {
     return !!t && t.usuarioId === this.truequesService.usuarioActualId();
   }
 
-  /** Envía la solicitud de trueque y avisa al dueño de la publicación. */
+  // Envía la solicitud de trueque y avisa al dueño de la publicación.
   solicitarTrueque(): void {
     const t = this.trueque;
     if (!t) return;
@@ -123,12 +119,12 @@ export class ModalDetalleTruequeComponent implements OnInit {
     if (t) this.router.navigate(['/trueque', t.id, 'editar']);
   }
 
-  /** Reutiliza SOLO clases que ya existen en tu CSS. Cero cambios de estilo. */
+  // Reutiliza SOLO clases que ya existen en tu CSS. Cero cambios de estilo.
   claseBadge(tipo: TipoPublicacion): string {
     return this.truequesService.claseBadge(tipo);
   }
 
-  /** Abre WhatsApp con el dueño. XchanGo no tiene chat interno. */
+  // Abre WhatsApp con el dueño. XchanGo no tiene chat interno.
   contactarPorWhatsApp(): void {
     const t = this.trueque;
     if (!t) return;

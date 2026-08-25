@@ -143,11 +143,14 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  overflow-y: auto;
 }
 
 .modal__thumb {
-  /* Las miniaturas se reparten el alto de la columna en partes iguales */
-  flex: 1;
+  /* Cuadradas y de tamaño fijo: ya no se estiran según cuántas fotos haya. */
+  flex: 0 0 92px;
+  aspect-ratio: 1 / 1;
   width: 100%;
   min-height: 0;
   padding: 0;
@@ -240,10 +243,6 @@ svg {
 }
 
 
-
-
-
-
 .modal__section-title {
   margin: 0 0 8px;
   font-size: 0.8rem;
@@ -314,7 +313,7 @@ svg {
   opacity: 0.9;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 600px) {
   .modal {
     grid-template-columns: 1fr;
   }
@@ -330,21 +329,20 @@ svg {
 /* --- Acciones de trueque (agregado por la migración) --- */
 .modal__acciones { display: flex; flex-direction: column; gap: 10px; }
 .modal__input {
-  border: 1px solid #e5dcc8; border-radius: 10px; padding: 11px 13px;
-  font: inherit; background: #fff; color: #1f1b16;
+  border: 1px solid var(--xg-linea); border-radius: 10px; padding: 11px 13px;
+  font: inherit; background: #fff; color: var(--xg-tinta);
 
   /* Empuja los botones al fondo de la columna */
   margin-top: auto;
   padding-top: 4px;
 }
-.modal__input:focus { outline: none; border-color: #c8a86b; }
-.modal__cta--wa { background: #1f8a4c; border-color: #1f8a4c; color: #fff; }
+.modal__input:focus { outline: none; border-color: var(--xg-dorado-oscuro); }
 .modal__aviso {
-  margin: 2px 0 0; font-size: .88rem; color: #7a6f5d;
+  margin: 2px 0 0; font-size: .88rem; color: var(--xg-tinta-suave);
   background: #fffaef; border-radius: 8px; padding: 9px 11px;
 }
 
-/* ===== Flechas y contador de la galería ===== */
+/* Flechas y contador de la galería */
 .modal__flecha {
   position: absolute;
   top: 50%;
@@ -398,7 +396,7 @@ svg {
   padding: 5px 12px;
 
   background: rgba(31, 27, 22, 0.62);
-  color: #fffdf8;
+  color: var(--xg-papel);
   border-radius: var(--xg-radio-pill);
 
   font-size: 12px;
@@ -408,7 +406,7 @@ svg {
   -webkit-backdrop-filter: blur(6px);
 }
 
-/* ===== Pantallas angostas ===== */
+/* Pantallas angostas */
 @media (max-width: 900px) {
   .modal {
     grid-template-columns: 1fr;
@@ -430,44 +428,7 @@ svg {
   }
 }
 
-/* ===== Etiqueta de tipo: mismo chip claro de las tarjetas del home ===== */
-.badge {
-  display: inline-flex;
-  align-self: flex-start;
-  width: fit-content;
-  align-items: center;
-  gap: 7px;
-
-  padding: 7px 15px;
-
-  background: var(--xg-crema);
-  border: 1px solid var(--xg-borde-suave);
-  border-radius: var(--xg-radio-pill);
-
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--xg-texto);
-}
-
-.badge::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--xg-acento);
-}
-
-.badge--servicios::before {
-  background: #6f9a7a;
-}
-
-.badge--electronicos::before {
-  background: #8a93b8;
-}
-
-/* =========================================================
-   MODO MODAL — encima del home, como el de iniciar sesión
-   ========================================================= */
+/* MODO MODAL — encima del home, como el de iniciar sesión */
 
 .detalle-page--modal {
   position: fixed;

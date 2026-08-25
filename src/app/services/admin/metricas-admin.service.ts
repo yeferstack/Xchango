@@ -10,11 +10,9 @@ import {
 
 export type Periodo = '1d' | '7d' | '30d' | '90d' | 'anio';
 
-/**
- * Estas interfaces se redeclaraban aquí, duplicando `models/admin/metrica.ts`.
- * Ahora se importan de allí y se reexportan para no romper a quien las
- * importaba desde este archivo.
- */
+// Estas interfaces se redeclaraban aquí, duplicando `models/admin/metrica.ts`.
+// Ahora se importan de allí y se reexportan para no romper a quien las
+// importaba desde este archivo.
 export type { MetricasData, MetricasResumen, SerieGrafico };
 export type MetricaComparativa = Comparativa;
 

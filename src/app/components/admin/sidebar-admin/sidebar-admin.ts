@@ -13,7 +13,7 @@ import { Icon } from '../icon/icon';
 export class SidebarAdmin {
   private admins = inject(AdminsAdminService);
 
-  /** El moderador no puede crear usuarios, por eso no ve ese enlace. */
+  // El moderador no puede crear usuarios, por eso no ve ese enlace.
   get esAdministrador(): boolean {
     return this.admins.esAdministrador();
   }

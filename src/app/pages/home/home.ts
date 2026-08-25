@@ -5,13 +5,14 @@ import { ModalDetalleTruequeComponent } from '../../layout/modal-detalle-trueque
 import { Component, OnInit, HostListener, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { HeaderComponent } from '../../layout/header/header';
 import { Categoria } from '../../models/categoria.model';
 import { PublicacionVista, TipoPublicacion } from '../../models/publicacion.model';
 import { TruequesService } from '../../services/trueques';
 
 type FiltroTrueque = 'todos' | 'bienes' | 'servicios' | 'digitales';
 
-/** Cada pestaña del home corresponde a un tipo real de publicación. */
+// Cada pestaña del home corresponde a un tipo real de publicación.
 const TIPO_POR_FILTRO: Record<Exclude<FiltroTrueque, 'todos'>, TipoPublicacion> = {
   bienes: 'bien_fisico',
   servicios: 'servicio',
@@ -21,7 +22,7 @@ const TIPO_POR_FILTRO: Record<Exclude<FiltroTrueque, 'todos'>, TipoPublicacion> 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ModalDetalleTruequeComponent, CommonModule, FormsModule, RouterLink],
+  imports: [ModalDetalleTruequeComponent, CommonModule, FormsModule, HeaderComponent, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -31,18 +32,18 @@ export class HomeComponent implements OnInit {
   categoriaSeleccionada = 'todos';
   mostrarSoloFavoritos = false;
 
-  /** Municipio elegido. Vacío = todo Casanare. */
+  // Municipio elegido. Vacío = todo Casanare.
   municipioSeleccionado = '';
 
-  /** Municipios de Casanare, del catálogo compartido del proyecto. */
+  // Municipios de Casanare, del catálogo compartido del proyecto.
   readonly municipios: readonly string[] = MUNICIPIOS_CASANARE;
 
-  /** Categorías para el desplegable (reemplazan la barra lateral). */
+  // Categorías para el desplegable (reemplazan la barra lateral).
   get listaCategorias(): Categoria[] {
     return this.truequesService.categorias();
   }
 
-  /** true cuando el panel de categorías está desplegado. */
+  // true cuando el panel de categorías está desplegado.
   categoriasAbiertas = false;
 
   get textoCategoria(): string {
@@ -55,15 +56,15 @@ export class HomeComponent implements OnInit {
     this.categoriasAbiertas = !this.categoriasAbiertas;
   }
 
-  /** true cuando el panel de ubicación está desplegado. */
+  // true cuando el panel de ubicación está desplegado.
   ubicacionAbierta = false;
 
-  /** Texto que muestra el botón de ubicación. */
+  // Texto que muestra el botón de ubicación.
   get textoUbicacion(): string {
     return this.municipioSeleccionado || 'Todo Casanare';
   }
 
-  /** Aviso del municipio (data/avisos-ubicacion.json). Solo informativo. */
+  // Aviso del municipio (data/avisos-ubicacion.json). Solo informativo.
   get avisoUbicacion(): AvisoUbicacion | undefined {
     return this.truequesService.avisoDeUbicacion(this.municipioSeleccionado);
   }
@@ -76,12 +77,10 @@ export class HomeComponent implements OnInit {
     this.ubicacionAbierta = false;
   }
 
-  /**
-   * Catálogo único (data/categorias.json). Viene de un `computed` del servicio,
-   * así que devuelve SIEMPRE la misma referencia hasta que cambian los datos.
-   * No construir aquí un array nuevo: el sidebar lo recibe por @Input y Angular
-   * lo vería como cambiado en cada ciclo de detección de cambios.
-   */
+  // Catálogo único (data/categorias.json). Viene de un `computed` del servicio,
+  // así que devuelve SIEMPRE la misma referencia hasta que cambian los datos.
+  // No construir aquí un array nuevo: el sidebar lo recibe por @Input y Angular
+  // lo vería como cambiado en cada ciclo de detección de cambios.
 
   beneficios = [
     {
@@ -106,24 +105,28 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  /** Avisos sin leer del usuario en sesión. Antes era un 2 fijo. */
+  // Avisos sin leer del usuario en sesión. Antes era un 2 fijo.
   get notificaciones(): number {
     return this.truequesService.notificacionesSinLeer();
   }
 
-  /** Foto del usuario en sesión, para el botón del header. */
+  // Foto del usuario en sesión, para el botón del header.
   get avatarUrl(): string {
     return this.truequesService.usuarioActual()?.avatar ?? 'https://i.pravatar.cc/80?img=68';
   }
 
-  /** Nombre del usuario en sesión, para el mini menú de perfil. */
+  // true si hay una cuenta activa (no es una visita de invitado).
+  get estaAutenticado(): boolean {
+    return this.truequesService.autenticado();
+  }
+
+  // Nombre del usuario en sesión, para el mini menú de perfil.
   get nombreUsuario(): string {
     return this.truequesService.usuarioActual()?.nombre ?? 'Invitado';
   }
 
-  /* =========================================================
-     MINI MENÚ DE PERFIL Y NOTIFICACIONES (header)
-     ========================================================= */
+
+  // MINI MENÚ DE PERFIL Y NOTIFICACIONES (header)
 
   readonly menuPerfilAbierto = signal(false);
   readonly notificacionesAbiertas = signal(false);
@@ -138,16 +141,17 @@ export class HomeComponent implements OnInit {
     this.notificacionesAbiertas.update((v) => !v);
   }
 
-  /** Últimos avisos para el mini panel de la campana ("solo para ver"). */
+  // Últimos avisos para el mini panel de la campana ("solo para ver").
   get ultimasNotificaciones() {
     return this.truequesService.notificaciones().slice(0, 4);
   }
 
-  /** Cierra los menús del header y el de ubicación al hacer clic en cualquier otro lugar. */
+  // Cierra los menús del header y el de ubicación al hacer clic en cualquier otro lugar.
   @HostListener('document:click')
   cerrarMenusHeader(): void {
     this.menuPerfilAbierto.set(false);
     this.notificacionesAbiertas.set(false);
+    this.redesSocialesAbiertas.set(false);
     this.cerrarUbicacion();
   }
 
@@ -155,6 +159,23 @@ export class HomeComponent implements OnInit {
     this.truequesService.cerrarSesion();
     this.router.navigate(['/login']);
   }
+
+  // El footer solo aparece (y se queda fijo abajo) tras hacer scroll.
+  readonly footerVisible = signal(false);
+
+  readonly redesSocialesAbiertas = signal(false);
+
+  toggleRedesSociales(): void {
+    this.redesSocialesAbiertas.update((v) => !v);
+  }
+
+  onScrollRejilla(evento: Event): void {
+    const el = evento.target as HTMLElement;
+    if (el.scrollTop > 16) {
+      this.footerVisible.set(true);
+    }
+  }
+
 
   constructor(
     private truequesService: TruequesService,
@@ -165,22 +186,22 @@ export class HomeComponent implements OnInit {
     this.truequesService.cargar();
   }
 
-  /** Catálogo visible, ya resuelto contra usuarios y categorías. */
+  // Catálogo visible, ya resuelto contra usuarios y categorías.
   get trueques(): PublicacionVista[] {
     return this.truequesService.publicaciones();
   }
 
-  /** true mientras se cargan los JSON. */
+  // true mientras se cargan los JSON.
   get cargando(): boolean {
     return this.truequesService.cargando();
   }
 
-  /** Mensaje de error si los JSON no se pudieron cargar. */
+  // Mensaje de error si los JSON no se pudieron cargar.
   get errorCarga(): string | null {
     return this.truequesService.error();
   }
 
-  /** Abre WhatsApp con el dueño. XchanGo no tiene chat interno. */
+  // Abre WhatsApp con el dueño. XchanGo no tiene chat interno.
   contactarPorWhatsApp(publicacion: PublicacionVista, evento?: Event): void {
     evento?.stopPropagation();
     const enlace = this.truequesService.enlaceWhatsApp(publicacion);
@@ -189,7 +210,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  /** Combina búsqueda + tab (Bienes/Servicios/Digitales) + categoría del sidebar + solo-favoritos */
+  // Combina búsqueda + tab (Bienes/Servicios/Digitales) + categoría del sidebar + solo-favoritos
   get truequesFiltrados(): PublicacionVista[] {
     let resultado = this.trueques;
 
@@ -231,7 +252,7 @@ export class HomeComponent implements OnInit {
     return this.trueques.filter((t) => t.favorito).length;
   }
 
-  /** "Carlos Ospina" -> "Carlos O." para que quepa junto a la ciudad. */
+  // "Carlos Ospina" -> "Carlos O." para que quepa junto a la ciudad.
   nombreCorto(nombre: string): string {
     const partes = nombre.trim().split(' ');
     if (partes.length < 2) return nombre;
@@ -242,7 +263,9 @@ export class HomeComponent implements OnInit {
     return t.id;
   }
 
-  /** Filtra las publicaciones por municipio y cierra el panel. */
+
+  // Filtra las publicaciones por municipio.
+  // Filtra las publicaciones por municipio y cierra el panel.
   seleccionarMunicipio(municipio: string): void {
     this.municipioSeleccionado = municipio;
     this.ubicacionAbierta = false;
@@ -289,16 +312,14 @@ export class HomeComponent implements OnInit {
     this.mostrarSoloFavoritos = false;
   }
 
-  /**
-   * Clase del badge por TIPO. Reutiliza SOLO clases que ya existen en tu CSS
-   * (badge--bienes, badge--servicios, badge--electronicos). Cero cambios de
-   * estilo.
-   */
+  // Clase del badge por TIPO. Reutiliza SOLO clases que ya existen en tu CSS
+  // (badge--bienes, badge--servicios, badge--electronicos). Cero cambios de
+  // estilo.
   claseBadge(tipo: TipoPublicacion): string {
     return this.truequesService.claseBadge(tipo);
   }
 
-  /** Abre el formulario para crear una publicación. */
+  // Abre el formulario para crear una publicación.
   publicarTrueque(): void {
     this.router.navigate(['/trueque']);
   }
@@ -308,16 +329,14 @@ export class HomeComponent implements OnInit {
     img.src = 'https://placehold.co/600x450/ece2c9/1f1b16?text=Sin+imagen';
   }
 
-  /**
-   * Publicación abierta en el modal. null = no hay ninguno abierto.
-   * Se abre ENCIMA del home para que el fondo se vea difuminado detrás,
-   * igual que el modal de inicio de sesión.
-   */
+  // Navega a la página de detalle del trueque (/trueque/:id).
+  // Publicación abierta en el modal. null = no hay ninguno abierto.
+  // Se abre ENCIMA del home para que el fondo se vea difuminado detrás,
+  // igual que el modal de inicio de sesión.
   detalleAbierto: string | null = null;
 
   irADetalle(trueque: PublicacionVista): void {
     this.detalleAbierto = trueque.id;
-
     // Bloquea el scroll del fondo mientras el modal está abierto.
     document.body.style.overflow = 'hidden';
   }
