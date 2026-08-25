@@ -160,22 +160,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // El footer solo aparece (y se queda fijo abajo) tras hacer scroll.
-  readonly footerVisible = signal(false);
-
   readonly redesSocialesAbiertas = signal(false);
 
   toggleRedesSociales(): void {
     this.redesSocialesAbiertas.update((v) => !v);
   }
-
-  onScrollRejilla(evento: Event): void {
-    const el = evento.target as HTMLElement;
-    if (el.scrollTop > 16) {
-      this.footerVisible.set(true);
-    }
-  }
-
 
   constructor(
     private truequesService: TruequesService,
