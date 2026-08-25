@@ -6,7 +6,7 @@
     "password": "admin123",
     "rol": "admin",
     "estado": "activo",
-    "avatar": "/img/admin/avatar-admin.jpg",
+    "avatar": "https://i.pravatar.cc/80?img=68",
     "ultimoAcceso": "2026-08-18T09:12:00"
   },
   {
@@ -16,7 +16,7 @@
     "password": "mod123",
     "rol": "moderador",
     "estado": "activo",
-    "avatar": "/img/admin/avatar-moderadora.jpg",
+    "avatar": "https://i.pravatar.cc/80?img=45",
     "ultimoAcceso": "2026-08-17T18:40:00"
   }
 ]

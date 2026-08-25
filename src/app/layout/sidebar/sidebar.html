@@ -1,5 +1,6 @@
 <aside class="sidebar">
   <h2 class="sidebar__title">Tipos de trueques</h2>
+
   <ul class="sidebar__list">
     <li *ngFor="let categoria of categorias">
       <button
@@ -8,6 +9,7 @@
         [class.sidebar__item--active]="categoriaSeleccionada === categoria.id"
         (click)="seleccionar(categoria.id)"
       >
+        <app-icono class="sidebar__icono" [nombre]="categoria.icono"></app-icono>
         {{ categoria.nombre }}
       </button>
     </li>

@@ -2,9 +2,6 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { StatCard } from '../../../components/admin/stat-card/stat-card';
-import { ChartLinea } from '../../../components/admin/chart-linea/chart-linea';
-import { ChartBarras } from '../../../components/admin/chart-barras/chart-barras';
-import { ChartDona } from '../../../components/admin/chart-dona/chart-dona';
 import { BadgeEstado } from '../../../components/admin/badge-estado/badge-estado';
 import { Icon } from '../../../components/admin/icon/icon';
 import { MetricasAdminService } from '../../../services/admin/metricas-admin.service';
@@ -15,7 +12,7 @@ import { PublicacionesAdminService } from '../../../services/admin/publicaciones
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [DatePipe, RouterLink, StatCard, ChartLinea, ChartBarras, ChartDona, BadgeEstado, Icon],
+  imports: [DatePipe, RouterLink, StatCard, BadgeEstado, Icon],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,7 +38,7 @@ export class Dashboard implements OnInit, OnDestroy {
     this.publicacionesSrv.reportadas().filter(p => p.estado === 'pendiente').slice(0, 5)
   );
 
-  /** Porcentaje de variación de cada tarjeta (null si no hay comparativa). */
+  // Porcentaje de variación de cada tarjeta (null si no hay comparativa).
   variacion(clave: string): number | null {
     return this.comparativas()[clave]?.porcentaje ?? null;
   }

@@ -1,10 +1,17 @@
 <aside class="sidebar">
-	<div class="sidebar__marca"><span class="sidebar__logo">X</span><strong>XchanGo</strong><small>ADMIN</small></div>
+	<div class="sidebar__marca">
+		<img src="Logo-xchango/chango.png" alt="Logo XchanGo" class="sidebar__logo-img" />
+		<strong>XchanGo</strong>
+		<small>ADMIN</small>
+	</div>
 	<p class="sidebar__seccion">Panel de control</p>
 	<nav class="sidebar__nav">
 		<a routerLink="/admin/dashboard" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="dashboard" [size]="18" /> Dashboard</a>
 		<a routerLink="/admin/reportes" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="chart" [size]="18" /> Reportes</a>
 		<a routerLink="/admin/administracion" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="settings" [size]="18" /> Administración</a>
+		<a routerLink="/admin/documentos" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="shield-alert" [size]="18" /> Documentos</a>
+		<!-- Crear moderadores: solo lo ve el administrador -->
+		<a *ngIf="esAdministrador" routerLink="/admin/crear-usuario" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="users" [size]="18" /> Crear usuario</a>
 		<a routerLink="/admin/usuarios" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="users" [size]="18" /> Usuarios</a>
 		<a routerLink="/admin/moderacion" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="shield-alert" [size]="18" /> Moderación</a>
 		<a routerLink="/admin/ranking" routerLinkActive="sidebar__link--activo" (click)="navegar.emit()"><app-icon name="activity" [size]="18" /> Ranking</a>

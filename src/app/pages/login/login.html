@@ -1,31 +1,41 @@
-<!-- ================= LOGO FUERA DE LA NAVBAR ================= -->
+<!-- logo fuera de la navbar -->
 
 <a href="/" class="navbar__brand">
 
   <img
-    src="/Logo-xchango/chango.png"
+    src="Logo-xchango/chango.png"
     alt="Logo XchanGo"
     class="navbar__chango"
   >
 
   <img
-    src="/Logo-xchango/letras-chango.png"
+    src="Logo-xchango/letras-chango.png"
     alt="XchanGo"
     class="navbar__wordmark"
   >
 
 </a>
 
+<!-- acceso administrativo -->
 
-<!-- ================= NAVBAR ================= -->
+<a routerLink="/admin/login" class="admin-link" title="Ingresar como administrador o moderador">
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5z"/>
+  </svg>
+
+  Administrador / Moderador
+
+</a>
 
 <header class="navbar">
 
   <nav class="nav-links">
 
-    <!-- ================= INICIO ================= -->
+    <!-- inicio -->
 
-    <a href="#" class="nav-item active">
+    <a href="javascript:void(0)" class="nav-item active" (click)="abrirModal('login')">
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -50,10 +60,7 @@
 
     </a>
 
-
-    <!-- ================= EXPLORAR ================= -->
-
-    <a href="#" class="nav-item">
+    <a href="javascript:void(0)" class="nav-item" (click)="explorarComoInvitado()">
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -79,10 +86,7 @@
 
     </a>
 
-
-    <!-- ================= SERVICIOS ================= -->
-
-    <a href="#" class="nav-item">
+    <div class="nav-item nav-item--redes" (click)="toggleRedesSociales(); $event.stopPropagation()">
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -95,35 +99,48 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       >
-        <rect width="18" height="7" x="3" y="3" rx="1"/>
-        <rect width="9" height="7" x="3" y="14" rx="1"/>
-        <rect width="5" height="7" x="16" y="14" rx="1"/>
+        <circle cx="18" cy="5" r="3"/>
+        <circle cx="6" cy="12" r="3"/>
+        <circle cx="18" cy="19" r="3"/>
+        <path d="m8.6 10.5 6.8-3.9"/>
+        <path d="m8.6 13.5 6.8 3.9"/>
       </svg>
 
-      Servicios
+      Redes sociales
 
-    </a>
+      @if (redesSocialesAbiertas()) {
+
+        <div class="redes-menu" (click)="$event.stopPropagation()">
+
+          <a href="https://facebook.com" target="_blank" rel="noopener" class="redes-menu__item">
+            Facebook
+          </a>
+
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="redes-menu__item">
+            Instagram
+          </a>
+
+          <a href="https://wa.me/573000000000" target="_blank" rel="noopener" class="redes-menu__item">
+            WhatsApp
+          </a>
+
+        </div>
+
+      }
+
+    </div>
 
   </nav>
 
 </header>
 
-
-<!-- =========================================================
-     HERO
-     ========================================================= -->
-
 <main class="hero">
-
-
-  <!-- ================= HERO LEFT ================= -->
 
   <section class="hero-left">
 
     <p class="eyebrow">
       Bienvenido a XCHANGO
     </p>
-
 
     <h1 class="headline">
 
@@ -133,14 +150,12 @@
 
     </h1>
 
-
     <p class="subtext">
 
       La plataforma #1 de trueques<br>
       en tu comunidad.
 
     </p>
-
 
     <div class="cta-row">
 
@@ -153,11 +168,10 @@
         Crear Cuenta
 
         <span class="arrow">
-          →
+
         </span>
 
       </button>
-
 
       <button
         class="btn btn-outline"
@@ -173,11 +187,7 @@
 
   </section>
 
-
-
-  <!-- =====================================================
-       TELÉFONO
-       ===================================================== -->
+  <!-- teléfono -->
 
   <section class="hero-center">
 
@@ -186,20 +196,18 @@
       aria-hidden="true">
     </div>
 
-
     <div class="phone-wrap">
 
       <img
-        src="/Logo-xchango/tel.png"
+        src="Logo-xchango/tel.png"
         srcset="
-          /Logo-xchango/tel.png 1x,
-          /Logo-xchango/tel@2x.png 2x,
-          /Logo-xchango/tel@3x.png 3x
+          Logo-xchango/tel.png 1x,
+          Logo-xchango/tel@2x.png 2x,
+          Logo-xchango/tel@3x.png 3x
         "
         alt="Teléfono XchanGo"
         class="phone-img"
       >
-
 
       <div class="phone-screen">
 
@@ -207,22 +215,14 @@
 
     </div>
 
-
     <div class="phone-podium">
     </div>
 
   </section>
 
-
-
-  <!-- =====================================================
-       HERO RIGHT
-       ===================================================== -->
-
   <section class="hero-right">
 
-
-    <!-- ================= BUSCADOR ================= -->
+    <!-- buscador -->
 
     <div class="search-bar">
 
@@ -249,16 +249,18 @@
 
       </svg>
 
-
       <input
         type="text"
         placeholder="Buscar trueques..."
+        [(ngModel)]="terminoBusqueda"
+        (keydown.enter)="buscarComoInvitado()"
       >
-
 
       <button
         class="filter-btn"
-        aria-label="Filtros"
+        type="button"
+        aria-label="Buscar"
+        (click)="buscarComoInvitado()"
       >
 
         <svg
@@ -292,170 +294,149 @@
 
     </div>
 
-
-
-    <!-- =================================================
-     CATEGORÍAS
-     ================================================= -->
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <h3>
-      Explora por categorías
-    </h3>
-
-    <a
-      href="#"
-      class="see-all"
-    >
-      Ver todas ›
-    </a>
-
-  </div>
-
-
-  <div class="categories">
-
-
-    <!-- ================= ELECTRÓNICOS ================= -->
-
-    <div class="category">
-
-      <div class="category-icon">
-
-        <img
-          src="/Logo-xchango/icono_elec.png"
-          alt="Electrónicos"
-        >
-
-      </div>
-
-      <span>
-        Electrónicos
-      </span>
-
-    </div>
-
-
-
-    <!-- ================= VEHÍCULOS ================= -->
-
-    <div class="category">
-
-      <div class="category-icon">
-
-        <img
-          src="/Logo-xchango/icono_vehiculo.png"
-          alt="Vehículos"
-        >
-
-      </div>
-
-      <span>
-        Vehículos
-      </span>
-
-    </div>
-
-
-
-    <!-- ================= VIDEOJUEGOS ================= -->
-
-    <div class="category">
-
-      <div class="category-icon">
-
-        <img
-          src="/Logo-xchango/icono_juegos.png"
-          alt="Videojuegos"
-        >
-
-      </div>
-
-      <span>
-        Videojuegos
-      </span>
-
-    </div>
-
-
-
-    <!-- ================= ROPA ================= -->
-
-    <div class="category">
-
-      <div class="category-icon">
-
-        <img
-          src="/Logo-xchango/icono_ropa.png"
-          alt="Ropa"
-        >
-
-      </div>
-
-      <span>
-        Ropa
-      </span>
-
-    </div>
-
-
-
-    <!-- ================= HOGAR ================= -->
-
-    <div class="category">
-
-      <div class="category-icon">
-
-        <img
-          src="/Logo-xchango/icono_hogar.png"
-          alt="Hogar"
-        >
-
-      </div>
-
-      <span>
-        Hogar
-      </span>
-
-    </div>
-
-
-
-    <!-- ================= MÁS ================= -->
-
-    <div class="category">
-
-      <div class="category-icon">
-
-        <img
-          src="/Logo-xchango/icono_mas.png"
-          alt="Más"
-        >
-
-      </div>
-
-      <span>
-        Más ...
-      </span>
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-
-    <!-- =================================================
-         DESTACADOS
-         ================================================= -->
+    <!-- categorías -->
 
     <div class="panel">
 
+      <div class="panel-header">
+
+        <h3>
+          Explora por categorías
+        </h3>
+
+        <a
+          href="javascript:void(0)"
+          class="see-all"
+          (click)="abrirModal('login')"
+        >
+          Ver todas ›
+        </a>
+
+      </div>
+
+      <div class="categories">
+
+        <!-- electrónicos -->
+
+        <div class="category">
+
+          <div class="category-icon">
+
+            <img
+              src="Logo-xchango/icono_elec.png"
+              alt="Electrónicos"
+            >
+
+          </div>
+
+          <span>
+            Electrónicos
+          </span>
+
+        </div>
+
+        <!-- vehículos -->
+
+        <div class="category">
+
+          <div class="category-icon">
+
+            <img
+              src="Logo-xchango/icono_vehiculo.png"
+              alt="Vehículos"
+            >
+
+          </div>
+
+          <span>
+            Vehículos
+          </span>
+
+        </div>
+
+        <!-- videojuegos -->
+
+        <div class="category">
+
+          <div class="category-icon">
+
+            <img
+              src="Logo-xchango/icono_juegos.png"
+              alt="Videojuegos"
+            >
+
+          </div>
+
+          <span>
+            Videojuegos
+          </span>
+
+        </div>
+
+        <!-- ropa -->
+
+        <div class="category">
+
+          <div class="category-icon">
+
+            <img
+              src="Logo-xchango/icono_ropa.png"
+              alt="Ropa"
+            >
+
+          </div>
+
+          <span>
+            Ropa
+          </span>
+
+        </div>
+
+        <!-- hogar -->
+
+        <div class="category">
+
+          <div class="category-icon">
+
+            <img
+              src="Logo-xchango/icono_hogar.png"
+              alt="Hogar"
+            >
+
+          </div>
+
+          <span>
+            Hogar
+          </span>
+
+        </div>
+
+        <!-- más -->
+
+        <div class="category">
+
+          <div class="category-icon">
+
+            <img
+              src="Logo-xchango/icono_mas.png"
+              alt="Más"
+            >
+
+          </div>
+
+          <span>
+            Más ...
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- destacados -->
+
+    <div class="panel">
 
       <div class="panel-header">
 
@@ -463,17 +444,15 @@
           Destacados
         </h3>
 
-
         <a
-          href="#"
+          href="javascript:void(0)"
           class="see-all"
+          (click)="abrirModal('login')"
         >
           Ver todas ›
         </a>
 
       </div>
-
-
 
       <div
         class="products"
@@ -484,30 +463,26 @@
         (focusout)="reanudar()"
       >
 
-
         @for (
           producto of productosVisibles();
           track producto.nombre
         ) {
 
-
           <article class="product-card">
 
-
             <div class="product-img">
-
 
               <img
                 [src]="producto.imagen"
                 [alt]="producto.nombre"
               >
 
-
               <button
                 class="fav-btn"
+                type="button"
                 aria-label="Favorito"
+                (click)="abrirModal('registro')"
               >
-
 
                 <svg
                   class="fav-icon"
@@ -528,21 +503,15 @@
 
                 </svg>
 
-
               </button>
 
             </div>
-
-
 
             <h4>
               {{ producto.nombre }}
             </h4>
 
-
-
             <p class="location">
-
 
               <svg
                 class="location-icon"
@@ -567,9 +536,7 @@
 
               </svg>
 
-
               {{ producto.ubicacion }}
-
 
             </p>
 
@@ -579,36 +546,29 @@
 
       </div>
 
-
-
-      <!-- ================= PUNTOS ================= -->
+      <!-- puntos -->
 
       <div class="dots">
-
 
         <span
           class="dot"
           [class.active]="puntoActivo() === 0">
         </span>
 
-
         <span
           class="dot"
           [class.active]="puntoActivo() === 1">
         </span>
-
 
         <span
           class="dot"
           [class.active]="puntoActivo() === 2">
         </span>
 
-
         <span
           class="dot"
           [class.active]="puntoActivo() === 3">
         </span>
-
 
       </div>
 
@@ -618,22 +578,15 @@
 
 </main>
 
-
-
-<!-- =========================================================
-     CARACTERÍSTICAS
-     ========================================================= -->
+<!-- características -->
 
 <section class="features">
 
-
-  <!-- ================= SEGURO Y CONFIABLE ================= -->
+  <!-- seguro y confiable -->
 
   <div class="feature">
 
-
     <div class="feature-icon">
-
 
       <svg
         class="feature-svg"
@@ -670,7 +623,6 @@
 
     </div>
 
-
     <div>
 
       <h4>
@@ -685,15 +637,11 @@
 
   </div>
 
-
-
-  <!-- ================= COMUNIDAD ACTIVA ================= -->
+  <!-- comunidad activa -->
 
   <div class="feature">
 
-
     <div class="feature-icon">
-
 
       <svg
         class="feature-svg"
@@ -724,7 +672,6 @@
 
     </div>
 
-
     <div>
 
       <h4>
@@ -739,15 +686,11 @@
 
   </div>
 
-
-
-  <!-- ================= FÁCIL Y RÁPIDO ================= -->
+  <!-- fácil y rápido -->
 
   <div class="feature">
 
-
     <div class="feature-icon">
-
 
       <svg
         class="feature-svg"
@@ -768,7 +711,6 @@
 
     </div>
 
-
     <div>
 
       <h4>
@@ -783,15 +725,11 @@
 
   </div>
 
-
-
-  <!-- ================= SOPORTE ================= -->
+  <!-- soporte -->
 
   <div class="feature">
 
-
     <div class="feature-icon">
-
 
       <svg
         class="feature-svg"
@@ -822,7 +760,6 @@
 
     </div>
 
-
     <div>
 
       <h4>
@@ -845,13 +782,9 @@
 
   </div>
 
-
 </section>
 
-
-<!-- =========================================================
-     MODAL DE AUTENTICACIÓN
-     ========================================================= -->
+<!-- modal de autenticación -->
 
 <app-metodo-acceso
   [abierto]="modalAbierto()"

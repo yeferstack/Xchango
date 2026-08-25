@@ -24,7 +24,7 @@ interface LegalSection {
   styleUrls: ['./legal-info.css'],
 })
 export class LegalInfo {
-  /** Tab activo. Cambia el contenido sin navegar a otra ruta. */
+  // Tab activo. Cambia el contenido sin navegar a otra ruta.
   activeTab = signal<string>('terminos');
 
   readonly sections: LegalSection[] = [
@@ -71,7 +71,7 @@ export class LegalInfo {
           items: [
             '¿Cómo publicar mi primer objeto?: aprende a tomar fotos atractivas y a redactar descripciones honestas para que otros se interesen en tu intercambio.',
             'Búsqueda de servicios: utiliza nuestros filtros avanzados para encontrar talentos locales, desde clases particulares hasta reparaciones técnicas.',
-            'Cómo proponer un trato: consejos sobre cómo redactar mensajes claros y justos al momento de proponer un intercambio de valores equivalentes.',
+            'Cómo proponer un trato: consejos sobre cómo redactar mensajes claros y justos al momento de acordar un intercambio equilibrado para ambas partes.',
           ],
         },
         {
@@ -99,7 +99,7 @@ export class LegalInfo {
             'Verificación de identidad: para evitar perfiles falsos, cada miembro de XchanGo debe completar un proceso de verificación que incluye la validación de correo electrónico y, opcionalmente, documentos de identidad para obtener la insignia de "Usuario Verificado".',
             'Sistema de reputación y reseñas: después de cada intercambio, ambas partes pueden calificarse. Este historial es público y permite a los nuevos usuarios verificar la fiabilidad de sus futuros compañeros de trueque.',
             'Monitoreo de contenido: contamos con herramientas de moderación que analizan las publicaciones para asegurar que no se intercambien artículos prohibidos o servicios que no cumplan con nuestras normas comunitarias.',
-            'Transparencia en el trato: promovemos el uso de nuestro chat interno para mantener un registro de los acuerdos, facilitando la resolución de disputas en caso de que un intercambio no se cumpla según lo pactado.',
+            'Transparencia en el trato: el contacto entre usuarios continúa por WhatsApp con el número registrado en el perfil. XchanGo no almacena conversaciones: conserva el historial de WhatsApp como respaldo de lo pactado.',
           ],
         },
       ],

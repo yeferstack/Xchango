@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { IconoComponent } from '../../components/icono/icono';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DEPARTAMENTO, MUNICIPIOS_CASANARE } from '../../shared/municipios-casanare';
+import { Categoria } from '../../models/categoria.model';
+import { DatosPublicacion, TruequesService } from '../../services/trueques';
+import { TipoPublicacion } from '../../models/publicacion.model';
 
 interface TipoIntercambio {
   id: string;
@@ -11,41 +16,17 @@ interface TipoIntercambio {
   colorClase: string; // clase css para el color del icono/tarjeta
 }
 
-// Municipios de Casanare (único departamento manejado por la plataforma)
-const MUNICIPIOS_CASANARE: string[] = [
-  'Yopal',
-  'Aguazul',
-  'Chámeza',
-  'Hato Corozal',
-  'La Salina',
-  'Maní',
-  'Monterrey',
-  'Nunchía',
-  'Orocué',
-  'Paz de Ariporo',
-  'Pore',
-  'Recetor',
-  'Sabanalarga',
-  'Sácama',
-  'San Luis de Palenque',
-  'Támara',
-  'Tauramena',
-  'Trinidad',
-  'Villanueva'
-];
 
 @Component({
   selector: 'app-formulario-crear-trueques',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [IconoComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './formulario-crear-trueques.html',
   styleUrls: ['./formulario-crear-trueques.css']
 })
-export class Formulario_crear_truequesComponent implements OnInit {
+export class FormularioCrearTruequesComponent implements OnInit {
 
-  // ---------------------------------------------------------
   // 1. Tipos de intercambio (tarjetas seleccionables)
-  // ---------------------------------------------------------
   tiposIntercambio: TipoIntercambio[] = [
     {
       id: 'fisico',
@@ -70,19 +51,11 @@ export class Formulario_crear_truequesComponent implements OnInit {
     }
   ];
 
-  // ---------------------------------------------------------
   // 2. Catálogos usados en los selects
-  // ---------------------------------------------------------
-  categorias: string[] = [
-    'Tecnología',
-    'Ropa y accesorios',
-    'Hogar',
-    'Libros y educación',
-    'Deportes',
-    'Servicios profesionales',
-    'Arte y manualidades',
-    'Otros'
-  ];
+  // Catálogo único. Referencia estable: es un signal del servicio.
+  get categorias(): Categoria[] {
+    return this.truequesService.categorias();
+  }
 
   opcionesDisponibilidad: string[] = [
     'Inmediata',
@@ -93,23 +66,47 @@ export class Formulario_crear_truequesComponent implements OnInit {
   ];
 
   // Departamento fijo: la plataforma solo opera en Casanare
-  readonly departamento = 'Casanare';
-  municipiosCasanare: string[] = MUNICIPIOS_CASANARE;
+  errorGuardado = '';
+  readonly departamento = DEPARTAMENTO;
+  municipiosCasanare: readonly string[] = MUNICIPIOS_CASANARE;
 
-  // ---------------------------------------------------------
   // 3. Estado del formulario
-  // ---------------------------------------------------------
   form!: FormGroup;
 
   imagenes: File[] = [];
   imagenesPreviewUrls: string[] = [];
+  indiceImagenVistaPrevia = 0;
   readonly maxImagenes = 5;
   readonly maxDescripcion = 500;
   arrastrandoArchivo = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private truequesService: TruequesService
+  ) {
+    this.asegurarFuenteMaterialIcons();
+  }
+
+  // Inyecta el link de Google Fonts para Material Icons si el proyecto
+  // todavía no lo tiene cargado (evita que los íconos se vean como texto,
+  // ej: "inventory_2" en vez del ícono real).
+  private asegurarFuenteMaterialIcons(): void {
+    const idLink = 'material-icons-font';
+    if (document.getElementById(idLink)) {
+      return;
+    }
+    const link = document.createElement('link');
+    link.id = idLink;
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+    document.head.appendChild(link);
+  }
 
   ngOnInit(): void {
+    this.truequesService.cargar();
+
     this.form = this.fb.group({
       tipoIntercambio: ['fisico', Validators.required],
       nombre: ['', Validators.required],
@@ -125,9 +122,7 @@ export class Formulario_crear_truequesComponent implements OnInit {
     });
   }
 
-  // ---------------------------------------------------------
   // Helpers de plantilla
-  // ---------------------------------------------------------
   seleccionarTipo(id: string): void {
     this.form.get('tipoIntercambio')?.setValue(id);
   }
@@ -145,9 +140,7 @@ export class Formulario_crear_truequesComponent implements OnInit {
     return this.maxDescripcion - valor.length;
   }
 
-  // ---------------------------------------------------------
   // Manejo de imágenes (drag & drop + input)
-  // ---------------------------------------------------------
   onDragOver(event: DragEvent): void {
     event.preventDefault();
     this.arrastrandoArchivo = true;
@@ -182,21 +175,39 @@ export class Formulario_crear_truequesComponent implements OnInit {
         if (!file.type.match(/image\/(jpeg|png)/)) return;
         if (file.size > 5 * 1024 * 1024) return; // máx 5MB
 
-        this.imagenes.push(file);
+        // Reasigna el arreglo (en vez de mutar con push) para que Angular
+        // detecte el cambio incluso con estrategias de detección estrictas.
+        this.imagenes = [...this.imagenes, file];
+
         const reader = new FileReader();
-        reader.onload = () => this.imagenesPreviewUrls.push(reader.result as string);
+        reader.onload = () => {
+          this.imagenesPreviewUrls = [...this.imagenesPreviewUrls, reader.result as string];
+          this.cdr.detectChanges();
+        };
         reader.readAsDataURL(file);
       });
   }
 
   eliminarImagen(index: number): void {
-    this.imagenes.splice(index, 1);
-    this.imagenesPreviewUrls.splice(index, 1);
+    this.imagenes = this.imagenes.filter((_, i) => i !== index);
+    this.imagenesPreviewUrls = this.imagenesPreviewUrls.filter((_, i) => i !== index);
+
+    if (this.indiceImagenVistaPrevia >= this.imagenesPreviewUrls.length) {
+      this.indiceImagenVistaPrevia = Math.max(0, this.imagenesPreviewUrls.length - 1);
+    }
   }
 
-  // ---------------------------------------------------------
+  imagenAnterior(): void {
+    this.indiceImagenVistaPrevia =
+      (this.indiceImagenVistaPrevia - 1 + this.imagenesPreviewUrls.length) % this.imagenesPreviewUrls.length;
+  }
+
+  imagenSiguiente(): void {
+    this.indiceImagenVistaPrevia =
+      (this.indiceImagenVistaPrevia + 1) % this.imagenesPreviewUrls.length;
+  }
+
   // Navegación / envío
-  // ---------------------------------------------------------
   seleccionarUbicacionEnMapa(): void {
     // Aquí se integraría el selector de ubicación (Google Maps / Leaflet, etc.)
     console.log('Abrir selector de ubicación en el mapa');
@@ -206,20 +217,50 @@ export class Formulario_crear_truequesComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  // Convierte el id del selector visual al tipo que usa el modelo.
+  private tipoReal(): TipoPublicacion {
+    const id = this.form.get('tipoIntercambio')?.value as string;
+    if (id === 'servicio') return 'servicio';
+    if (id === 'digital') return 'bien_digital';
+    return 'bien_fisico';
+  }
+
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    const formData = new FormData();
-    formData.append('departamento', this.departamento);
-    Object.entries(this.form.getRawValue()).forEach(([key, value]) => {
-      formData.append(key, String(value));
-    });
-    this.imagenes.forEach(img => formData.append('imagenes', img));
+    const v = this.form.getRawValue();
+    const tipo = this.tipoReal();
 
-    // TODO: reemplazar por la llamada real al servicio de trueques
-    console.log('Publicación lista para enviar:', this.form.getRawValue(), this.imagenes);
+    // Los campos se mandan según el tipo: el bien digital no lleva ubicación,
+    // ni cantidad, ni disponibilidad, y el servicio no lleva barrio.
+    const datos: DatosPublicacion = {
+      tipo: tipo,
+      categoriaId: v.categoria,
+      titulo: v.nombre,
+      descripcion: v.descripcion,
+      ofreces: v.ofreces || v.nombre,
+      buscas: v.buscas,
+      imagenes: this.imagenesPreviewUrls,
+    };
+
+    if (tipo !== 'bien_digital') {
+      datos.municipio = v.municipio;
+      datos.cantidadDisponible = v.cantidad;
+      datos.disponibilidad = v.disponibilidad;
+      if (tipo === 'bien_fisico') {
+        datos.barrio = v.barrio;
+      }
+    }
+
+    const id = this.truequesService.crearPublicacion(datos);
+    if (!id) {
+      this.errorGuardado = 'Inicia sesión para publicar.';
+      return;
+    }
+
+    this.router.navigate(['/trueque', id]);
   }
 }

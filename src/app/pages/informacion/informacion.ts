@@ -1,37 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { IconoComponent } from '../../components/icono/icono';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TruequesService } from '../../services/trueques';
 
 @Component({
     selector: 'app-informacion',
     standalone: true,
-    imports: [CommonModule, FormsModule, RouterLink],
+    imports: [IconoComponent, CommonModule, FormsModule, RouterLink],
     templateUrl: './informacion.html',
     styleUrl: './informacion.css'
 })
-export class InformacionComponent {
-    // Datos generales del perfil (mismo header lateral que en /perfil)
-    nombreUsuario: string = 'Miguel Perez';
-    avatarUrl: string = 'assets/avatar-miguel.jpeg';
-    logoUrl: string = 'assets/logo-xchango.jpeg';
+export class InformacionComponent implements OnInit {
+    private servicio = inject(TruequesService);
 
-    calificacion: number = 4;
     calificacionMaxima: number = 5;
     totalCalificacionesRequeridas: number = 5;
 
     // Campos editables del formulario
-    nombreElegido: string = 'Miguel Perez';
+    nombreElegido: string = '';
     numeroTelefono: string = '';
 
     // Foto nueva seleccionada (preview antes de guardar)
     fotoPreviewUrl: string | null = null;
     private archivoSeleccionado: File | null = null;
 
+    guardado = false;
+
+    ngOnInit(): void {
+        this.servicio.cargar();
+        const usuario = this.servicio.usuarioActual();
+        this.nombreElegido = usuario?.nombre ?? '';
+        this.numeroTelefono = usuario?.telefono ?? '';
+    }
+
+    // Datos generales del perfil (mismo header lateral que en /perfil).
+    get nombreUsuario(): string {
+        return this.servicio.usuarioActual()?.nombre ?? 'Invitado';
+    }
+
+    get avatarUrl(): string {
+        return this.fotoPreviewUrl ?? this.servicio.usuarioActual()?.avatar ?? 'Logo-xchango/chango.png';
+    }
+
+    get calificacion(): number {
+        return this.servicio.usuarioActual()?.calificacion ?? 0;
+    }
+
+    get notificaciones(): number {
+        return this.servicio.notificacionesSinLeer();
+    }
+
     estrellas(): boolean[] {
         return Array.from(
             { length: this.calificacionMaxima },
-            (_, i) => i < this.calificacion
+            (_, i) => i < Math.round(this.calificacion)
         );
     }
 
@@ -52,13 +76,13 @@ export class InformacionComponent {
     }
 
     guardarCambios(): void {
-        // TODO: conectar con el servicio/API real de XchanGo
-        console.log('Guardando cambios:', {
-            nombreElegido: this.nombreElegido,
-            numeroTelefono: this.numeroTelefono,
-            archivo: this.archivoSeleccionado
+        this.servicio.actualizarPerfil({
+            nombre: this.nombreElegido.trim(),
+            telefono: this.numeroTelefono.trim(),
+            ...(this.fotoPreviewUrl ? { avatar: this.fotoPreviewUrl } : {}),
         });
 
-        alert('Cambios guardados correctamente.');
+        this.guardado = true;
+        setTimeout(() => (this.guardado = false), 2500);
     }
 }

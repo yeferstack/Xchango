@@ -1,0 +1,40 @@
+/*
+  Paleta de XchanGo.
+
+  Va en :host de app-root porque ese elemento envuelve toda la aplicación,
+  así que las variables llegan por herencia a cualquier componente y no
+  hay que repetir los mismos hex en cada archivo.
+*/
+
+:host {
+  --xg-tinta: #1f1b16;
+  --xg-tinta-oscura: #1c1a17;
+  --xg-tinta-media: #29251f;
+  --xg-tinta-suave: #7a6f5d;
+  --xg-tinta-tenue: #847a68;
+  --xg-tinta-gris: #6f6656;
+
+  --xg-papel: #fffdf8;
+  --xg-papel-crema: #f7f3ea;
+  --xg-blanco: #ffffff;
+
+  --xg-linea: #e5dcc8;
+
+  --xg-dorado: #c9a876;
+  --xg-dorado-oscuro: #c8a86b;
+  --xg-ambar: #a3690f;
+
+  --xg-verde: #2f6d4f;
+  --xg-verde-claro: #2f7d5d;
+  --xg-verde-fondo: #e8f3ed;
+
+  --xg-rojo: #a8453b;
+  --xg-rojo-fuerte: #dc2626;
+  --xg-rojo-medio: #a63f33;
+  --xg-rojo-fondo: #fee2e2;
+
+  --xg-radio: 16px;
+  --xg-radio-chico: 10px;
+  --xg-radio-grande: 26px;
+  --xg-radio-pill: 999px;
+}

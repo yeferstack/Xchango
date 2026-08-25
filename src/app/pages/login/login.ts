@@ -1,12 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostListener,
   OnDestroy,
   OnInit,
   computed,
   signal
 } from '@angular/core';
 
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { MetodoAcceso, ModoAuth, MetodoAuth } from './metodo-acceso/metodo-acceso';
 
 export interface Producto {
@@ -20,14 +25,12 @@ export interface Producto {
   templateUrl: './login.html',
   styleUrl: './login.css',
   standalone: true,
-  imports: [MetodoAcceso],
+  imports: [MetodoAcceso, RouterLink, FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login implements OnInit, OnDestroy {
 
-  /* =========================================================
-     PRODUCTOS DESTACADOS
-     ========================================================= */
+  // productos destacados
 
   productos: Producto[] = [
 
@@ -124,10 +127,6 @@ export class Login implements OnInit, OnDestroy {
   ];
 
 
-  /* =========================================================
-     CONFIGURACIÓN
-     ========================================================= */
-
   private readonly visibles = 4;
 
   private readonly dotsCount = 4;
@@ -140,19 +139,13 @@ export class Login implements OnInit, OnDestroy {
   private readonly duracionFundido = 260;
 
 
-  /* =========================================================
-     TIMERS
-     ========================================================= */
-
   private timerCarrusel?: ReturnType<typeof setInterval>;
 
   private timerFundido?: ReturnType<typeof setTimeout>;
   private timerReaparicion?: ReturnType<typeof setTimeout>;
 
 
-  /* =========================================================
-     ESTADOS CARRUSEL
-     ========================================================= */
+  // estados carrusel
 
   readonly inicio = signal(0);
 
@@ -163,18 +156,41 @@ export class Login implements OnInit, OnDestroy {
   readonly pausado = signal(false);
 
 
-  /* =========================================================
-     ESTADO MODAL DE AUTENTICACIÓN
-     ========================================================= */
+  // ESTADO MODAL DE AUTENTICACIÓN
 
   readonly modalAbierto = signal(false);
 
   readonly modoAuth = signal<ModoAuth>('login');
 
 
-  /* =========================================================
-     PRODUCTOS VISIBLES
-     ========================================================= */
+  // BUSCADOR Y REDES SOCIALES (sin sesión)
+
+  terminoBusqueda = '';
+
+  readonly redesSocialesAbiertas = signal(false);
+
+  toggleRedesSociales(): void {
+    this.redesSocialesAbiertas.update((v) => !v);
+  }
+
+  @HostListener('document:click')
+  cerrarRedesSociales(): void {
+    if (this.redesSocialesAbiertas()) {
+      this.redesSocialesAbiertas.set(false);
+    }
+  }
+
+  // "Explora" deja navegar por el home sin cuenta, solo para ver.
+  explorarComoInvitado(): void {
+    this.router.navigate(['/home']);
+  }
+
+  // El buscador del hero también funciona sin haber iniciado sesión.
+  buscarComoInvitado(): void {
+    const termino = this.terminoBusqueda.trim();
+    this.router.navigate(['/home'], termino ? { queryParams: { buscar: termino } } : {});
+  }
+
 
   readonly productosVisibles = computed<Producto[]>(() => {
 
@@ -203,10 +219,6 @@ export class Login implements OnInit, OnDestroy {
   });
 
 
-  /* =========================================================
-     PUNTO ACTIVO
-     ========================================================= */
-
   readonly puntoActivo = computed(() => {
 
     const posicion = this.inicio();
@@ -216,7 +228,7 @@ export class Login implements OnInit, OnDestroy {
      * (no en grupos de `visibles`, que es un valor distinto y
      * solo coincidía con dotsCount por casualidad). Con 15
      * productos y 4 puntos: segmento = ceil(15/4) = 4
-     * → posiciones 0-3 = punto 0, 4-7 = punto 1, 8-11 = punto 2,
+     *  posiciones 0-3 = punto 0, 4-7 = punto 1, 8-11 = punto 2,
      *   12-14 = punto 3.
      * El Math.min evita que el índice se pase del último punto
      * si la división no es exacta.
@@ -232,10 +244,6 @@ export class Login implements OnInit, OnDestroy {
   });
 
 
-  /* =========================================================
-     CICLO DE VIDA
-     ========================================================= */
-
   ngOnInit(): void {
 
     this.iniciarCarrusel();
@@ -249,10 +257,6 @@ export class Login implements OnInit, OnDestroy {
 
   }
 
-
-  /* =========================================================
-     PAUSAR
-     ========================================================= */
 
   pausar(): void {
 
@@ -268,9 +272,7 @@ export class Login implements OnInit, OnDestroy {
   }
 
 
-  /* =========================================================
-     MODAL DE AUTENTICACIÓN
-     ========================================================= */
+  // modal de autenticación
 
   abrirModal(modo: ModoAuth): void {
 
@@ -291,19 +293,19 @@ export class Login implements OnInit, OnDestroy {
 
   }
 
+  private readonly router = inject(Router);
+
   onMetodoSeleccionado(metodo: MetodoAuth): void {
+    this.cerrarModal();
 
-    // Punto de enganche para la autenticación real (Firebase,
-    // Google OAuth, Apple OAuth, correo). Por ahora solo se deja
-    // preparado el flujo visual.
-    console.log('Método de autenticación seleccionado:', metodo, this.modoAuth());
-
+    // Google y Apple no están implementados, todo se resuelve por correo.
+    if (this.modoAuth() === 'registro') {
+      this.router.navigate(['/formulario']);
+    } else {
+      this.router.navigate(['/acceso']);
+    }
   }
 
-
-  /* =========================================================
-     INICIAR
-     ========================================================= */
 
   private iniciarCarrusel(): void {
 
@@ -323,10 +325,6 @@ export class Login implements OnInit, OnDestroy {
 
   }
 
-
-  /* =========================================================
-     AVANZAR
-     ========================================================= */
 
   private avanzar(): void {
 
@@ -372,10 +370,6 @@ export class Login implements OnInit, OnDestroy {
 
   }
 
-
-  /* =========================================================
-     DETENER
-     ========================================================= */
 
   private detenerCarrusel(): void {
 
