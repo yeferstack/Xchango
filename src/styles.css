@@ -162,7 +162,7 @@ body.xg-auth {
       rgba(243, 235, 223, 0.76) 48%,
       rgba(236, 223, 205, 0.82)
     ),
-    url("/Logo-xchango/fondo.jpg") center / cover no-repeat fixed;
+    url("Logo-xchango/fondo.jpg") center / cover no-repeat fixed;
 }
 
 /* el login es una landing y no debería hacer scroll */

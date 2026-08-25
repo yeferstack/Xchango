@@ -42,7 +42,7 @@ body {
       rgba(243, 235, 223, .76) 48%,
       rgba(236, 223, 205, .82)
     ),
-    url("/Logo-xchango/fondo.jpg")
+    url("Logo-xchango/fondo.jpg")
     center / cover
     no-repeat;
 }
