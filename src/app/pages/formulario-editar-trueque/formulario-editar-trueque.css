@@ -17,7 +17,7 @@ app-icono {
   font-feature-settings: 'liga';
 }
 
-/* ESTADOS DE CARGA / ERROR */
+/* ===================== ESTADOS DE CARGA / ERROR ===================== */
 .estado-carga,
 .estado-error {
   display: flex;
