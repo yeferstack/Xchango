@@ -15,7 +15,7 @@ export class AlertasAdminService {
   readonly cargando = this._cargando.asReadonly();
   readonly error = this._error.asReadonly();
 
-  /** Contador para el badge de notificaciones del header. */
+  // Contador para el badge de notificaciones del header.
   readonly noLeidas = computed(() => this._alertas().filter(a => !a.leida).length);
 
   cargar(): void {
@@ -24,7 +24,7 @@ export class AlertasAdminService {
     this._cargando.set(true);
     this._error.set(null);
 
-    this.http.get<Alerta[]>('/data/alertas.json').subscribe({
+    this.http.get<Alerta[]>('data/alertas.json').subscribe({
       next: datos => {
         this._alertas.set(datos);
         this._cargando.set(false);

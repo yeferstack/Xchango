@@ -1,15 +1,39 @@
 :host {
-  --bg: #f3efe7;
-  --panel: #faf8f3;
-  --ink: #1f1b16;
-  --ink-soft: #6b645a;
-  --line: #e7e0d3;
-  --accent-soft: #ece2c9;
+  /* Colores enlazados a los tokens de XchanGo */
+  --bg: var(--xg-bg);
+  --panel: var(--xg-superficie);
+  --ink: var(--xg-texto);
+  --ink-soft: var(--xg-texto-suave);
+  --line: var(--xg-borde-suave);
+  --accent-soft: var(--xg-crema);
   --radius-lg: 20px;
   --radius-sm: 10px;
-  font-family: 'Nunito', 'Segoe UI', Roboto, sans-serif;
+
+  font-family: var(--xg-fuente-texto);
   color: var(--ink);
   display: block;
+
+  /* Acompaña el scroll: se queda pegado bajo el header.
+     El max-height evita que se salga de la pantalla si hay
+     muchas categorías; en ese caso hace scroll por dentro. */
+  position: sticky;
+  top: calc(var(--xg-alto-header) + 10px);
+  align-self: start;
+
+  max-height: calc(100vh - var(--xg-alto-header) - 24px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  transition: top 0.28s ease;
+}
+
+:host::-webkit-scrollbar {
+  width: 6px;
+}
+
+:host::-webkit-scrollbar-thumb {
+  background: var(--xg-borde);
+  border-radius: 999px;
 }
 
 * {
@@ -24,24 +48,30 @@ textarea {
 }
 
 .sidebar {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-  position: sticky;
-  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 20px 16px;
+
+  background: var(--xg-superficie);
+  border: 1px solid var(--xg-borde-suave);
+  border-radius: 24px;
+
+  box-shadow: 0 6px 18px rgba(96, 77, 51, 0.04);
 }
 
 .sidebar__title {
-  font-family: 'Baloo 2', 'Nunito', sans-serif;
-  font-size: 1rem;
+  margin: 0 0 10px 10px;
+  font-family: var(--xg-fuente-titulo);
+  font-size: 15px;
   font-weight: 700;
-  margin: 0 0 14px;
+  color: var(--xg-texto-suave);
 }
 
 .sidebar__list {
   list-style: none;
-  margin: 0 0 20px;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -50,14 +80,35 @@ textarea {
 
 .sidebar__item {
   width: 100%;
-  text-align: left;
-  padding: 9px 12px;
-  border-radius: var(--radius-sm);
-  border: none;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 11px 13px;
+
   background: transparent;
-  font-size: 0.88rem;
-  color: var(--ink-soft);
+  border: 0;
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--xg-texto-suave);
+  text-align: left;
   cursor: pointer;
+
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.sidebar__icono {
+  color: var(--xg-texto-tenue);
+  font-size: 19px;
+  flex-shrink: 0;
+}
+
+.sidebar__item:hover {
+  background: var(--xg-crema);
+  color: var(--xg-texto);
 }
 
 .sidebar__item:hover {
@@ -66,35 +117,53 @@ textarea {
 }
 
 .sidebar__item--active {
-  background: var(--accent-soft);
-  color: var(--ink);
-  font-weight: 600;
+  background: var(--xg-crema-fuerte);
+  color: var(--xg-texto);
+}
+
+.sidebar__item--active .sidebar__icono {
+  color: var(--xg-acento-oscuro);
 }
 
 .publish-btn {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  border-radius: 999px;
-  border: none;
-  background: var(--ink);
-  color: #fff;
-  font-size: 0.88rem;
-  font-weight: 600;
+  gap: 10px;
+
+  margin-top: 14px;
+  padding: 13px 8px 13px 18px;
+
+  background: var(--xg-texto);
+  border: 0;
+  border-radius: var(--xg-radio-pill);
+
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--xg-superficie);
   cursor: pointer;
+
+  transition: background 0.18s ease;
+}
+
+.publish-btn:hover {
+  background: #322b23;
 }
 
 .publish-btn__plus {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+
+  width: 30px;
+  height: 30px;
+
+  background: var(--xg-superficie);
+  color: var(--xg-texto);
+  border-radius: 50%;
+
+  font-size: 18px;
+  line-height: 1;
 }
 
 @media (max-width: 900px) {
@@ -102,3 +171,5 @@ textarea {
     position: static;
   }
 }
+
+

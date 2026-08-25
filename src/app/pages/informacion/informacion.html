@@ -1,6 +1,5 @@
 <div class="perfil-page">
 
-    <!-- NAVBAR -->
     <header class="navbar">
         <div class="navbar__brand">
         <img src="Logo-xchango/chango.png" alt="XchanGo" class="navbar__logo" />
@@ -8,33 +7,29 @@
         </div>
 
         <nav class=" navbar__pill">
-            <a class="navbar__link"><span class="material-icons">home</span> Inicio</a>
-            <a class="navbar__link"><span class="material-icons">search</span> Explorar</a>
-            <a class="navbar__link"><span class="material-icons">swap_horiz</span> Mis trueques</a>
-            <a class="navbar__link"><span class="material-icons">apps</span> Servicios</a>
-            <a class="navbar__link"><span class="material-icons">chat_bubble_outline</span> Mensajes</a>
-            <a class="navbar__link"><span class="material-icons">favorite_border</span> Favoritos</a>
+            <a class="navbar__link" routerLink="/home"><app-icono nombre="home"></app-icono> Inicio</a>
+            <a class="navbar__link" routerLink="/mis-trueques"><app-icono nombre="swap_horiz"></app-icono> Mis trueques</a>
+            <a class="navbar__link" routerLink="/mis-publicaciones"><app-icono nombre="apps"></app-icono> Mis publicaciones</a>
         </nav>
 
         <div class="navbar__actions">
-            <button class="navbar__icon-btn" aria-label="Notificaciones">
-                <span class="material-icons">notifications_none</span>
+            <button class="navbar__icon-btn" aria-label="Notificaciones" routerLink="/notificaciones">
+                <app-icono nombre="notifications_none"></app-icono>
             </button>
             <div class="navbar__avatar">
                 <img [src]="avatarUrl" [alt]="nombreUsuario" />
             </div>
-            <span class="material-icons navbar__chevron">expand_more</span>
+            <app-icono nombre="expand_more"></app-icono>
         </div>
     </header>
 
-    <!-- CONTENIDO -->
     <main class="perfil">
         <section class="perfil__card perfil__hero">
 
             <!-- Columna izquierda: igual que en /perfil, con link de vuelta -->
             <div class="perfil__identity">
                 <a routerLink="/perfil" class="perfil__back" aria-label="Volver al perfil">
-                    <span class="material-icons">arrow_back</span> Volver
+                    <app-icono nombre="arrow_back"></app-icono> Volver
                 </a>
 
                 <div class="perfil__avatar-wrap">
@@ -47,9 +42,12 @@
                     <h2 class="perfil__rating-title">Calificaciones y opiniones</h2>
                     <div class="perfil__stars"
                         [attr.aria-label]="calificacion + ' de ' + calificacionMaxima + ' estrellas'">
-                        <span class="material-icons" *ngFor="let llena of estrellas()" [class.is-filled]="llena">
-                            star
-                        </span>
+                        <app-icono
+                            *ngFor="let llena of estrellas()"
+                            class="perfil__star"
+                            [class.perfil__star--llena]="llena"
+                            nombre="star"
+                        ></app-icono>
                     </div>
                     <p class="perfil__rating-note">
                         (Solo será visible públicamente tras recibir
@@ -81,7 +79,7 @@
                         <label class="upload-box" for="fotoInput">
                             <ng-container *ngIf="!fotoPreviewUrl">
                                 <span class="upload-box__hint">Subir foto</span>
-                                <span class="material-icons upload-box__icon">south</span>
+                                <app-icono nombre="south"></app-icono>
                             </ng-container>
 
                             <img *ngIf="fotoPreviewUrl" class="upload-box__preview" [src]="fotoPreviewUrl"

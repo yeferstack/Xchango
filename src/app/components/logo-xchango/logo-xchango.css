@@ -1,0 +1,87 @@
+:host {
+  display: inline-flex;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logo__chango,
+.logo__letras {
+  display: block;
+  object-fit: contain;
+}
+
+.logo__letras {
+  height: auto;
+}
+
+/* las tres medidas salen del login: 42/112 es el del landing */
+.logo--sm .logo__chango {
+  width: 30px;
+  height: 30px;
+}
+
+.logo--sm .logo__letras {
+  width: 84px;
+}
+
+.logo--md .logo__chango {
+  width: 34px;
+  height: 34px;
+}
+
+.logo--md .logo__letras {
+  width: 96px;
+}
+
+.logo--lg .logo__chango {
+  width: 42px;
+  height: 42px;
+}
+
+.logo--lg .logo__letras {
+  width: 112px;
+}
+
+@media (max-width: 600px) {
+  .logo--lg .logo__chango {
+    width: 34px;
+    height: 34px;
+  }
+
+  .logo--lg .logo__letras {
+    width: 96px;
+  }
+}
+
+/* logo.png ya viene con las letras debajo, así que va solo */
+.logo--apilado {
+  justify-content: center;
+}
+
+.logo__completo {
+  display: block;
+  object-fit: contain;
+}
+
+.logo--apilado.logo--sm .logo__completo {
+  width: 84px;
+}
+
+.logo--apilado.logo--md .logo__completo {
+  width: 108px;
+}
+
+.logo--apilado.logo--lg .logo__completo {
+  width: 132px;
+}
+
+@media (max-width: 480px) {
+  .logo--apilado.logo--md .logo__completo {
+    width: 96px;
+  }
+}

@@ -1,11 +1,32 @@
+/* Esta página usa los tokens de XchanGo definidos en src/styles.css,
+   que salen de la paleta y las fuentes del login. */
+
+:host {
+  display: block;
+  background: var(--xg-bg);
+  color: var(--xg-texto);
+  font-family: var(--xg-fuente-texto);
+  min-height: 100vh;
+}
+
+/* Los iconos heredan el trazo del texto, igual que en el login. */
+app-icono {
+  color: var(--xg-texto-tenue);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--xg-fuente-titulo);
+  color: var(--xg-texto);
+}
+
 :host {
     display: block;
 }
 
 
-/* ==============================
-   PANEL DE LA SECCION
-============================== */
+/* PANEL DE LA SECCION */
 
 .seccion {
     display: flex;
@@ -14,32 +35,6 @@
     gap: 16px;
 
     align-content: start;
-}
-
-.seccion__head {
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    margin-bottom: 4px;
-}
-
-.seccion__titulo {
-    margin: 0;
-
-    font-size: 1.35rem;
-    font-weight: 700;
-
-    color: var(--text-primary);
-}
-
-.seccion__sub {
-    margin: 2px 0 0;
-
-    font-size: 0.85rem;
-
-    color: var(--text-secondary);
 }
 
 .volver {
@@ -85,9 +80,7 @@
 }
 
 
-/* ==============================
-   BLOQUES DESPLEGABLES
-============================== */
+/* bloques desplegables */
 
 .bloque {
     background: var(--bg-option);
@@ -220,9 +213,7 @@
 }
 
 
-/* ==============================
-   FILAS INTERNAS
-============================== */
+/* filas internas */
 
 .fila {
     display: flex;
@@ -236,14 +227,6 @@
     border-radius: 12px;
 
     background: var(--bg-app);
-}
-
-.fila--acciones {
-    justify-content: flex-end;
-
-    background: transparent;
-
-    padding: 4px 0 0;
 }
 
 .fila__texto {
@@ -275,27 +258,6 @@
     color: var(--text-secondary);
 }
 
-.etiqueta {
-    font-style: normal;
-
-    font-size: 0.68rem;
-    font-weight: 600;
-
-    letter-spacing: 0.02em;
-
-    padding: 2px 8px;
-
-    border-radius: 999px;
-
-    background: var(--accent);
-
-    color: #fff;
-}
-
-
-/* ==============================
-   SWITCH
-============================== */
 
 .switch {
     position: relative;
@@ -331,7 +293,7 @@
 
     border-radius: 50%;
 
-    background: #fff;
+    background: var(--xg-card);
 
     transition: transform 0.2s ease;
 }
@@ -345,63 +307,7 @@
 }
 
 
-/* ==============================
-   BOTONES
-============================== */
-
-.btn-texto {
-    background: none;
-
-    border: 0;
-
-    padding: 6px 4px;
-
-    font-family: inherit;
-    font-size: 0.85rem;
-    font-weight: 600;
-
-    color: var(--accent-dark);
-
-    cursor: pointer;
-
-    flex-shrink: 0;
-}
-
-.btn-texto:hover {
-    text-decoration: underline;
-}
-
-.btn-secundario {
-    background: transparent;
-
-    border: 1px solid var(--accent);
-
-    color: var(--accent-dark);
-
-    padding: 10px 18px;
-
-    border-radius: 12px;
-
-    font-family: inherit;
-    font-size: 0.85rem;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: background 0.15s ease, color 0.15s ease;
-}
-
-.btn-secundario:hover {
-    background: var(--accent);
-    color: #fff;
-}
-
-
-/* ==============================
-   RESPONSIVE
-============================== */
-
-@media (max-width: 640px) {
+@media (max-width: 600px) {
 
     .bloque__cabeza {
         padding: 16px 14px;

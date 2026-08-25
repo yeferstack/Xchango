@@ -1,7 +1,7 @@
-/* ==========================================================
-   XchanGo · Tu información
-   Misma paleta beige que /perfil + acento navy en el botón
-   ========================================================== */
+/*
+  XchanGo · Tu información
+  Misma paleta beige que /perfil + acento navy en el botón
+*/
 
 :host {
     --bg-app: #F4EEE1;
@@ -16,11 +16,11 @@
     --border-soft: #DED1B3;
     --star-filled: #C9AD7E;
     --star-empty: #D8CDB6;
-    --navy: #2B2A4C;
-    --navy-dark: #201F3B;
+    --navy: #1f1b16;
+    --navy-dark: #322b23;
 
     display: block;
-    font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Nunito', 'Segoe UI', Roboto, Arial, sans-serif;
     background: var(--bg-app);
     min-height: 100vh;
 }
@@ -35,7 +35,7 @@
     padding: 24px 40px 60px;
 }
 
-/* ============== NAVBAR (igual que en /perfil) ============== */
+/* NAVBAR (igual que en /perfil) */
 
 .navbar {
     display: flex;
@@ -88,7 +88,7 @@
     white-space: nowrap;
 }
 
-.navbar__link .material-icons {
+.navbar__link app-icono {
     font-size: 18px;
 }
 
@@ -133,11 +133,7 @@
     display: block;
 }
 
-.navbar__chevron {
-    color: var(--text-secondary);
-}
-
-/* ============== TARJETA PRINCIPAL ============== */
+/* tarjeta principal */
 
 .perfil {
     max-width: 1200px;
@@ -174,7 +170,7 @@
     cursor: pointer;
 }
 
-.perfil__back .material-icons {
+.perfil__back app-icono {
     font-size: 18px;
 }
 
@@ -223,12 +219,12 @@
     margin-bottom: 8px;
 }
 
-.perfil__stars .material-icons {
+.perfil__stars app-icono {
     font-size: 26px;
     color: var(--star-empty);
 }
 
-.perfil__stars .material-icons.is-filled {
+.perfil__stars app-icono.perfil__star--llena {
     color: var(--star-filled);
 }
 
@@ -317,10 +313,6 @@
     color: var(--text-secondary);
 }
 
-.upload-box__icon {
-    color: var(--text-secondary);
-}
-
 .upload-box__preview {
     width: 100%;
     height: 100%;
@@ -362,7 +354,6 @@
     object-fit: contain;
 }
 
-/* ============== RESPONSIVE ============== */
 
 @media (max-width: 1024px) {
     .navbar__pill {
@@ -389,7 +380,7 @@
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
     .perfil-page {
         padding: 16px;
     }

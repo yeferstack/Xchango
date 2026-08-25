@@ -11,7 +11,7 @@ import { MetricasAdminService } from '../../../services/admin/metricas-admin.ser
 import { AlertasAdminService } from '../../../services/admin/alertas-admin.service';
 import { HistorialAdminService } from '../../../services/admin/historial-admin.service';
 
-/** Título y bajada del header según la ruta activa. */
+// Título y bajada del header según la ruta activa.
 const TITULOS: Record<string, { titulo: string; sub: string }> = {
   dashboard: { titulo: 'Dashboard', sub: 'Resumen general de la plataforma' },
   reportes: { titulo: 'Reportes y estadísticas', sub: 'Métricas, gráficos y exportación de datos' },
@@ -38,10 +38,10 @@ export class AdminLayout implements OnInit {
   private readonly alertas = inject(AlertasAdminService);
   private readonly historial = inject(HistorialAdminService);
 
-  /** Drawer del sidebar en pantallas pequeñas. */
+  // Drawer del sidebar en pantallas pequeñas.
   readonly menuAbierto = signal(false);
 
-  /** Segmento final de la URL, como signal. */
+  // Segmento final de la URL, como signal.
   private readonly seccion = toSignal(
     this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd),

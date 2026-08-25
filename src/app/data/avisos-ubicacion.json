@@ -1,0 +1,37 @@
+[
+  {
+    "id": "av1",
+    "municipio": "Yopal",
+    "titulo": "7 trueques cerca de ti",
+    "mensaje": "Hay publicaciones nuevas en tu municipio esta semana.",
+    "icono": "location_on"
+  },
+  {
+    "id": "av2",
+    "municipio": "Aguazul",
+    "titulo": "3 trueques cerca de ti",
+    "mensaje": "Revisa lo que están ofreciendo en Aguazul.",
+    "icono": "location_on"
+  },
+  {
+    "id": "av3",
+    "municipio": "Villanueva",
+    "titulo": "2 trueques cerca de ti",
+    "mensaje": "Nuevas publicaciones en Villanueva.",
+    "icono": "location_on"
+  },
+  {
+    "id": "av4",
+    "municipio": "Tauramena",
+    "titulo": "1 trueque cerca de ti",
+    "mensaje": "Alguien publicó un servicio en Tauramena.",
+    "icono": "location_on"
+  },
+  {
+    "id": "av5",
+    "municipio": "",
+    "titulo": "Elige tu municipio",
+    "mensaje": "Así te mostramos primero los trueques que tienes cerca.",
+    "icono": "place"
+  }
+]
