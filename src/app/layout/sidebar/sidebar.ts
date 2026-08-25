@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { IconoComponent } from '../../components/icono/icono';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export interface CategoriaTrueque {
@@ -10,21 +11,22 @@ export interface CategoriaTrueque {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [IconoComponent, CommonModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
 export class SidebarComponent {
-  /** Lista de categorías a mostrar; la define el componente padre (home) */
+
+  // Lista de categorías a mostrar; la define el componente padre (home)
   @Input() categorias: CategoriaTrueque[] = [];
 
-  /** Id de la categoría actualmente seleccionada, controlado desde el padre */
+  // Id de la categoría actualmente seleccionada, controlado desde el padre
   @Input() categoriaSeleccionada = 'todos';
 
-  /** Se emite cuando el usuario hace clic en una categoría */
+  // Se emite cuando el usuario hace clic en una categoría
   @Output() categoriaCambiada = new EventEmitter<string>();
 
-  /** Se emite cuando el usuario hace clic en "Publicar un trueque" */
+  // Se emite cuando el usuario hace clic en "Publicar un trueque"
   @Output() publicar = new EventEmitter<void>();
 
   seleccionar(id: string): void {

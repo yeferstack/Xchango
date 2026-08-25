@@ -1,6 +1,10 @@
 import { Component } from "@angular/core";
+import { inject, signal } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
+import { TruequesService } from "../../services/trueques";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { VerificarCodigoComponent } from "../../layout/verificar-codigo/verificar-codigo";
 
 interface RegistroUsuario {
   nombres: string;
@@ -25,11 +29,11 @@ interface Opcion {
 @Component({
   selector: "formulario-crear-usuario",
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, VerificarCodigoComponent, RouterLink],
   templateUrl: "./formulario-crear-usuario.html",
   styleUrls: ["./formulario-crear-usuario.css"],
 })
-export class Formulario_crear_usuarioComponent {
+export class FormularioCrearUsuarioComponent {
   modelo: RegistroUsuario = {
     nombres: "",
     apellidos: "",
@@ -45,11 +49,21 @@ export class Formulario_crear_usuarioComponent {
     numeroDocumento: "",
   };
 
+  // La contraseña hace falta para poder iniciar sesión después.
+  // Paso actual del registro: primero el correo, luego el código, luego el formulario.
+  readonly paso = signal<'correo' | 'verificar' | 'formulario'>('correo');
+
+  errorRegistro = "";
+
+  private servicio = inject(TruequesService);
+
+  private readonly router = inject(Router);
+
   fotoPerfilArchivo: File | null = null;
   fotoPerfilNombre = "";
   isDragOver = false;
 
-  /** Datos de los <select>: cada uno se recorre en el HTML con *ngFor. */
+  // Datos de los <select>: cada uno se recorre en el HTML con *ngFor.
   readonly opcionesSexo: Opcion[] = [
     { value: "femenino", label: "Femenino" },
     { value: "masculino", label: "Masculino" },
@@ -107,18 +121,47 @@ export class Formulario_crear_usuarioComponent {
     this.fotoPerfilNombre = archivo.name;
   }
 
-  onSubmit(): void {
-    const formData = new FormData();
+  // Paso 1: solo el correo. Si el formato es válido y no está ya registrado, sigue a verificar.
+  continuarConCorreo(): void {
+    this.errorRegistro = "";
+    const correo = this.modelo.email.trim().toLowerCase();
 
-    Object.entries(this.modelo).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
-
-    if (this.fotoPerfilArchivo) {
-      formData.append("fotoPerfil", this.fotoPerfilArchivo);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+      this.errorRegistro = "Ingresa un correo válido.";
+      return;
+    }
+    if (this.servicio.correoRegistrado(correo)) {
+      this.errorRegistro = "Ese correo ya tiene una cuenta. Inicia sesión en vez de registrarte.";
+      return;
     }
 
-    // TODO: reemplazar con la llamada al servicio real
-    console.log("Formulario listo para enviar:", this.modelo, formData);
+    this.modelo.email = correo;
+    this.paso.set('verificar');
+  }
+
+  // Paso 2: código verificado, ahora sí se llena el resto de los datos.
+  onCodigoVerificado(): void {
+    this.paso.set('formulario');
+  }
+
+  // Paso 3: formulario completo, ya se registra de verdad.
+  onSubmit(): void {
+    this.errorRegistro = "";
+
+    const nombre = (this.modelo.nombres + " " + this.modelo.apellidos).trim();
+    const mensaje = this.servicio.registrar({
+      nombre: nombre,
+      email: this.modelo.email,
+      telefono: this.modelo.telefono,
+      ubicacion: this.modelo.ciudad || "Yopal",
+    });
+
+    if (mensaje) {
+      this.errorRegistro = mensaje;
+      return;
+    }
+
+    // Ya quedó registrado y con la sesión abierta.
+    this.router.navigate(["/home"]);
   }
 }

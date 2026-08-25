@@ -1,0 +1,71 @@
+<section class="doc">
+  <header class="doc__top">
+    <div>
+      <h1 class="doc__title">Verificación de documentos</h1>
+      <p class="doc__sub">
+        Revisa el documento que subió cada usuario y aprueba o rechaza su cuenta.
+      </p>
+    </div>
+    <span class="doc__contador" *ngIf="pendientes().length">
+      {{ pendientes().length }} por revisar
+    </span>
+  </header>
+
+  <nav class="doc__filtros">
+    <button type="button" class="doc__filtro" [class.doc__filtro--on]="filtro() === 'pendiente'"
+      (click)="cambiarFiltro('pendiente')">Pendientes ({{ contar('pendiente') }})</button>
+    <button type="button" class="doc__filtro" [class.doc__filtro--on]="filtro() === 'aprobado'"
+      (click)="cambiarFiltro('aprobado')">Aprobados ({{ contar('aprobado') }})</button>
+    <button type="button" class="doc__filtro" [class.doc__filtro--on]="filtro() === 'rechazado'"
+      (click)="cambiarFiltro('rechazado')">Rechazados ({{ contar('rechazado') }})</button>
+    <button type="button" class="doc__filtro" [class.doc__filtro--on]="filtro() === 'todos'"
+      (click)="cambiarFiltro('todos')">Todos ({{ contar('todos') }})</button>
+  </nav>
+
+  <p class="doc__vacio" *ngIf="!cargando() && listado().length === 0">
+    No hay documentos en esta lista.
+  </p>
+
+  <ul class="doc__lista">
+    <li class="doc__card" *ngFor="let d of listado()">
+      <div class="doc__head">
+        <img class="doc__avatar" [src]="d.usuarioAvatar" alt="" />
+        <div class="doc__quien">
+          <strong>{{ d.usuarioNombre }}</strong>
+          <span>{{ d.usuarioEmail }}</span>
+        </div>
+        <span [class]="claseEstado(d.estado)">{{ d.estado }}</span>
+      </div>
+
+      <dl class="doc__datos">
+        <div><dt>Tipo</dt><dd>{{ d.tipoDocumento }}</dd></div>
+        <div><dt>Número</dt><dd>{{ d.numero }}</dd></div>
+        <div><dt>Subido</dt><dd>{{ d.fechaSubida }}</dd></div>
+      </dl>
+
+      <div class="doc__archivo">
+        <app-icono nombre="description"></app-icono>
+        <span>{{ d.archivo }}</span>
+      </div>
+
+      <ng-container *ngIf="d.estado === 'pendiente'">
+        <input class="doc__obs" type="text" placeholder="Observación (opcional)"
+          [(ngModel)]="observaciones[d.id]" [name]="'obs-' + d.id" />
+
+        <div class="doc__acciones">
+          <button class="doc__btn doc__btn--ok" type="button" (click)="aprobar(d)">
+            <app-icono nombre="check_circle"></app-icono> Aprobar
+          </button>
+          <button class="doc__btn doc__btn--no" type="button" (click)="rechazar(d)">
+            <app-icono nombre="cancel"></app-icono> Rechazar
+          </button>
+        </div>
+      </ng-container>
+
+      <p class="doc__obs-texto" *ngIf="d.estado !== 'pendiente' && d.observacion">
+        {{ d.observacion }}
+        <span *ngIf="d.revisorNombre"> — revisó {{ d.revisorNombre }}</span>
+      </p>
+    </li>
+  </ul>
+</section>

@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AdminsAdminService } from '../services/admin/admins-admin.service';
 
-/** Bloquea /admin si no hay sesión y recuerda a dónde quería entrar. */
+// Bloquea /admin si no hay sesión y recuerda a dónde quería entrar.
 export const adminAuthGuard: CanActivateFn = (_route, state) => {
   const auth = inject(AdminsAdminService);
   const router = inject(Router);
@@ -12,7 +12,7 @@ export const adminAuthGuard: CanActivateFn = (_route, state) => {
   return router.createUrlTree(['/admin/login'], { queryParams: { redirigir: state.url } });
 };
 
-/** Evita que un admin ya logueado vuelva a ver el login. */
+// Evita que un admin ya logueado vuelva a ver el login.
 export const adminInvitadoGuard: CanActivateFn = () => {
   const auth = inject(AdminsAdminService);
   const router = inject(Router);

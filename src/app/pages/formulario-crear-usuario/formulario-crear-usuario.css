@@ -331,7 +331,7 @@ select {
   text-decoration: underline;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .form-card {
     padding: 28px 20px 32px;
   }
@@ -341,3 +341,67 @@ select {
     gap: 18px;
   }
 }
+.form-hint {
+  margin: 6px 2px 0;
+  font-size: 12px;
+  color: var(--color-text-muted, var(--xg-tinta-suave));
+}
+
+input[readonly] {
+  opacity: 0.75;
+  cursor: default;
+}
+
+/*
+  PASO 1: SOLO CORREO
+  Mismo estilo blanco/negro simple que /acceso y /login,
+  en vez del header dorado con puntitos que tenía el
+  formulario grande.
+*/
+
+.ac-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--xg-papel-crema);
+}
+
+.ac__marca {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.ac__marca-chango { width: 34px; height: 34px; object-fit: contain; }
+.ac__marca-wordmark { width: 90px; height: auto; object-fit: contain; }
+
+.ac__card {
+  width: min(420px, 100%);
+  background: var(--xg-papel);
+  border: 1px solid var(--xg-linea);
+  border-radius: 20px;
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ac__title { margin: 0 0 4px; font-family: "Baloo 2", sans-serif; font-size: 1.7rem; color: var(--xg-tinta); }
+.ac__sub { margin: 0 0 24px; color: var(--xg-tinta-suave); font-size: .92rem; }
+
+.ac__label { font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; color: var(--xg-tinta-suave); margin-bottom: 6px; }
+.ac__input { border: 1px solid var(--xg-linea); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font: inherit; background: #fff; color: var(--xg-tinta); }
+.ac__input:focus { outline: none; border-color: var(--xg-dorado-oscuro); }
+
+.ac__error { background: #f6e2e0; color: var(--xg-rojo); border-radius: 8px; padding: 10px 12px; margin: 0 0 14px; font-size: .88rem; }
+
+.ac__btn { background: var(--xg-tinta); color: var(--xg-papel); border: 0; border-radius: 10px; padding: 13px; font: inherit; font-weight: 600; cursor: pointer; }
+.ac__btn:hover { background: #322b23; }
+
+.ac__foot { margin: 20px 0 0; text-align: center; color: var(--xg-tinta-suave); font-size: .86rem; }
+.ac__foot a { color: var(--xg-tinta); }
