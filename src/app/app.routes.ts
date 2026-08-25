@@ -7,7 +7,7 @@ import { PerfilComponent } from './pages/perfil/perfil';
 import { InformacionComponent } from './pages/informacion/informacion';
 import { SeguridadComponent } from './pages/seguridad/seguridad';
 import { LegalInfo } from './pages/legal-info/legal-info';
-import { formulario_crear_truequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
+import { FormularioCrearTruequesComponent } from './pages/formulario-crear-trueques/formulario-crear-trueques';
 import { FormularioCrearUsuarioComponent } from './pages/formulario-crear-usuario/formulario-crear-usuario';
 import { LoginAdministracion } from './pages/login-administracion/login-administracion';
 import { AdminLayout } from './pages/admin/admin-layout/admin-layout';
@@ -19,10 +19,10 @@ import { Reportes } from './pages/admin/reportes/reportes';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { adminAuthGuard, adminInvitadoGuard } from './guards/admin-auth-guard';
 import { FormularioEditarTruequeComponent } from './pages/formulario-editar-trueque/formulario-editar-trueque';
-import { DatosCuentaComponent } from './pages/datos_cuenta/datos_cuenta';
+import { DatosCuentaComponent } from './pages/datos-cuenta/datos-cuenta';
 import { UbicacionComponent } from './pages/ubicacion/ubicacion';
-import { MisPublicacionesComponent } from './pages/mis_publicaciones/mis_publicaciones';
-import { MisTruequesComponent } from './pages/mis_trueques/mis_trueques';
+import { MisPublicacionesComponent } from './pages/mis-publicaciones/mis-publicaciones';
+import { MisTruequesComponent } from './pages/mis-trueques/mis-trueques';
 import { NotificacionesComponent } from './pages/notificaciones/notificaciones';
 import { AccesoComponent } from './pages/acceso/acceso';
 import { authGuard } from './guards/auth.guard';
@@ -32,18 +32,14 @@ import { FormularioCrearUsuarioAdminComponent } from './pages/admin/formulario-c
 
 export const routes: Routes = [
 
-  // =========================
-  // RUTA INICIAL
-  // =========================
+  // ruta inicial
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
 
-  // =========================
-  // LOGIN
-  // =========================
+  // login
   {
     path: 'login',
     component: Login
@@ -54,17 +50,13 @@ export const routes: Routes = [
     component: AccesoComponent
   },
 
-  // =========================
-  // HOME
-  // =========================
+  // home
   {
     path: 'home',
     component: HomeComponent
   },
 
-  // =========================
-  // TRUEQUES
-  // =========================
+  // trueques
   {
     path: 'trueque/:id',
     component: ModalDetalleTruequeComponent
@@ -72,13 +64,11 @@ export const routes: Routes = [
 
   {
     path: 'trueque',
-    component: formulario_crear_truequesComponent,
+    component: FormularioCrearTruequesComponent,
     canActivate: [authGuard]
   },
 
-  // =========================
-  // CREAR USUARIO
-  // =========================
+  // crear usuario
   {
     path: 'formulario',
     component: FormularioCrearUsuarioComponent
@@ -95,70 +85,54 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
 
-  // =========================
-// PERFIL > DATOS DE TU CUENTA
-// =========================
+  // PERFIL > DATOS DE TU CUENTA
 {
   path: 'perfil/cuenta',
   component: DatosCuentaComponent,
     canActivate: [authGuard]
 },
 
-// =========================
-// PERFIL > UBICACIÓN
-// =========================
+// perfil > ubicación
 {
   path: 'perfil/ubicacion',
   component: UbicacionComponent,
     canActivate: [authGuard]
 },
-// =========================
-// MIS PUBLICACIONES
-// =========================
+// mis publicaciones
 {
   path: 'mis-publicaciones',
   component: MisPublicacionesComponent,
     canActivate: [authGuard]
 },
 
-  // =========================
-  // INFORMACIÓN LEGAL
-  // =========================
+  // información legal
   {
     path: 'legal-info',
     component: LegalInfo
   },
 
-  // =========================
-  // PERFIL
-  // =========================
+  // perfil
   {
     path: 'perfil',
     component: PerfilComponent,
     canActivate: [authGuard]
   },
 
-  // =========================
-  // PERFIL > INFORMACIÓN
-  // =========================
+  // perfil > información
   {
     path: 'perfil/informacion',
     component: InformacionComponent,
     canActivate: [authGuard]
   },
 
-  // =========================
-  // PERFIL > SEGURIDAD
-  // =========================
+  // perfil > seguridad
   {
     path: 'perfil/seguridad',
     component: SeguridadComponent,
     canActivate: [authGuard]
   },
 
-  // =========================
-  // ADMINISTRACIÓN
-  // =========================
+  // administración
   {
     path: 'admin/login',
     component: LoginAdministracion,
@@ -182,9 +156,7 @@ export const routes: Routes = [
     ],
   },
 
-  // =========================
   // TRUEQUES Y AVISOS DEL USUARIO
-  // =========================
   {
     path: 'mis-trueques',
     component: MisTruequesComponent,
@@ -196,9 +168,7 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
 
-  // =========================
   // ALIAS: cierran enlaces que antes no resolvían
-  // =========================
   { path: 'explorar', redirectTo: 'home', pathMatch: 'full' },
   { path: 'servicios', redirectTo: 'home', pathMatch: 'full' },
   { path: 'favoritos', redirectTo: 'home', pathMatch: 'full' },
@@ -206,9 +176,7 @@ export const routes: Routes = [
   { path: 'mensajes', redirectTo: 'notificaciones', pathMatch: 'full' },
   { path: 'perfil/privacidad', redirectTo: 'perfil/seguridad', pathMatch: 'full' },
 
-  // =========================
-  // RUTA NO ENCONTRADA
-  // =========================
+  // ruta no encontrada
   {
     path: '**',
     redirectTo: 'login'

@@ -6,13 +6,10 @@ import { AccionAdmin, AccionAdminVista } from '../../models/admin/accion-admin';
 import { AdminUsuario } from '../../models/admin/admin-usuario';
 import { Usuario } from '../../models/usuario.model';
 
-/**
- * Historial de moderación.
- *
- * El JSON ahora guarda `usuarioId` + `adminId` en lugar de repetir nombres.
- * El servicio resuelve los nombres al vuelo y expone `AccionAdminVista`, que
- * conserva `usuarioNombre` y `administrador` para no tocar las plantillas.
- */
+// Historial de moderación.
+// El JSON ahora guarda `usuarioId` + `adminId` en lugar de repetir nombres.
+// El servicio resuelve los nombres al vuelo y expone `AccionAdminVista`, que
+// conserva `usuarioNombre` y `administrador` para no tocar las plantillas.
 @Injectable({ providedIn: 'root' })
 export class HistorialAdminService {
   private readonly http = inject(HttpClient);
@@ -63,12 +60,12 @@ export class HistorialAdminService {
     });
   }
 
-  /** HU71 — historial de un usuario puntual. */
+  // HU71 — historial de un usuario puntual.
   porUsuario(usuarioId: string): AccionAdminVista[] {
     return this.acciones().filter((a) => a.usuarioId === usuarioId);
   }
 
-  /** HU68 — filtro por rango de fechas. */
+  // HU68 — filtro por rango de fechas.
   entreFechas(desde?: string, hasta?: string): AccionAdminVista[] {
     const min = desde ? new Date(desde).getTime() : -Infinity;
     // +1 día para que "hasta" incluya el día completo
@@ -86,7 +83,7 @@ export class HistorialAdminService {
       .slice(0, limite);
   }
 
-  /** Registra una acción nueva. Recibe IDs, nunca nombres. */
+  // Registra una acción nueva. Recibe IDs, nunca nombres.
   registrar(accion: Omit<AccionAdmin, 'id' | 'fecha'>): void {
     this._acciones.update((lista) => [
       { ...accion, id: `ac_${Date.now()}`, fecha: new Date().toISOString() },

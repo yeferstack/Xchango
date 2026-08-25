@@ -1,7 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { IconoComponent } from '../../components/icono/icono';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { inject } from '@angular/core';
+import { DatosPublicacion, TruequesService } from '../../services/trueques';
+import { TipoPublicacion } from '../../models/publicacion.model';
+import { Categoria } from '../../models/categoria.model';
+import { MUNICIPIOS_CASANARE } from '../../shared/municipios-casanare';
 
 interface TipoIntercambio {
   id: string;
@@ -28,40 +34,17 @@ interface Trueque {
 }
 
 // Municipios de Casanare (único departamento manejado por la plataforma)
-const MUNICIPIOS_CASANARE: string[] = [
-  'Yopal',
-  'Aguazul',
-  'Chámeza',
-  'Hato Corozal',
-  'La Salina',
-  'Maní',
-  'Monterrey',
-  'Nunchía',
-  'Orocué',
-  'Paz de Ariporo',
-  'Pore',
-  'Recetor',
-  'Sabanalarga',
-  'Sácama',
-  'San Luis de Palenque',
-  'Támara',
-  'Tauramena',
-  'Trinidad',
-  'Villanueva'
-];
 
 @Component({
   selector: 'app-formulario-editar-trueque',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [IconoComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './formulario-editar-trueque.html',
   styleUrls: ['./formulario-editar-trueque.css']
 })
 export class FormularioEditarTruequeComponent implements OnInit {
 
-  // ---------------------------------------------------------
   // 1. Tipos de intercambio (tarjetas seleccionables)
-  // ---------------------------------------------------------
   tiposIntercambio: TipoIntercambio[] = [
     {
       id: 'fisico',
@@ -86,9 +69,7 @@ export class FormularioEditarTruequeComponent implements OnInit {
     }
   ];
 
-  // ---------------------------------------------------------
   // 2. Catálogos usados en los selects
-  // ---------------------------------------------------------
   categorias: string[] = [
     'Tecnología',
     'Ropa y accesorios',
@@ -110,11 +91,9 @@ export class FormularioEditarTruequeComponent implements OnInit {
 
   // Departamento fijo: la plataforma solo opera en Casanare
   readonly departamento = 'Casanare';
-  municipiosCasanare: string[] = MUNICIPIOS_CASANARE;
+  municipiosCasanare: readonly string[] = MUNICIPIOS_CASANARE;
 
-  // ---------------------------------------------------------
   // 3. Estado del formulario
-  // ---------------------------------------------------------
   form!: FormGroup;
 
   // El id del trueque que se está editando (viene de la ruta)
@@ -145,11 +124,9 @@ export class FormularioEditarTruequeComponent implements OnInit {
     this.asegurarFuenteMaterialIcons();
   }
 
-  /**
-   * Inyecta el link de Google Fonts para Material Icons si el proyecto
-   * todavía no lo tiene cargado (evita que los íconos se vean como texto,
-   * ej: "inventory_2" en vez del ícono real).
-   */
+  // Inyecta el link de Google Fonts para Material Icons si el proyecto
+  // todavía no lo tiene cargado (evita que los íconos se vean como texto,
+  // ej: "inventory_2" en vez del ícono real).
   private asegurarFuenteMaterialIcons(): void {
     const idLink = 'material-icons-font';
     if (document.getElementById(idLink)) {
@@ -162,7 +139,18 @@ export class FormularioEditarTruequeComponent implements OnInit {
     document.head.appendChild(link);
   }
 
+  private readonly srv = inject(TruequesService);
+
+  // Catálogo único; referencia estable (signal del store).
+  get categoriasCatalogo(): Categoria[] {
+    return this.srv.categorias();
+  }
+
+  readonly municipiosCatalogo: readonly string[] = MUNICIPIOS_CASANARE;
+
   ngOnInit(): void {
+    this.srv.cargar();
+
     this.form = this.fb.group({
       tipoIntercambio: ['fisico', Validators.required],
       nombre: ['', Validators.required],
@@ -185,40 +173,45 @@ export class FormularioEditarTruequeComponent implements OnInit {
     }
   }
 
-  // ---------------------------------------------------------
   // Carga y precarga del trueque a editar
-  // ---------------------------------------------------------
+  // Carga la publicación desde el store y precarga el formulario.
   private cargarTrueque(id: string): void {
     this.cargandoTrueque = true;
     this.errorCarga = '';
 
-    // TODO: reemplazar por la llamada real al servicio/backend, ej:
-    // this.truequeService.obtenerPorId(id).subscribe({
-    //   next: (trueque) => this.precargarFormulario(trueque),
-    //   error: () => this.errorCarga = 'No se pudo cargar la publicación.',
-    //   complete: () => this.cargandoTrueque = false
-    // });
-
-    // Simulación temporal para poder probar la precarga sin backend conectado.
-    setTimeout(() => {
-      const truequeSimulado = this.obtenerTruequeDeEjemplo(id);
-
-      if (!truequeSimulado) {
-        this.errorCarga = 'No se encontró la publicación que intentas editar.';
-        this.cargandoTrueque = false;
-        return;
-      }
-
-      this.precargarFormulario(truequeSimulado);
+    const p = this.srv.obtenerPorId(id);
+    if (!p) {
+      this.errorCarga = 'No se encontró la publicación.';
       this.cargandoTrueque = false;
-    }, 400);
+      return;
+    }
+
+    const idTipo =
+      p.tipo === 'servicio' ? 'servicio' : p.tipo === 'bien_digital' ? 'digital' : 'fisico';
+
+    this.form.patchValue({
+      tipoIntercambio: idTipo,
+      nombre: p.titulo,
+      categoria: p.categoriaId,
+      descripcion: p.descripcion,
+      ofreces: p.ofreces,
+      buscas: p.buscas,
+      estado: p.estado === 'activa',
+      // Solo existen en los tipos que los manejan.
+      disponibilidad: p.tipo === 'bien_digital' ? '' : p.disponibilidad,
+      cantidad: p.tipo === 'bien_digital' ? '' : p.cantidadDisponible,
+      municipio: p.tipo === 'bien_digital' ? '' : p.municipio,
+      barrio: p.tipo === 'bien_fisico' ? p.barrio : '',
+    });
+
+    this.imagenesExistentes = [...p.imagenes];
+    this.cargandoTrueque = false;
+    this.cdr.markForCheck();
   }
 
-  /**
-   * Llena el formulario reactivo con los datos de un trueque existente.
-   * Las imágenes ya subidas se guardan aparte (imagenesExistentes) para
-   * poder diferenciarlas de las nuevas que el usuario agregue.
-   */
+  // Llena el formulario reactivo con los datos de un trueque existente.
+  // Las imágenes ya subidas se guardan aparte (imagenesExistentes) para
+  // poder diferenciarlas de las nuevas que el usuario agregue.
   private precargarFormulario(trueque: Trueque): void {
     this.form.patchValue({
       tipoIntercambio: trueque.tipoIntercambio,
@@ -239,10 +232,8 @@ export class FormularioEditarTruequeComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  /**
-   * Stub de datos de ejemplo — simula lo que devolvería el backend.
-   * Bórralo cuando conectes el servicio real de trueques.
-   */
+  // Stub de datos de ejemplo — simula lo que devolvería el backend.
+  // Bórralo cuando conectes el servicio real de trueques.
   private obtenerTruequeDeEjemplo(id: string): Trueque | null {
     return {
       id,
@@ -264,9 +255,7 @@ export class FormularioEditarTruequeComponent implements OnInit {
     };
   }
 
-  // ---------------------------------------------------------
   // Helpers de plantilla
-  // ---------------------------------------------------------
   seleccionarTipo(id: string): void {
     this.form.get('tipoIntercambio')?.setValue(id);
   }
@@ -284,7 +273,7 @@ export class FormularioEditarTruequeComponent implements OnInit {
     return this.maxDescripcion - valor.length;
   }
 
-  /** Todas las imágenes a mostrar en la vista previa: existentes + nuevas */
+  // Todas las imágenes a mostrar en la vista previa: existentes + nuevas
   get imagenesPreviewUrls(): string[] {
     return [...this.imagenesExistentes, ...this.imagenesNuevasPreviewUrls];
   }
@@ -293,9 +282,7 @@ export class FormularioEditarTruequeComponent implements OnInit {
     return this.imagenesExistentes.length + this.imagenesNuevas.length;
   }
 
-  // ---------------------------------------------------------
   // Manejo de imágenes (drag & drop + input)
-  // ---------------------------------------------------------
   onDragOver(event: DragEvent): void {
     event.preventDefault();
     this.arrastrandoArchivo = true;
@@ -341,11 +328,9 @@ export class FormularioEditarTruequeComponent implements OnInit {
       });
   }
 
-  /**
-   * Elimina una imagen de la vista previa combinada (existentes + nuevas).
-   * Si la imagen eliminada era una que ya estaba en el servidor, se guarda
-   * su URL en imagenesEliminadas para que el backend sepa que debe borrarla.
-   */
+  // Elimina una imagen de la vista previa combinada (existentes + nuevas).
+  // Si la imagen eliminada era una que ya estaba en el servidor, se guarda
+  // su URL en imagenesEliminadas para que el backend sepa que debe borrarla.
   eliminarImagen(index: number): void {
     const esExistente = index < this.imagenesExistentes.length;
 
@@ -374,9 +359,7 @@ export class FormularioEditarTruequeComponent implements OnInit {
     this.indiceImagenVistaPrevia = (this.indiceImagenVistaPrevia + 1) % total;
   }
 
-  // ---------------------------------------------------------
   // Navegación / envío
-  // ---------------------------------------------------------
   seleccionarUbicacionEnMapa(): void {
     // Aquí se integraría el selector de ubicación (Google Maps / Leaflet, etc.)
     console.log('Abrir selector de ubicación en el mapa');
@@ -403,13 +386,34 @@ export class FormularioEditarTruequeComponent implements OnInit {
     formData.append('imagenesEliminadas', JSON.stringify(this.imagenesEliminadas));
     formData.append('imagenesConservadas', JSON.stringify(this.imagenesExistentes));
 
-    // TODO: reemplazar por la llamada real al servicio de trueques (PUT/PATCH)
-    console.log('Cambios listos para guardar:', {
-      id: this.truequeId,
-      valores: this.form.getRawValue(),
-      imagenesNuevas: this.imagenesNuevas,
-      imagenesEliminadas: this.imagenesEliminadas,
-      imagenesConservadas: this.imagenesExistentes
-    });
+    const v = this.form.getRawValue();
+    const idTipo = v.tipoIntercambio as string;
+    const tipo: TipoPublicacion =
+      idTipo === 'servicio' ? 'servicio' : idTipo === 'digital' ? 'bien_digital' : 'bien_fisico';
+
+    const datos: DatosPublicacion = {
+      tipo: tipo,
+      categoriaId: v.categoria,
+      titulo: v.nombre,
+      descripcion: v.descripcion,
+      ofreces: v.ofreces || v.nombre,
+      buscas: v.buscas,
+      imagenes: [...this.imagenesExistentes, ...this.imagenesNuevasPreviewUrls],
+    };
+
+    if (tipo !== 'bien_digital') {
+      datos.municipio = v.municipio;
+      datos.cantidadDisponible = v.cantidad;
+      datos.disponibilidad = v.disponibilidad;
+      if (tipo === 'bien_fisico') {
+        datos.barrio = v.barrio;
+      }
+    }
+
+    if (this.truequeId && this.srv.actualizarPublicacion(this.truequeId, datos)) {
+      this.router.navigate(['/trueque', this.truequeId]);
+    } else {
+      this.errorCarga = 'No se pudo guardar. ¿La publicación es tuya?';
+    }
   }
 }

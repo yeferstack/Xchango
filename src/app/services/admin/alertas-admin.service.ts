@@ -15,7 +15,7 @@ export class AlertasAdminService {
   readonly cargando = this._cargando.asReadonly();
   readonly error = this._error.asReadonly();
 
-  /** Contador para el badge de notificaciones del header. */
+  // Contador para el badge de notificaciones del header.
   readonly noLeidas = computed(() => this._alertas().filter(a => !a.leida).length);
 
   cargar(): void {

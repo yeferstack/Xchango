@@ -1,8 +1,6 @@
 <div class="app">
 
-  <!-- =====================================================
-       ENCABEZADO
-       ===================================================== -->
+  <!-- encabezado -->
 
   <header class="cabecera vidrio">
 
@@ -20,9 +18,6 @@
 
     </a>
 
-
-    <!-- ================= BUSCADOR ================= -->
-
     <label class="buscador vidrio">
 
       <svg viewBox="0 0 24 24">
@@ -38,12 +33,9 @@
 
     </label>
 
-
-    <!-- ================= MENÚ ================= -->
-
     <nav class="menu">
 
-      <!-- INICIO -->
+      <!-- inicio -->
 
       <a
         class="menu__item"
@@ -66,8 +58,7 @@
 
       </a>
 
-
-      <!-- MIS TRUEQUES -->
+      <!-- mis trueques -->
 
       <a
         class="menu__item"
@@ -90,31 +81,31 @@
 
       </a>
 
-
-      <!-- WHATSAPP -->
-      <!-- XchanGo no tiene chat interno: toda negociación pasa por WhatsApp. -->
-
-      <a
-        class="menu__item"
-        href="https://wa.me/573000000000"
-        target="_blank"
-        rel="noopener"
-      >
+      <div class="menu__item menu__item--redes" (click)="toggleRedesSociales(); $event.stopPropagation()">
 
         <svg viewBox="0 0 24 24">
 
-          <path
-            d="M21 11.5A8.4 8.4 0 0 1 12.5 20c-1.5 0-3-.4-4.3-1.1L3 20l1.1-5.2A8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5z"
-          />
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <path d="m8.6 10.5 6.8-3.9"/>
+          <path d="m8.6 13.5 6.8 3.9"/>
 
         </svg>
 
-        WhatsApp
+        Redes sociales
 
-      </a>
+        <div class="mini-menu redes-menu" *ngIf="redesSocialesAbiertas()" (click)="$event.stopPropagation()">
 
+          <a href="https://facebook.com" target="_blank" rel="noopener" class="mini-menu__link">Facebook</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="mini-menu__link">Instagram</a>
+          <a href="https://wa.me/573000000000" target="_blank" rel="noopener" class="mini-menu__link">WhatsApp</a>
 
-      <!-- FAVORITOS -->
+        </div>
+
+      </div>
+
+      <!-- favoritos -->
 
       <a
         class="menu__item"
@@ -137,10 +128,9 @@
 
     </nav>
 
-
-    <!-- ================= ACCIONES ================= -->
-
     <div class="acciones">
+
+      <ng-container *ngIf="estaAutenticado; else accionesInvitado">
 
       <div style="position: relative;">
 
@@ -188,7 +178,6 @@
 
       </div>
 
-
       <div style="position: relative;">
 
         <button
@@ -226,22 +215,28 @@
 
       </div>
 
+      </ng-container>
+
+      <!-- INVITADO (sin sesión) -->
+      <ng-template #accionesInvitado>
+
+        <span class="modo-invitado" title="Estás viendo XchanGo sin una cuenta">
+          Vista previa
+        </span>
+
+        <a class="btn-entrar-invitado" routerLink="/acceso">
+          Iniciar sesión
+        </a>
+
+      </ng-template>
+
     </div>
 
   </header>
 
-
-
-  <!-- =====================================================
-       CUERPO
-       ===================================================== -->
-
   <div class="cuerpo">
 
-
-    <!-- ===================================================
-         MENÚ LATERAL
-         =================================================== -->
+    <!-- menú lateral -->
 
     <aside class="lateral vidrio">
 
@@ -407,16 +402,7 @@
 
     </aside>
 
-
-
-    <!-- ===================================================
-         CONTENIDO
-         =================================================== -->
-
     <main class="contenido">
-
-
-      <!-- ================= FILTROS ================= -->
 
       <div class="filtros">
 
@@ -443,7 +429,6 @@
 
           </button>
 
-
           <button
             class="pestana"
             [class.pestana--activa]="filtroActivo === 'servicios'"
@@ -468,7 +453,6 @@
             Servicios
 
           </button>
-
 
           <button
             class="pestana"
@@ -498,7 +482,6 @@
           </button>
 
         </div>
-
 
         <div class="orden">
 
@@ -559,7 +542,6 @@
 
           </div>
 
-
           <button
             class="orden__ajustes vidrio"
             type="button"
@@ -586,8 +568,7 @@
 
       </div>
 
-
-      <!-- ================= CONTEO + LIMPIAR ================= -->
+      <!-- conteo + limpiar -->
 
       <div class="resultados-info">
 
@@ -606,11 +587,7 @@
 
       </div>
 
-
-
-      <!-- =================================================
-           TARJETAS
-           ================================================= -->
+      <!-- tarjetas -->
 
       <section class="rejilla" *ngIf="truequesFiltrados.length; else sinResultados">
 
@@ -650,7 +627,6 @@
 
           </div>
 
-
           <div class="tarjeta__cuerpo">
 
             <div class="tarjeta__titulo-fila">
@@ -676,7 +652,6 @@
 
             </div>
 
-
             <div class="tarjeta__pie">
 
               <span class="autor">
@@ -691,7 +666,6 @@
                 {{ nombreCorto(t.autor) }}
 
               </span>
-
 
               <span class="ciudad">
 
@@ -711,7 +685,6 @@
 
               </span>
 
-
               <span class="intercambio">
                 Intercambio
               </span>
@@ -722,6 +695,9 @@
 
         </article>
 
+        <!-- Footer/beneficios: va DENTRO de la rejilla que hace scroll,
+             así solo se ve cuando el usuario baja hasta el final. -->
+  
       </section>
 
       <ng-template #sinResultados>
@@ -729,22 +705,9 @@
       </ng-template>
 
     </main>
+    <footer class="beneficios vidrio">
 
-  </div>
-
-
-
-  <!-- =====================================================
-       FOOTER / BENEFICIOS
-       ===================================================== -->
-
-  <footer class="beneficios vidrio">
-
-
-    <!-- =================================================
-         SEGURO Y CONFIABLE
-         ICONO DEL HOME ORIGINAL
-         ================================================= -->
+    <!-- seguro y confiable icono del home original -->
 
     <div class="beneficio">
 
@@ -785,7 +748,6 @@
 
       </span>
 
-
       <div>
 
         <strong>
@@ -800,12 +762,7 @@
 
     </div>
 
-
-
-    <!-- =================================================
-         COMUNIDAD ACTIVA
-         ICONO DEL HOME ORIGINAL
-         ================================================= -->
+    <!-- comunidad activa icono del home original -->
 
     <div class="beneficio">
 
@@ -840,7 +797,6 @@
 
       </span>
 
-
       <div>
 
         <strong>
@@ -855,12 +811,7 @@
 
     </div>
 
-
-
-    <!-- =================================================
-         FÁCIL Y RÁPIDO
-         ICONO DEL HOME ORIGINAL
-         ================================================= -->
+    <!-- fácil y rápido icono del home original -->
 
     <div class="beneficio">
 
@@ -885,7 +836,6 @@
 
       </span>
 
-
       <div>
 
         <strong>
@@ -900,12 +850,7 @@
 
     </div>
 
-
-
-    <!-- =================================================
-         SOPORTE 24/7
-         ICONO DEL HOME ORIGINAL
-         ================================================= -->
+    <!-- soporte 24/7 icono del home original -->
 
     <div class="beneficio">
 
@@ -940,7 +885,6 @@
 
       </span>
 
-
       <div>
 
         <strong>
@@ -957,6 +901,8 @@
 
   </footer>
 
+  </div>
+
 </div>
 
 <app-modal-detalle-trueque
@@ -964,4 +910,3 @@
   [publicacionId]="detalleAbierto"
   (cerrado)="cerrarDetalle()"
 ></app-modal-detalle-trueque>
-

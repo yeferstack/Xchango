@@ -1,0 +1,54 @@
+<p class="pin__destino">
+  Enviamos un PIN a<br />
+  <strong>{{ correo }}</strong>
+</p>
+
+<form class="pin__form" (ngSubmit)="confirmar()">
+
+  <input
+    class="xg-input pin__input"
+    type="text"
+    inputmode="numeric"
+    maxlength="6"
+    placeholder="------"
+    autocomplete="one-time-code"
+    name="pin"
+    aria-label="PIN de 6 dígitos"
+    [ngModel]="pin()"
+    (ngModelChange)="onPinChange($event)"
+  />
+
+  @if (error()) {
+    <p class="xg-error">{{ error() }}</p>
+  }
+
+  @if (aviso()) {
+    <p class="pin__aviso">{{ aviso() }}</p>
+  }
+
+  <button
+    class="xg-btn xg-btn--primario xg-btn--bloque"
+    type="submit"
+    [disabled]="enviando()"
+  >
+    {{ enviando() ? 'Verificando...' : textoBoton }}
+  </button>
+
+</form>
+
+<p class="pin__reenvio">
+  ¿No recibiste el PIN?
+  @if (puedeReenviar()) {
+    <button type="button" class="xg-enlace" (click)="reenviar()">Reenviar PIN</button>
+  } @else {
+    <span class="pin__espera">Puedes pedir otro en {{ segundos() }}s</span>
+  }
+</p>
+
+@if (pinDemo()) {
+  <p class="xg-nota pin__demo">
+    Esta versión no manda correos todavía. Tu PIN es <strong>{{ pinDemo() }}</strong>
+  </p>
+}
+
+<button type="button" class="pin__volver" (click)="volverAtras()">‹ Cambiar el correo</button>

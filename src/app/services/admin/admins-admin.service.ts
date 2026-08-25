@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { AdminUsuario } from '../../models/admin/admin-usuario';
 
-/** Forma cruda del JSON: igual que AdminUsuario pero con password. */
+// Forma cruda del JSON: igual que AdminUsuario pero con password.
 interface AdminConPassword extends AdminUsuario {
   password: string;
 }
@@ -14,7 +14,7 @@ const CLAVE_SESION = 'xchango_admin';
 export class AdminsAdminService {
   private readonly http = inject(HttpClient);
 
-  /** Sesión activa. La leemos de localStorage para sobrevivir a un F5. */
+  // Sesión activa. La leemos de localStorage para sobrevivir a un F5.
   private readonly _admin = signal<AdminUsuario | null>(this.leerSesion());
   private readonly _cargando = signal(false);
 
@@ -22,15 +22,15 @@ export class AdminsAdminService {
   readonly cargando = this._cargando.asReadonly();
   readonly autenticado = computed(() => this._admin() !== null);
 
-  /** Solo el administrador puede crear usuarios internos y borrar cuentas. */
+  // Solo el administrador puede crear usuarios internos y borrar cuentas.
   readonly esAdministrador = computed(() => this._admin()?.rol === 'admin');
 
-  /** Lista de usuarios internos (administradores y moderadores). */
+  // Lista de usuarios internos (administradores y moderadores).
   private readonly _lista = signal<AdminUsuario[]>([]);
   readonly lista = this._lista.asReadonly();
   private yaCargo = false;
 
-  /** Trae los usuarios internos desde data/admins.json. */
+  // Trae los usuarios internos desde data/admins.json.
   cargar(): void {
     if (this.yaCargo) return;
     this.yaCargo = true;
@@ -52,10 +52,8 @@ export class AdminsAdminService {
     });
   }
 
-  /**
-   * Crea un moderador o administrador.
-   * Devuelve null si se creó bien, o el mensaje de error.
-   */
+  // Crea un moderador o administrador.
+  // Devuelve null si se creó bien, o el mensaje de error.
   crearUsuarioInterno(datos: {
     nombre: string;
     email: string;
@@ -88,7 +86,7 @@ export class AdminsAdminService {
     return null;
   }
 
-  /** Activa o desactiva un usuario interno. Solo el administrador. */
+  // Activa o desactiva un usuario interno. Solo el administrador.
   cambiarEstado(id: string, estado: 'activo' | 'inactivo'): boolean {
     if (!this.esAdministrador()) return false;
     this._lista.update((l) => l.map((a) => (a.id === id ? { ...a, estado } : a)));
@@ -96,7 +94,7 @@ export class AdminsAdminService {
     return true;
   }
 
-  /** Elimina un usuario interno. Solo el administrador, y no a sí mismo. */
+  // Elimina un usuario interno. Solo el administrador, y no a sí mismo.
   eliminarUsuarioInterno(id: string): string | null {
     if (!this.esAdministrador()) return 'Solo un administrador puede eliminar cuentas.';
     if (id === this.idActual()) return 'No puedes eliminar tu propia cuenta.';
@@ -132,11 +130,9 @@ export class AdminsAdminService {
     }
   }
 
-  /**
-   * Login contra /data/admins.json.
-   * Cuando exista NestJS, esto se vuelve un POST /api/admin/login
-   * y el resto de la app no se entera.
-   */
+  // Login contra /data/admins.json.
+  // Cuando exista NestJS, esto se vuelve un POST /api/admin/login
+  // y el resto de la app no se entera.
   async login(email: string, password: string): Promise<AdminUsuario> {
     this._cargando.set(true);
     try {
@@ -168,12 +164,12 @@ export class AdminsAdminService {
     this._admin.set(null);
   }
 
-  /** ID del admin en sesión. Es lo que se guarda en el historial. */
+  // ID del admin en sesión. Es lo que se guarda en el historial.
   idActual(): string {
     return this._admin()?.id ?? 'a1';
   }
 
-  /** Nombre del admin en sesión, solo para mostrar en pantalla. */
+  // Nombre del admin en sesión, solo para mostrar en pantalla.
   nombreActual(): string {
     return this._admin()?.nombre ?? 'Administrador';
   }

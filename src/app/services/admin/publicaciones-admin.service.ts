@@ -15,17 +15,13 @@ import {
 } from '../../models/admin/publicacion-eliminada';
 import { AdminUsuario } from '../../models/admin/admin-usuario';
 
-/**
- * Moderación de publicaciones.
- *
- * `publicaciones-reportadas.json` ya no duplica el título, el dueño ni la
- * categoría: guarda solo `publicacionId` + `reportanteId`. Este servicio hace
- * el join contra publicaciones.json, usuarios.json y categorias.json, y expone
- * `PublicacionReportada` con los mismos nombres de campo que ya usaba la vista,
- * de modo que `moderacion.html` no necesita cambios.
- *
- * Las interfaces que antes se redeclaraban aquí ahora viven en `models/admin/`.
- */
+// Moderación de publicaciones.
+// `publicaciones-reportadas.json` ya no duplica el título, el dueño ni la
+// categoría: guarda solo `publicacionId` + `reportanteId`. Este servicio hace
+// el join contra publicaciones.json, usuarios.json y categorias.json, y expone
+// `PublicacionReportada` con los mismos nombres de campo que ya usaba la vista,
+// de modo que `moderacion.html` no necesita cambios.
+// Las interfaces que antes se redeclaraban aquí ahora viven en `models/admin/`.
 @Injectable({ providedIn: 'root' })
 export class PublicacionesAdminService {
   private readonly http = inject(HttpClient);
@@ -57,7 +53,7 @@ export class PublicacionesAdminService {
     () => new Map(this._admins().map((a) => [a.id, a]))
   );
 
-  /** Reportes con título, dueño y categoría ya resueltos. */
+  // Reportes con título, dueño y categoría ya resueltos.
   readonly reportadas = computed<PublicacionReportada[]>(() => {
     const pubs = this.mapaPublicaciones();
     const usuarios = this.mapaUsuarios();
@@ -79,7 +75,7 @@ export class PublicacionesAdminService {
     });
   });
 
-  /** Eliminadas con título y nombres resueltos. */
+  // Eliminadas con título y nombres resueltos.
   readonly eliminadas = computed<PublicacionEliminadaVista[]>(() => {
     const pubs = this.mapaPublicaciones();
     const usuarios = this.mapaUsuarios();
@@ -134,7 +130,7 @@ export class PublicacionesAdminService {
     return [...new Set(this._reportes().map((r) => r.motivo))].sort();
   }
 
-  /** Se alimenta del catálogo único de categorías, no de los reportes. */
+  // Se alimenta del catálogo único de categorías, no de los reportes.
   categorias(): string[] {
     return this._categorias().map((c) => c.nombre).sort();
   }
@@ -164,10 +160,8 @@ export class PublicacionesAdminService {
     this.actualizarEstado(reporteId, 'aprobada');
   }
 
-  /**
-   * Marca el reporte como resuelto, cambia la publicación a estado 'eliminada'
-   * y deja el registro en la lista de eliminadas, referenciando por ID.
-   */
+  // Marca el reporte como resuelto, cambia la publicación a estado 'eliminada'
+  // y deja el registro en la lista de eliminadas, referenciando por ID.
   eliminar(reporteId: string, motivo: string, adminId: string): void {
     const reporte = this._reportes().find((r) => r.id === reporteId);
     if (!reporte) return;

@@ -41,7 +41,7 @@ export class Ranking implements OnInit {
   readonly crecimiento = computed(() => this.metricasSrv.crecimientoCategorias());
   readonly ubicaciones = computed(() => this.metricasSrv.ubicacionesMasActivas(7));
 
-  /** HU77 — comparación de este mes contra el anterior. */
+  // HU77 — comparación de este mes contra el anterior.
   readonly comparativas = computed<TarjetaComparativa[]>(() => {
     const c = this.metricasSrv.comparativas();
 
@@ -65,7 +65,7 @@ export class Ranking implements OnInit {
     this.metricasSrv.cargar();
   }
 
-  /** Valor que se muestra a la derecha de cada usuario según el criterio. */
+  // Valor que se muestra a la derecha de cada usuario según el criterio.
   valorDe(u: { publicaciones: number; intercambios: number }): number {
     if (this.criterio() === 'publicaciones') return u.publicaciones;
     if (this.criterio() === 'intercambios') return u.intercambios;

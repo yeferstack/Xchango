@@ -9,10 +9,8 @@ import { DocumentoVista } from '../../../models/admin/documento';
 
 type Filtro = 'pendiente' | 'aprobado' | 'rechazado' | 'todos';
 
-/**
- * Verificación de documentos.
- * El usuario sube su documento y aquí se aprueba o se rechaza.
- */
+// Verificación de documentos.
+// El usuario sube su documento y aquí se aprueba o se rechaza.
 @Component({
   selector: 'app-documentos',
   standalone: true,
@@ -26,7 +24,7 @@ export class DocumentosComponent implements OnInit {
 
   filtro = signal<Filtro>('pendiente');
 
-  /** Observación que escribe el revisor, guardada por id de documento. */
+  // Observación que escribe el revisor, guardada por id de documento.
   observaciones: Record<string, string> = {};
 
   cargando = this.srv.cargando;

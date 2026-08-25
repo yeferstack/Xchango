@@ -8,12 +8,9 @@ import { AdminUsuario } from '../../models/admin/admin-usuario';
 
 const CLAVE = 'xchango_documentos';
 
-/**
- * Verificación de documentos de identidad.
- *
- * El usuario sube su documento y aquí el administrador o el moderador lo
- * aprueba o lo rechaza. Los datos salen de data/documentos.json.
- */
+// Verificación de documentos de identidad.
+// El usuario sube su documento y aquí el administrador o el moderador lo
+// aprueba o lo rechaza. Los datos salen de data/documentos.json.
 @Injectable({ providedIn: 'root' })
 export class DocumentosAdminService {
   private http = inject(HttpClient);
@@ -28,7 +25,7 @@ export class DocumentosAdminService {
   cargando = this.estaCargando.asReadonly();
   error = this.mensajeError.asReadonly();
 
-  /** Documentos con el nombre del usuario y del revisor ya resueltos. */
+  // Documentos con el nombre del usuario y del revisor ya resueltos.
   documentos = computed<DocumentoVista[]>(() => {
     const usuarios = new Map(this.listaUsuarios().map((u) => [u.id, u]));
     const admins = new Map(this.listaAdmins().map((a) => [a.id, a]));
@@ -75,12 +72,12 @@ export class DocumentosAdminService {
     });
   }
 
-  /** Aprueba el documento: la cuenta del usuario queda verificada. */
+  // Aprueba el documento: la cuenta del usuario queda verificada.
   aprobar(id: string, adminId: string, observacion: string): void {
     this.actualizar(id, 'aprobado', adminId, observacion || 'Documento verificado sin novedad.');
   }
 
-  /** Rechaza el documento. La observación explica el motivo. */
+  // Rechaza el documento. La observación explica el motivo.
   rechazar(id: string, adminId: string, observacion: string): void {
     this.actualizar(id, 'rechazado', adminId, observacion || 'El documento no cumple los requisitos.');
   }

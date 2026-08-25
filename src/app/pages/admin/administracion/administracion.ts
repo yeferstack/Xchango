@@ -26,7 +26,7 @@ export class Administracion implements OnInit {
   readonly resumen = this.metricasSrv.resumen;
   readonly alertas = this.alertasSrv.alertas;
 
-  /** Usuarios "conectados": los activos con mayor nivel de actividad. */
+  // Usuarios "conectados": los activos con mayor nivel de actividad.
   readonly conectados = computed(() =>
     this.usuariosSrv.usuarios()
       .filter(u => u.estado === 'activo' && u.nivelActividad !== 'bajo')
@@ -36,7 +36,7 @@ export class Administracion implements OnInit {
   readonly publicacionesRecientes = computed(() => this.publicacionesSrv.reportadas().slice(0, 5));
   readonly acciones = computed(() => this.historialSrv.recientes(6));
 
-  /** Semáforo del estado general de la plataforma. */
+  // Semáforo del estado general de la plataforma.
   readonly estadoPlataforma = computed(() => {
     const pendientes = this.publicacionesSrv.pendientes();
     const alertasAltas = this.alertasSrv.porPrioridad('alta').filter(a => !a.leida).length;

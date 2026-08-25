@@ -22,7 +22,7 @@
   text-decoration: none;
 }
 
-.ac__marca-chango { width: 30px; height: 30px; object-fit: contain; }
+.ac__marca-chango { width: 34px; height: 34px; object-fit: contain; }
 .ac__marca-wordmark { width: 90px; height: auto; object-fit: contain; }
 
 .ac__card {
@@ -35,9 +35,6 @@
   flex-direction: column;
 }
 
-.ac__logo { display: flex; justify-content: center; margin-bottom: 14px; }
-.ac__logo-chango { width: 46px; height: 46px; object-fit: contain; }
-
 
 .ac__title { margin: 0 0 4px; font-family: "Baloo 2", sans-serif; font-size: 1.7rem; color: var(--ac-ink); }
 .ac__sub { margin: 0 0 24px; color: var(--ac-soft); font-size: .92rem; }
@@ -46,9 +43,9 @@
 .ac__input { border: 1px solid var(--ac-line); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font: inherit; background: #fff; color: var(--ac-ink); }
 .ac__input:focus { outline: none; border-color: var(--ac-acc); }
 
-.ac__error { background: #f6e2e0; color: #a8453b; border-radius: 8px; padding: 10px 12px; margin: 0 0 14px; font-size: .88rem; }
+.ac__error { background: #f6e2e0; color: var(--xg-rojo); border-radius: 8px; padding: 10px 12px; margin: 0 0 14px; font-size: .88rem; }
 
-.ac__btn { background: var(--ac-ink); color: #fffdf8; border: 0; border-radius: 10px; padding: 13px; font: inherit; font-weight: 600; cursor: pointer; }
+.ac__btn { background: var(--ac-ink); color: var(--xg-papel); border: 0; border-radius: 10px; padding: 13px; font: inherit; font-weight: 600; cursor: pointer; }
 .ac__btn:hover { background: #322b23; }
 
 .ac__foot { margin: 20px 0 0; text-align: center; color: var(--ac-soft); font-size: .86rem; }

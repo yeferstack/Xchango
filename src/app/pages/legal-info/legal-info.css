@@ -1,6 +1,4 @@
-/* =========================================================
-   TOKENS — mismos valores que ya usa el resto del sitio
-   ========================================================= */
+/* TOKENS — mismos valores que ya usa el resto del sitio */
 
 :host {
   --ink: #191714;
@@ -18,9 +16,7 @@
 }
 
 
-/* =========================================================
-   LAYOUT GENERAL
-   ========================================================= */
+/* layout general */
 
 .legal-page {
   max-width: 920px;
@@ -29,9 +25,7 @@
 }
 
 
-/* =========================================================
-   ENCABEZADO
-   ========================================================= */
+/* encabezado */
 
 .legal-header {
   margin-bottom: 28px;
@@ -74,9 +68,7 @@
 }
 
 
-/* =========================================================
-   TABS — mismo estilo pill que .nav-links / .nav-item
-   ========================================================= */
+/* TABS — mismo estilo pill que .nav-links / .nav-item */
 
 .legal-tabs {
   display: flex;
@@ -139,7 +131,7 @@
   display: flex;
   width: 18px;
   height: 18px;
-  color: #847a68;
+  color: var(--xg-tinta-tenue);
   flex-shrink: 0;
 }
 
@@ -153,9 +145,7 @@
 }
 
 
-/* =========================================================
-   PANEL DE VIDRIO — mismo tratamiento que .panel
-   ========================================================= */
+/* PANEL DE VIDRIO — mismo tratamiento que .panel */
 
 .legal-panel {
   padding: 28px 30px 32px;
@@ -210,9 +200,7 @@
 }
 
 
-/* =========================================================
-   CONTENIDO
-   ========================================================= */
+/* contenido */
 
 .legal-panel__body {
   display: flex;
@@ -223,7 +211,7 @@
 .legal-block__heading {
   margin-bottom: 8px;
 
-  color: #29251f;
+  color: var(--xg-tinta-media);
 
   font-family: "Baloo 2", sans-serif;
   font-size: 16px;
@@ -270,11 +258,7 @@
 }
 
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 640px) {
+@media (max-width: 600px) {
 
   .legal-page {
     padding: 32px 16px 48px;

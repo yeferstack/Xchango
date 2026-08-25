@@ -54,8 +54,8 @@ h3 {
 }
 
 .logo {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     object-fit: contain;
 }
 
@@ -660,6 +660,9 @@ h3 {
 /* ===== BOTONES ===== */
 .btn-secundario {
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
     border: 1px solid var(--xg-borde);
     background: var(--xg-card);
     border-radius: 999px;

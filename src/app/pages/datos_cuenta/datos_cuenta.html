@@ -1,7 +1,7 @@
 <!-- ===== NAVBAR ===== -->
 <header class="navbar">
     <a class="marca" routerLink="/home">
-        <img src="/Logo-xchango/logo-xchango.png" alt="" class="logo" />
+        <img src="Logo-xchango/logo-xchango.png" alt="" class="logo" />
         <span class="marca-texto">XchanGo</span>
     </a>
 
@@ -31,7 +31,7 @@
             <app-icono nombre="notifications_none"></app-icono>
         </button>
         <div class="avatar-nav">
-            <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+            <img src="Logo-xchango/avatar-miguel.jpeg" alt="" />
         </div>
         <app-icono nombre="expand_more"></app-icono>
     </div>
@@ -48,7 +48,7 @@
             </button>
 
             <div class="foto-perfil">
-                <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+                <img src="Logo-xchango/avatar-miguel.jpeg" alt="" />
             </div>
 
             <h2 class="nombre">Miguel Perez</h2>
@@ -89,25 +89,22 @@
                         <app-icono nombre="mail"></app-icono>
                         <span class="fila-texto">
                             <strong>Correo electrónico</strong>
-                            <small *ngIf="editando() !== 'correo'">{{ correo() }}</small>
-                            <input class="campo-edicion" *ngIf="editando() === 'correo'" type="email"
-                                [ngModel]="valorTemporal()" (ngModelChange)="valorTemporal.set($event)"
-                                placeholder="tucorreo@ejemplo.com" />
+                            <small>{{ correo() }}</small>
                         </span>
 
-                        <span class="insignia" [class.pendiente]="!correoVerificado()" *ngIf="editando() !== 'correo'">
+                        <span class="insignia" [class.pendiente]="!correoVerificado()">
                             {{ correoVerificado() ? 'Verificado' : 'Sin verificar' }}
                         </span>
 
-                        <button class="btn-secundario" type="button" *ngIf="editando() !== 'correo'"
-                            (click)="iniciarEdicion('correo', correo())">
-                            Cambiar
-                        </button>
-
-                        <span class="acciones-edicion" *ngIf="editando() === 'correo'">
-                            <button class="btn-secundario" type="button" (click)="cancelarEdicion()">Cancelar</button>
-                            <button class="btn-mini" type="button" (click)="guardarEdicion('correo')">Guardar</button>
-                        </span>
+                        <a
+                            class="btn-secundario"
+                            href="https://wa.me/573000000000?text=Hola%2C%20necesito%20cambiar%20el%20correo%20de%20mi%20cuenta%20XchanGo"
+                            target="_blank"
+                            rel="noopener"
+                            title="Por seguridad, el cambio de correo lo hace soporte"
+                        >
+                            Escribir a soporte
+                        </a>
                     </li>
 
                     <!-- Nombre de usuario -->

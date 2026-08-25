@@ -26,6 +26,41 @@ export class MisPublicacionesComponent implements OnInit {
 
     private readonly srv = inject(TruequesService);
 
+    /** Mismos datos que en /perfil, para la tarjeta de la izquierda. */
+    get nombreUsuario(): string {
+        return this.srv.usuarioActual()?.nombre ?? 'Invitado';
+    }
+
+    get avatarUrl(): string {
+        return this.srv.usuarioActual()?.avatar ?? 'Logo-xchango/chango.png';
+    }
+
+    get calificacion(): number {
+        return this.srv.usuarioActual()?.calificacion ?? 0;
+    }
+
+    readonly calificacionMaxima = 5;
+    readonly totalCalificacionesRequeridas = 5;
+
+    get totalCalificaciones(): number {
+        return this.srv.usuarioActual()?.totalCalificaciones ?? 0;
+    }
+
+    get muestraCalificacion(): boolean {
+        return this.totalCalificaciones >= this.totalCalificacionesRequeridas;
+    }
+
+    estrellas(): boolean[] {
+        return Array.from(
+            { length: this.calificacionMaxima },
+            (_, i) => i < Math.round(this.calificacion),
+        );
+    }
+
+    get notificaciones(): number {
+        return this.srv.notificacionesSinLeer();
+    }
+
     /** Mensaje que se muestra al tocar un botón que todavía no guarda. */
     aviso = '';
 

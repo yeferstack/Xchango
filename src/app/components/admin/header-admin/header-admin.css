@@ -4,4 +4,4 @@
 .header__menu, .header__salir { display: grid; place-items: center; border: 0; color: var(--admin-text-2, #6d5847); background: transparent; cursor: pointer; padding: 6px; border-radius: var(--admin-radius-chico, 6px); }
 .header__salir:hover, .header__menu:hover { background: var(--admin-surface-2, #f5ede2); }
 .header__menu { display: none; }
-@media (max-width: 760px) { .header { padding: 0 18px; } .header__menu { display: grid; } }
+@media (max-width: 900px) { .header { padding: 0 18px; } .header__menu { display: grid; } }

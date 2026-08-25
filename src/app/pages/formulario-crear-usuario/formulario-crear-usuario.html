@@ -1,4 +1,5 @@
 <div class="pagina">
+
   <!-- ===================== ENCABEZADO ===================== -->
   <header class="encabezado">
     <button type="button" class="boton-volver" (click)="volver()">
@@ -11,8 +12,10 @@
   </header>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contenedor-principal">
+
     <!-- ===================== COLUMNA IZQUIERDA (FORMULARIO) ===================== -->
     <div class="columna-formulario">
+
       <!-- 1. Información personal -->
       <section class="seccion">
         <h2 class="titulo-seccion">1. Información personal</h2>
@@ -22,7 +25,7 @@
             <label>Nombres <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">person</span>
-              <input type="text" formControlName="nombres" placeholder="Ej: Juan" />
+              <input type="text" formControlName="nombres" placeholder="Ej: Juan">
             </div>
           </div>
 
@@ -30,7 +33,7 @@
             <label>Apellidos <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">person</span>
-              <input type="text" formControlName="apellidos" placeholder="Ej: Pérez" />
+              <input type="text" formControlName="apellidos" placeholder="Ej: Pérez">
             </div>
           </div>
         </div>
@@ -40,7 +43,7 @@
             <label>Fecha de nacimiento <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">calendar_month</span>
-              <input type="date" formControlName="fechaNacimiento" />
+              <input type="date" formControlName="fechaNacimiento">
             </div>
           </div>
 
@@ -66,11 +69,7 @@
             <label>Dirección de residencia <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">home</span>
-              <input
-                type="text"
-                formControlName="direccion"
-                placeholder="Calle, número, apartamento"
-              />
+              <input type="text" formControlName="direccion" placeholder="Calle, número, apartamento">
             </div>
           </div>
 
@@ -78,7 +77,7 @@
             <label>Ciudad <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">location_city</span>
-              <input type="text" formControlName="ciudad" placeholder="Ej: Yopal" />
+              <input type="text" formControlName="ciudad" placeholder="Ej: Yopal">
             </div>
           </div>
         </div>
@@ -88,7 +87,7 @@
             <label>Estado / Provincia <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">map</span>
-              <input type="text" formControlName="estadoProvincia" placeholder="Ej: Casanare" />
+              <input type="text" formControlName="estadoProvincia" placeholder="Ej: Casanare">
             </div>
           </div>
 
@@ -96,7 +95,7 @@
             <label>Barrio <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">place</span>
-              <input type="text" formControlName="barrio" placeholder="Ej: El Centro" />
+              <input type="text" formControlName="barrio" placeholder="Ej: El Centro">
             </div>
           </div>
         </div>
@@ -111,7 +110,7 @@
             <label>Email <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">mail</span>
-              <input type="email" formControlName="email" placeholder="ejemplo@correo.com" />
+              <input type="email" formControlName="email" placeholder="ejemplo@correo.com">
             </div>
           </div>
 
@@ -119,7 +118,7 @@
             <label>Número de teléfono <span class="requerido">*</span></label>
             <div class="input-con-icono">
               <span class="material-icons">call</span>
-              <input type="tel" formControlName="telefono" placeholder="+57 300 123 4567" />
+              <input type="tel" formControlName="telefono" placeholder="+57 300 123 4567">
             </div>
           </div>
         </div>
@@ -140,8 +139,8 @@
               (dragleave)="onDragLeave($event, 'perfil')"
               (drop)="onDrop($event, 'perfil')"
               (click)="inputFotoPerfil.click()"
-              *ngIf="!imagenes.perfil.previewUrl"
-            >
+              *ngIf="!imagenes.perfil.previewUrl">
+
               <span class="material-icons icono-carga">cloud_upload</span>
               <strong>Sube tu foto</strong>
               <p class="texto-formatos">JPG, PNG (máx. 5MB)</p>
@@ -151,12 +150,11 @@
                 type="file"
                 accept="image/jpeg,image/png"
                 hidden
-                (change)="onFileSelected($event, 'perfil')"
-              />
+                (change)="onFileSelected($event, 'perfil')">
             </div>
 
             <div class="vista-previa-foto" *ngIf="imagenes.perfil.previewUrl">
-              <img [src]="imagenes.perfil.previewUrl" alt="Foto de perfil" />
+              <img [src]="imagenes.perfil.previewUrl" alt="Foto de perfil">
               <button type="button" (click)="quitarImagen('perfil')">
                 <span class="material-icons">close</span>
               </button>
@@ -176,11 +174,7 @@
 
             <div class="input-con-icono campo-documento-numero">
               <span class="material-icons">tag</span>
-              <input
-                type="text"
-                formControlName="numeroDocumento"
-                placeholder="Número de documento"
-              />
+              <input type="text" formControlName="numeroDocumento" placeholder="Número de documento">
             </div>
           </div>
         </div>
@@ -202,8 +196,8 @@
               (dragleave)="onDragLeave($event, 'documentoFrente')"
               (drop)="onDrop($event, 'documentoFrente')"
               (click)="inputDocumentoFrente.click()"
-              *ngIf="!imagenes.documentoFrente.previewUrl"
-            >
+              *ngIf="!imagenes.documentoFrente.previewUrl">
+
               <span class="material-icons icono-carga">badge</span>
               <strong>Sube el frente</strong>
               <p class="texto-formatos">JPG, PNG (máx. 5MB)</p>
@@ -213,15 +207,11 @@
                 type="file"
                 accept="image/jpeg,image/png"
                 hidden
-                (change)="onFileSelected($event, 'documentoFrente')"
-              />
+                (change)="onFileSelected($event, 'documentoFrente')">
             </div>
 
-            <div
-              class="vista-previa-foto vista-previa-documento"
-              *ngIf="imagenes.documentoFrente.previewUrl"
-            >
-              <img [src]="imagenes.documentoFrente.previewUrl" alt="Frente del documento" />
+            <div class="vista-previa-foto vista-previa-documento" *ngIf="imagenes.documentoFrente.previewUrl">
+              <img [src]="imagenes.documentoFrente.previewUrl" alt="Frente del documento">
               <button type="button" (click)="quitarImagen('documentoFrente')">
                 <span class="material-icons">close</span>
               </button>
@@ -238,8 +228,8 @@
               (dragleave)="onDragLeave($event, 'documentoReverso')"
               (drop)="onDrop($event, 'documentoReverso')"
               (click)="inputDocumentoReverso.click()"
-              *ngIf="!imagenes.documentoReverso.previewUrl"
-            >
+              *ngIf="!imagenes.documentoReverso.previewUrl">
+
               <span class="material-icons icono-carga">flip</span>
               <strong>Sube el reverso</strong>
               <p class="texto-formatos">JPG, PNG (máx. 5MB)</p>
@@ -249,15 +239,11 @@
                 type="file"
                 accept="image/jpeg,image/png"
                 hidden
-                (change)="onFileSelected($event, 'documentoReverso')"
-              />
+                (change)="onFileSelected($event, 'documentoReverso')">
             </div>
 
-            <div
-              class="vista-previa-foto vista-previa-documento"
-              *ngIf="imagenes.documentoReverso.previewUrl"
-            >
-              <img [src]="imagenes.documentoReverso.previewUrl" alt="Reverso del documento" />
+            <div class="vista-previa-foto vista-previa-documento" *ngIf="imagenes.documentoReverso.previewUrl">
+              <img [src]="imagenes.documentoReverso.previewUrl" alt="Reverso del documento">
               <button type="button" (click)="quitarImagen('documentoReverso')">
                 <span class="material-icons">close</span>
               </button>
@@ -274,7 +260,8 @@
       <p class="nota-terminos">
         <span class="material-icons">lock</span>
         Al crear una cuenta, aceptas nuestros
-        <a href="#">Términos y Condiciones</a> y nuestra <a href="#">Política de Privacidad</a>.
+        <a href="#">Términos y Condiciones</a> y nuestra
+        <a href="#">Política de Privacidad</a>.
       </p>
     </div>
 
@@ -295,11 +282,7 @@
           <span class="destello destello-3">✦</span>
 
           <div class="avatar-circulo">
-            <img
-              *ngIf="imagenes.perfil.previewUrl"
-              [src]="imagenes.perfil.previewUrl"
-              alt="Avatar"
-            />
+            <img *ngIf="imagenes.perfil.previewUrl" [src]="imagenes.perfil.previewUrl" alt="Avatar">
             <span class="material-icons" *ngIf="!imagenes.perfil.previewUrl">person</span>
           </div>
 
@@ -336,12 +319,10 @@
         <span class="material-icons">lightbulb</span>
         <div>
           <strong>Consejo</strong>
-          <p>
-            Completa toda tu información para generar confianza en otros usuarios y tener más
-            oportunidades de intercambio.
-          </p>
+          <p>Completa toda tu información para generar confianza en otros usuarios y tener más oportunidades de intercambio.</p>
         </div>
       </div>
     </aside>
+
   </form>
 </div>

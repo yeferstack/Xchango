@@ -196,9 +196,7 @@
   border-radius: 10px;
   background: var(--color-bg-input);
   overflow: hidden;
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: border-color .15s ease, box-shadow .15s ease;
 }
 
 .input-con-icono:focus-within {
@@ -234,12 +232,8 @@
   background-image:
     linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
     linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) center,
-    calc(100% - 13px) center;
-  background-size:
-    5px 5px,
-    5px 5px;
+  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+  background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
   cursor: pointer;
   padding-right: 34px;
@@ -263,9 +257,7 @@
   color: var(--color-text-muted);
   cursor: pointer;
   text-align: center;
-  transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease;
+  transition: border-color .15s ease, background-color .15s ease;
   min-height: 88px;
 }
 
@@ -315,7 +307,7 @@
   height: 24px;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, .55);
   color: #fff;
   display: flex;
   align-items: center;
@@ -343,7 +335,7 @@
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color .15s ease;
 }
 
 .boton-crear:hover {
@@ -424,7 +416,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(176, 141, 91, 0.25);
+  box-shadow: 0 4px 14px rgba(176, 141, 91, .25);
 }
 
 .avatar-circulo img {
@@ -457,23 +449,13 @@
 .destello {
   position: absolute;
   color: var(--color-accent);
-  opacity: 0.55;
+  opacity: .55;
   font-size: 14px;
 }
 
-.destello-1 {
-  top: 18px;
-  left: 16%;
-}
-.destello-2 {
-  top: 10px;
-  right: 18%;
-  font-size: 18px;
-}
-.destello-3 {
-  bottom: 34px;
-  right: 10%;
-}
+.destello-1 { top: 18px; left: 16%; }
+.destello-2 { top: 10px; right: 18%; font-size: 18px; }
+.destello-3 { bottom: 34px; right: 10%; }
 
 .fila-datos {
   display: flex;

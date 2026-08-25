@@ -11,7 +11,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './header.css',
 })
 export class HeaderComponent implements OnDestroy {
-  /** Se esconde al bajar y vuelve a salir al subir. */
+  // Se esconde al bajar y vuelve a salir al subir.
   @HostBinding('class.header--oculto') oculto = false;
 
   private ultimaPosicion = 0;
@@ -37,31 +37,29 @@ export class HeaderComponent implements OnDestroy {
   }
 
 
-
-
-  /** Texto de búsqueda, controlado desde el padre (soporta [(busqueda)]) */
+  // Texto de búsqueda, controlado desde el padre (soporta [(busqueda)])
   @Input() busqueda = '';
   @Output() busquedaChange = new EventEmitter<string>();
 
-  /** Cantidad de notificaciones sin leer */
+  // Cantidad de notificaciones sin leer
   @Input() notificaciones = 0;
 
-  /** Cantidad de trueques marcados como favoritos */
+  // Cantidad de trueques marcados como favoritos
   @Input() cantidadFavoritos = 0;
 
-  /** Si la vista actual está mostrando solo favoritos */
+  // Si la vista actual está mostrando solo favoritos
   @Input() mostrarSoloFavoritos = false;
 
-  /** URL del avatar del usuario logueado */
+  // URL del avatar del usuario logueado
   @Input() avatarUrl = 'https://i.pravatar.cc/40?img=68';
 
-  /** Se emite al hacer clic en "Inicio" */
+  // Se emite al hacer clic en "Inicio"
   @Output() irAInicio = new EventEmitter<void>();
 
-  /** Se emite al hacer clic en "Favoritos" */
+  // Se emite al hacer clic en "Favoritos"
   @Output() verSoloFavoritos = new EventEmitter<void>();
 
-  /** Se emite al hacer clic en "Servicios": el home filtra por ese tipo */
+  // Se emite al hacer clic en "Servicios": el home filtra por ese tipo
   @Output() verServicios = new EventEmitter<void>();
 
   constructor(private router: Router) {}
@@ -83,17 +81,17 @@ export class HeaderComponent implements OnDestroy {
     this.verServicios.emit();
   }
 
-  /** Abre el formulario para crear una publicación. */
+  // Abre el formulario para crear una publicación.
   irAPublicar(): void {
     this.router.navigate(['/trueque']);
   }
 
-  /** La campana lleva a la bandeja de avisos. */
+  // La campana lleva a la bandeja de avisos.
   irANotificaciones(): void {
     this.router.navigate(['/notificaciones']);
   }
 
-  /** La foto de la derecha lleva al perfil del usuario. */
+  // La foto de la derecha lleva al perfil del usuario.
   irAPerfil(): void {
     this.router.navigate(['/perfil']);
   }

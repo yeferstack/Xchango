@@ -98,7 +98,7 @@
   font-size: 11.5px;
   font-weight: 600;
   color: var(--admin-ok);
-  background: #e8f3ed;
+  background: var(--xg-verde-fondo);
   padding: 4px 10px;
   border-radius: 999px;
 }
@@ -138,10 +138,6 @@
   flex-shrink: 0;
 }
 
-.rank__pos--1 { background: #f5e6c8; color: #8a6d1f; }
-.rank__pos--2 { background: #eceaea; color: #6e6a6a; }
-.rank__pos--3 { background: #f2e2d5; color: #8a5a3a; }
-
 .rank__cuerpo { flex: 1; min-width: 0; }
 
 .rank__nombre {
@@ -178,10 +174,6 @@
   flex-shrink: 0;
   padding-top: 2px;
 }
-
-.alerta__icono--alta { color: var(--admin-danger); }
-.alerta__icono--media { color: var(--admin-warn); }
-.alerta__icono--baja { color: var(--admin-text-2); }
 
 .alerta__titulo {
   font-size: 13.5px;

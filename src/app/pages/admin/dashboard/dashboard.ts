@@ -38,7 +38,7 @@ export class Dashboard implements OnInit, OnDestroy {
     this.publicacionesSrv.reportadas().filter(p => p.estado === 'pendiente').slice(0, 5)
   );
 
-  /** Porcentaje de variación de cada tarjeta (null si no hay comparativa). */
+  // Porcentaje de variación de cada tarjeta (null si no hay comparativa).
   variacion(clave: string): number | null {
     return this.comparativas()[clave]?.porcentaje ?? null;
   }

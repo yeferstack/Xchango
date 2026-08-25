@@ -7,10 +7,6 @@
   padding: 16px 18px;
 }
 
-.stat-card--ok { border-left-color: var(--admin-ok, #2f6d4f); }
-.stat-card--warn { border-left-color: var(--admin-warn, #a3690f); }
-.stat-card--danger { border-left-color: var(--admin-danger, #a63f33); }
-
 .stat-card__top {
   display: flex;
   align-items: center;
@@ -24,21 +20,21 @@
   color: var(--admin-muted, #9a9184);
 }
 
-.stat-card--ok .stat-card__icon { color: var(--admin-ok, #2f6d4f); }
-.stat-card--warn .stat-card__icon { color: var(--admin-warn, #a3690f); }
-.stat-card--danger .stat-card__icon { color: var(--admin-danger, #a63f33); }
+.stat-card--ok .stat-card__icon { color: var(--admin-ok, var(--xg-verde)); }
+.stat-card--warn .stat-card__icon { color: var(--admin-warn, var(--xg-ambar)); }
+.stat-card--danger .stat-card__icon { color: var(--admin-danger, var(--xg-rojo-medio)); }
 
 .stat-card__variacion {
-  color: var(--admin-ok, #2f6d4f);
+  color: var(--admin-ok, var(--xg-verde));
   font-size: 11.5px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
-.stat-card__variacion--negativa { color: var(--admin-danger, #a63f33); }
+.stat-card__variacion--negativa { color: var(--admin-danger, var(--xg-rojo-medio)); }
 
 .stat-card__etiqueta {
   margin: 14px 0 2px;
-  color: var(--admin-text-2, #6f6656);
+  color: var(--admin-text-2, var(--xg-tinta-gris));
   font-size: 12.5px;
 }
 

@@ -1,22 +1,23 @@
 <div class="pagina">
-  <!-- ===================== ENCABEZADO ===================== -->
+
   <header class="encabezado">
     <button type="button" class="boton-volver" (click)="volver()">
-      <span class="material-icons">arrow_back</span>
+      <app-icono nombre="arrow_back"></app-icono>
     </button>
     <div>
       <h1>Editar Trueque</h1>
       <p>Actualiza la información de tu publicación</p>
     </div>
   </header>
+
   <!-- ===================== ESTADO DE CARGA ===================== -->
   <div class="estado-carga" *ngIf="cargandoTrueque">
-    <span class="material-icons girando">progress_activity</span>
+    <app-icono nombre="progress_activity"></app-icono>
     Cargando la información de tu publicación...
   </div>
 
   <div class="estado-error" *ngIf="errorCarga">
-    <span class="material-icons">error</span>
+    <app-icono nombre="error"></app-icono>
     {{ errorCarga }}
   </div>
 
@@ -26,7 +27,7 @@
     class="contenedor-principal"
     *ngIf="!cargandoTrueque && !errorCarga"
   >
-    <!-- ===================== COLUMNA IZQUIERDA (FORMULARIO) ===================== -->
+    <!-- columna izquierda (formulario) -->
     <div class="columna-formulario">
       <!-- Paso 1: Tipo de intercambio -->
       <section class="seccion">
@@ -44,7 +45,7 @@
           >
             <div class="tarjeta-tipo-encabezado">
               <div class="icono-circulo" [ngClass]="tipo.colorClase">
-                <span class="material-icons">{{ tipo.icono }}</span>
+                <app-icono [nombre]="tipo.icono"></app-icono>
               </div>
               <span
                 class="radio-personalizado"
@@ -117,7 +118,7 @@
           <div class="campo">
             <label>Disponibilidad <span class="requerido">*</span></label>
             <div class="input-con-icono">
-              <span class="material-icons">event</span>
+              <app-icono nombre="event"></app-icono>
               <select formControlName="disponibilidad">
                 <option value="" disabled>Selecciona disponibilidad</option>
                 <option *ngFor="let opcion of opcionesDisponibilidad" [value]="opcion">
@@ -130,7 +131,7 @@
           <div class="campo">
             <label>Cantidad disponible</label>
             <div class="input-con-icono">
-              <span class="material-icons">tag</span>
+              <app-icono nombre="tag"></app-icono>
               <input
                 type="text"
                 formControlName="cantidad"
@@ -163,7 +164,7 @@
           <div class="campo">
             <label>Departamento</label>
             <div class="input-con-icono">
-              <span class="material-icons">apartment</span>
+              <app-icono nombre="apartment"></app-icono>
               <input type="text" [value]="departamento" disabled readonly />
             </div>
           </div>
@@ -171,7 +172,7 @@
           <div class="campo">
             <label>Municipio <span class="requerido">*</span></label>
             <div class="input-con-icono">
-              <span class="material-icons">account_balance</span>
+              <app-icono nombre="account_balance"></app-icono>
               <select formControlName="municipio">
                 <option value="" disabled>Selecciona municipio</option>
                 <option *ngFor="let municipio of municipiosCasanare" [value]="municipio">
@@ -184,7 +185,7 @@
           <div class="campo">
             <label>Barrio</label>
             <div class="input-con-icono">
-              <span class="material-icons">place</span>
+              <app-icono nombre="place"></app-icono>
               <input type="text" formControlName="barrio" placeholder="Ej: 20 de Julio" />
             </div>
           </div>
@@ -203,7 +204,7 @@
           (drop)="onDrop($event)"
           (click)="inputArchivo.click()"
         >
-          <span class="material-icons icono-carga">cloud_upload</span>
+          <app-icono nombre="cloud_upload"></app-icono>
           <strong>Sube fotos de tu intercambio</strong>
           <p>Arrastra y suelta archivos aquí o haz clic para seleccionar</p>
           <p class="texto-formatos">Formatos: JPG, PNG (Máx. 5MB cada uno)</p>
@@ -227,25 +228,25 @@
           <div class="miniatura" *ngFor="let url of imagenesPreviewUrls; let i = index">
             <img [src]="url" alt="Vista previa de imagen" />
             <button type="button" (click)="eliminarImagen(i)">
-              <span class="material-icons">close</span>
+              <app-icono nombre="close"></app-icono>
             </button>
           </div>
         </div>
       </section>
 
       <button type="button" class="boton-ubicacion" (click)="seleccionarUbicacionEnMapa()">
-        <span class="material-icons">location_on</span>
+        <app-icono nombre="location_on"></app-icono>
         Seleccionar ubicación en el mapa
       </button>
 
       <button type="submit" class="boton-publicar">Guardar cambios</button>
     </div>
 
-    <!-- ===================== COLUMNA DERECHA (VISTA PREVIA) ===================== -->
+    <!-- columna derecha (vista previa) -->
     <aside class="columna-vista-previa">
       <div class="tarjeta-vista-previa">
         <div class="encabezado-vista-previa">
-          <span class="material-icons">visibility</span>
+          <app-icono nombre="visibility"></app-icono>
           <div>
             <strong>Vista previa de los cambios</strong>
             <p>Así se verá tu publicación actualizada</p>
@@ -256,7 +257,7 @@
           <!-- Sin imágenes: se muestra el ícono del tipo de intercambio -->
           <ng-container *ngIf="!imagenesPreviewUrls.length">
             <div class="icono-circulo icono-banner" [ngClass]="tipoSeleccionado?.colorClase">
-              <span class="material-icons">{{ tipoSeleccionado?.icono || 'inventory_2' }}</span>
+              <app-icono [nombre]="tipoSeleccionado?.icono || 'inventory_2'"></app-icono>
             </div>
             <h3>{{ tituloVistaPrevia }}</h3>
           </ng-container>
@@ -279,7 +280,7 @@
               *ngIf="imagenesPreviewUrls.length > 1"
               (click)="imagenAnterior()"
             >
-              <span class="material-icons">chevron_left</span>
+              <app-icono nombre="chevron_left"></app-icono>
             </button>
 
             <button
@@ -288,21 +289,21 @@
               *ngIf="imagenesPreviewUrls.length > 1"
               (click)="imagenSiguiente()"
             >
-              <span class="material-icons">chevron_right</span>
+              <app-icono nombre="chevron_right"></app-icono>
             </button>
           </ng-container>
         </div>
 
         <ul class="lista-vista-previa">
           <li>
-            <span class="material-icons">home</span>
+            <app-icono nombre="home"></app-icono>
             <div>
               <strong>Nombre</strong>
               <p>{{ form.get('nombre')?.value || 'Ej: Servicios' }}</p>
             </div>
           </li>
           <li>
-            <span class="material-icons">description</span>
+            <app-icono nombre="description"></app-icono>
             <div>
               <strong>Descripción</strong>
               <p>{{ form.get('descripcion')?.value || 'Descripción de la categoría' }}</p>
@@ -311,33 +312,33 @@
         </ul>
 
         <div class="fila-datos">
-          <span class="material-icons">check_circle</span>
+          <app-icono nombre="check_circle"></app-icono>
           <strong>Estado</strong>
           <span class="etiqueta-activo" *ngIf="form.get('estado')?.value">Activo</span>
           <span class="etiqueta-inactivo" *ngIf="!form.get('estado')?.value">Inactivo</span>
         </div>
 
         <div class="fila-datos">
-          <span class="material-icons">event</span>
+          <app-icono nombre="event"></app-icono>
           <strong>Disponibilidad</strong>
           <span>{{ form.get('disponibilidad')?.value || 'Ej: Fines de semana' }}</span>
         </div>
 
         <div class="fila-datos">
-          <span class="material-icons">place</span>
+          <app-icono nombre="place"></app-icono>
           <strong>Ubicación</strong>
           <span> {{ form.get('municipio')?.value || 'Ej: Yopal' }}, {{ departamento }} </span>
         </div>
 
         <div class="fila-datos">
-          <span class="material-icons">tag</span>
+          <app-icono nombre="tag"></app-icono>
           <strong>Cantidad disponible</strong>
           <span>{{ form.get('cantidad')?.value || 'Ej: 1 unidad' }}</span>
         </div>
       </div>
 
       <div class="caja-consejo">
-        <span class="material-icons">lightbulb</span>
+        <app-icono nombre="lightbulb"></app-icono>
         <div>
           <strong>Consejo</strong>
           <p>

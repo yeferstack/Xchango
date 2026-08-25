@@ -6,15 +6,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TruequesService } from '../../services/trueques';
 import { VerificarCodigoComponent } from '../../layout/verificar-codigo/verificar-codigo';
 
-/**
- * Pantalla de inicio de sesión con correo y contraseña.
- * La landing de /login solo deja elegir el método; el formulario real está aquí.
- *
- * El login es una simulación de práctica: cualquier correo con formato
- * válido y cualquier contraseña entran (ver TruequesService.iniciarSesion).
- * Antes de entrar de verdad se muestra un paso de "verificación por correo"
- * también simulado.
- */
+// Pantalla de inicio de sesión, solo con correo (sin contraseña: no se usa
+// en este proyecto). Se entra con un código de verificación simulado que
+// "llega" al correo — ver TruequesService.iniciarSesion.
 @Component({
   selector: 'app-acceso',
   standalone: true,
@@ -28,12 +22,11 @@ export class AccesoComponent implements OnInit {
   private ruta = inject(ActivatedRoute);
 
   email = '';
-  password = '';
   error = signal('');
 
   readonly mostrarVerificacion = signal(false);
 
-  /** A dónde volver después de entrar (lo pone el guard). */
+  // A dónde volver después de entrar (lo pone el guard).
   private volverA = '/home';
 
   ngOnInit(): void {
@@ -49,18 +42,17 @@ export class AccesoComponent implements OnInit {
       return;
     }
 
-    if (!this.email.trim() || !this.password) {
-      this.error.set('Completa correo y contraseña.');
+    if (!this.email.trim()) {
+      this.error.set('Completa tu correo.');
       return;
     }
 
-    // El correo/contraseña se validan de verdad solo después del código
-    // (onCodigoVerificado), así el flujo se ve como uno real.
+    // El correo se valida de verdad solo después del código (onCodigoVerificado).
     this.mostrarVerificacion.set(true);
   }
 
   onCodigoVerificado(): void {
-    const mensaje = this.servicio.iniciarSesion(this.email, this.password);
+    const mensaje = this.servicio.iniciarSesion(this.email);
     if (mensaje) {
       this.mostrarVerificacion.set(false);
       this.error.set(mensaje);

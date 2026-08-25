@@ -14,25 +14,19 @@ import { MUNICIPIOS_CASANARE } from '../../shared/municipios-casanare';
 })
 export class UbicacionComponent {
 
-    /* ==============================
-        UNICIPIOS DE CASANARE
-    ============================== */
+    // unicipios de casanare
 
     municipios: readonly string[] = MUNICIPIOS_CASANARE;
 
 
-    /* ==============================
-        BICACIÓN GUARDADA
-    ============================== */
+    // bicación guardada
 
     municipio = signal('Yopal');
     barrio = signal('El Triunfo');
     referencia = signal('Cerca al parque principal');
 
 
-    /* ==============================
-        DICIÓN
-    ============================== */
+    // dición
 
     editando = signal(false);
 
@@ -41,16 +35,10 @@ export class UbicacionComponent {
     tempReferencia = signal('');
 
 
-    /* ==============================
-        ADIO DE BÚSQUEDA
-    ============================== */
+    // adio de búsqueda
 
     radio = signal(15);
 
-
-    /* ==============================
-        BICACIÓN ACTUAL
-    ============================== */
 
     ubicacionActual = signal(false);
     obteniendoUbicacion = signal(false);
@@ -58,10 +46,6 @@ export class UbicacionComponent {
     latitud = signal<number | null>(null);
     longitud = signal<number | null>(null);
 
-
-    /* ==============================
-        RUEQUES CERCANOS
-    ============================== */
 
     truequesCercanos = signal([
         {
@@ -99,9 +83,7 @@ export class UbicacionComponent {
     ]);
 
 
-    /* ==============================
-        PUNTOS DE ENCUENTRO
-    ============================== */
+    // puntos de encuentro
 
     puntos = signal([
         {
@@ -118,10 +100,6 @@ export class UbicacionComponent {
 
     nuevoPunto = signal('');
 
-
-    /* ==============================
-        PREFERENCIAS
-    ============================== */
 
     preferencias = signal([
         {
@@ -145,28 +123,22 @@ export class UbicacionComponent {
     ]);
 
 
-    /* ==============================
-        ESTADO
-    ============================== */
-
     guardado = signal(false);
 
 
-    /** Trueque del marcador que se tocó en el mapa. null = ninguno. */
+    // Trueque del marcador que se tocó en el mapa. null = ninguno.
     truequeSeleccionado: { titulo: string; distancia: number } | null = null;
 
     constructor(private location: Location) { }
 
-    /** Al tocar un marcador se muestra de qué publicación es. */
+    // Al tocar un marcador se muestra de qué publicación es.
     verMarcador(trueque: { titulo: string; distancia: number }): void {
         this.truequeSeleccionado =
             this.truequeSeleccionado?.titulo === trueque.titulo ? null : trueque;
     }
 
 
-    /* ==============================
-        EDICIÓN DE UBICACIÓN
-    ============================== */
+    // edición de ubicación
 
     iniciarEdicion(): void {
         this.tempMunicipio.set(this.municipio());
@@ -195,18 +167,12 @@ export class UbicacionComponent {
     }
 
 
-    /* ==============================
-        RADIO
-    ============================== */
-
     cambiarRadio(valor: string): void {
         this.radio.set(Number(valor));
     }
 
 
-    /* ==============================
-        GPS
-    ============================== */
+    // gps
 
     usarUbicacionActual(): void {
 
@@ -247,9 +213,7 @@ export class UbicacionComponent {
     }
 
 
-    /* ==============================
-        PUNTOS DE ENCUENTRO
-    ============================== */
+    // puntos de encuentro
 
     agregarPunto(): void {
 
@@ -284,9 +248,7 @@ export class UbicacionComponent {
     }
 
 
-    /* ==============================
-        PREFERENCIAS
-    ============================== */
+    // preferencias
 
     togglePreferencia(id: string): void {
 
@@ -310,10 +272,6 @@ export class UbicacionComponent {
     }
 
 
-    /* ==============================
-        GOOGLE MAPS
-    ============================== */
-
     abrirGoogleMaps(nombre: string): void {
 
         const destino =
@@ -326,10 +284,6 @@ export class UbicacionComponent {
     }
 
 
-    /* ==============================
-        GUARDAR CAMBIOS
-    ============================== */
-
     guardarCambios(): void {
 
         this.guardado.set(true);
@@ -339,10 +293,6 @@ export class UbicacionComponent {
         }, 2500);
     }
 
-
-    /* ==============================
-        VOLVER
-    ============================== */
 
     volver(): void {
         this.location.back();

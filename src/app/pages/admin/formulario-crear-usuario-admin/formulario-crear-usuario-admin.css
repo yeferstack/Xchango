@@ -1,4 +1,3 @@
-/* ===================== BASE ===================== */
 :host {
   /* Alias hacia los tokens compartidos del panel admin, para que
      esta página no tenga su propia paleta desconectada del resto. */
@@ -31,7 +30,7 @@
   padding: 24px;
 }
 
-/* ===================== ÍCONOS ===================== */
+/* íconos */
 app-icono {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -50,7 +49,7 @@ app-icono {
   font-feature-settings: 'liga';
 }
 
-/* ===================== ENCABEZADO ===================== */
+
 .encabezado {
   display: flex;
   align-items: center;
@@ -83,7 +82,7 @@ app-icono {
   font-size: 14px;
 }
 
-/* ===================== LAYOUT PRINCIPAL ===================== */
+/* layout principal */
 .contenedor-principal {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -91,7 +90,7 @@ app-icono {
   align-items: start;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 900px) {
   .contenedor-principal {
     grid-template-columns: 1fr;
   }
@@ -104,7 +103,7 @@ app-icono {
   gap: 20px;
 }
 
-/* ===================== SECCIONES ===================== */
+
 .seccion {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
@@ -132,7 +131,7 @@ app-icono {
   color: var(--color-text-muted);
 }
 
-/* ===================== CAMPOS ===================== */
+
 .fila-campos {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -163,7 +162,7 @@ app-icono {
 }
 
 .requerido {
-  color: #dc2626;
+  color: var(--xg-rojo-fuerte);
 }
 
 .texto-ayuda {
@@ -173,7 +172,7 @@ app-icono {
 }
 
 .texto-error {
-  color: #dc2626;
+  color: var(--xg-rojo-fuerte);
 }
 
 .input-con-icono {
@@ -234,7 +233,7 @@ app-icono {
   font-size: 18px;
 }
 
-/* ===================== TEXTAREA (NOTAS) ===================== */
+/* textarea (notas) */
 textarea {
   border: 1px solid var(--color-border);
   border-radius: 10px;
@@ -260,14 +259,14 @@ textarea:focus {
   color: var(--color-text-muted);
 }
 
-/* ===================== TARJETAS DE ROL ===================== */
+/* tarjetas de rol */
 .grid-roles {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 600px) {
   .grid-roles {
     grid-template-columns: 1fr;
   }
@@ -343,7 +342,7 @@ textarea:focus {
   color: var(--verde);
 }
 
-/* ===================== ESTADO DE LA CUENTA ===================== */
+/* ESTADO DE LA CUENTA */
 .grupo-estado {
   display: flex;
   gap: 10px;
@@ -377,12 +376,12 @@ textarea:focus {
 }
 
 .boton-estado.inactivo-seleccionado {
-  border-color: #dc2626;
-  background: #fee2e2;
+  border-color: var(--xg-rojo-fuerte);
+  background: var(--xg-rojo-fondo);
   color: #b91c1c;
 }
 
-/* ===================== BOTONES DE ACCIÓN ===================== */
+/* botones de acción */
 .fila-botones {
   display: flex;
   justify-content: flex-end;
@@ -423,7 +422,7 @@ textarea:focus {
   background: var(--color-accent-dark);
 }
 
-/* ===================== VISTA PREVIA ===================== */
+
 .tarjeta-vista-previa {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
@@ -537,15 +536,15 @@ textarea:focus {
 }
 
 .etiqueta-inactivo {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--xg-rojo-fondo);
+  color: var(--xg-rojo-fuerte);
   font-size: 11.5px;
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 999px;
 }
 
-/* ===================== CAJA CONSEJO ===================== */
+
 .caja-consejo {
   display: flex;
   gap: 10px;

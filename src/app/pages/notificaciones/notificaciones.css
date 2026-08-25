@@ -54,4 +54,4 @@
   font: inherit; font-size: .88rem; border: 1px solid var(--nt-line); background: #fff;
 }
 .nt__btn--ok { background: #3f7d52; border-color: #3f7d52; color: #fff; }
-.nt__btn--no { background: #fff; border-color: #a8453b; color: #a8453b; }
+.nt__btn--no { background: #fff; border-color: var(--xg-rojo); color: var(--xg-rojo); }

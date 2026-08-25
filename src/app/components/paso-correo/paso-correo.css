@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+.correo__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.correo__form .xg-label {
+  margin-bottom: 0;
+}
+
+.correo__nota {
+  margin-top: 16px;
+}

@@ -1,7 +1,7 @@
 <!-- ===== NAVBAR ===== -->
 <header class="navbar">
     <a class="marca" routerLink="/home">
-        <img src="/Logo-xchango/logo-xchango.png" alt="" class="logo" />
+        <img src="Logo-xchango/logo-xchango.png" alt="" class="logo" />
         <span class="marca-texto">XchanGo</span>
     </a>
 
@@ -9,29 +9,21 @@
         <a routerLink="/home" class="nav-item activo">
             <app-icono nombre="home"></app-icono> Inicio
         </a>
-        <a routerLink="/explorar" class="nav-item">
-            <app-icono nombre="search"></app-icono> Explorar
-        </a>
         <a routerLink="/mis-trueques" class="nav-item">
             <app-icono nombre="swap_horiz"></app-icono> Mis trueques
         </a>
-        <a routerLink="/servicios" class="nav-item">
-            <app-icono nombre="apps"></app-icono> Servicios
-        </a>
-        <a routerLink="/mensajes" class="nav-item">
-            <app-icono nombre="chat_bubble_outline"></app-icono> Mensajes
-        </a>
-        <a routerLink="/favoritos" class="nav-item">
-            <app-icono nombre="favorite_border"></app-icono> Favoritos
+        <a routerLink="/mis-publicaciones" class="nav-item">
+            <app-icono nombre="apps"></app-icono> Mis publicaciones
         </a>
     </nav>
 
     <div class="nav-derecha">
         <button class="btn-campana" type="button" routerLink="/notificaciones" title="Ver notificaciones">
             <app-icono nombre="notifications_none"></app-icono>
+            <span class="campana-punto" *ngIf="notificaciones > 0">{{ notificaciones }}</span>
         </button>
         <div class="avatar-nav">
-            <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+            <img [src]="avatarUrl" [alt]="nombreUsuario" />
         </div>
         <app-icono nombre="expand_more"></app-icono>
     </div>
@@ -48,20 +40,22 @@
             </button>
 
             <div class="foto-perfil">
-                <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+                <img [src]="avatarUrl" [alt]="nombreUsuario" />
             </div>
 
-            <h2 class="nombre">Miguel Perez</h2>
+            <h2 class="nombre">{{ nombreUsuario }}</h2>
 
             <h3 class="subtitulo-calif">Calificaciones y opiniones</h3>
             <div class="estrellas">
-                <app-icono nombre="star"></app-icono>
-                <app-icono nombre="star"></app-icono>
-                <app-icono nombre="star"></app-icono>
-                <app-icono nombre="star"></app-icono>
-                <app-icono nombre="star"></app-icono>
+                <app-icono
+                    *ngFor="let llena of estrellas()"
+                    [class.llena]="llena"
+                    [class.vacia]="!llena"
+                    nombre="star"
+                ></app-icono>
             </div>
-            <p class="nota-calif">(Solo será visible públicamente tras recibir 5 calificaciones).</p>
+            <p class="nota-calif" *ngIf="!muestraCalificacion">(Solo será visible públicamente tras recibir 5 calificaciones).</p>
+            <p class="nota-calif" *ngIf="muestraCalificacion">{{ calificacion }} de {{ calificacionMaxima }} ({{ totalCalificaciones }} calificaciones)</p>
         </aside>
 
         <!-- Tarjeta blanca: contenido -->

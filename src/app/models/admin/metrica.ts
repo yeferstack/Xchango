@@ -1,11 +1,8 @@
-/**
- * Modelos de métricas (data/metricas.json).
- *
- * Fuente ÚNICA: `MetricasAdminService` ya no redeclara estas interfaces, las
- * importa desde aquí.
- */
+// Modelos de métricas (data/metricas.json).
+// Fuente ÚNICA: `MetricasAdminService` ya no redeclara estas interfaces, las
+// importa desde aquí.
 
-/** Totales actuales. Son coherentes con el resto de los JSON. */
+// Totales actuales. Son coherentes con el resto de los JSON.
 export interface MetricasResumen {
   usuarios: number;
   usuariosActivos: number;
@@ -15,10 +12,10 @@ export interface MetricasResumen {
   usuariosSuspendidos: number;
 }
 
-/** Alias histórico; algunos componentes lo importaban con este nombre. */
+// Alias histórico; algunos componentes lo importaban con este nombre.
 export type Metrica = MetricasResumen;
 
-/** Punto de una serie de gráfica. `valor` es una magnitud, nunca dinero. */
+// Punto de una serie de gráfica. `valor` es una magnitud, nunca dinero.
 export interface SerieGrafico {
   label: string;
   valor: number;
