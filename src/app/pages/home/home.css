@@ -1,7 +1,7 @@
     /*
-    XchanGo — HOME
-    CSS COMPLETO Y ORGANIZADO
-    */
+        XchanGo — HOME
+        CSS COMPLETO Y ORGANIZADO
+        */
 
     :host {
     --crema: #f4eee1;
@@ -45,10 +45,7 @@
     margin: 0;
 
     width: 100%;
-    height: 100vh;
     min-height: 100vh;
-
-    overflow: hidden;
 
     font-family: var(--fuente);
     color: var(--tinta);
@@ -105,8 +102,7 @@
     width: 100%;
     max-width: 1500px;
 
-    height: 100vh;
-    min-height: 0;
+    min-height: 100vh;
 
     margin: 0 auto;
 
@@ -116,7 +112,7 @@
 
     grid-template-rows:
         auto
-        minmax(0, 1fr);
+        auto;
     }
 
     /* header */
@@ -309,7 +305,7 @@
 
     padding: 5px 5px 5px 7px;
 
-    overflow: hidden;
+    overflow: visible;
 
     background: rgba(255, 255, 255, 0.48);
 
@@ -585,9 +581,6 @@
     }
 
     .cuerpo {
-    min-height: 0;
-    height: 100%;
-
     display: grid;
 
     grid-template-columns:
@@ -596,13 +589,10 @@
 
     gap: 20px;
 
-    align-items: stretch;
+    align-items: start;
     }
 
     .lateral {
-    height: 100%;
-    min-height: 0;
-
     padding: 20px 14px;
 
     display: flex;
@@ -622,8 +612,20 @@
 
     overflow: hidden;
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    /* Antes blur(18px). Esta barra queda justo encima de las fotos de
+        las tarjetas, y recalcular un desenfoque tan fuerte en tiempo
+        real mientras esas fotos pasan detrás (al hacer scroll) es muy
+        costoso para el navegador: se traba unos segundos y luego "salta"
+        de golpe a la posición correcta. Con menos blur se ve casi igual
+        mas el navegador no se atrasa. */
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+
+    /* Le avisa al navegador que este efecto va a cambiar seguido
+        (por el contenido que pasa detrás al hacer scroll), para que
+        lo prepare en su propia capa de antemano en vez de recalcularlo
+        de golpe. */
+    will-change: backdrop-filter;
     }
 
     .lateral__titulo {
@@ -722,7 +724,7 @@
     .publicar {
     min-height: 50px;
 
-    margin-top: auto;
+    margin-top: 10px;
 
     padding: 7px 7px 7px 15px;
 
@@ -787,21 +789,11 @@
 
     .contenido {
     min-width: 0;
-    min-height: 0;
 
-    height: 100%;
-
-    display: grid;
-
-    grid-template-rows:
-        auto
-        auto
-        minmax(0, 1fr)
-        auto;
+    display: flex;
+    flex-direction: column;
 
     gap: 12px;
-
-    overflow: hidden;
     }
 
     .filtros {
@@ -836,6 +828,13 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.75);
 
     overflow: hidden;
+
+    /* Igual que .lateral: hereda blur(18px) de .vidrio y queda encima
+        de las tarjetas con fotos. Se sobreescribe aquí para que el
+        scroll no se trabe y "salte". */
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    will-change: backdrop-filter;
     }
 
     .pestana {
@@ -937,6 +936,13 @@
         background 0.18s ease,
         transform 0.18s ease,
         box-shadow 0.18s ease;
+
+    /* Igual que .lateral y .pestanas: hereda blur(18px) de .vidrio
+        y está sobre las tarjetas con fotos, causando el mismo trabón
+        al hacer scroll. */
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    will-change: backdrop-filter;
     }
 
     .orden__selector svg {
@@ -959,26 +965,19 @@
     /* ZONA DE PUBLICACIONES + FOOTER */
 
     /*
-    IMPORTANTE:
+        IMPORTANTE:
 
-    La zona completa tiene scroll.
+        La zona completa tiene scroll.
 
-    Esto permite que:
-    - Las tarjetas se vean completas.
-    - El footer NO tape las tarjetas.
-    - El footer quede al FINAL.
-    - El usuario tenga que bajar hasta el final
-        para verlo.
-    */
+        Esto permite que:
+        - Las tarjetas se vean completas.
+        - El footer NO tape las tarjetas.
+        - El footer quede al FINAL.
+        - El usuario tenga que bajar hasta el final
+            para verlo.
+        */
 
     .rejilla {
-    min-height: 0;
-
-    height: 100%;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
     display: grid;
 
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -987,31 +986,7 @@
 
     gap: 20px;
 
-    padding: 8px 8px 35px 2px;
-
-    scrollbar-width: thin;
-
-    scrollbar-color: rgba(162, 127, 89, 0.28) transparent;
-    }
-
-    /* Scrollbar */
-
-    .rejilla::-webkit-scrollbar {
-    width: 6px;
-    }
-
-    .rejilla::-webkit-scrollbar-track {
-    background: transparent;
-    }
-
-    .rejilla::-webkit-scrollbar-thumb {
-    background: rgba(162, 127, 89, 0.28);
-
-    border-radius: 999px;
-    }
-
-    .rejilla::-webkit-scrollbar-thumb:hover {
-    background: rgba(162, 127, 89, 0.45);
+    padding: 8px 8px 4px 2px;
     }
 
     /* tarjetas */
@@ -1325,11 +1300,11 @@
     /* footer / beneficios */
 
     /*
-    El footer está DENTRO del flujo de la zona inferior.
-    No es fixed.
-    No tapa tarjetas.
-    Aparece cuando el usuario llega al final.
-    */
+        El footer está DENTRO del flujo de la zona inferior.
+        No es fixed.
+        No tapa tarjetas.
+        Aparece cuando el usuario llega al final.
+        */
 
     .footer {
     width: 100%;
@@ -1342,10 +1317,12 @@
     }
 
     .beneficios {
-    /* Fila fija de .contenido (grid-template-rows: ... auto), siempre
-        visible al fondo del layout — no depende de que .rejilla haga
-        scroll ni de cálculos de alto que puedan fallar en pantallas
-        bajas. */
+    /* Ahora vive DENTRO de .rejilla (la que hace scroll), como una fila
+            más que ocupa las 3 columnas. Ya no es position:absolute ni
+            depende de ningún JS: aparece solo cuando el usuario llega al
+            final de la lista, de forma natural. */
+    grid-column: 1 / -1;
+
     margin-top: 8px;
 
     padding: 12px 20px;
@@ -1567,8 +1544,8 @@
     }
 
     /*
-        Navbar completa en tablet
-    */
+            Navbar completa en tablet
+        */
 
     .menu {
         order: 3;
@@ -1597,8 +1574,8 @@
     }
 
     /*
-        Cuerpo
-    */
+            Cuerpo
+        */
 
     .cuerpo {
         height: auto;
@@ -1635,8 +1612,8 @@
     }
 
     /*
-        Contenido
-    */
+            Contenido
+        */
 
     .contenido {
         height: auto;
@@ -1647,8 +1624,8 @@
     }
 
     /*
-        Publicaciones
-    */
+            Publicaciones
+        */
 
     .rejilla {
         height: auto;
@@ -1673,8 +1650,8 @@
     }
 
     /*
-        Footer
-    */
+            Footer
+        */
 
     .footer {
         margin-top: 10px;
@@ -1731,8 +1708,8 @@
     }
 
     /*
-        Navbar
-    */
+            Navbar
+        */
 
     .menu {
         width: 100%;
@@ -1785,8 +1762,8 @@
     }
 
     /*
-        Filtros
-    */
+            Filtros
+        */
 
     .filtros {
         align-items: stretch;
@@ -1813,8 +1790,8 @@
     }
 
     /*
-        Tarjetas
-    */
+            Tarjetas
+        */
 
     .rejilla {
         grid-template-columns: 1fr;
@@ -1854,8 +1831,8 @@
     }
 
     /*
-        Footer
-    */
+            Footer
+        */
 
     .beneficios {
         grid-template-columns: 1fr;
@@ -1915,7 +1892,7 @@
     gap: 4px;
 
     /* Fondo propio (no solo el de .vidrio): así se ve siempre sólido,
-        sin depender de que el navegador soporte backdrop-filter. */
+            sin depender de que el navegador soporte backdrop-filter. */
     background: #fffdfa;
     border: 1px solid rgba(255, 255, 255, 0.9);
     box-shadow: 0 20px 45px rgba(60, 45, 26, 0.22);
@@ -2215,6 +2192,11 @@
     top: calc(100% + 10px);
     left: 50%;
     right: auto;
-    transform: translateX(-50%);
+    /* Antes se centraba con transform: translateX(-50%), pero la
+        animación miniMenuIn también anima "transform" (translateY) y
+        lo pisaba durante los 0.16s de la animación: el menú aparecía
+        pegado a la derecha y "saltaba" al centro justo al terminar.
+        Centrar con margin-left evita ese choque: no depende de transform. */
+    margin-left: -80px; /* mitad del width (160px / 2) */
     width: 160px;
     }
