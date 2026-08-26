@@ -1,28 +1,32 @@
-/*
-  XchanGo · Tu información
-  Misma paleta beige que /perfil + acento navy en el botón
-*/
+/* XchanGo · Tu información */
 
 :host {
-    --bg-app: #F4EEE1;
-    --bg-nav: #FBF8F0;
-    --bg-card: #EFE7D6;
-    --bg-option: #E9E0CC;
-    --bg-option-hover: #E1D5B8;
-    --accent: #C9AD7E;
-    --accent-dark: #B4966A;
-    --text-primary: #1E1B16;
-    --text-secondary: #847A68;
-    --border-soft: #DED1B3;
-    --star-filled: #C9AD7E;
-    --star-empty: #D8CDB6;
+    --bg-app: var(--xg-bg);
+    --bg-nav: var(--xg-superficie);
+    --bg-card: var(--xg-crema);
+    --bg-option: var(--xg-crema-fuerte);
+    --bg-option-hover: var(--xg-borde);
+    --accent: var(--xg-acento);
+    --accent-dark: var(--xg-acento-oscuro);
+    --text-primary: var(--xg-texto);
+    --text-secondary: var(--xg-texto-tenue);
+    --border-soft: var(--xg-borde);
+    --star-filled: var(--xg-acento);
+    --star-empty: var(--xg-borde);
     --navy: #1f1b16;
     --navy-dark: #322b23;
 
     display: block;
-    font-family: 'Nunito', 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: var(--xg-fuente-texto);
     background: var(--bg-app);
     min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--xg-fuente-titulo);
+    color: var(--text-primary);
 }
 
 * {
@@ -38,63 +42,77 @@
 /* NAVBAR (igual que en /perfil) */
 
 .navbar {
+    position: relative;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
+    min-height: 64px;
     margin-bottom: 32px;
 }
 
 .navbar__brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    height: 52px;
+    margin-left: -12px;
     flex-shrink: 0;
 }
 
 .navbar__logo {
-    width: 34px;
+    width: 90px;
     height: 34px;
     object-fit: contain;
-    border-radius: 6px;
-}
-
-.navbar__brand-name {
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--text-primary);
+    display: block;
+    flex-shrink: 0;
 }
 
 .navbar__pill {
     display: flex;
     align-items: center;
-    gap: 4px;
-    background: var(--bg-nav);
-    border-radius: 999px;
-    padding: 8px 10px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    gap: 5px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.54);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: var(--xg-sombra-suave);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 .navbar__link {
+    min-height: 40px;
+    padding: 0 15px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
+    justify-content: center;
+    gap: 7px;
+    border-radius: 14px;
+    color: var(--xg-texto-suave);
+    font-size: 14px;
+    font-weight: 700;
     white-space: nowrap;
-}
-
-.navbar__link app-icono {
-    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .navbar__link:hover {
-    background: var(--bg-option);
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--xg-texto-fuerte);
+    transform: translateY(-1px);
+}
+
+.navbar__link app-icono {
+    color: var(--text-secondary);
+    font-size: 18px;
+}
+
+.navbar__link:first-child {
+    background: var(--text-primary);
+    color: var(--xg-card);
 }
 
 .navbar__actions {
@@ -115,6 +133,26 @@
     justify-content: center;
     cursor: pointer;
     color: var(--text-primary);
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.navbar__icon-btn:hover {
+    background: var(--bg-option);
+    transform: scale(1.05);
+}
+
+.navbar__perfil-wrap {
+    position: relative;
+}
+
+.navbar__avatar-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
 }
 
 .navbar__avatar {
@@ -123,6 +161,7 @@
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid var(--accent);
+    background: var(--bg-option);
     flex-shrink: 0;
 }
 
@@ -131,6 +170,63 @@
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.navbar__menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 300;
+    width: 250px;
+    padding: 12px;
+    background: var(--bg-nav);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    box-shadow: 0 16px 34px rgba(31, 27, 22, 0.14);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.navbar__menu-nombre {
+    margin: 0 0 6px;
+    padding: 0 8px;
+    font-family: var(--xg-fuente-titulo);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.navbar__menu-link,
+.navbar__menu-salir {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 8px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-align: left;
+    text-decoration: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.navbar__menu-link:hover,
+.navbar__menu-salir:hover {
+    background: var(--bg-option);
+    color: var(--text-primary);
+}
+
+.navbar__menu-salir {
+    margin-top: 4px;
+    border-top: 1px solid var(--border-soft);
+    border-radius: 0;
+    padding-top: 12px;
+    color: #b4453a;
 }
 
 /* tarjeta principal */
@@ -150,7 +246,7 @@
     padding: 40px;
 }
 
-/* ---------- Columna izquierda ---------- */
+/* Columna izquierda */
 
 .perfil__identity {
     display: flex;
@@ -178,7 +274,6 @@
     color: var(--text-primary);
 }
 
-/* --- FOTO DE PERFIL: tamaño corregido + contenida en el círculo --- */
 .perfil__avatar-wrap {
     width: 160px;
     height: 160px;
@@ -236,7 +331,7 @@
     margin: 0;
 }
 
-/* ---------- Columna derecha: panel de información ---------- */
+/* Columna derecha: panel de información */
 
 .info-panel {
     display: flex;
@@ -354,7 +449,6 @@
     object-fit: contain;
 }
 
-
 @media (max-width: 1024px) {
     .navbar__pill {
         display: none;
@@ -383,6 +477,29 @@
 @media (max-width: 600px) {
     .perfil-page {
         padding: 16px;
+    }
+
+    .navbar {
+        gap: 10px;
+    }
+
+    .navbar__brand {
+        gap: 5px;
+        margin-left: 0;
+    }
+
+    .navbar__actions {
+        gap: 6px;
+    }
+
+    .navbar__icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .navbar__avatar {
+        width: 34px;
+        height: 34px;
     }
 
     .perfil__hero {
