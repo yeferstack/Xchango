@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, HostListener, inject, signal } from '@angular/core';
 import { IconoComponent } from '../../components/icono/icono';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TruequesService } from '../../services/trueques';
 
 @Component({
@@ -14,6 +14,7 @@ import { TruequesService } from '../../services/trueques';
 })
 export class InformacionComponent implements OnInit {
     private servicio = inject(TruequesService);
+    private router = inject(Router);
 
     calificacionMaxima: number = 5;
     totalCalificacionesRequeridas: number = 5;
@@ -28,6 +29,9 @@ export class InformacionComponent implements OnInit {
 
     guardado = false;
 
+    // Menú del avatar en la navbar
+    readonly menuAbierto = signal(false);
+
     ngOnInit(): void {
         this.servicio.cargar();
         const usuario = this.servicio.usuarioActual();
@@ -35,7 +39,6 @@ export class InformacionComponent implements OnInit {
         this.numeroTelefono = usuario?.telefono ?? '';
     }
 
-    // Datos generales del perfil (mismo header lateral que en /perfil).
     get nombreUsuario(): string {
         return this.servicio.usuarioActual()?.nombre ?? 'Invitado';
     }
@@ -57,6 +60,20 @@ export class InformacionComponent implements OnInit {
             { length: this.calificacionMaxima },
             (_, i) => i < Math.round(this.calificacion)
         );
+    }
+
+    toggleMenu(): void {
+        this.menuAbierto.update((v) => !v);
+    }
+
+    @HostListener('document:click')
+    cerrarMenu(): void {
+        this.menuAbierto.set(false);
+    }
+
+    cerrarSesion(): void {
+        this.servicio.cerrarSesion();
+        this.router.navigate(['/login']);
     }
 
     onArchivoSeleccionado(event: Event): void {
