@@ -54,9 +54,11 @@ h3 {
 }
 
 .logo {
-    width: 34px;
+    width: 90px;
     height: 34px;
     object-fit: contain;
+    display: block;
+    flex-shrink: 0;
 }
 
 .marca-texto {
