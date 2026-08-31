@@ -5,6 +5,7 @@
 // `alertas.json` no servía para esto: es del panel admin y no tiene usuarioId.
 export type TipoNotificacion =
   | 'solicitud'   // alguien quiere truequear con una publicación tuya
+  | 'enviada'     // TÚ enviaste una solicitud a otra publicación (recibo/confirmación)
   | 'aceptada'    // el dueño aceptó tu propuesta
   | 'rechazada';  // el dueño no aceptó tu propuesta  
 
