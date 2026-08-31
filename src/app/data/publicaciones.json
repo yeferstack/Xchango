@@ -13,7 +13,11 @@
     "cantidadDisponible": "1 unidad",
     "disponibilidad": "Fines de semana",
     "imagenes": [
-      "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=900&q=80"
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1603921326210-6edd2d60ca68?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1592286927505-2fd3b8a5b1f1?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 214,
@@ -34,7 +38,11 @@
     "cantidadDisponible": "1 unidad",
     "disponibilidad": "Lunes a viernes en la tarde",
     "imagenes": [
-      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=900&q=80"
+      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "finalizada",
     "vistas": 341,
@@ -51,7 +59,11 @@
     "ofreces": "Paquete de plantillas premium para Canva",
     "buscas": "Diseño de logo o edición de video",
     "imagenes": [
-      "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80"
+      "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 128,
@@ -63,16 +75,20 @@
     "usuarioId": "u4",
     "tipo": "bien_fisico",
     "categoriaId": "cat6",
-    "titulo": "Pc Gamer",
-    "descripcion": "Pc Gamer de alta gama con procesador de ultima generacion y tarjeta grafica dedicada.",
-    "ofreces": "Pc Gamer",
+    "titulo": "PlayStation 5 con dos controles",
+    "descripcion": "Consola con dos controles inalámbricos y tres juegos físicos incluidos.",
+    "ofreces": "PlayStation 5 con dos controles",
     "buscas": "Portátil para diseño o cámara réflex",
     "municipio": "Villanueva",
     "barrio": "Centro",
     "cantidadDisponible": "1 unidad",
     "disponibilidad": "Disponible todos los días",
     "imagenes": [
-      "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=900&q=80"
+      "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1592840062661-1b2f4c1d7c4e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1603481546238-487240415921?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 487,
@@ -92,7 +108,11 @@
     "cantidadDisponible": "3 sesiones",
     "disponibilidad": "Martes y jueves de 5:00 PM a 8:00 PM",
     "imagenes": [
-      "https://images.unsplash.com/photo-1558877385-81a1c7e67d72?w=900&q=80"
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 176,
@@ -113,7 +133,11 @@
     "cantidadDisponible": "1 unidad",
     "disponibilidad": "Fines de semana",
     "imagenes": [
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80"
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1550226891-ef816aed4a98?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "pausada",
     "vistas": 95,
@@ -130,7 +154,11 @@
     "ofreces": "Curso digital de Excel básico",
     "buscas": "Curso de inglés o plantillas de diseño",
     "imagenes": [
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80"
+      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 263,
@@ -151,7 +179,11 @@
     "cantidadDisponible": "1 unidad",
     "disponibilidad": "Fines de semana",
     "imagenes": [
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80"
+      "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "finalizada",
     "vistas": 152,
@@ -171,7 +203,11 @@
     "cantidadDisponible": "5 sesiones",
     "disponibilidad": "Lunes y miércoles de 4:00 PM a 7:00 PM",
     "imagenes": [
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&q=80"
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 198,
@@ -191,7 +227,11 @@
     "cantidadDisponible": "4 horas",
     "disponibilidad": "Sábados de 8:00 AM a 12:00 M",
     "imagenes": [
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80"
+      "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 143,
@@ -212,7 +252,11 @@
     "cantidadDisponible": "6 unidades",
     "disponibilidad": "Fines de semana",
     "imagenes": [
-      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&q=80"
+      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "eliminada",
     "vistas": 61,
@@ -229,7 +273,11 @@
     "ofreces": "Acceso a cuenta de streaming compartida",
     "buscas": "Licencia de software o curso digital",
     "imagenes": [
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=900&q=80"
+      "https://images.unsplash.com/photo-1586899028174-e7098604235b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1601944177325-f8867652837f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "eliminada",
     "vistas": 88,
@@ -250,7 +298,11 @@
     "cantidadDisponible": "2 unidades",
     "disponibilidad": "Entre semana",
     "imagenes": [
-      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&q=80"
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "eliminada",
     "vistas": 37,
@@ -271,7 +323,11 @@
     "cantidadDisponible": "1 unidad",
     "disponibilidad": "Fines de semana",
     "imagenes": [
-      "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=900&q=80"
+      "https://images.unsplash.com/photo-1577737330379-1f82737418ab?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1723193217409-8367f2bed30e?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1721461043344-9fb9bd5fbdf3?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1558981359-219d6364c9c8?auto=format&fit=crop&w=900&q=80"
     ],
     "estado": "activa",
     "vistas": 0,
