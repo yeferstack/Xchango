@@ -20,3 +20,5 @@ describe('ChartBarras', () => {
     expect(component).toBeTruthy();
   });
 });
+
+

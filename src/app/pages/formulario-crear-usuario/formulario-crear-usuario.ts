@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef } from "@angular/core";
 import { inject, signal } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { TruequesService } from "../../services/trueques";
@@ -26,6 +26,15 @@ interface Opcion {
   label: string;
 }
 
+// Representa una zona de carga de imagen individual (perfil, frente o reverso)
+interface CampoImagen {
+  archivo: File | null;
+  previewUrl: string | null;
+  arrastrando: boolean;
+}
+
+type ClaveImagen = "perfil" | "documentoFrente" | "documentoReverso";
+
 @Component({
   selector: "formulario-crear-usuario",
   standalone: true,
@@ -49,7 +58,6 @@ export class FormularioCrearUsuarioComponent {
     numeroDocumento: "",
   };
 
-  // La contraseña hace falta para poder iniciar sesión después.
   // Paso actual del registro: primero el correo, luego el código, luego el formulario.
   readonly paso = signal<'correo' | 'verificar' | 'formulario'>('correo');
 
@@ -59,9 +67,7 @@ export class FormularioCrearUsuarioComponent {
 
   private readonly router = inject(Router);
 
-  fotoPerfilArchivo: File | null = null;
-  fotoPerfilNombre = "";
-  isDragOver = false;
+  private readonly cdr = inject(ChangeDetectorRef);
 
   // Datos de los <select>: cada uno se recorre en el HTML con *ngFor.
   readonly opcionesSexo: Opcion[] = [
@@ -80,48 +86,125 @@ export class FormularioCrearUsuarioComponent {
   private readonly tiposPermitidos = ["image/png", "image/jpeg"];
   private readonly tamanoMaximoBytes = 5 * 1024 * 1024; // 5MB
 
-  onFotoPerfilSeleccionada(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) {
+  readonly fechaRegistro = new Date();
+
+  // Una entrada por cada zona de carga de imagen del paso 3
+  imagenes: Record<ClaveImagen, CampoImagen> = {
+    perfil: { archivo: null, previewUrl: null, arrastrando: false },
+    documentoFrente: { archivo: null, previewUrl: null, arrastrando: false },
+    documentoReverso: { archivo: null, previewUrl: null, arrastrando: false },
+  };
+
+  constructor() {
+    this.asegurarFuenteMaterialIcons();
+  }
+
+  /**
+   * Inyecta el link de Google Fonts para Material Icons si el proyecto
+   * todavía no lo tiene cargado (evita que los íconos se vean como texto).
+   */
+  private asegurarFuenteMaterialIcons(): void {
+    const idLink = "material-icons-font";
+    if (document.getElementById(idLink)) {
       return;
     }
-    this.asignarFotoPerfil(input.files[0]);
+    const link = document.createElement("link");
+    link.id = idLink;
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+    document.head.appendChild(link);
   }
 
-  onDragOver(event: DragEvent): void {
-    event.preventDefault();
-    this.isDragOver = true;
+  // ---------------------------------------------------------
+  // Vista previa (columna derecha del paso 3)
+  // ---------------------------------------------------------
+  get nombreCompleto(): string {
+    const nombreCompleto = `${this.modelo.nombres} ${this.modelo.apellidos}`.trim();
+    return nombreCompleto || "Juan Pérez";
   }
 
-  onDragLeave(event: DragEvent): void {
-    event.preventDefault();
-    this.isDragOver = false;
+  get ubicacionVistaPrevia(): string {
+    if (this.modelo.ciudad && this.modelo.estado) {
+      return `${this.modelo.ciudad}, ${this.modelo.estado}`;
+    }
+    return "Yopal, Casanare";
   }
 
-  onDrop(event: DragEvent): void {
-    event.preventDefault();
-    this.isDragOver = false;
+  get telefonoVistaPrevia(): string {
+    return this.modelo.telefono || "+57 300 123 4567";
+  }
 
-    const archivo = event.dataTransfer?.files?.[0];
-    if (archivo) {
-      this.asignarFotoPerfil(archivo);
+  get emailVistaPrevia(): string {
+    return this.modelo.email || "juan@correo.com";
+  }
+
+  get fechaRegistroFormateada(): string {
+    const dia = String(this.fechaRegistro.getDate()).padStart(2, "0");
+    const mes = String(this.fechaRegistro.getMonth() + 1).padStart(2, "0");
+    const anio = this.fechaRegistro.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+  }
+
+  // ---------------------------------------------------------
+  // Manejo de imágenes (drag & drop + input) — genérico para
+  // perfil, frente y reverso del documento
+  // ---------------------------------------------------------
+  onDragOver(event: DragEvent, clave: ClaveImagen): void {
+    event.preventDefault();
+    this.imagenes[clave] = { ...this.imagenes[clave], arrastrando: true };
+  }
+
+  onDragLeave(event: DragEvent, clave: ClaveImagen): void {
+    event.preventDefault();
+    this.imagenes[clave] = { ...this.imagenes[clave], arrastrando: false };
+  }
+
+  onDrop(event: DragEvent, clave: ClaveImagen): void {
+    event.preventDefault();
+    this.imagenes[clave] = { ...this.imagenes[clave], arrastrando: false };
+    if (event.dataTransfer?.files?.length) {
+      this.asignarImagen(event.dataTransfer.files[0], clave);
     }
   }
 
-  private asignarFotoPerfil(archivo: File): void {
-    if (!this.tiposPermitidos.includes(archivo.type)) {
+  onFileSelected(event: Event, clave: ClaveImagen): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.asignarImagen(input.files[0], clave);
+    }
+    input.value = "";
+  }
+
+  private asignarImagen(file: File, clave: ClaveImagen): void {
+    if (!this.tiposPermitidos.includes(file.type)) {
       console.warn("Formato no permitido. Usa JPG o PNG.");
       return;
     }
-    if (archivo.size > this.tamanoMaximoBytes) {
+    if (file.size > this.tamanoMaximoBytes) {
       console.warn("El archivo supera el máximo de 5MB.");
       return;
     }
-    this.fotoPerfilArchivo = archivo;
-    this.fotoPerfilNombre = archivo.name;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagenes[clave] = {
+        archivo: file,
+        previewUrl: reader.result as string,
+        arrastrando: false,
+      };
+      this.cdr.detectChanges();
+    };
+    reader.readAsDataURL(file);
   }
 
-  // Paso 1: solo el correo. Si el formato es válido y no está ya registrado, sigue a verificar.
+  quitarImagen(clave: ClaveImagen): void {
+    this.imagenes[clave] = { archivo: null, previewUrl: null, arrastrando: false };
+  }
+
+  // ---------------------------------------------------------
+  // Paso 1: solo el correo. Si el formato es válido y no está ya
+  // registrado, sigue a verificar.
+  // ---------------------------------------------------------
   continuarConCorreo(): void {
     this.errorRegistro = "";
     const correo = this.modelo.email.trim().toLowerCase();
@@ -148,7 +231,24 @@ export class FormularioCrearUsuarioComponent {
   onSubmit(): void {
     this.errorRegistro = "";
 
+    if (!this.imagenes.perfil.archivo) {
+      this.errorRegistro = "Sube tu foto de perfil antes de continuar.";
+      return;
+    }
+    if (this.modelo.tipoDocumento && !this.imagenes.documentoFrente.archivo) {
+      this.errorRegistro = "Sube la foto del frente de tu documento.";
+      return;
+    }
+    if (this.modelo.tipoDocumento && !this.imagenes.documentoReverso.archivo) {
+      this.errorRegistro = "Sube la foto del reverso de tu documento.";
+      return;
+    }
+
     const nombre = (this.modelo.nombres + " " + this.modelo.apellidos).trim();
+
+    // TODO: confirmar si TruequesService.registrar acepta los archivos
+    // (fotoPerfil / documentoFrente / documentoReverso) o si hace falta
+    // subirlos aparte (ej. a un storage) antes de llamar a registrar().
     const mensaje = this.servicio.registrar({
       nombre: nombre,
       email: this.modelo.email,

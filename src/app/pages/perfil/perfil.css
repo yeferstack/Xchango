@@ -607,7 +607,7 @@ h3 {
 /* El logo salía a tamaño natural (256px) porque el HTML usa
    .navbar__logo y el CSS solo tenía regla para .navbar__chango. */
 .navbar__logo {
-    width: 34px;
+    width: 90px;
     height: 34px;
     object-fit: contain;
     display: block;

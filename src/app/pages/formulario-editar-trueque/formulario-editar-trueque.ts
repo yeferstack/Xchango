@@ -16,7 +16,6 @@ interface TipoIntercambio {
   icono: string;      // nombre de material icon
   colorClase: string; // clase css para el color del icono/tarjeta
 }
-
 // Estructura de un trueque tal como vendría del backend
 interface Trueque {
   id: string;
