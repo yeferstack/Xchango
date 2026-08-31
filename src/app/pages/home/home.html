@@ -79,6 +79,10 @@
 
         Mis trueques
 
+        <span class="menu__item-punto" *ngIf="truequesPendientes > 0">
+          {{ truequesPendientes }}
+        </span>
+
       </a>
 
       <div class="menu__item menu__item--redes" (click)="toggleRedesSociales(); $event.stopPropagation()">
@@ -99,7 +103,7 @@
 
           <a href="https://facebook.com" target="_blank" rel="noopener" class="mini-menu__link">Facebook</a>
           <a href="https://instagram.com" target="_blank" rel="noopener" class="mini-menu__link">Instagram</a>
-          <a href="https://wa.me/573145979628" target="_blank" rel="noopener" class="mini-menu__link">WhatsApp</a>
+          <a href="https://wa.me/573000000000" target="_blank" rel="noopener" class="mini-menu__link">WhatsApp</a>
 
         </div>
 
@@ -694,7 +698,7 @@
 
           <!-- seguro y confiable icono del home original -->
 
-          <div class="beneficio">
+          <button class="beneficio" type="button" (click)="abrirBeneficio('seguro')">
 
             <span class="beneficio__icono">
 
@@ -745,11 +749,11 @@
 
             </div>
 
-          </div>
+          </button>
 
           <!-- comunidad activa icono del home original -->
 
-          <div class="beneficio">
+          <button class="beneficio" type="button" (click)="abrirBeneficio('comunidad')">
 
             <span class="beneficio__icono">
 
@@ -794,11 +798,11 @@
 
             </div>
 
-          </div>
+          </button>
 
           <!-- fácil y rápido icono del home original -->
 
-          <div class="beneficio">
+          <button class="beneficio" type="button" (click)="abrirBeneficio('facil')">
 
             <span class="beneficio__icono">
 
@@ -833,11 +837,16 @@
 
             </div>
 
-          </div>
+          </button>
 
-          <!-- soporte 24/7 icono del home original -->
+          <!-- soporte 24/7 icono del home original: va directo a WhatsApp -->
 
-          <div class="beneficio">
+          <a
+            class="beneficio"
+            href="https://wa.me/573000000000"
+            target="_blank"
+            rel="noopener"
+          >
 
             <span class="beneficio__icono">
 
@@ -882,9 +891,127 @@
 
             </div>
 
-          </div>
+          </a>
 
         </footer>
+
+        <!-- Panel con más información al hacer clic en "Seguro y confiable",
+             "Comunidad activa" o "Fácil y rápido". "Soporte 24/7" no pasa
+             por aquí: abre WhatsApp directamente. -->
+
+        <div
+          class="beneficio-overlay"
+          *ngIf="beneficioAbierto()"
+          (click)="cerrarBeneficio()"
+        >
+
+          <div class="beneficio-panel vidrio" (click)="$event.stopPropagation()">
+
+            <button
+              class="beneficio-panel__cerrar"
+              type="button"
+              aria-label="Cerrar"
+              (click)="cerrarBeneficio()"
+            >
+              <svg viewBox="0 0 24 24">
+                <path d="M18 6 6 18"/>
+                <path d="m6 6 12 12"/>
+              </svg>
+            </button>
+
+            <!-- Seguro y confiable -->
+            <ng-container *ngIf="beneficioAbierto() === 'seguro'">
+
+              <h3 class="beneficio-panel__titulo">Seguro y confiable</h3>
+
+              <p class="beneficio-panel__intro">
+                Así cuidamos que cada trueque en XchanGo sea seguro para ambas partes.
+              </p>
+
+              <ul class="beneficio-panel__lista">
+                <li>
+                  <strong>Perfiles verificados:</strong> pedimos datos reales y un número de contacto antes de publicar.
+                </li>
+                <li>
+                  <strong>Historial visible:</strong> puedes ver los trueques anteriores de la otra persona antes de aceptar.
+                </li>
+                <li>
+                  <strong>Reportes y moderación:</strong> cualquier publicación o usuario sospechoso se puede reportar y nuestro equipo lo revisa.
+                </li>
+                <li>
+                  <strong>Encuentros seguros:</strong> recomendamos siempre acordar el intercambio en un lugar público y a la luz del día.
+                </li>
+              </ul>
+
+            </ng-container>
+
+            <!-- Comunidad activa -->
+            <ng-container *ngIf="beneficioAbierto() === 'comunidad'">
+
+              <h3 class="beneficio-panel__titulo">Comunidad activa</h3>
+
+              <p class="beneficio-panel__intro">
+                XchanGo crece cada día en todo Casanare.
+              </p>
+
+              <div class="beneficio-panel__stats">
+                <div class="beneficio-panel__stat">
+                  <strong>+1.200</strong>
+                  <span>usuarios activos</span>
+                </div>
+                <div class="beneficio-panel__stat">
+                  <strong>+300</strong>
+                  <span>trueques este mes</span>
+                </div>
+                <div class="beneficio-panel__stat">
+                  <strong>8</strong>
+                  <span>municipios con actividad</span>
+                </div>
+              </div>
+
+              <p class="beneficio-panel__intro">
+                Las categorías más activas ahora mismo son Electrónicos, Servicios profesionales y Ropa y accesorios.
+              </p>
+
+            </ng-container>
+
+            <!-- Fácil y rápido -->
+            <ng-container *ngIf="beneficioAbierto() === 'facil'">
+
+              <h3 class="beneficio-panel__titulo">Fácil y rápido</h3>
+
+              <p class="beneficio-panel__intro">
+                Hacer un trueque en XchanGo toma solo unos minutos:
+              </p>
+
+              <ol class="beneficio-panel__pasos">
+                <li>
+                  <strong>Publica</strong> lo que quieres intercambiar, con fotos y una descripción corta.
+                </li>
+                <li>
+                  <strong>Recibe propuestas</strong> de otras personas interesadas en tu publicación.
+                </li>
+                <li>
+                  <strong>Chatea y ponte de acuerdo</strong> sobre qué se intercambia y dónde se van a encontrar.
+                </li>
+                <li>
+                  <strong>Haz el trueque</strong> y marca la publicación como completada.
+                </li>
+              </ol>
+
+              <button
+                class="beneficio-panel__cta"
+                type="button"
+                (click)="cerrarBeneficio(); publicarTrueque()"
+              >
+                Publicar un trueque
+              </button>
+
+            </ng-container>
+
+          </div>
+
+        </div>
 
 
     </main>

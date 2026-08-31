@@ -143,7 +143,40 @@
         <button *ngIf="esMia" class="modal__cta" type="button" (click)="irAEditar()">
           Editar mi publicación
         </button>
-        <p class="modal__aviso" *ngIf="mensaje">{{ mensaje }}</p>
+        <p
+          class="modal__aviso"
+          [class.modal__aviso--exito]="mensajeEsExito"
+          [class.modal__aviso--error]="!mensajeEsExito"
+          *ngIf="mensaje"
+        >
+          <svg
+            *ngIf="mensajeEsExito"
+            class="modal__aviso-icono"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5"></path>
+          </svg>
+          <svg
+            *ngIf="!mensajeEsExito"
+            class="modal__aviso-icono"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>{{ mensaje }}</span>
+        </p>
       </div>
 
     </div>

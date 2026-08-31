@@ -110,6 +110,12 @@ export class HomeComponent implements OnInit {
     return this.truequesService.notificacionesSinLeer();
   }
 
+  // Trueques pendientes (enviados + recibidos), para el número junto a
+  // "Mis trueques" en el menú de arriba.
+  get truequesPendientes(): number {
+    return this.truequesService.misTruequesPendientes();
+  }
+
   // Foto del usuario en sesión, para el botón del header.
   get avatarUrl(): string {
     return this.truequesService.usuarioActual()?.avatar ?? 'https://i.pravatar.cc/80?img=68';
@@ -139,6 +145,19 @@ export class HomeComponent implements OnInit {
   toggleNotificaciones(): void {
     this.menuPerfilAbierto.set(false);
     this.notificacionesAbiertas.update((v) => !v);
+  }
+
+  // PANEL DE BENEFICIOS (footer): "Seguro y confiable", "Comunidad activa"
+  // y "Fácil y rápido" abren un panel con más información. "Soporte 24/7"
+  // no usa este panel: va directo a WhatsApp (ver plantilla).
+  readonly beneficioAbierto = signal<'seguro' | 'comunidad' | 'facil' | null>(null);
+
+  abrirBeneficio(tipo: 'seguro' | 'comunidad' | 'facil'): void {
+    this.beneficioAbierto.set(tipo);
+  }
+
+  cerrarBeneficio(): void {
+    this.beneficioAbierto.set(null);
   }
 
   // Últimos avisos para el mini panel de la campana ("solo para ver").

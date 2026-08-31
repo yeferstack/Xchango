@@ -640,6 +640,16 @@ export class TruequesService {
     () => this.truequesRecibidos().filter((t) => t.estado === 'pendiente').length,
   );
 
+  // Total de trueques en 'pendiente', contando tanto los que enviaste como
+  // los que recibiste. Se usa para el número junto a "Mis trueques" en el menú.
+  misTruequesPendientes = computed(
+    () => this.trueques().filter(
+      (t) =>
+        t.estado === 'pendiente' &&
+        (t.solicitanteId === this.usuarioActualId() || t.propietarioId === this.usuarioActualId()),
+    ).length,
+  );
+
   // Devuelve null si la solicitud se envió, o el mensaje de error.
   solicitarTrueque(publicacionId: string, ofrece: string): string | null {
     const yo = this.usuarioActual();
@@ -680,6 +690,17 @@ export class TruequesService {
       'solicitud',
       'Nueva solicitud de trueque',
       yo.nombre + ' quiere truequear por tu publicación "' + pub.titulo + '".',
+      nuevo.id,
+    );
+    // Confirmación para quien ENVÍA la solicitud (antes solo se avisaba
+    // al dueño de la publicación, que es una cuenta distinta a la tuya,
+    // por eso no aparecía nada en tu propia campana).
+    this.crearNotificacion(
+      yo.id,
+      'enviada',
+      'Solicitud enviada',
+      'Le enviaste una solicitud de trueque a ' + this.nombreDe(pub.usuarioId) +
+        ' por "' + pub.titulo + '".',
       nuevo.id,
     );
     this.guardar();
@@ -802,6 +823,11 @@ export class TruequesService {
   private tituloDe(publicacionId: string): string {
     const p = this.listaPublicaciones().find((x) => x.id === publicacionId);
     return p ? p.titulo : 'la publicación';
+  }
+
+  // Nombre del dueño de la publicación, para el texto de "Solicitud enviada".
+  private nombreDe(usuarioId: string): string {
+    return this.listaUsuarios().find((u) => u.id === usuarioId)?.nombre ?? 'ese usuario';
   }
 
   private contarIntercambios(usuarioId: string): void {

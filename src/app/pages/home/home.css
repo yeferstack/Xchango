@@ -527,6 +527,32 @@
     box-shadow: 0 2px 8px rgba(31, 27, 22, 0.14);
     }
 
+    /* Número de trueques pendientes junto a "Mis trueques" en el menú.
+        Mismo look que .campana__punto, pero como aquí el botón tiene
+        texto (no solo un ícono), va como una pastilla al lado del texto
+        en vez de una esquina superpuesta. */
+    .menu__item-punto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 18px;
+    height: 18px;
+
+    padding: 0 5px;
+
+    background: #111;
+
+    color: #fff;
+
+    border-radius: 50%;
+
+    font-size: 10.5px;
+    font-weight: 700;
+
+    box-shadow: 0 2px 8px rgba(31, 27, 22, 0.14);
+    }
+
     .perfil {
     height: 52px;
 
@@ -1355,6 +1381,26 @@
     gap: 10px;
 
     position: relative;
+
+    /* Ahora son <button>/<a>, no <div>: se resetean los estilos que
+        trae el navegador por defecto para que se vean igual que antes. */
+    width: 100%;
+    padding: 6px;
+    margin: -6px;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    border-radius: 14px;
+
+    transition: background 0.16s ease;
+    }
+
+    .beneficio:hover {
+    background: rgba(255, 255, 255, 0.5);
     }
 
     .beneficio + .beneficio {
@@ -2199,4 +2245,223 @@
         Centrar con margin-left evita ese choque: no depende de transform. */
     margin-left: -80px; /* mitad del width (160px / 2) */
     width: 160px;
+    }
+
+    /* PANEL DE BENEFICIOS (footer): "Seguro y confiable", "Comunidad
+        activa" y "Fácil y rápido" abren este panel con más información.
+        "Soporte 24/7" no usa este panel, va directo a WhatsApp. */
+
+    .beneficio-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(31, 27, 22, 0.42);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    animation: beneficioFadeIn 0.16s ease;
+    }
+
+    @keyframes beneficioFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+    }
+
+    .beneficio-panel {
+    position: relative;
+
+    width: 100%;
+    max-width: 440px;
+    max-height: min(560px, 88vh);
+    overflow-y: auto;
+
+    padding: 32px 28px 28px;
+
+    background: #fffdf8;
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+
+    box-shadow: 0 30px 60px rgba(60, 45, 26, 0.28);
+
+    animation: beneficioPanelIn 0.18s ease;
+    }
+
+    @keyframes beneficioPanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    }
+
+    .beneficio-panel__cerrar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    background: var(--beige);
+    border: 0;
+    border-radius: 50%;
+
+    color: var(--tinta-suave);
+    cursor: pointer;
+
+    transition:
+        background 0.16s ease,
+        color 0.16s ease;
+    }
+
+    .beneficio-panel__cerrar:hover {
+    background: var(--beige-fuerte);
+    color: var(--tinta);
+    }
+
+    .beneficio-panel__cerrar svg {
+    width: 16px;
+    height: 16px;
+    }
+
+    .beneficio-panel__titulo {
+    margin: 0 0 8px;
+
+    font-family: var(--fuente-titulo);
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--tinta);
+    }
+
+    .beneficio-panel__intro {
+    margin: 0 0 16px;
+
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--tinta-suave);
+    }
+
+    .beneficio-panel__lista {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    }
+
+    .beneficio-panel__lista li {
+    padding: 12px 14px;
+
+    background: var(--crema-clara);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--tinta-suave);
+    }
+
+    .beneficio-panel__lista strong {
+    color: var(--tinta);
+    }
+
+    .beneficio-panel__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    margin-bottom: 16px;
+    }
+
+    .beneficio-panel__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+
+    padding: 14px 6px;
+
+    background: var(--crema-clara);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+
+    text-align: center;
+    }
+
+    .beneficio-panel__stat strong {
+    font-family: var(--fuente-titulo);
+    font-size: 19px;
+    color: var(--dorado-oscuro);
+    }
+
+    .beneficio-panel__stat span {
+    font-size: 11px;
+    color: var(--tinta-tenue);
+    }
+
+    .beneficio-panel__pasos {
+    margin: 0 0 18px;
+    padding: 0 0 0 22px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--tinta-suave);
+    }
+
+    .beneficio-panel__pasos li::marker {
+    font-weight: 800;
+    color: var(--dorado-oscuro);
+    }
+
+    .beneficio-panel__pasos strong {
+    color: var(--tinta);
+    }
+
+    .beneficio-panel__cta {
+    width: 100%;
+
+    padding: 13px;
+
+    background: var(--tinta);
+    border: 0;
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .beneficio-panel__cta:hover {
+    background: #322b23;
+    transform: translateY(-1px);
     }

@@ -93,6 +93,10 @@ export class ModalDetalleTruequeComponent implements OnInit {
   // Texto que el usuario ofrece a cambio (HU42).
   ofrezco = '';
   mensaje = '';
+  // true = "Solicitud enviada..." (verde). false = un error, p. ej.
+  // "Esta publicación es tuya." (rojo). Se usa para pintar el aviso
+  // de un color u otro en la plantilla.
+  mensajeEsExito = false;
 
   get esMia(): boolean {
     const t = this.trueque;
@@ -107,10 +111,12 @@ export class ModalDetalleTruequeComponent implements OnInit {
     const error = this.truequesService.solicitarTrueque(t.id, this.ofrezco);
     if (error) {
       this.mensaje = error;
+      this.mensajeEsExito = false;
       return;
     }
 
     this.mensaje = 'Solicitud enviada. El dueño recibirá una notificación.';
+    this.mensajeEsExito = true;
     this.ofrezco = '';
   }
 
