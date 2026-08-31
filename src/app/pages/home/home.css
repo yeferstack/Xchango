@@ -1,4 +1,4 @@
-    /*
+   /*
         XchanGo — HOME
         CSS COMPLETO Y ORGANIZADO
         */
@@ -46,6 +46,11 @@
 
     width: 100%;
     min-height: 100vh;
+
+    /* La página en sí ya no hace scroll: cada zona (rejilla + barra
+        inferior) maneja su propio scroll con .zona-scroll. En móvil
+        (ver media query 900px) esto se revierte a overflow:auto. */
+    overflow: hidden;
 
     font-family: var(--fuente);
     color: var(--tinta);
@@ -102,7 +107,7 @@
     width: 100%;
     max-width: 1500px;
 
-    min-height: 100vh;
+    height: 100vh;
 
     margin: 0 auto;
 
@@ -110,9 +115,12 @@
 
     display: grid;
 
+    /* fila 1: cabecera (su alto natural) | fila 2: cuerpo (ocupa
+        el resto y puede encogerse, necesario para que el scroll
+        interno de .zona-scroll funcione) */
     grid-template-rows:
         auto
-        auto;
+        minmax(0, 1fr);
     }
 
     /* header */
@@ -615,10 +623,23 @@
 
     gap: 20px;
 
-    align-items: start;
+    /* antes "align-items: start": eso encogía .lateral y .contenido
+        a su alto de contenido. Con "stretch" ambos ocupan el 100%
+        del alto disponible, que es lo que .contenido necesita para
+        poder delegar su scroll a .zona-scroll. */
+    align-items: stretch;
+
+    height: 100%;
+    min-height: 0;
     }
 
     .lateral {
+    /* .cuerpo ahora usa "align-items: stretch" para que .contenido
+        pueda ocupar el 100% de la altura (necesario para el scroll
+        interno). El sidebar no debe estirarse con él: se alinea
+        arriba y mide solo lo que ocupa su contenido. */
+    align-self: start;
+
     padding: 20px 14px;
 
     display: flex;
@@ -816,6 +837,10 @@
     .contenido {
     min-width: 0;
 
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
 
@@ -824,6 +849,9 @@
 
     .filtros {
     margin: 0;
+
+    /* fijo arriba: no debe encogerse cuando .zona-scroll crece */
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
@@ -1003,7 +1031,49 @@
             para verlo.
         */
 
+    /* ZONA CON SCROLL PROPIO: tarjetas + barra inferior de beneficios.
+        Es la única parte del home que hace scroll; el resto (header,
+        sidebar, filtros, conteo) queda fijo. */
+
+    .zona-scroll {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* separa el contenido de la barra de scroll para que no tape
+        las tarjetas */
+    padding-right: 6px;
+    margin-right: -6px;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--dorado) transparent;
+    }
+
+    .zona-scroll::-webkit-scrollbar {
+    width: 8px;
+    }
+
+    .zona-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    }
+
+    .zona-scroll::-webkit-scrollbar-thumb {
+    background: var(--dorado);
+    border-radius: 999px;
+    }
+
+    .zona-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--dorado-oscuro);
+    }
+
     .rejilla {
+    flex-shrink: 0;
+
     display: grid;
 
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1343,11 +1413,10 @@
     }
 
     .beneficios {
-    /* Ahora vive DENTRO de .rejilla (la que hace scroll), como una fila
-            más que ocupa las 3 columnas. Ya no es position:absolute ni
-            depende de ningún JS: aparece solo cuando el usuario llega al
-            final de la lista, de forma natural. */
-    grid-column: 1 / -1;
+    /* Vive dentro de .zona-scroll, justo después de .rejilla: aparece
+        solo cuando el usuario baja hasta el final de esa zona con
+        scroll propio. No depende de ningún JS ni de position:absolute. */
+    flex-shrink: 0;
 
     margin-top: 8px;
 
@@ -1667,6 +1736,20 @@
         display: block;
 
         overflow: visible;
+    }
+
+    /*
+            Zona con scroll propio: en móvil se desactiva y todo
+            vuelve a fluir con el scroll normal de la página.
+        */
+
+    .zona-scroll {
+        flex: none;
+
+        overflow: visible;
+
+        padding-right: 0;
+        margin-right: 0;
     }
 
     /*
@@ -2125,6 +2208,8 @@
     /* CONTEO DE RESULTADOS + LIMPIAR FILTROS */
 
     .resultados-info {
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
